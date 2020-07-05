@@ -7307,9 +7307,17 @@ end
 return false
 end
 Text = [[
-اهلا  بك في سورس لارفين ،
+🔰 Welcome to Source 🔰
 
+🌐┇LARViN TEAM
+┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
+📊┇[Source Channel](https://t.me/i600ik/610) 
 
+📁┇ [Source  Files](https://t.me/i500k) 
+
+📧┇[TWS LARViN](http://t.me/p018bot) 
+ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ 
+👨‍🔧┇[Mtwr alswrus](http://t.me/p018q) 
 ]]
 send(msg.chat_id_, msg.id_,Text)
 end
