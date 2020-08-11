@@ -7350,7 +7350,7 @@ Text = [[
 🎖┇م4 ~⪼ لعرض اوامر المنشئين
 👤┇م5 ~⪼ لعرض اوامر المطورين
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
-[Ch Source](t.me/Source_Milano)
+[Ch LaRviN TEAM](http://t.me/i500K) . 
 ]]
 send(msg.chat_id_, msg.id_,Text)
 return false
