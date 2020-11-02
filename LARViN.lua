@@ -9133,6 +9133,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
+
                     Text = [[
 𓍼 ⁝ Welcome to Source 
 
@@ -9148,6 +9149,17 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
 ]]
                     send(msg.chat_id_, msg.id_, Text)
                 end
+                if text == 'تنزيل جميع الرتب' then
+                    if not BasicConstructor(msg) then
+                    send(msg.chat_id_, msg.id_,'܁𓍼 : منشئ اساسي فقط لتكمز 😹😭 ') 
+                    return false
+                    end
+                    database:del(bot_id..'LARViN:Constructor'..msg.chat_id_)
+                    database:del(bot_id..'LARViN:Mod:User'..msg.chat_id_)
+                    database:del(bot_id..'LARViN:Manager'..msg.chat_id_)
+                    database:del(bot_id..'LARViN:Special:User'..msg.chat_id_)
+                    send(msg.chat_id_, msg.id_, '܁𓍼 : تم تنزيل جميع رتب الاعضاء من ▾\n܁𓍼 :◝ المنشئين ٬ المدراء ٬ الادمنيه ٬ المميزين◟\n')
+                    end
                 if text and text:match("^(.*)$") then
                     if database:get(bot_id .. 'help' .. msg.sender_user_id_) == 'true' then
                         send(msg.chat_id_, msg.id_, '𓍼 : تم حفظ الكليشه بنجاح')
