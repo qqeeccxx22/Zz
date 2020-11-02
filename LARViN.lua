@@ -4588,7 +4588,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                                 return false
                             end
                             database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, result.id_)
-                            Reply_Status(msg.chat_id_, msg.id_, "reply", "܂𓍼 ⁝ تم كتمه من المجموعة")
+                            send(msg.chat_id_, msg.id_,  "܂𓍼 ⁝ تم كتمه من المجموعة")
                         else
                             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ لا يوجد حساب بهاذا المعرف")
                         end
@@ -4704,7 +4704,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                         else
                             https.request("https://api.telegram.org/bot" .. token .. "/restrictChatMember?chat_id=" ..
                                               msg.chat_id_ .. "&user_id=" .. result.sender_user_id_)
-                            send(msg.chat_id_, msg.id_, "\n܂𓍼 ⁝ تم تقييده في المجموعه")
+                            send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ العضو » "..result.sender_user_id_.." \n܂𓍼 ⁝ تم تقييده في المجموعه")
                         end
                     end
                     tdcli_function({
