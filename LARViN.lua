@@ -4548,7 +4548,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                             return false
                         end
                         database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, result.sender_user_id_)
-                        Reply_Status(msg.chat_id_, msg.id_, "NameUser","\n܂𓍼 ⁝ تم كتمه من المجموعة")
+                        send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ العضو » "..result.sender_user_id_.." \n܂𓍼 ⁝ تم كتمه من المجموعة")
                     end
                     tdcli_function({
                         ID = "GetMessage",
@@ -4696,6 +4696,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
+                    local UserName = (data.username_ or "i600ik")
                     function Function_LARViN(extra, result, success)
                         if Rank_Checking(result.sender_user_id_, msg.chat_id_) then
                             send(msg.chat_id_, msg.id_,
@@ -4704,7 +4705,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                         else
                             https.request("https://api.telegram.org/bot" .. token .. "/restrictChatMember?chat_id=" ..
                                               msg.chat_id_ .. "&user_id=" .. result.sender_user_id_)
-                                              Reply_Status(msg.chat_id_, msg.id_, "NameUser","܂𓍼 ⁝ العضو » "..result.sender_user_id_.." \n܂𓍼 ⁝ تم تقييده في المجموعه")
+                            send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ بواسطه ◃ [" .. data.first_name_ .. "](T.me/" .. UserName .. ")\n܂𓍼 ⁝ تم تقييده في المجموعه")
                         end
                     end
                     tdcli_function({
