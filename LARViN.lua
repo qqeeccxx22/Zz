@@ -4704,7 +4704,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                         else
                             https.request("https://api.telegram.org/bot" .. token .. "/restrictChatMember?chat_id=" ..
                                               msg.chat_id_ .. "&user_id=" .. result.sender_user_id_)
-                            send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ العضو » "..result.sender_user_id_.." \n܂𓍼 ⁝ تم تقييده في المجموعه")
+                            send(msg.chat_id_, msg.id_, "\n܂𓍼 ⁝ تم تقييده في المجموعه")
                         end
                     end
                     tdcli_function({
