@@ -4442,7 +4442,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                         }, function(arg, ban)
                         end, nil)
                         Reply_Status(msg, result.sender_user_id_, "reply",
-                            "܂𓍼 ⁝ تم الغاء حظره من هنا")
+                            "܂𓍼 ⁝ تم الغاء حظره  من المجموعة")
                     end
                     tdcli_function({
                         ID = "GetMessage",
@@ -4481,7 +4481,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                                 }
                             }, function(arg, ban)
                             end, nil)
-                            Reply_Status(msg, result.id_, "reply", "܂𓍼 ⁝ تم الغاء حظره من هنا")
+                            Reply_Status(msg, result.id_, "reply", "܂𓍼 ⁝ تم الغاء حظره  من المجموعة")
                         else
                             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ لا يوجد حساب بهاذا المعرف")
                         end
@@ -4520,7 +4520,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                         }
                     }, function(arg, ban)
                     end, nil)
-                    send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم الغاء حظره من هنا")
+                    send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم الغاء حظره  من المجموعة")
                     return false
                 end
 
@@ -4548,7 +4548,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                             return false
                         end
                         database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, result.sender_user_id_)
-                        send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم كتمه من هنا")
+                        send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم كتمه من المجموعة")
                     end
                     tdcli_function({
                         ID = "GetMessage",
@@ -4588,7 +4588,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                                 return false
                             end
                             database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, result.id_)
-                            send(msg.chat_id_, msg.id_, "reply", "܂𓍼 ⁝ تم كتمه من هنا")
+                            send(msg.chat_id_, msg.id_, "reply", "܂𓍼 ⁝ تم كتمه من المجموعة")
                         else
                             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ لا يوجد حساب بهاذا المعرف")
                         end
@@ -4622,7 +4622,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                             return false
                         end
                         database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, userid)
-                        send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم كتمه من هنا")
+                        send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم كتمه  من المجموعة")
                     end
                     return false
                 end
@@ -4640,7 +4640,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                     end
                     function Function_LARViN(extra, result, success)
                         database:srem(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, result.sender_user_id_)
-                        send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم الغاء كتمه من هنا")
+                        send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم الغاء كتمه  من المجموعة")
                     end
                     tdcli_function({
                         ID = "GetMessage",
@@ -4654,7 +4654,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                     function Function_LARViN(extra, result, success)
                         if result.id_ then
                             database:srem(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, result.id_)
-                            send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم الغاء كتمه من هنا")
+                            send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم الغاء كتمه من المجموعة")
                         else
                             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ لا يوجد حساب بهاذا المعرف")
                         end
@@ -4680,7 +4680,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                     end
                     local userid = text:match("^الغاء كتم (%d+)$")
                     database:srem(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, userid)
-                    send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم الغاء كتمه من هنا")
+                    send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم الغاء كتمه  من المجموعة")
                     return false
                 end
 
@@ -4898,7 +4898,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                                 end
                                 Kick_Group(result.chat_id_, result.sender_user_id_)
                                 Reply_Status(msg, result.sender_user_id_, "reply",
-                                    "܂𓍼 ⁝ تم طرده من هنا")
+                                    "܂𓍼 ⁝ تم طرده  من المجموعة")
                             end, nil)
                         end
                     end
@@ -4959,7 +4959,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                                         return false
                                     end
                                     Kick_Group(msg.chat_id_, result.id_)
-                                    Reply_Status(msg, result.id_, "reply", "܂𓍼 ⁝ تم طرده من هنا")
+                                    Reply_Status(msg, result.id_, "reply", "܂𓍼 ⁝ تم طرده  من المجموعة")
                                 end, nil)
                             end
                         else
@@ -5015,7 +5015,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                                 return false
                             end
                             Kick_Group(msg.chat_id_, userid)
-                            Reply_Status(msg, userid, "reply", "܂𓍼 ⁝ تم طرده من هنا")
+                            Reply_Status(msg, userid, "reply", "܂𓍼 ⁝ تم طرده  من المجموعة")
                         end, nil)
                     end
                     return false
@@ -5121,7 +5121,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                             database:set(bot_id .. "LARViN:Pin:Id:Msg" .. msg.chat_id_, msg.reply_to_message_id_)
                         elseif data.code_ == 6 then
                             send(msg.chat_id_, msg.id_,
-                                "܂𓍼 ⁝ انا لست ادمن هنا يرجى ترقيتي ادمن ثم اعد المحاوله")
+                                "܂𓍼 ⁝ انا لست اد من المجموعة يرجى ترقيتي ادمن ثم اعد المحاوله")
                         elseif data.message_ == "CHAT_ADMIN_REQUIRED" then
                             send(msg.chat_id_, msg.id_,
                                 "܂𓍼 ⁝ ليست لدي صلاحية التثبيت يرجى التحقق من الصلاحيات")
@@ -5154,7 +5154,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                             database:del(bot_id .. "LARViN:Pin:Id:Msg" .. msg.chat_id_)
                         elseif data.code_ == 6 then
                             send(msg.chat_id_, msg.id_,
-                                "܂𓍼 ⁝ انا لست ادمن هنا يرجى ترقيتي ادمن ثم اعد المحاوله")
+                                "܂𓍼 ⁝ انا لست اد من المجموعة يرجى ترقيتي ادمن ثم اعد المحاوله")
                         elseif data.message_ == "CHAT_ADMIN_REQUIRED" then
                             send(msg.chat_id_, msg.id_,
                                 "܂𓍼 ⁝ ليست لدي صلاحية التثبيت يرجى التحقق من الصلاحيات")
@@ -6604,7 +6604,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     if msg.can_be_deleted_ == false then
-                        send(msg.chat_id_, msg.id_, "܂𓍼 ⁝  البوت ليس ادمن هنا \n")
+                        send(msg.chat_id_, msg.id_, "܂𓍼 ⁝  البوت ليس اد من المجموعة \n")
                         return false
                     end
                     tdcli_function({
@@ -7110,7 +7110,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                 if text == ("مسح المطرودين") and Addictive(msg) then
                     local function delbans(extra, result)
                         if not msg.can_be_deleted_ == true then
-                            send(msg.chat_id_, msg.id_, "܂𓍼 ⁝  يرجى ترقيتي ادمن هنا")
+                            send(msg.chat_id_, msg.id_, "܂𓍼 ⁝  يرجى ترقيتي اد من المجموعة")
                             return false
                         end
                         local num = 0
