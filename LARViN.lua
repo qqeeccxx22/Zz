@@ -4743,7 +4743,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                             end
                             https.request("https://api.telegram.org/bot" .. token .. "/restrictChatMember?chat_id=" ..
                                               msg.chat_id_ .. "&user_id=" .. result.id_)
-                            send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ العضو » "..result.id_.." \n܂𓍼 ⁝ تم تقييده في المجموعه")
+                            send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ العضو » ["..result.id_.."](https://t.me/i600ik) \n܂𓍼 ⁝ تم تقييده في المجموعه")
                         else
                             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ لا يوجد حساب بهاذا المعرف")
                         end
@@ -4775,7 +4775,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                     else
                         https.request("https://api.telegram.org/bot" .. token .. "/restrictChatMember?chat_id=" ..
                                           msg.chat_id_ .. "&user_id=" .. userid)
-                        send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ العضو » "..userid.."\n܂𓍼 ⁝ تم تقييده في المجموعه")
+                        send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ العضو » ["..userid.."](https://t.me/i600ik)\n܂𓍼 ⁝ تم تقييده في المجموعه")
                     end
                     return false
                 end
