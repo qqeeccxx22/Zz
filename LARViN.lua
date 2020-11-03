@@ -4588,7 +4588,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                                 return false
                             end
                             database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, result.id_)
-                            send(msg.chat_id_, msg.id_,  "܂𓍼 ⁝ تم كتمه من المجموعة")
+                            send(msg.chat_id_, msg.id_,  "܂𓍼 ⁝ العضو » ["..result.id_.."](https://t.me/i600ik) \n܂𓍼 ⁝ تم كتمه من المجموعة")
                         else
                             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ لا يوجد حساب بهاذا المعرف")
                         end
@@ -4622,7 +4622,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                             return false
                         end
                         database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, userid)
-                        send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ العضو » "..userid.."\n܂𓍼 ⁝ تم كتمه  من المجموعة")
+                        send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ العضو » ["..userid.."](https://t.me/i600ik)\n܂𓍼 ⁝ تم كتمه  من المجموعة")
                     end
                     return false
                 end
@@ -4654,7 +4654,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                     function Function_LARViN(extra, result, success)
                         if result.id_ then
                             database:srem(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, result.id_)
-                            send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ العضو » "..result.id_.."\n܂𓍼 ⁝ تم الغاء كتمه من المجموعة")
+                            send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ العضو » ["..result.id_.."](https://t.me/i600ik)\n܂𓍼 ⁝ تم الغاء كتمه من المجموعة")
                         else
                             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ لا يوجد حساب بهاذا المعرف")
                         end
@@ -4680,7 +4680,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                     end
                     local userid = text:match("^الغاء كتم (%d+)$")
                     database:srem(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, userid)
-                    send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ العضو » "..userid.." \n܂𓍼 ⁝ تم الغاء كتمه  من المجموعة")
+                    send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ العضو » ["..userid.."](https://t.me/i600ik) \n܂𓍼 ⁝ تم الغاء كتمه  من المجموعة")
                     return false
                 end
 
