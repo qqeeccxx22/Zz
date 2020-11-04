@@ -4409,7 +4409,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                             end
                             database:sadd(bot_id .. "LARViN:Ban:User" .. msg.chat_id_, userid)
                             Kick_Group(msg.chat_id_, userid)
-                            send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم حظره من المجموعه")
+                            send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ العضو » ["..userid.."](https://t.me/i600ik)\n܂𓍼 ⁝ تم حظره من المجموعه")
                         end, nil)
                     end
                     return false
