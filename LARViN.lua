@@ -4520,7 +4520,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                         }
                     }, function(arg, ban)
                     end, nil)
-                    send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم الغاء حظره  من المجموعة")
+                    send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ العضو » ["..userid.."](https://t.me/i600ik)\n܂𓍼 ⁝ تم الغاء حظره  من المجموعة")
                     return false
                 end
 
@@ -4654,7 +4654,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                     function Function_LARViN(extra, result, success)
                         if result.id_ then
                             database:srem(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, result.id_)
-                            send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ العضو » ["..username.."](https://t.me/i600ik)\n܂𓍼 ⁝ تم الغاء كتمه من المجموعة")
+                            send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ العضو » [@"..username.."](https://t.me/i600ik)\n܂𓍼 ⁝ تم الغاء كتمه من المجموعة")
                         else
                             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ لا يوجد حساب بهاذا المعرف")
                         end
@@ -4852,7 +4852,7 @@ function LARViN_Started_Bot(msg, data) -- بداية العمل
                     https.request("https://api.telegram.org/bot" .. token .. "/restrictChatMember?chat_id=" ..
                                       msg.chat_id_ .. "&user_id=" .. userid ..
                                       "&can_send_messages=True&can_send_media_messages=True&can_send_other_messages=True&can_add_web_page_previews=True")
-                    send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ العضو » "..userid.."\n܂𓍼 ⁝ تم الغاء تقييده")
+                    send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ العضو » ["..userid.."](https://t.me/i600ik)\n܂𓍼 ⁝ تم الغاء تقييده")
                     return false
                 end
                 if text == ("طرد") and msg.reply_to_message_id_ ~= 0 and Addictive(msg) then
