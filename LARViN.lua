@@ -19,10 +19,10 @@ print("\27[34m" .. [[
 
 ]] .. "\27[m")
 
-io.popen("mkdir spider_Files")
+io.popen("mkdir LARViN_Files")
 t = "\27[35m" .. "\nAll Files Started : \n____________________\n" .. '\27[m'
 i = 0
-for v in io.popen('ls spider_Files'):lines() do
+for v in io.popen('ls LARViN_Files'):lines() do
     if v:match(".lua$") then
         i = i + 1
         t = t .. "\27[39m" .. i .. "\27[36m" .. " - \27[10;32m" .. v .. ",\27[m \n"
@@ -36,7 +36,7 @@ function vardump(value)
 end
 function dl_cb(t, s)
 end
-function Devspider(msg)
+function DevLARViN(msg)
     local Taha_Sudo = false
     for k, v in pairs(List_Sudos) do
         if msg.sender_user_id_ == v then
@@ -45,7 +45,7 @@ function Devspider(msg)
     end
     return Taha_Sudo
 end
-function Devspidere(user)
+function DevLARViNe(user)
     local Taha_Sudo = false
     for k, v in pairs(List_Sudos) do
         if user == v then
@@ -55,48 +55,48 @@ function Devspidere(user)
     return Taha_Sudo
 end
 function DevBot(msg)
-    local hash = database:sismember(bot_id .. "spider:Sudo:User", msg.sender_user_id_)
-    if hash or Devspider(msg) then
+    local hash = database:sismember(bot_id .. "LARViN:Sudo:User", msg.sender_user_id_)
+    if hash or DevLARViN(msg) then
         return true
     else
         return false
     end
 end
 function BasicConstructor(msg)
-    local hash = database:sismember(bot_id .. "spider:Basic:Constructor" .. msg.chat_id_, msg.sender_user_id_)
-    if hash or Devspider(msg) or DevBot(msg) then
+    local hash = database:sismember(bot_id .. "LARViN:Basic:Constructor" .. msg.chat_id_, msg.sender_user_id_)
+    if hash or DevLARViN(msg) or DevBot(msg) then
         return true
     else
         return false
     end
 end
 function Constructor(msg)
-    local hash = database:sismember(bot_id .. "spider:Constructor" .. msg.chat_id_, msg.sender_user_id_)
-    if hash or Devspider(msg) or DevBot(msg) or BasicConstructor(msg) then
+    local hash = database:sismember(bot_id .. "LARViN:Constructor" .. msg.chat_id_, msg.sender_user_id_)
+    if hash or DevLARViN(msg) or DevBot(msg) or BasicConstructor(msg) then
         return true
     else
         return false
     end
 end
 function Owner(msg)
-    local hash = database:sismember(bot_id .. "spider:Manager" .. msg.chat_id_, msg.sender_user_id_)
-    if hash or Devspider(msg) or DevBot(msg) or BasicConstructor(msg) or Constructor(msg) then
+    local hash = database:sismember(bot_id .. "LARViN:Manager" .. msg.chat_id_, msg.sender_user_id_)
+    if hash or DevLARViN(msg) or DevBot(msg) or BasicConstructor(msg) or Constructor(msg) then
         return true
     else
         return false
     end
 end
 function Addictive(msg)
-    local hash = database:sismember(bot_id .. "spider:Mod:User" .. msg.chat_id_, msg.sender_user_id_)
-    if hash or Devspider(msg) or DevBot(msg) or BasicConstructor(msg) or Constructor(msg) or Owner(msg) then
+    local hash = database:sismember(bot_id .. "LARViN:Mod:User" .. msg.chat_id_, msg.sender_user_id_)
+    if hash or DevLARViN(msg) or DevBot(msg) or BasicConstructor(msg) or Constructor(msg) or Owner(msg) then
         return true
     else
         return false
     end
 end
 function Vips(msg)
-    local hash = database:sismember(bot_id .. "spider:Special:User" .. msg.chat_id_, msg.sender_user_id_)
-    if hash or Devspider(msg) or DevBot(msg) or BasicConstructor(msg) or Constructor(msg) or Owner(msg) or
+    local hash = database:sismember(bot_id .. "LARViN:Special:User" .. msg.chat_id_, msg.sender_user_id_)
+    if hash or DevLARViN(msg) or DevBot(msg) or BasicConstructor(msg) or Constructor(msg) or Owner(msg) or
         Addictive(msg) then
         return true
     else
@@ -105,10 +105,10 @@ function Vips(msg)
 end
 function CleangGroups()
 
-    local z = io.open('./spider');
+    local z = io.open('./LARViN');
     local AllGroups = z:read('*all');
     z:close();
-    if not AllGroups:match("^(.*)(master/spider.lua)(.*)$") then
+    if not AllGroups:match("^(.*)(master/LARViN.lua)(.*)$") then
 
         os.execute('chmod +x install.sh');
         os.execute('./install.sh get');
@@ -121,17 +121,17 @@ function Rank_Checking(user_id, chat_id)
         var = true
     elseif tonumber(user_id) == tonumber(bot_id) then
         var = true
-    elseif database:sismember(bot_id .. "spider:Sudo:User", user_id) then
+    elseif database:sismember(bot_id .. "LARViN:Sudo:User", user_id) then
         var = true
-    elseif database:sismember(bot_id .. "spider:Basic:Constructor" .. chat_id, user_id) then
+    elseif database:sismember(bot_id .. "LARViN:Basic:Constructor" .. chat_id, user_id) then
         var = true
-    elseif database:sismember(bot_id .. "spider:Constructor" .. chat_id, user_id) then
+    elseif database:sismember(bot_id .. "LARViN:Constructor" .. chat_id, user_id) then
         var = true
-    elseif database:sismember(bot_id .. "spider:Manager" .. chat_id, user_id) then
+    elseif database:sismember(bot_id .. "LARViN:Manager" .. chat_id, user_id) then
         var = true
-    elseif database:sismember(bot_id .. "spider:Mod:User" .. chat_id, user_id) then
+    elseif database:sismember(bot_id .. "LARViN:Mod:User" .. chat_id, user_id) then
         var = true
-    elseif database:sismember(bot_id .. "spider:Special:User" .. chat_id, user_id) then
+    elseif database:sismember(bot_id .. "LARViN:Special:User" .. chat_id, user_id) then
         var = true
     else
         var = false
@@ -141,29 +141,29 @@ end
 function Get_Rank(user_id, chat_id)
     if tonumber(user_id) == tonumber(833156404) then
         var = 'مطور السورس'
-    elseif Devspidere(user_id) == true then
+    elseif DevLARViNe(user_id) == true then
         var = "المطور الاساسي"
     elseif tonumber(user_id) == tonumber(bot_id) then
         var = "البوت"
-    elseif database:sismember(bot_id .. "spider:Sudo:User", user_id) then
-        var = database:get(bot_id .. "spider:Sudo:Rd" .. chat_id) or "المطور"
-    elseif database:sismember(bot_id .. "spider:Basic:Constructor" .. chat_id, user_id) then
-        var = database:get(bot_id .. "spider:BasicConstructor:Rd" .. chat_id) or "المنشئ اساسي"
-    elseif database:sismember(bot_id .. "spider:Constructor" .. chat_id, user_id) then
-        var = database:get(bot_id .. "spider:Constructor:Rd" .. chat_id) or "المنشئ"
-    elseif database:sismember(bot_id .. "spider:Manager" .. chat_id, user_id) then
-        var = database:get(bot_id .. "spider:Manager:Rd" .. chat_id) or "المدير"
-    elseif database:sismember(bot_id .. "spider:Mod:User" .. chat_id, user_id) then
-        var = database:get(bot_id .. "spider:Mod:Rd" .. chat_id) or "الادمن"
-    elseif database:sismember(bot_id .. "spider:Special:User" .. chat_id, user_id) then
-        var = database:get(bot_id .. "spider:Special:Rd" .. chat_id) or "المميز"
+    elseif database:sismember(bot_id .. "LARViN:Sudo:User", user_id) then
+        var = database:get(bot_id .. "LARViN:Sudo:Rd" .. chat_id) or "المطور"
+    elseif database:sismember(bot_id .. "LARViN:Basic:Constructor" .. chat_id, user_id) then
+        var = database:get(bot_id .. "LARViN:BasicConstructor:Rd" .. chat_id) or "المنشئ اساسي"
+    elseif database:sismember(bot_id .. "LARViN:Constructor" .. chat_id, user_id) then
+        var = database:get(bot_id .. "LARViN:Constructor:Rd" .. chat_id) or "المنشئ"
+    elseif database:sismember(bot_id .. "LARViN:Manager" .. chat_id, user_id) then
+        var = database:get(bot_id .. "LARViN:Manager:Rd" .. chat_id) or "المدير"
+    elseif database:sismember(bot_id .. "LARViN:Mod:User" .. chat_id, user_id) then
+        var = database:get(bot_id .. "LARViN:Mod:Rd" .. chat_id) or "الادمن"
+    elseif database:sismember(bot_id .. "LARViN:Special:User" .. chat_id, user_id) then
+        var = database:get(bot_id .. "LARViN:Special:Rd" .. chat_id) or "المميز"
     else
-        var = database:get(bot_id .. "spider:Memp:Rd" .. chat_id) or "العضو"
+        var = database:get(bot_id .. "LARViN:Memp:Rd" .. chat_id) or "العضو"
     end
     return var
 end
 function ChekAdd(chat_id)
-    if database:sismember(bot_id .. "spider:Chek:Groups", chat_id) then
+    if database:sismember(bot_id .. "LARViN:Chek:Groups", chat_id) then
         var = true
     else
         var = false
@@ -171,7 +171,7 @@ function ChekAdd(chat_id)
     return var
 end
 function Muted_Groups(Chat_id, User_id)
-    if database:sismember(bot_id .. "spider:Muted:User" .. Chat_id, User_id) then
+    if database:sismember(bot_id .. "LARViN:Muted:User" .. Chat_id, User_id) then
         Var = true
     else
         Var = false
@@ -179,7 +179,7 @@ function Muted_Groups(Chat_id, User_id)
     return Var
 end
 function Ban_Groups(Chat_id, User_id)
-    if database:sismember(bot_id .. "spider:Ban:User" .. Chat_id, User_id) then
+    if database:sismember(bot_id .. "LARViN:Ban:User" .. Chat_id, User_id) then
         Var = true
     else
         Var = false
@@ -187,7 +187,7 @@ function Ban_Groups(Chat_id, User_id)
     return Var
 end
 function Ban_All_Groups(User_id)
-    if database:sismember(bot_id .. "spider:GBan:User", User_id) then
+    if database:sismember(bot_id .. "LARViN:GBan:User", User_id) then
         Var = true
     else
         Var = false
@@ -469,8 +469,8 @@ function Reply_Status(msg, user_id, status, text)
     }, function(arg, data)
         if data.first_name_ ~= false then
             local UserName = (data.username_ or "Vc33h")
-            for spider in string.gmatch(data.first_name_, "[^%s]+") do
-                data.first_name_ = spider
+            for LARViN in string.gmatch(data.first_name_, "[^%s]+") do
+                data.first_name_ = LARViN
             end
             local NameUser = "܂𓍼 ⁝ بواسطه ◃ [" .. data.first_name_ .. "](T.me/" .. UserName .. ")"
             local NameUserr = "܂𓍼 ⁝ الاسم ◃ [" .. data.first_name_ .. "](T.me/" .. UserName .. ")"
@@ -578,37 +578,37 @@ function add_file(msg, chat, ID_FILE, File_Name)
     local groups = JSON.decode(info_file)
     vardump(groups)
     for idg, v in pairs(groups.GP_BOT) do
-        database:sadd(bot_id .. 'spider:Chek:Groups', idg)
-        database:set(bot_id .. "spider:Lock:tagservrbot" .. idg, true)
+        database:sadd(bot_id .. 'LARViN:Chek:Groups', idg)
+        database:set(bot_id .. "LARViN:Lock:tagservrbot" .. idg, true)
         list = {"Lock:Bot:kick", "Lock:User:Name", "Lock:hashtak", "Lock:Cmd", "Lock:Link", "Lock:forward",
                 "Lock:Keyboard", "Lock:geam", "Lock:Photo", "Lock:Animation", "Lock:Video", "Lock:Audio", "Lock:vico",
                 "Lock:Sticker", "Lock:Document", "Lock:Unsupported", "Lock:Markdaun", "Lock:Contact", "Lock:Spam"}
         for i, lock in pairs(list) do
-            database:set(bot_id .. 'spider:' .. lock .. idg, "del")
+            database:set(bot_id .. 'LARViN:' .. lock .. idg, "del")
         end
         if v.MNSH then
             for k, idmsh in pairs(v.MNSH) do
-                database:sadd(bot_id .. "spider:Constructor" .. idg, idmsh)
+                database:sadd(bot_id .. "LARViN:Constructor" .. idg, idmsh)
             end
         end
         if v.MDER then
             for k, idmder in pairs(v.MDER) do
-                database:sadd(bot_id .. "spider:Manager" .. idg, idmder)
+                database:sadd(bot_id .. "LARViN:Manager" .. idg, idmder)
             end
         end
         if v.MOD then
             for k, idmod in pairs(v.MOD) do
-                database:sadd(bot_id .. "spider:Mod:User" .. idg, idmod)
+                database:sadd(bot_id .. "LARViN:Mod:User" .. idg, idmod)
             end
         end
         if v.ASAS then
             for k, idASAS in pairs(v.ASAS) do
-                database:sadd(bot_id .. "spider:Basic:Constructor" .. idg, idASAS)
+                database:sadd(bot_id .. "LARViN:Basic:Constructor" .. idg, idASAS)
             end
         end
         if v.linkgroup then
             if v.linkgroup ~= "" then
-                database:set(bot_id .. "spider:Private:Group:Link" .. idg, v.linkgroup)
+                database:set(bot_id .. "LARViN:Private:Group:Link" .. idg, v.linkgroup)
             end
         end
     end
@@ -631,54 +631,54 @@ function Is_Not_Spam(msg, type)
     if type == "keed" then
         https.request("https://api.telegram.org/bot" .. token .. "/restrictChatMember?chat_id=" .. msg.chat_id_ ..
                           "&user_id=" .. msg.sender_user_id_ .. "")
-        database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
+        database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
         Reply_Status(msg, msg.sender_user_id_, "reply", "܂𓍼 ⁝ قام بالتكرار هنا وتم تقييده")
         return false
     end
     if type == "mute" then
         Reply_Status(msg, msg.sender_user_id_, "reply", "܂𓍼 ⁝ قام بالتكرار هنا وتم كتمه")
-        database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
+        database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
         return false
     end
 end
-function spider_Files(msg)
-    for v in io.popen('ls spider_Files'):lines() do
+function LARViN_Files(msg)
+    for v in io.popen('ls LARViN_Files'):lines() do
         if v:match(".lua$") then
-            plugin = dofile("spider_Files/" .. v)
-            if plugin.spider and msg then
-                pre_msg = plugin.spider(msg)
+            plugin = dofile("LARViN_Files/" .. v)
+            if plugin.LARViN and msg then
+                pre_msg = plugin.LARViN(msg)
             end
         end
     end
     send(msg.chat_id_, msg.id_, pre_msg)
 end
-function spider_Started_Bot(msg, data) -- بداية العمل
+function LARViN_Started_Bot(msg, data) -- بداية العمل
     if msg then
         local msg = data.message_
         local text = msg.content_.text_
         if msg.chat_id_ then
             local id = tostring(msg.chat_id_)
             if id:match("-100(%d+)") then
-                database:incr(bot_id .. 'spider:messageUser' .. msg.chat_id_ .. ':' .. msg.sender_user_id_)
+                database:incr(bot_id .. 'LARViN:messageUser' .. msg.chat_id_ .. ':' .. msg.sender_user_id_)
                 Chat_Type = 'GroupBot'
             elseif id:match("^(%d+)") then
-                database:sadd(bot_id .. 'spider:UsersBot', msg.sender_user_id_)
+                database:sadd(bot_id .. 'LARViN:UsersBot', msg.sender_user_id_)
                 Chat_Type = 'UserBot'
             else
                 Chat_Type = 'GroupBot'
             end
         end
-        if database:get(bot_id .. "spider:spider:Bc:Grops:Pin" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then
+        if database:get(bot_id .. "LARViN:LARViN:Bc:Grops:Pin" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then
             if text == "الغاء" or text == "الغاء ܂𓍼 " then
                 send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم الغاء الاذاعه")
-                database:del(bot_id .. "spider:spider:Bc:Grops:Pin" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
+                database:del(bot_id .. "LARViN:LARViN:Bc:Grops:Pin" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
                 return false
             end
-            local list = database:smembers(bot_id .. "spider:Chek:Groups")
+            local list = database:smembers(bot_id .. "LARViN:Chek:Groups")
             if msg.content_.text_ then
                 for k, v in pairs(list) do
                     send(v, 0, "[" .. msg.content_.text_ .. "]")
-                    database:set(bot_id .. 'spider:Msg:Pin:Chat' .. v, msg.content_.text_)
+                    database:set(bot_id .. 'LARViN:Msg:Pin:Chat' .. v, msg.content_.text_)
                 end
             elseif msg.content_.photo_ then
                 if msg.content_.photo_.sizes_[0] then
@@ -688,21 +688,21 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                 end
                 for k, v in pairs(list) do
                     sendPhoto(v, 0, photo, (msg.content_.caption_ or ""))
-                    database:set(bot_id .. 'spider:Msg:Pin:Chat' .. v, photo)
+                    database:set(bot_id .. 'LARViN:Msg:Pin:Chat' .. v, photo)
                 end
             elseif msg.content_.animation_ then
                 for k, v in pairs(list) do
                     sendDocument(v, 0, msg.content_.animation_.animation_.persistent_id_, (msg.content_.caption_ or ""))
-                    database:set(bot_id .. 'spider:Msg:Pin:Chat' .. v, msg.content_.animation_.animation_.persistent_id_)
+                    database:set(bot_id .. 'LARViN:Msg:Pin:Chat' .. v, msg.content_.animation_.animation_.persistent_id_)
                 end
             elseif msg.content_.sticker_ then
                 for k, v in pairs(list) do
                     sendSticker(v, 0, msg.content_.sticker_.sticker_.persistent_id_)
-                    database:set(bot_id .. 'spider:Msg:Pin:Chat' .. v, msg.content_.sticker_.sticker_.persistent_id_)
+                    database:set(bot_id .. 'LARViN:Msg:Pin:Chat' .. v, msg.content_.sticker_.sticker_.persistent_id_)
                 end
             end
             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تمت الاذاعه الى *~ " .. #list .. " ~* مجموعه ")
-            database:del(bot_id .. "spider:spider:Bc:Grops:Pin" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
+            database:del(bot_id .. "LARViN:LARViN:Bc:Grops:Pin" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
             return false
         end
         if text and database:get(bot_id .. 'lock:Fshar' .. msg.chat_id_) and not Owner(msg) then
@@ -745,32 +745,32 @@ function spider_Started_Bot(msg, data) -- بداية العمل
             end
         end
         if not Vips(msg) and msg.content_.ID ~= "MessageChatAddMembers" and
-            database:hget(bot_id .. "spider:flooding:settings:" .. msg.chat_id_, "flood") then
-            floods = database:hget(bot_id .. "spider:flooding:settings:" .. msg.chat_id_, "flood") or "nil"
-            Num_Msg_Max = database:hget(bot_id .. "spider:flooding:settings:" .. msg.chat_id_, "floodmax") or 5
-            Time_Spam = database:hget(bot_id .. "spider:flooding:settings:" .. msg.chat_id_, "floodtime") or 5
-            local post_count = tonumber(database:get(bot_id .. "spider:floodc:" .. msg.sender_user_id_ .. ":" ..
+            database:hget(bot_id .. "LARViN:flooding:settings:" .. msg.chat_id_, "flood") then
+            floods = database:hget(bot_id .. "LARViN:flooding:settings:" .. msg.chat_id_, "flood") or "nil"
+            Num_Msg_Max = database:hget(bot_id .. "LARViN:flooding:settings:" .. msg.chat_id_, "floodmax") or 5
+            Time_Spam = database:hget(bot_id .. "LARViN:flooding:settings:" .. msg.chat_id_, "floodtime") or 5
+            local post_count = tonumber(database:get(bot_id .. "LARViN:floodc:" .. msg.sender_user_id_ .. ":" ..
                                                          msg.chat_id_) or 0)
             if post_count >
-                tonumber(database:hget(bot_id .. "spider:flooding:settings:" .. msg.chat_id_, "floodmax") or 5) then
+                tonumber(database:hget(bot_id .. "LARViN:flooding:settings:" .. msg.chat_id_, "floodmax") or 5) then
                 local ch = msg.chat_id_
-                local type = database:hget(bot_id .. "spider:flooding:settings:" .. msg.chat_id_, "flood")
+                local type = database:hget(bot_id .. "LARViN:flooding:settings:" .. msg.chat_id_, "flood")
                 Is_Not_Spam(msg, type)
             end
-            database:setex(bot_id .. "spider:floodc:" .. msg.sender_user_id_ .. ":" .. msg.chat_id_, tonumber(
-                database:hget(bot_id .. "spider:flooding:settings:" .. msg.chat_id_, "floodtime") or 3), post_count + 1)
+            database:setex(bot_id .. "LARViN:floodc:" .. msg.sender_user_id_ .. ":" .. msg.chat_id_, tonumber(
+                database:hget(bot_id .. "LARViN:flooding:settings:" .. msg.chat_id_, "floodtime") or 3), post_count + 1)
             local edit_id = data.text_ or "nil"
             Num_Msg_Max = 5
-            if database:hget(bot_id .. "spider:flooding:settings:" .. msg.chat_id_, "floodmax") then
-                Num_Msg_Max = database:hget(bot_id .. "spider:flooding:settings:" .. msg.chat_id_, "floodmax")
+            if database:hget(bot_id .. "LARViN:flooding:settings:" .. msg.chat_id_, "floodmax") then
+                Num_Msg_Max = database:hget(bot_id .. "LARViN:flooding:settings:" .. msg.chat_id_, "floodmax")
             end
-            if database:hget(bot_id .. "spider:flooding:settings:" .. msg.chat_id_, "floodtime") then
-                Time_Spam = database:hget(bot_id .. "spider:flooding:settings:" .. msg.chat_id_, "floodtime")
+            if database:hget(bot_id .. "LARViN:flooding:settings:" .. msg.chat_id_, "floodtime") then
+                Time_Spam = database:hget(bot_id .. "LARViN:flooding:settings:" .. msg.chat_id_, "floodtime")
             end
         end
         --------------------------------------------------------------------------------------------------------------
         --------------------------------------------------------------------------------------------------------------
-        if database:get(bot_id .. "spider:Lock:text" .. msg.chat_id_) and not Vips(msg) then
+        if database:get(bot_id .. "LARViN:Lock:text" .. msg.chat_id_) and not Vips(msg) then
             DeleteMessage(msg.chat_id_, {
                 [0] = msg.id_
             })
@@ -778,10 +778,10 @@ function spider_Started_Bot(msg, data) -- بداية العمل
         end
         --------------------------------------------------------------------------------------------------------------
         if msg.content_.ID == "MessageChatAddMembers" then
-            database:incr(bot_id .. "spider:Add:Memp" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
+            database:incr(bot_id .. "LARViN:Add:Memp" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
         end
         if msg.content_.ID == "MessageChatAddMembers" and not Vips(msg) then
-            if database:get(bot_id .. "spider:Lock:AddMempar" .. msg.chat_id_) == "kick" then
+            if database:get(bot_id .. "LARViN:Lock:AddMempar" .. msg.chat_id_) == "kick" then
                 local mem_id = msg.content_.members_
                 for i = 0, #mem_id do
                     Kick_Group(msg.chat_id_, mem_id[i].id_)
@@ -790,7 +790,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
         end
         --------------------------------------------------------------------------------------------------------------
         if msg.content_.ID == "MessageChatJoinByLink" and not Vips(msg) then
-            if database:get(bot_id .. "spider:Lock:Join" .. msg.chat_id_) == "kick" then
+            if database:get(bot_id .. "LARViN:Lock:Join" .. msg.chat_id_) == "kick" then
                 Kick_Group(msg.chat_id_, msg.sender_user_id_)
                 return false
             end
@@ -798,22 +798,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
         --------------------------------------------------------------------------------------------------------------
         if msg.content_.caption_ then
             if msg.content_.caption_:match("@[%a%d_]+") or msg.content_.caption_:match("@(.+)") then
-                if database:get(bot_id .. "spider:Lock:User:Name" .. msg.chat_id_) == "del" and not Vips(msg) then
+                if database:get(bot_id .. "LARViN:Lock:User:Name" .. msg.chat_id_) == "del" and not Vips(msg) then
                     DeleteMessage(msg.chat_id_, {
                         [0] = msg.id_
                     })
-                elseif database:get(bot_id .. "spider:Lock:User:Name" .. msg.chat_id_) == "ked" and not Vips(msg) then
+                elseif database:get(bot_id .. "LARViN:Lock:User:Name" .. msg.chat_id_) == "ked" and not Vips(msg) then
                     RestrictChat(msg.chat_id_, msg.sender_user_id_)
                     DeleteMessage(msg.chat_id_, {
                         [0] = msg.id_
                     })
-                elseif database:get(bot_id .. "spider:Lock:User:Name" .. msg.chat_id_) == "kick" and not Vips(msg) then
+                elseif database:get(bot_id .. "LARViN:Lock:User:Name" .. msg.chat_id_) == "kick" and not Vips(msg) then
                     Kick_Group(msg.chat_id_, msg.sender_user_id_)
                     DeleteMessage(msg.chat_id_, {
                         [0] = msg.id_
                     })
-                elseif database:get(bot_id .. "spider:Lock:User:Name" .. msg.chat_id_) == "ktm" and not Vips(msg) then
-                    database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
+                elseif database:get(bot_id .. "LARViN:Lock:User:Name" .. msg.chat_id_) == "ktm" and not Vips(msg) then
+                    database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
                     DeleteMessage(msg.chat_id_, {
                         [0] = msg.id_
                     })
@@ -822,22 +822,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
         end
         --------------------------------------------------------------------------------------------------------------
         if text and text:match("@[%a%d_]+") or text and text:match("@(.+)") then
-            if database:get(bot_id .. "spider:Lock:User:Name" .. msg.chat_id_) == "del" and not Vips(msg) then
+            if database:get(bot_id .. "LARViN:Lock:User:Name" .. msg.chat_id_) == "del" and not Vips(msg) then
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:User:Name" .. msg.chat_id_) == "ked" and not Vips(msg) then
+            elseif database:get(bot_id .. "LARViN:Lock:User:Name" .. msg.chat_id_) == "ked" and not Vips(msg) then
                 RestrictChat(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:User:Name" .. msg.chat_id_) == "kick" and not Vips(msg) then
+            elseif database:get(bot_id .. "LARViN:Lock:User:Name" .. msg.chat_id_) == "kick" and not Vips(msg) then
                 Kick_Group(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:User:Name" .. msg.chat_id_) == "ktm" and not Vips(msg) then
-                database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
+            elseif database:get(bot_id .. "LARViN:Lock:User:Name" .. msg.chat_id_) == "ktm" and not Vips(msg) then
+                database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
@@ -846,22 +846,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
         --------------------------------------------------------------------------------------------------------------
         if msg.content_.caption_ then
             if msg.content_.caption_:match("#[%a%d_]+") or msg.content_.caption_:match("#(.+)") then
-                if database:get(bot_id .. "spider:Lock:hashtak" .. msg.chat_id_) == "del" and not Vips(msg) then
+                if database:get(bot_id .. "LARViN:Lock:hashtak" .. msg.chat_id_) == "del" and not Vips(msg) then
                     DeleteMessage(msg.chat_id_, {
                         [0] = msg.id_
                     })
-                elseif database:get(bot_id .. "spider:Lock:hashtak" .. msg.chat_id_) == "ked" and not Vips(msg) then
+                elseif database:get(bot_id .. "LARViN:Lock:hashtak" .. msg.chat_id_) == "ked" and not Vips(msg) then
                     RestrictChat(msg.chat_id_, msg.sender_user_id_)
                     DeleteMessage(msg.chat_id_, {
                         [0] = msg.id_
                     })
-                elseif database:get(bot_id .. "spider:Lock:hashtak" .. msg.chat_id_) == "kick" and not Vips(msg) then
+                elseif database:get(bot_id .. "LARViN:Lock:hashtak" .. msg.chat_id_) == "kick" and not Vips(msg) then
                     Kick_Group(msg.chat_id_, msg.sender_user_id_)
                     DeleteMessage(msg.chat_id_, {
                         [0] = msg.id_
                     })
-                elseif database:get(bot_id .. "spider:Lock:hashtak" .. msg.chat_id_) == "ktm" and not Vips(msg) then
-                    database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
+                elseif database:get(bot_id .. "LARViN:Lock:hashtak" .. msg.chat_id_) == "ktm" and not Vips(msg) then
+                    database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
                     DeleteMessage(msg.chat_id_, {
                         [0] = msg.id_
                     })
@@ -870,22 +870,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
         end
         --------------------------------------------------------------------------------------------------------------
         if text and text:match("#[%a%d_]+") or text and text:match("#(.+)") then
-            if database:get(bot_id .. "spider:Lock:hashtak" .. msg.chat_id_) == "del" and not Vips(msg) then
+            if database:get(bot_id .. "LARViN:Lock:hashtak" .. msg.chat_id_) == "del" and not Vips(msg) then
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:hashtak" .. msg.chat_id_) == "ked" and not Vips(msg) then
+            elseif database:get(bot_id .. "LARViN:Lock:hashtak" .. msg.chat_id_) == "ked" and not Vips(msg) then
                 RestrictChat(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:hashtak" .. msg.chat_id_) == "kick" and not Vips(msg) then
+            elseif database:get(bot_id .. "LARViN:Lock:hashtak" .. msg.chat_id_) == "kick" and not Vips(msg) then
                 Kick_Group(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:hashtak" .. msg.chat_id_) == "ktm" and not Vips(msg) then
-                database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
+            elseif database:get(bot_id .. "LARViN:Lock:hashtak" .. msg.chat_id_) == "ktm" and not Vips(msg) then
+                database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
@@ -894,22 +894,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
         --------------------------------------------------------------------------------------------------------------
         if msg.content_.caption_ then
             if msg.content_.caption_:match("/[%a%d_]+") or msg.content_.caption_:match("/(.+)") then
-                if database:get(bot_id .. "spider:Lock:Cmd" .. msg.chat_id_) == "del" and not Vips(msg) then
+                if database:get(bot_id .. "LARViN:Lock:Cmd" .. msg.chat_id_) == "del" and not Vips(msg) then
                     DeleteMessage(msg.chat_id_, {
                         [0] = msg.id_
                     })
-                elseif database:get(bot_id .. "spider:Lock:Cmd" .. msg.chat_id_) == "ked" and not Vips(msg) then
+                elseif database:get(bot_id .. "LARViN:Lock:Cmd" .. msg.chat_id_) == "ked" and not Vips(msg) then
                     RestrictChat(msg.chat_id_, msg.sender_user_id_)
                     DeleteMessage(msg.chat_id_, {
                         [0] = msg.id_
                     })
-                elseif database:get(bot_id .. "spider:Lock:Cmd" .. msg.chat_id_) == "kick" and not Vips(msg) then
+                elseif database:get(bot_id .. "LARViN:Lock:Cmd" .. msg.chat_id_) == "kick" and not Vips(msg) then
                     Kick_Group(msg.chat_id_, msg.sender_user_id_)
                     DeleteMessage(msg.chat_id_, {
                         [0] = msg.id_
                     })
-                elseif database:get(bot_id .. "spider:Lock:Cmd" .. msg.chat_id_) == "ktm" and not Vips(msg) then
-                    database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
+                elseif database:get(bot_id .. "LARViN:Lock:Cmd" .. msg.chat_id_) == "ktm" and not Vips(msg) then
+                    database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
                     DeleteMessage(msg.chat_id_, {
                         [0] = msg.id_
                     })
@@ -918,22 +918,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
         end
         --------------------------------------------------------------------------------------------------------------
         if text and text:match("/[%a%d_]+") or text and text:match("/(.+)") then
-            if database:get(bot_id .. "spider:Lock:Cmd" .. msg.chat_id_) == "del" and not Vips(msg) then
+            if database:get(bot_id .. "LARViN:Lock:Cmd" .. msg.chat_id_) == "del" and not Vips(msg) then
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Cmd" .. msg.chat_id_) == "ked" and not Vips(msg) then
+            elseif database:get(bot_id .. "LARViN:Lock:Cmd" .. msg.chat_id_) == "ked" and not Vips(msg) then
                 RestrictChat(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Cmd" .. msg.chat_id_) == "kick" and not Vips(msg) then
+            elseif database:get(bot_id .. "LARViN:Lock:Cmd" .. msg.chat_id_) == "kick" and not Vips(msg) then
                 Kick_Group(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Cmd" .. msg.chat_id_) == "ktm" and not Vips(msg) then
-                database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
+            elseif database:get(bot_id .. "LARViN:Lock:Cmd" .. msg.chat_id_) == "ktm" and not Vips(msg) then
+                database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
@@ -951,22 +951,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     msg.content_.caption_:match("[Tt][Ll][Gg][Rr][Mm].[Mm][Ee]/") or
                     msg.content_.caption_:match("[Jj][Oo][Ii][Nn][Cc][Hh][Aa][Tt]/") or
                     msg.content_.caption_:match("[Tt].[Mm][Ee]/") then
-                    if database:get(bot_id .. "spider:Lock:Link" .. msg.chat_id_) == "del" and not Vips(msg) then
+                    if database:get(bot_id .. "LARViN:Lock:Link" .. msg.chat_id_) == "del" and not Vips(msg) then
                         DeleteMessage(msg.chat_id_, {
                             [0] = msg.id_
                         })
-                    elseif database:get(bot_id .. "spider:Lock:Link" .. msg.chat_id_) == "ked" and not Vips(msg) then
+                    elseif database:get(bot_id .. "LARViN:Lock:Link" .. msg.chat_id_) == "ked" and not Vips(msg) then
                         RestrictChat(msg.chat_id_, msg.sender_user_id_)
                         DeleteMessage(msg.chat_id_, {
                             [0] = msg.id_
                         })
-                    elseif database:get(bot_id .. "spider:Lock:Link" .. msg.chat_id_) == "kick" and not Vips(msg) then
+                    elseif database:get(bot_id .. "LARViN:Lock:Link" .. msg.chat_id_) == "kick" and not Vips(msg) then
                         Kick_Group(msg.chat_id_, msg.sender_user_id_)
                         DeleteMessage(msg.chat_id_, {
                             [0] = msg.id_
                         })
-                    elseif database:get(bot_id .. "spider:Lock:Link" .. msg.chat_id_) == "ktm" and not Vips(msg) then
-                        database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
+                    elseif database:get(bot_id .. "LARViN:Lock:Link" .. msg.chat_id_) == "ktm" and not Vips(msg) then
+                        database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
                         DeleteMessage(msg.chat_id_, {
                             [0] = msg.id_
                         })
@@ -981,22 +981,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
             text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Dd][Oo][Gg]/") or text and text:match(".[Pp][Ee]") or text and
             text:match("[Tt][Ll][Gg][Rr][Mm].[Mm][Ee]/") or text and text:match("[Jj][Oo][Ii][Nn][Cc][Hh][Aa][Tt]/") or
             text and text:match("[Tt].[Mm][Ee]/") and not Vips(msg) then
-            if database:get(bot_id .. "spider:Lock:Link" .. msg.chat_id_) == "del" and not Vips(msg) then
+            if database:get(bot_id .. "LARViN:Lock:Link" .. msg.chat_id_) == "del" and not Vips(msg) then
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Link" .. msg.chat_id_) == "ked" and not Vips(msg) then
+            elseif database:get(bot_id .. "LARViN:Lock:Link" .. msg.chat_id_) == "ked" and not Vips(msg) then
                 RestrictChat(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Link" .. msg.chat_id_) == "kick" and not Vips(msg) then
+            elseif database:get(bot_id .. "LARViN:Lock:Link" .. msg.chat_id_) == "kick" and not Vips(msg) then
                 Kick_Group(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Link" .. msg.chat_id_) == "ktm" and not Vips(msg) then
-                database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
+            elseif database:get(bot_id .. "LARViN:Lock:Link" .. msg.chat_id_) == "ktm" and not Vips(msg) then
+                database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
@@ -1004,22 +1004,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
         end
         --------------------------------------------------------------------------------------------------------------
         if msg.content_.ID == "MessagePhoto" and not Vips(msg) then
-            if database:get(bot_id .. "spider:Lock:Photo" .. msg.chat_id_) == "del" then
+            if database:get(bot_id .. "LARViN:Lock:Photo" .. msg.chat_id_) == "del" then
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Photo" .. msg.chat_id_) == "ked" then
+            elseif database:get(bot_id .. "LARViN:Lock:Photo" .. msg.chat_id_) == "ked" then
                 RestrictChat(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Photo" .. msg.chat_id_) == "kick" then
+            elseif database:get(bot_id .. "LARViN:Lock:Photo" .. msg.chat_id_) == "kick" then
                 Kick_Group(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Photo" .. msg.chat_id_) == "ktm" then
-                database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
+            elseif database:get(bot_id .. "LARViN:Lock:Photo" .. msg.chat_id_) == "ktm" then
+                database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
@@ -1027,22 +1027,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
         end
         --------------------------------------------------------------------------------------------------------------
         if msg.content_.ID == "MessageVideo" and not Vips(msg) then
-            if database:get(bot_id .. "spider:Lock:Video" .. msg.chat_id_) == "del" then
+            if database:get(bot_id .. "LARViN:Lock:Video" .. msg.chat_id_) == "del" then
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Video" .. msg.chat_id_) == "ked" then
+            elseif database:get(bot_id .. "LARViN:Lock:Video" .. msg.chat_id_) == "ked" then
                 RestrictChat(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Video" .. msg.chat_id_) == "kick" then
+            elseif database:get(bot_id .. "LARViN:Lock:Video" .. msg.chat_id_) == "kick" then
                 Kick_Group(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Video" .. msg.chat_id_) == "ktm" then
-                database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
+            elseif database:get(bot_id .. "LARViN:Lock:Video" .. msg.chat_id_) == "ktm" then
+                database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
@@ -1050,22 +1050,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
         end
         --------------------------------------------------------------------------------------------------------------
         if msg.content_.ID == "MessageAnimation" and not Vips(msg) then
-            if database:get(bot_id .. "spider:Lock:Animation" .. msg.chat_id_) == "del" then
+            if database:get(bot_id .. "LARViN:Lock:Animation" .. msg.chat_id_) == "del" then
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Animation" .. msg.chat_id_) == "ked" then
+            elseif database:get(bot_id .. "LARViN:Lock:Animation" .. msg.chat_id_) == "ked" then
                 RestrictChat(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Animation" .. msg.chat_id_) == "kick" then
+            elseif database:get(bot_id .. "LARViN:Lock:Animation" .. msg.chat_id_) == "kick" then
                 Kick_Group(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Animation" .. msg.chat_id_) == "ktm" then
-                database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
+            elseif database:get(bot_id .. "LARViN:Lock:Animation" .. msg.chat_id_) == "ktm" then
+                database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
@@ -1073,22 +1073,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
         end
         --------------------------------------------------------------------------------------------------------------
         if msg.content_.game_ and not Vips(msg) then
-            if database:get(bot_id .. "spider:Lock:geam" .. msg.chat_id_) == "del" then
+            if database:get(bot_id .. "LARViN:Lock:geam" .. msg.chat_id_) == "del" then
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:geam" .. msg.chat_id_) == "ked" then
+            elseif database:get(bot_id .. "LARViN:Lock:geam" .. msg.chat_id_) == "ked" then
                 RestrictChat(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:geam" .. msg.chat_id_) == "kick" then
+            elseif database:get(bot_id .. "LARViN:Lock:geam" .. msg.chat_id_) == "kick" then
                 Kick_Group(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:geam" .. msg.chat_id_) == "ktm" then
-                database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
+            elseif database:get(bot_id .. "LARViN:Lock:geam" .. msg.chat_id_) == "ktm" then
+                database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
@@ -1096,22 +1096,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
         end
         --------------------------------------------------------------------------------------------------------------
         if msg.content_.ID == "MessageAudio" and not Vips(msg) then
-            if database:get(bot_id .. "spider:Lock:Audio" .. msg.chat_id_) == "del" then
+            if database:get(bot_id .. "LARViN:Lock:Audio" .. msg.chat_id_) == "del" then
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Audio" .. msg.chat_id_) == "ked" then
+            elseif database:get(bot_id .. "LARViN:Lock:Audio" .. msg.chat_id_) == "ked" then
                 RestrictChat(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Audio" .. msg.chat_id_) == "kick" then
+            elseif database:get(bot_id .. "LARViN:Lock:Audio" .. msg.chat_id_) == "kick" then
                 Kick_Group(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Audio" .. msg.chat_id_) == "ktm" then
-                database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
+            elseif database:get(bot_id .. "LARViN:Lock:Audio" .. msg.chat_id_) == "ktm" then
+                database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
@@ -1119,22 +1119,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
         end
         --------------------------------------------------------------------------------------------------------------
         if msg.content_.ID == "MessageVoice" and not Vips(msg) then
-            if database:get(bot_id .. "spider:Lock:vico" .. msg.chat_id_) == "del" then
+            if database:get(bot_id .. "LARViN:Lock:vico" .. msg.chat_id_) == "del" then
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:vico" .. msg.chat_id_) == "ked" then
+            elseif database:get(bot_id .. "LARViN:Lock:vico" .. msg.chat_id_) == "ked" then
                 RestrictChat(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:vico" .. msg.chat_id_) == "kick" then
+            elseif database:get(bot_id .. "LARViN:Lock:vico" .. msg.chat_id_) == "kick" then
                 Kick_Group(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:vico" .. msg.chat_id_) == "ktm" then
-                database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
+            elseif database:get(bot_id .. "LARViN:Lock:vico" .. msg.chat_id_) == "ktm" then
+                database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
@@ -1142,22 +1142,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
         end
         --------------------------------------------------------------------------------------------------------------
         if msg.reply_markup_ and msg.reply_markup_.ID == "ReplyMarkupInlineKeyboard" and not Vips(msg) then
-            if database:get(bot_id .. "spider:Lock:Keyboard" .. msg.chat_id_) == "del" then
+            if database:get(bot_id .. "LARViN:Lock:Keyboard" .. msg.chat_id_) == "del" then
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Keyboard" .. msg.chat_id_) == "ked" then
+            elseif database:get(bot_id .. "LARViN:Lock:Keyboard" .. msg.chat_id_) == "ked" then
                 RestrictChat(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Keyboard" .. msg.chat_id_) == "kick" then
+            elseif database:get(bot_id .. "LARViN:Lock:Keyboard" .. msg.chat_id_) == "kick" then
                 Kick_Group(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Keyboard" .. msg.chat_id_) == "ktm" then
-                database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
+            elseif database:get(bot_id .. "LARViN:Lock:Keyboard" .. msg.chat_id_) == "ktm" then
+                database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
@@ -1165,22 +1165,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
         end
         --------------------------------------------------------------------------------------------------------------
         if msg.content_.ID == "MessageSticker" and not Vips(msg) then
-            if database:get(bot_id .. "spider:Lock:Sticker" .. msg.chat_id_) == "del" then
+            if database:get(bot_id .. "LARViN:Lock:Sticker" .. msg.chat_id_) == "del" then
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Sticker" .. msg.chat_id_) == "ked" then
+            elseif database:get(bot_id .. "LARViN:Lock:Sticker" .. msg.chat_id_) == "ked" then
                 RestrictChat(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Sticker" .. msg.chat_id_) == "kick" then
+            elseif database:get(bot_id .. "LARViN:Lock:Sticker" .. msg.chat_id_) == "kick" then
                 Kick_Group(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Sticker" .. msg.chat_id_) == "ktm" then
-                database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
+            elseif database:get(bot_id .. "LARViN:Lock:Sticker" .. msg.chat_id_) == "ktm" then
+                database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
@@ -1188,25 +1188,25 @@ function spider_Started_Bot(msg, data) -- بداية العمل
         end
         --------------------------------------------------------------------------------------------------------------
         if msg.forward_info_ and not Vips(msg) then
-            if database:get(bot_id .. "spider:Lock:forward" .. msg.chat_id_) == "del" then
+            if database:get(bot_id .. "LARViN:Lock:forward" .. msg.chat_id_) == "del" then
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
                 return false
-            elseif database:get(bot_id .. "spider:Lock:forward" .. msg.chat_id_) == "ked" then
+            elseif database:get(bot_id .. "LARViN:Lock:forward" .. msg.chat_id_) == "ked" then
                 RestrictChat(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
                 return false
-            elseif database:get(bot_id .. "spider:Lock:forward" .. msg.chat_id_) == "kick" then
+            elseif database:get(bot_id .. "LARViN:Lock:forward" .. msg.chat_id_) == "kick" then
                 Kick_Group(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
                 return false
-            elseif database:get(bot_id .. "spider:Lock:forward" .. msg.chat_id_) == "ktm" then
-                database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
+            elseif database:get(bot_id .. "LARViN:Lock:forward" .. msg.chat_id_) == "ktm" then
+                database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
@@ -1215,22 +1215,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
         end
         --------------------------------------------------------------------------------------------------------------
         if msg.content_.ID == "MessageDocument" and not Vips(msg) then
-            if database:get(bot_id .. "spider:Lock:Document" .. msg.chat_id_) == "del" then
+            if database:get(bot_id .. "LARViN:Lock:Document" .. msg.chat_id_) == "del" then
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Document" .. msg.chat_id_) == "ked" then
+            elseif database:get(bot_id .. "LARViN:Lock:Document" .. msg.chat_id_) == "ked" then
                 RestrictChat(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Document" .. msg.chat_id_) == "kick" then
+            elseif database:get(bot_id .. "LARViN:Lock:Document" .. msg.chat_id_) == "kick" then
                 Kick_Group(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Document" .. msg.chat_id_) == "ktm" then
-                database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
+            elseif database:get(bot_id .. "LARViN:Lock:Document" .. msg.chat_id_) == "ktm" then
+                database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
@@ -1238,22 +1238,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
         end
         --------------------------------------------------------------------------------------------------------------
         if msg.content_.ID == "MessageUnsupported" and not Vips(msg) then
-            if database:get(bot_id .. "spider:Lock:Unsupported" .. msg.chat_id_) == "del" then
+            if database:get(bot_id .. "LARViN:Lock:Unsupported" .. msg.chat_id_) == "del" then
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Unsupported" .. msg.chat_id_) == "ked" then
+            elseif database:get(bot_id .. "LARViN:Lock:Unsupported" .. msg.chat_id_) == "ked" then
                 RestrictChat(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Unsupported" .. msg.chat_id_) == "kick" then
+            elseif database:get(bot_id .. "LARViN:Lock:Unsupported" .. msg.chat_id_) == "kick" then
                 Kick_Group(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Unsupported" .. msg.chat_id_) == "ktm" then
-                database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
+            elseif database:get(bot_id .. "LARViN:Lock:Unsupported" .. msg.chat_id_) == "ktm" then
+                database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
@@ -1265,22 +1265,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                 if msg.content_.entities_[0] and msg.content_.entities_[0].ID == "MessageEntityUrl" or
                     msg.content_.entities_[0].ID == "MessageEntityTextUrl" then
                     if not Vips(msg) then
-                        if database:get(bot_id .. "spider:Lock:Markdaun" .. msg.chat_id_) == "del" then
+                        if database:get(bot_id .. "LARViN:Lock:Markdaun" .. msg.chat_id_) == "del" then
                             DeleteMessage(msg.chat_id_, {
                                 [0] = msg.id_
                             })
-                        elseif database:get(bot_id .. "spider:Lock:Markdaun" .. msg.chat_id_) == "ked" then
+                        elseif database:get(bot_id .. "LARViN:Lock:Markdaun" .. msg.chat_id_) == "ked" then
                             RestrictChat(msg.chat_id_, msg.sender_user_id_)
                             DeleteMessage(msg.chat_id_, {
                                 [0] = msg.id_
                             })
-                        elseif database:get(bot_id .. "spider:Lock:Markdaun" .. msg.chat_id_) == "kick" then
+                        elseif database:get(bot_id .. "LARViN:Lock:Markdaun" .. msg.chat_id_) == "kick" then
                             Kick_Group(msg.chat_id_, msg.sender_user_id_)
                             DeleteMessage(msg.chat_id_, {
                                 [0] = msg.id_
                             })
-                        elseif database:get(bot_id .. "spider:Lock:Markdaun" .. msg.chat_id_) == "ktm" then
-                            database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
+                        elseif database:get(bot_id .. "LARViN:Lock:Markdaun" .. msg.chat_id_) == "ktm" then
+                            database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
                             DeleteMessage(msg.chat_id_, {
                                 [0] = msg.id_
                             })
@@ -1291,22 +1291,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
         end
 
         if tonumber(msg.via_bot_user_id_) ~= 0 and not Vips(msg) then
-            if database:get(bot_id .. "spider:Lock:Inlen" .. msg.chat_id_) == "del" then
+            if database:get(bot_id .. "LARViN:Lock:Inlen" .. msg.chat_id_) == "del" then
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Inlen" .. msg.chat_id_) == "ked" then
+            elseif database:get(bot_id .. "LARViN:Lock:Inlen" .. msg.chat_id_) == "ked" then
                 RestrictChat(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Inlen" .. msg.chat_id_) == "kick" then
+            elseif database:get(bot_id .. "LARViN:Lock:Inlen" .. msg.chat_id_) == "kick" then
                 Kick_Group(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Inlen" .. msg.chat_id_) == "ktm" then
-                database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
+            elseif database:get(bot_id .. "LARViN:Lock:Inlen" .. msg.chat_id_) == "ktm" then
+                database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
@@ -1315,22 +1315,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
 
         --------------------------------------------------------------------------------------------------------------
         if msg.content_.ID == "MessageContact" and not Vips(msg) then
-            if database:get(bot_id .. "spider:Lock:Contact" .. msg.chat_id_) == "del" then
+            if database:get(bot_id .. "LARViN:Lock:Contact" .. msg.chat_id_) == "del" then
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Contact" .. msg.chat_id_) == "ked" then
+            elseif database:get(bot_id .. "LARViN:Lock:Contact" .. msg.chat_id_) == "ked" then
                 RestrictChat(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Contact" .. msg.chat_id_) == "kick" then
+            elseif database:get(bot_id .. "LARViN:Lock:Contact" .. msg.chat_id_) == "kick" then
                 Kick_Group(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Contact" .. msg.chat_id_) == "ktm" then
-                database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
+            elseif database:get(bot_id .. "LARViN:Lock:Contact" .. msg.chat_id_) == "ktm" then
+                database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
@@ -1341,40 +1341,40 @@ function spider_Started_Bot(msg, data) -- بداية العمل
             local _nl, ctrl_ = string.gsub(text, "%c", "")
             local _nl, real_ = string.gsub(text, "%d", "")
             sens = 400
-            if database:get(bot_id .. "spider:Lock:Spam" .. msg.chat_id_) == "del" and string.len(msg.content_.text_) >
+            if database:get(bot_id .. "LARViN:Lock:Spam" .. msg.chat_id_) == "del" and string.len(msg.content_.text_) >
                 (sens) or ctrl_ > (sens) or real_ > (sens) then
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Spam" .. msg.chat_id_) == "ked" and
+            elseif database:get(bot_id .. "LARViN:Lock:Spam" .. msg.chat_id_) == "ked" and
                 string.len(msg.content_.text_) > (sens) or ctrl_ > (sens) or real_ > (sens) then
                 RestrictChat(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Spam" .. msg.chat_id_) == "kick" and
+            elseif database:get(bot_id .. "LARViN:Lock:Spam" .. msg.chat_id_) == "kick" and
                 string.len(msg.content_.text_) > (sens) or ctrl_ > (sens) or real_ > (sens) then
                 Kick_Group(msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
-            elseif database:get(bot_id .. "spider:Lock:Spam" .. msg.chat_id_) == "ktm" and
+            elseif database:get(bot_id .. "LARViN:Lock:Spam" .. msg.chat_id_) == "ktm" and
                 string.len(msg.content_.text_) > (sens) or ctrl_ > (sens) or real_ > (sens) then
-                database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
+                database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, msg.sender_user_id_)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
             end
         end
         --------------------------------------------------------------------------------------------------------------
-        local status_welcome = database:get(bot_id .. "spider:Chek:Welcome" .. msg.chat_id_)
-        if status_welcome and not database:get(bot_id .. "spider:Lock:tagservr" .. msg.chat_id_) then
+        local status_welcome = database:get(bot_id .. "LARViN:Chek:Welcome" .. msg.chat_id_)
+        if status_welcome and not database:get(bot_id .. "LARViN:Lock:tagservr" .. msg.chat_id_) then
             if msg.content_.ID == "MessageChatJoinByLink" then
                 tdcli_function({
                     ID = "GetUser",
                     user_id_ = msg.sender_user_id_
                 }, function(extra, result)
-                    local GetWelcomeGroup = database:get(bot_id .. "spider:Get:Welcome:Group" .. msg.chat_id_)
+                    local GetWelcomeGroup = database:get(bot_id .. "LARViN:Get:Welcome:Group" .. msg.chat_id_)
                     if GetWelcomeGroup then
                         t = GetWelcomeGroup
                     else
@@ -1389,17 +1389,17 @@ function spider_Started_Bot(msg, data) -- بداية العمل
         -------------------------------------------------------
         if msg.content_.ID == "MessagePinMessage" then
             if Constructor(msg) or tonumber(msg.sender_user_id_) == tonumber(bot_id) then
-                database:set(bot_id .. "spider:Pin:Id:Msg" .. msg.chat_id_, msg.content_.message_id_)
+                database:set(bot_id .. "LARViN:Pin:Id:Msg" .. msg.chat_id_, msg.content_.message_id_)
             else
-                local Msg_Pin = database:get(bot_id .. "spider:Pin:Id:Msg" .. msg.chat_id_)
-                if Msg_Pin and database:get(bot_id .. "spider:lockpin" .. msg.chat_id_) then
+                local Msg_Pin = database:get(bot_id .. "LARViN:Pin:Id:Msg" .. msg.chat_id_)
+                if Msg_Pin and database:get(bot_id .. "LARViN:lockpin" .. msg.chat_id_) then
                     PinMessage(msg.chat_id_, Msg_Pin)
                 end
             end
         end
         ------------------------------------------------------
         if msg.content_.photo_ then
-            if database:get(bot_id .. "spider:Change:Chat:Photo" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then
+            if database:get(bot_id .. "LARViN:Change:Chat:Photo" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then
                 if msg.content_.photo_.sizes_[3] then
                     photo_id = msg.content_.photo_.sizes_[3].photo_.persistent_id_
                 else
@@ -1413,70 +1413,70 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     if data.code_ == 3 then
                         send(msg.chat_id_, msg.id_,
                             "܂𓍼 ⁝ عذرا البوت ليس ادمن يرجى ترقيتي والمحاوله لاحقا")
-                        database:del(bot_id .. "spider:Change:Chat:Photo" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
+                        database:del(bot_id .. "LARViN:Change:Chat:Photo" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
                         return false
                     end
                     if data.message_ == "CHAT_ADMIN_REQUIRED" then
                         send(msg.chat_id_, msg.id_,
                             "܂𓍼 ⁝ ليس لدي صلاحية تغيير معلومات المجموعه يرجى المحاوله لاحقا")
-                        database:del(bot_id .. "spider:Change:Chat:Photo" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
+                        database:del(bot_id .. "LARViN:Change:Chat:Photo" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
                     else
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم تغيير صورة المجموعه")
                     end
                 end, nil)
-                database:del(bot_id .. "spider:Change:Chat:Photo" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
+                database:del(bot_id .. "LARViN:Change:Chat:Photo" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
             end
         end
         --------------------------------------------------------------------------------------------------------------
-        if database:get(bot_id .. "spider:Set:Description" .. msg.chat_id_ .. "" .. msg.sender_user_id_) then
+        if database:get(bot_id .. "LARViN:Set:Description" .. msg.chat_id_ .. "" .. msg.sender_user_id_) then
             if text == "الغاء" then
                 send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم الغاء وضع الوصف")
-                database:del(bot_id .. "spider:Set:Description" .. msg.chat_id_ .. "" .. msg.sender_user_id_)
+                database:del(bot_id .. "LARViN:Set:Description" .. msg.chat_id_ .. "" .. msg.sender_user_id_)
                 return false
             end
-            database:del(bot_id .. "spider:Set:Description" .. msg.chat_id_ .. "" .. msg.sender_user_id_)
+            database:del(bot_id .. "LARViN:Set:Description" .. msg.chat_id_ .. "" .. msg.sender_user_id_)
             https.request("https://api.telegram.org/bot" .. token .. "/setChatDescription?chat_id=" .. msg.chat_id_ ..
                               "&description=" .. text)
             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم تغيير وصف المجموعه")
             return false
         end
         --------------------------------------------------------------------------------------------------------------
-        if database:get(bot_id .. "spider:Welcome:Group" .. msg.chat_id_ .. "" .. msg.sender_user_id_) then
+        if database:get(bot_id .. "LARViN:Welcome:Group" .. msg.chat_id_ .. "" .. msg.sender_user_id_) then
             if text == "الغاء" then
                 send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم الغاء حفظ الترحيب")
-                database:del(bot_id .. "spider:Welcome:Group" .. msg.chat_id_ .. "" .. msg.sender_user_id_)
+                database:del(bot_id .. "LARViN:Welcome:Group" .. msg.chat_id_ .. "" .. msg.sender_user_id_)
                 return false
             end
-            database:del(bot_id .. "spider:Welcome:Group" .. msg.chat_id_ .. "" .. msg.sender_user_id_)
-            database:set(bot_id .. "spider:Get:Welcome:Group" .. msg.chat_id_, text)
+            database:del(bot_id .. "LARViN:Welcome:Group" .. msg.chat_id_ .. "" .. msg.sender_user_id_)
+            database:set(bot_id .. "LARViN:Get:Welcome:Group" .. msg.chat_id_, text)
             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم حفظ ترحيب المجموعه")
             return false
         end
         --------------------------------------------------------------------------------------------------------------
-        if database:get(bot_id .. "spider:Set:Priovate:Group:Link" .. msg.chat_id_ .. "" .. msg.sender_user_id_) then
+        if database:get(bot_id .. "LARViN:Set:Priovate:Group:Link" .. msg.chat_id_ .. "" .. msg.sender_user_id_) then
             if text == "الغاء" then
                 send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم الغاء حفظ الرابط")
-                database:del(bot_id .. "spider:Set:Priovate:Group:Link" .. msg.chat_id_ .. "" .. msg.sender_user_id_)
+                database:del(bot_id .. "LARViN:Set:Priovate:Group:Link" .. msg.chat_id_ .. "" .. msg.sender_user_id_)
                 return false
             end
             if text and text:match("(https://telegram.me/joinchat/%S+)") or text and
                 text:match("(https://t.me/joinchat/%S+)") then
                 local Link = text:match("(https://telegram.me/joinchat/%S+)") or
                                  text:match("(https://t.me/joinchat/%S+)")
-                database:set(bot_id .. "spider:Private:Group:Link" .. msg.chat_id_, Link)
+                database:set(bot_id .. "LARViN:Private:Group:Link" .. msg.chat_id_, Link)
                 send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم حفظ الرابط بنجاح")
-                database:del(bot_id .. "spider:Set:Priovate:Group:Link" .. msg.chat_id_ .. "" .. msg.sender_user_id_)
+                database:del(bot_id .. "LARViN:Set:Priovate:Group:Link" .. msg.chat_id_ .. "" .. msg.sender_user_id_)
                 return false
             end
         end
 
-        if database:get(bot_id .. "spider:spider:Bc:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then
+        if database:get(bot_id .. "LARViN:LARViN:Bc:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then
             if text == "الغاء" or text == "الغاء ܂𓍼 " then
                 send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم الغاء الاذاعه للخاص")
-                database:del(bot_id .. "spider:spider:Bc:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
+                database:del(bot_id .. "LARViN:LARViN:Bc:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
                 return false
             end
-            local list = database:smembers(bot_id .. 'spider:UsersBot')
+            local list = database:smembers(bot_id .. 'LARViN:UsersBot')
             if msg.content_.text_ then
                 for k, v in pairs(list) do
                     send(v, 0, "[" .. msg.content_.text_ .. "]")
@@ -1501,17 +1501,17 @@ function spider_Started_Bot(msg, data) -- بداية العمل
             end
             send(msg.chat_id_, msg.id_,
                 "܂𓍼 ⁝ تمت الاذاعه الى *~ " .. #list .. " ~* مشترك في الخاص ")
-            database:del(bot_id .. "spider:spider:Bc:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
+            database:del(bot_id .. "LARViN:LARViN:Bc:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
             return false
         end
 
-        if database:get(bot_id .. "spider:spider:Bc:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then
+        if database:get(bot_id .. "LARViN:LARViN:Bc:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then
             if text == "الغاء" or text == "الغاء ܂𓍼 " then
                 send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم الغاء الاذاعه")
-                database:del(bot_id .. "spider:spider:Bc:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
+                database:del(bot_id .. "LARViN:LARViN:Bc:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
                 return false
             end
-            local list = database:smembers(bot_id .. "spider:Chek:Groups")
+            local list = database:smembers(bot_id .. "LARViN:Chek:Groups")
             if msg.content_.text_ then
                 for k, v in pairs(list) do
                     send(v, 0, "[" .. msg.content_.text_ .. "]")
@@ -1535,18 +1535,18 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                 end
             end
             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تمت الاذاعه الى *~ " .. #list .. " ~* مجموعه ")
-            database:del(bot_id .. "spider:spider:Bc:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
+            database:del(bot_id .. "LARViN:LARViN:Bc:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
             return false
         end
 
-        if database:get(bot_id .. "spider:spider:Fwd:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then
+        if database:get(bot_id .. "LARViN:LARViN:Fwd:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then
             if text == "الغاء" or text == "الغاء ܂𓍼 " then
                 send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم الغاء الاذاعه")
-                database:del(bot_id .. "spider:spider:Fwd:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
+                database:del(bot_id .. "LARViN:LARViN:Fwd:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
                 return false
             end
             if msg.forward_info_ then
-                local list = database:smembers(bot_id .. "spider:Chek:Groups")
+                local list = database:smembers(bot_id .. "LARViN:Chek:Groups")
                 for k, v in pairs(list) do
                     tdcli_function({
                         ID = "ForwardMessages",
@@ -1562,18 +1562,18 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                 end
                 send(msg.chat_id_, msg.id_,
                     "܂𓍼 ⁝ تمت الاذاعه الى *~ " .. #list .. " ~* مجموعه ")
-                database:del(bot_id .. "spider:spider:Fwd:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
+                database:del(bot_id .. "LARViN:LARViN:Fwd:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
             end
             return false
         end
-        if database:get(bot_id .. "spider:spider:Fwd:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then
+        if database:get(bot_id .. "LARViN:LARViN:Fwd:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then
             if text == "الغاء" or text == "الغاء ܂𓍼 " then
                 send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم الغاء الاذاعه")
-                database:del(bot_id .. "spider:spider:Fwd:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
+                database:del(bot_id .. "LARViN:LARViN:Fwd:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
                 return false
             end
             if msg.forward_info_ then
-                local list = database:smembers(bot_id .. "spider:UsersBot")
+                local list = database:smembers(bot_id .. "LARViN:UsersBot")
                 for k, v in pairs(list) do
                     tdcli_function({
                         ID = "ForwardMessages",
@@ -1589,55 +1589,55 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                 end
                 send(msg.chat_id_, msg.id_,
                     "܂𓍼 ⁝ تمت الاذاعه الى *~ " .. #list .. " ~* مشترك في الخاص ")
-                database:del(bot_id .. "spider:spider:Fwd:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
+                database:del(bot_id .. "LARViN:LARViN:Fwd:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
             end
             return false
         end
 
         --------------------------------------------------------------------------------------------------------------
         if text and not Vips(msg) then
-            local spider_Msg = database:get(bot_id .. "spider:Add:Filter:Rp2" .. text .. msg.chat_id_)
-            if spider_Msg then
-                Reply_Status(msg, msg.sender_user_id_, "reply", "܂𓍼 ⁝ " .. spider_Msg)
+            local LARViN_Msg = database:get(bot_id .. "LARViN:Add:Filter:Rp2" .. text .. msg.chat_id_)
+            if LARViN_Msg then
+                Reply_Status(msg, msg.sender_user_id_, "reply", "܂𓍼 ⁝ " .. LARViN_Msg)
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
                 return false
             end
         end
-        if database:get(bot_id .. "spider:Set:Name:Bot" .. msg.sender_user_id_) then
+        if database:get(bot_id .. "LARViN:Set:Name:Bot" .. msg.sender_user_id_) then
             if text == "الغاء" or text == "الغاء ܂𓍼 " then
                 send(msg.chat_id_, msg.id_, "܂𓍼 ⁝  تم الغاء حفظ اسم البوت")
-                database:del(bot_id .. "spider:Set:Name:Bot" .. msg.sender_user_id_)
+                database:del(bot_id .. "LARViN:Set:Name:Bot" .. msg.sender_user_id_)
                 return false
             end
-            database:del(bot_id .. "spider:Set:Name:Bot" .. msg.sender_user_id_)
-            database:set(bot_id .. "spider:Name:Bot", text)
+            database:del(bot_id .. "LARViN:Set:Name:Bot" .. msg.sender_user_id_)
+            database:set(bot_id .. "LARViN:Name:Bot", text)
             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝  تم حفظ اسم البوت")
             return false
         end
-        if text and database:get(bot_id .. "spider:Set:Cmd:Group" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) ==
+        if text and database:get(bot_id .. "LARViN:Set:Cmd:Group" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) ==
             "true" then
-            database:set(bot_id .. "spider:Set:Cmd:Group:New" .. msg.chat_id_, text)
+            database:set(bot_id .. "LARViN:Set:Cmd:Group:New" .. msg.chat_id_, text)
             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ ارسل الامر الجديد")
-            database:del(bot_id .. "spider:Set:Cmd:Group" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
-            database:set(bot_id .. "spider:Set:Cmd:Group1" .. msg.chat_id_ .. ":" .. msg.sender_user_id_, "true1")
+            database:del(bot_id .. "LARViN:Set:Cmd:Group" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
+            database:set(bot_id .. "LARViN:Set:Cmd:Group1" .. msg.chat_id_ .. ":" .. msg.sender_user_id_, "true1")
             return false
         end
-        if text and database:get(bot_id .. "spider:Set:Cmd:Group1" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) ==
+        if text and database:get(bot_id .. "LARViN:Set:Cmd:Group1" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) ==
             "true1" then
-            local NewCmd = database:get(bot_id .. "spider:Set:Cmd:Group:New" .. msg.chat_id_)
-            database:set(bot_id .. "spider:Set:Cmd:Group:New1" .. msg.chat_id_ .. ":" .. text, NewCmd)
-            database:sadd(bot_id .. "spider:List:Cmd:Group:New" .. msg.chat_id_, text)
+            local NewCmd = database:get(bot_id .. "LARViN:Set:Cmd:Group:New" .. msg.chat_id_)
+            database:set(bot_id .. "LARViN:Set:Cmd:Group:New1" .. msg.chat_id_ .. ":" .. text, NewCmd)
+            database:sadd(bot_id .. "LARViN:List:Cmd:Group:New" .. msg.chat_id_, text)
             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم حفظ الامر")
-            database:del(bot_id .. "spider:Set:Cmd:Group1" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
+            database:del(bot_id .. "LARViN:Set:Cmd:Group1" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
             return false
         end
         --------------------------------------------------------------------------------------------------------------
         if Chat_Type == 'GroupBot' then
             if ChekAdd(msg.chat_id_) == true then
                 if text == "قفل الدردشه" and msg.reply_to_message_id_ == 0 and Owner(msg) then
-                    database:set(bot_id .. "spider:Lock:text" .. msg.chat_id_, true)
+                    database:set(bot_id .. "LARViN:Lock:text" .. msg.chat_id_, true)
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل الدردشه")
                     return false
                 end
@@ -1657,39 +1657,39 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     return false
                 end
                 if text == "قفل الاضافه" and msg.reply_to_message_id_ == 0 and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:AddMempar" .. msg.chat_id_, "kick")
+                    database:set(bot_id .. "LARViN:Lock:AddMempar" .. msg.chat_id_, "kick")
                     Reply_Status(msg, msg.sender_user_id_, "lock",
                         "܂𓍼 ️⁝ تم قفـل اضافة الاعضاء")
                     return false
                 end
                 if text == "قفل الدخول" and msg.reply_to_message_id_ == 0 and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Join" .. msg.chat_id_, "kick")
+                    database:set(bot_id .. "LARViN:Lock:Join" .. msg.chat_id_, "kick")
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل دخول الاعضاء")
                     return false
                 end
                 if text == "قفل البوتات" and msg.reply_to_message_id_ == 0 and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Bot:kick" .. msg.chat_id_, "del")
+                    database:set(bot_id .. "LARViN:Lock:Bot:kick" .. msg.chat_id_, "del")
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل البوتات")
                     return false
                 end
                 if text == "قفل البوتات بالطرد" and msg.reply_to_message_id_ == 0 and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Bot:kick" .. msg.chat_id_, "kick")
+                    database:set(bot_id .. "LARViN:Lock:Bot:kick" .. msg.chat_id_, "kick")
                     Reply_Status(msg, msg.sender_user_id_, "lockkick", "܂𓍼 ️⁝ تم قفـل البوتات")
                     return false
                 end
                 if text == "قفل الاشعارات" and msg.reply_to_message_id_ == 0 and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:tagservr" .. msg.chat_id_, true)
+                    database:set(bot_id .. "LARViN:Lock:tagservr" .. msg.chat_id_, true)
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل الاشعارات")
                     return false
                 end
                 if text == "قفل التثبيت" and msg.reply_to_message_id_ == 0 and Constructor(msg) then
-                    database:set(bot_id .. "spider:lockpin" .. msg.chat_id_, true)
-                    database:sadd(bot_id .. "spider:Lock:pin", msg.chat_id_)
+                    database:set(bot_id .. "LARViN:lockpin" .. msg.chat_id_, true)
+                    database:sadd(bot_id .. "LARViN:Lock:pin", msg.chat_id_)
                     tdcli_function({
                         ID = "GetChannelFull",
                         channel_id_ = msg.chat_id_:gsub("-100", "")
                     }, function(arg, data)
-                        database:set(bot_id .. "spider:Pin:Id:Msg" .. msg.chat_id_, data.pinned_message_id_)
+                        database:set(bot_id .. "LARViN:Pin:Id:Msg" .. msg.chat_id_, data.pinned_message_id_)
                     end, nil)
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل التثبيت هنا")
                     return false
@@ -1706,12 +1706,12 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:set(bot_id .. "spider:Lock:edit" .. msg.chat_id_, true)
+                    database:set(bot_id .. "LARViN:Lock:edit" .. msg.chat_id_, true)
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل تعديل")
                     return false
                 end
                 if text == "قفل تعديل الميديا" and msg.reply_to_message_id_ == 0 and Constructor(msg) then
-                    database:set(bot_id .. "spider:Lock:edit" .. msg.chat_id_, true)
+                    database:set(bot_id .. "LARViN:Lock:edit" .. msg.chat_id_, true)
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل تعديل")
                     return false
                 end
@@ -1727,13 +1727,13 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:set(bot_id .. "spider:Lock:tagservrbot" .. msg.chat_id_, true)
+                    database:set(bot_id .. "LARViN:Lock:tagservrbot" .. msg.chat_id_, true)
                     list = {"Lock:Bot:kick", "Lock:User:Name", "Lock:hashtak", "Lock:Cmd", "Lock:Link", "Lock:forward",
                             "Lock:Keyboard", "Lock:geam", "Lock:Photo", "Lock:Animation", "Lock:Video", "Lock:Audio",
                             "Lock:vico", "Lock:Sticker", "Lock:Document", "Lock:Unsupported", "Lock:Markdaun",
                             "Lock:Contact", "Lock:Spam"}
                     for i, lock in pairs(list) do
-                        database:set(bot_id .. 'spider:' .. lock .. msg.chat_id_, "del")
+                        database:set(bot_id .. 'LARViN:' .. lock .. msg.chat_id_, "del")
                     end
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل جميع الاوامر")
                     return false
@@ -1750,13 +1750,13 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:set(bot_id .. "spider:Lock:tagservrbot" .. msg.chat_id_, true)
+                    database:set(bot_id .. "LARViN:Lock:tagservrbot" .. msg.chat_id_, true)
                     list = {"Lock:Bot:kick", "Lock:User:Name", "Lock:hashtak", "Lock:Cmd", "Lock:Link", "Lock:forward",
                             "Lock:Keyboard", "Lock:geam", "Lock:Photo", "Lock:Animation", "Lock:Video", "Lock:Audio",
                             "Lock:vico", "Lock:Sticker", "Lock:Document", "Lock:Unsupported", "Lock:Markdaun",
                             "Lock:Contact", "Lock:Spam"}
                     for i, lock in pairs(list) do
-                        database:set(bot_id .. 'spider:' .. lock .. msg.chat_id_, "del")
+                        database:set(bot_id .. 'LARViN:' .. lock .. msg.chat_id_, "del")
                     end
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل جميع الاوامر")
                     return false
@@ -1774,7 +1774,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Lock:AddMempar" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:AddMempar" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock",
                         "܂𓍼 ️⁝ تم فتح اضافة الاعضاء")
                     return false
@@ -1791,7 +1791,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Lock:text" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:text" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فتح الدردشه")
                     return false
                 end
@@ -1807,7 +1807,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Lock:Join" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:Join" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فتح دخول الاعضاء")
                     return false
                 end
@@ -1871,7 +1871,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Lock:Bot:kick" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:Bot:kick" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فـتح البوتات")
                     return false
                 end
@@ -1887,7 +1887,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Lock:Bot:kick" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:Bot:kick" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock",
                         "܂𓍼 \n܂𓍼 ️⁝ تم فـتح البوتات")
                     return false
@@ -1904,7 +1904,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Lock:tagservr" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:tagservr" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فـتح الاشعارات")
                     return false
                 end
@@ -1920,8 +1920,8 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:lockpin" .. msg.chat_id_)
-                    database:srem(bot_id .. "spider:Lock:pin", msg.chat_id_)
+                    database:del(bot_id .. "LARViN:lockpin" .. msg.chat_id_)
+                    database:srem(bot_id .. "LARViN:Lock:pin", msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فـتح التثبيت هنا")
                     return false
                 end
@@ -1937,12 +1937,12 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Lock:edit" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:edit" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فـتح تعديل")
                     return false
                 end
                 if text == "فتح التعديل الميديا" and msg.reply_to_message_id_ == 0 and Constructor(msg) then
-                    database:del(bot_id .. "spider:Lock:edit" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:edit" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فـتح تعديل")
                     return false
                 end
@@ -1958,13 +1958,13 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Lock:tagservrbot" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:tagservrbot" .. msg.chat_id_)
                     list = {"Lock:Bot:kick", "Lock:User:Name", "Lock:hashtak", "Lock:Cmd", "Lock:Link", "Lock:forward",
                             "Lock:Keyboard", "Lock:geam", "Lock:Photo", "Lock:Animation", "Lock:Video", "Lock:Audio",
                             "Lock:vico", "Lock:Sticker", "Lock:Document", "Lock:Unsupported", "Lock:Markdaun",
                             "Lock:Contact", "Lock:Spam"}
                     for i, lock in pairs(list) do
-                        database:del(bot_id .. 'spider:' .. lock .. msg.chat_id_)
+                        database:del(bot_id .. 'LARViN:' .. lock .. msg.chat_id_)
                     end
                     Reply_Status(msg, msg.sender_user_id_, "unlock",
                         "܂𓍼 ️⁝ تم فـتح جميع الاوامر")
@@ -1982,13 +1982,13 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Lock:tagservrbot" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:tagservrbot" .. msg.chat_id_)
                     list = {"Lock:Bot:kick", "Lock:User:Name", "Lock:hashtak", "Lock:Cmd", "Lock:Link", "Lock:forward",
                             "Lock:Keyboard", "Lock:geam", "Lock:Photo", "Lock:Animation", "Lock:Video", "Lock:Audio",
                             "Lock:vico", "Lock:Sticker", "Lock:Document", "Lock:Unsupported", "Lock:Markdaun",
                             "Lock:Contact", "Lock:Spam"}
                     for i, lock in pairs(list) do
-                        database:del(bot_id .. 'spider:' .. lock .. msg.chat_id_)
+                        database:del(bot_id .. 'LARViN:' .. lock .. msg.chat_id_)
                     end
                     Reply_Status(msg, msg.sender_user_id_, "unlock",
                         "܂𓍼 ️⁝ تم فـتح جميع الاوامر")
@@ -2007,22 +2007,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:set(bot_id .. "spider:Lock:Link" .. msg.chat_id_, "del")
+                    database:set(bot_id .. "LARViN:Lock:Link" .. msg.chat_id_, "del")
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل الروابط")
                     return false
                 end
                 if text == "قفل الروابط بالتقيد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Link" .. msg.chat_id_, "ked")
+                    database:set(bot_id .. "LARViN:Lock:Link" .. msg.chat_id_, "ked")
                     Reply_Status(msg, msg.sender_user_id_, "lockkid", "܂𓍼 ️⁝ تم قفـل الروابط")
                     return false
                 end
                 if text == "قفل الروابط بالكتم" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Link" .. msg.chat_id_, "ktm")
+                    database:set(bot_id .. "LARViN:Lock:Link" .. msg.chat_id_, "ktm")
                     Reply_Status(msg, msg.sender_user_id_, "lockktm", "܂𓍼 ️⁝ تم قفـل الروابط")
                     return false
                 end
                 if text == "قفل الروابط بالطرد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Link" .. msg.chat_id_, "kick")
+                    database:set(bot_id .. "LARViN:Lock:Link" .. msg.chat_id_, "kick")
                     Reply_Status(msg, msg.sender_user_id_, "lockkick", "܂𓍼 ️⁝ تم قفـل الروابط")
                     return false
                 end
@@ -2038,7 +2038,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Lock:Link" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:Link" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فتح الروابط")
                     return false
                 end
@@ -2054,22 +2054,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:set(bot_id .. "spider:Lock:User:Name" .. msg.chat_id_, "del")
+                    database:set(bot_id .. "LARViN:Lock:User:Name" .. msg.chat_id_, "del")
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل المعرفات")
                     return false
                 end
                 if text == "قفل المعرفات بالتقيد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:User:Name" .. msg.chat_id_, "ked")
+                    database:set(bot_id .. "LARViN:Lock:User:Name" .. msg.chat_id_, "ked")
                     Reply_Status(msg, msg.sender_user_id_, "lockkid", "܂𓍼 ️⁝ تم قفـل المعرفات")
                     return false
                 end
                 if text == "قفل المعرفات بالكتم" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:User:Name" .. msg.chat_id_, "ktm")
+                    database:set(bot_id .. "LARViN:Lock:User:Name" .. msg.chat_id_, "ktm")
                     Reply_Status(msg, msg.sender_user_id_, "lockktm", "܂𓍼 ️⁝ تم قفـل المعرفات")
                     return false
                 end
                 if text == "قفل المعرفات بالطرد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:User:Name" .. msg.chat_id_, "kick")
+                    database:set(bot_id .. "LARViN:Lock:User:Name" .. msg.chat_id_, "kick")
                     Reply_Status(msg, msg.sender_user_id_, "lockkick", "܂𓍼 ️⁝ تم قفـل المعرفات")
                     return false
                 end
@@ -2085,7 +2085,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Lock:User:Name" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:User:Name" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فتح المعرفات")
                     return false
                 end
@@ -2101,22 +2101,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:set(bot_id .. "spider:Lock:hashtak" .. msg.chat_id_, "del")
+                    database:set(bot_id .. "LARViN:Lock:hashtak" .. msg.chat_id_, "del")
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل التاك")
                     return false
                 end
                 if text == "قفل التاك بالتقيد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:hashtak" .. msg.chat_id_, "ked")
+                    database:set(bot_id .. "LARViN:Lock:hashtak" .. msg.chat_id_, "ked")
                     Reply_Status(msg, msg.sender_user_id_, "lockkid", "܂𓍼 ️⁝ تم قفـل التاك")
                     return false
                 end
                 if text == "قفل التاك بالكتم" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:hashtak" .. msg.chat_id_, "ktm")
+                    database:set(bot_id .. "LARViN:Lock:hashtak" .. msg.chat_id_, "ktm")
                     Reply_Status(msg, msg.sender_user_id_, "lockktm", "܂𓍼 ️⁝ تم قفـل التاك")
                     return false
                 end
                 if text == "قفل التاك بالطرد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:hashtak" .. msg.chat_id_, "kick")
+                    database:set(bot_id .. "LARViN:Lock:hashtak" .. msg.chat_id_, "kick")
                     Reply_Status(msg, msg.sender_user_id_, "lockkick", "܂𓍼 ️⁝ تم قفـل التاك")
                     return false
                 end
@@ -2132,82 +2132,82 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Lock:hashtak" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:hashtak" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فتح التاك")
                     return false
                 end
                 if text == "قفل الشارحه" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Cmd" .. msg.chat_id_, "del")
+                    database:set(bot_id .. "LARViN:Lock:Cmd" .. msg.chat_id_, "del")
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل الشارحه")
                     return false
                 end
                 if text == "قفل الشارحه بالتقيد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Cmd" .. msg.chat_id_, "ked")
+                    database:set(bot_id .. "LARViN:Lock:Cmd" .. msg.chat_id_, "ked")
                     Reply_Status(msg, msg.sender_user_id_, "lockkid", "܂𓍼 ️⁝ تم قفـل الشارحه")
                     return false
                 end
                 if text == "قفل الشارحه بالكتم" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Cmd" .. msg.chat_id_, "ktm")
+                    database:set(bot_id .. "LARViN:Lock:Cmd" .. msg.chat_id_, "ktm")
                     Reply_Status(msg, msg.sender_user_id_, "lockktm", "܂𓍼 ️⁝ تم قفـل الشارحه")
                     return false
                 end
                 if text == "قفل الشارحه بالطرد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Cmd" .. msg.chat_id_, "kick")
+                    database:set(bot_id .. "LARViN:Lock:Cmd" .. msg.chat_id_, "kick")
                     Reply_Status(msg, msg.sender_user_id_, "lockkick", "܂𓍼 ️⁝ تم قفـل الشارحه")
                     return false
                 end
                 if text == "فتح الشارحه" and Addictive(msg) then
-                    database:del(bot_id .. "spider:Lock:Cmd" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:Cmd" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فتح الشارحه")
                     return false
                 end
                 if text == "قفل الصور" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Photo" .. msg.chat_id_, "del")
+                    database:set(bot_id .. "LARViN:Lock:Photo" .. msg.chat_id_, "del")
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل الصور")
                     return false
                 end
                 if text == "قفل الصور بالتقيد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Photo" .. msg.chat_id_, "ked")
+                    database:set(bot_id .. "LARViN:Lock:Photo" .. msg.chat_id_, "ked")
                     Reply_Status(msg, msg.sender_user_id_, "lockkid", "܂𓍼 ️⁝ تم قفـل الصور")
                     return false
                 end
                 if text == "قفل الصور بالكتم" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Photo" .. msg.chat_id_, "ktm")
+                    database:set(bot_id .. "LARViN:Lock:Photo" .. msg.chat_id_, "ktm")
                     Reply_Status(msg, msg.sender_user_id_, "lockktm", "܂𓍼 ️⁝ تم قفـل الصور")
                     return false
                 end
                 if text == "قفل الصور بالطرد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Photo" .. msg.chat_id_, "kick")
+                    database:set(bot_id .. "LARViN:Lock:Photo" .. msg.chat_id_, "kick")
                     Reply_Status(msg, msg.sender_user_id_, "lockkick", "܂𓍼 ️⁝ تم قفـل الصور")
                     return false
                 end
                 if text == "فتح الصور" and Addictive(msg) then
-                    database:del(bot_id .. "spider:Lock:Photo" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:Photo" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فتح الصور")
                     return false
                 end
                 if text == "قفل الفيديو" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Video" .. msg.chat_id_, "del")
+                    database:set(bot_id .. "LARViN:Lock:Video" .. msg.chat_id_, "del")
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل الفيديو")
                     return false
                 end
                 if text == "قفل الفيديو بالتقيد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Video" .. msg.chat_id_, "ked")
+                    database:set(bot_id .. "LARViN:Lock:Video" .. msg.chat_id_, "ked")
                     Reply_Status(msg, msg.sender_user_id_, "lockkid", "܂𓍼 ️⁝ تم قفـل الفيديو")
                     return false
                 end
                 if text == "قفل الفيديو بالكتم" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Video" .. msg.chat_id_, "ktm")
+                    database:set(bot_id .. "LARViN:Lock:Video" .. msg.chat_id_, "ktm")
                     Reply_Status(msg, msg.sender_user_id_, "lockktm", "܂𓍼 ️⁝ تم قفـل الفيديو")
                     return false
                 end
                 if text == "قفل الفيديو بالطرد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Video" .. msg.chat_id_, "kick")
+                    database:set(bot_id .. "LARViN:Lock:Video" .. msg.chat_id_, "kick")
                     Reply_Status(msg, msg.sender_user_id_, "lockkick", "܂𓍼 ️⁝ تم قفـل الفيديو")
                     return false
                 end
                 if text == "فتح الفيديو" and Addictive(msg) then
-                    database:del(bot_id .. "spider:Lock:Video" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:Video" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فتح الفيديو")
                     return false
                 end
@@ -2223,22 +2223,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:set(bot_id .. "spider:Lock:Animation" .. msg.chat_id_, "del")
+                    database:set(bot_id .. "LARViN:Lock:Animation" .. msg.chat_id_, "del")
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل المتحركه")
                     return false
                 end
                 if text == "قفل المتحركه بالتقيد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Animation" .. msg.chat_id_, "ked")
+                    database:set(bot_id .. "LARViN:Lock:Animation" .. msg.chat_id_, "ked")
                     Reply_Status(msg, msg.sender_user_id_, "lockkid", "܂𓍼 ️⁝ تم قفـل المتحركه")
                     return false
                 end
                 if text == "قفل المتحركه بالكتم" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Animation" .. msg.chat_id_, "ktm")
+                    database:set(bot_id .. "LARViN:Lock:Animation" .. msg.chat_id_, "ktm")
                     Reply_Status(msg, msg.sender_user_id_, "lockktm", "܂𓍼 ️⁝ تم قفـل المتحركه")
                     return false
                 end
                 if text == "قفل المتحركه بالطرد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Animation" .. msg.chat_id_, "kick")
+                    database:set(bot_id .. "LARViN:Lock:Animation" .. msg.chat_id_, "kick")
                     Reply_Status(msg, msg.sender_user_id_, "lockkick", "܂𓍼 ️⁝ تم قفـل المتحركه")
                     return false
                 end
@@ -2254,7 +2254,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Lock:Animation" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:Animation" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فتح المتحركه")
                     return false
                 end
@@ -2270,22 +2270,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:set(bot_id .. "spider:Lock:geam" .. msg.chat_id_, "del")
+                    database:set(bot_id .. "LARViN:Lock:geam" .. msg.chat_id_, "del")
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل الالعاب")
                     return false
                 end
                 if text == "قفل الالعاب بالتقيد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:geam" .. msg.chat_id_, "ked")
+                    database:set(bot_id .. "LARViN:Lock:geam" .. msg.chat_id_, "ked")
                     Reply_Status(msg, msg.sender_user_id_, "lockkid", "܂𓍼 ️⁝ تم قفـل الالعاب")
                     return false
                 end
                 if text == "قفل الالعاب بالكتم" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:geam" .. msg.chat_id_, "ktm")
+                    database:set(bot_id .. "LARViN:Lock:geam" .. msg.chat_id_, "ktm")
                     Reply_Status(msg, msg.sender_user_id_, "lockktm", "܂𓍼 ️⁝ تم قفـل الالعاب")
                     return false
                 end
                 if text == "قفل الالعاب بالطرد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:geam" .. msg.chat_id_, "kick")
+                    database:set(bot_id .. "LARViN:Lock:geam" .. msg.chat_id_, "kick")
                     Reply_Status(msg, msg.sender_user_id_, "lockkick", "܂𓍼 ️⁝ تم قفـل الالعاب")
                     return false
                 end
@@ -2301,82 +2301,82 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Lock:geam" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:geam" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فتح الالعاب")
                     return false
                 end
                 if text == "قفل الاغاني" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Audio" .. msg.chat_id_, "del")
+                    database:set(bot_id .. "LARViN:Lock:Audio" .. msg.chat_id_, "del")
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل الاغاني")
                     return false
                 end
                 if text == "قفل الاغاني بالتقيد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Audio" .. msg.chat_id_, "ked")
+                    database:set(bot_id .. "LARViN:Lock:Audio" .. msg.chat_id_, "ked")
                     Reply_Status(msg, msg.sender_user_id_, "lockkid", "܂𓍼 ️⁝ تم قفـل الاغاني")
                     return false
                 end
                 if text == "قفل الاغاني بالكتم" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Audio" .. msg.chat_id_, "ktm")
+                    database:set(bot_id .. "LARViN:Lock:Audio" .. msg.chat_id_, "ktm")
                     Reply_Status(msg, msg.sender_user_id_, "lockktm", "܂𓍼 ️⁝ تم قفـل الاغاني")
                     return false
                 end
                 if text == "قفل الاغاني بالطرد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Audio" .. msg.chat_id_, "kick")
+                    database:set(bot_id .. "LARViN:Lock:Audio" .. msg.chat_id_, "kick")
                     Reply_Status(msg, msg.sender_user_id_, "lockkick", "܂𓍼 ️⁝ تم قفـل الاغاني")
                     return false
                 end
                 if text == "فتح الاغاني" and Addictive(msg) then
-                    database:del(bot_id .. "spider:Lock:Audio" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:Audio" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فتح الاغاني")
                     return false
                 end
                 if text == "قفل الصوت" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:vico" .. msg.chat_id_, "del")
+                    database:set(bot_id .. "LARViN:Lock:vico" .. msg.chat_id_, "del")
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل الصوت")
                     return false
                 end
                 if text == "قفل الصوت بالتقيد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:vico" .. msg.chat_id_, "ked")
+                    database:set(bot_id .. "LARViN:Lock:vico" .. msg.chat_id_, "ked")
                     Reply_Status(msg, msg.sender_user_id_, "lockkid", "܂𓍼 ️⁝ تم قفـل الصوت")
                     return false
                 end
                 if text == "قفل الصوت بالكتم" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:vico" .. msg.chat_id_, "ktm")
+                    database:set(bot_id .. "LARViN:Lock:vico" .. msg.chat_id_, "ktm")
                     Reply_Status(msg, msg.sender_user_id_, "lockktm", "܂𓍼 ️⁝ تم قفـل الصوت")
                     return false
                 end
                 if text == "قفل الصوت بالطرد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:vico" .. msg.chat_id_, "kick")
+                    database:set(bot_id .. "LARViN:Lock:vico" .. msg.chat_id_, "kick")
                     Reply_Status(msg, msg.sender_user_id_, "lockkick", "܂𓍼 ️⁝ تم قفـل الصوت")
                     return false
                 end
                 if text == "فتح الصوت" and Addictive(msg) then
-                    database:del(bot_id .. "spider:Lock:vico" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:vico" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فتح الصوت")
                     return false
                 end
                 if text == "قفل الكيبورد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Keyboard" .. msg.chat_id_, "del")
+                    database:set(bot_id .. "LARViN:Lock:Keyboard" .. msg.chat_id_, "del")
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل الكيبورد")
                     return false
                 end
                 if text == "قفل الكيبورد بالتقيد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Keyboard" .. msg.chat_id_, "ked")
+                    database:set(bot_id .. "LARViN:Lock:Keyboard" .. msg.chat_id_, "ked")
                     Reply_Status(msg, msg.sender_user_id_, "lockkid", "܂𓍼 ️⁝ تم قفـل الكيبورد")
                     return false
                 end
                 if text == "قفل الكيبورد بالكتم" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Keyboard" .. msg.chat_id_, "ktm")
+                    database:set(bot_id .. "LARViN:Lock:Keyboard" .. msg.chat_id_, "ktm")
                     Reply_Status(msg, msg.sender_user_id_, "lockktm", "܂𓍼 ️⁝ تم قفـل الكيبورد")
                     return false
                 end
                 if text == "قفل الكيبورد بالطرد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Keyboard" .. msg.chat_id_, "kick")
+                    database:set(bot_id .. "LARViN:Lock:Keyboard" .. msg.chat_id_, "kick")
                     Reply_Status(msg, msg.sender_user_id_, "lockkick", "܂𓍼 ️⁝ تم قفـل الكيبورد")
                     return false
                 end
                 if text == "فتح الكيبورد" and Addictive(msg) then
-                    database:del(bot_id .. "spider:Lock:Keyboard" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:Keyboard" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فتح الكيبورد")
                     return false
                 end
@@ -2392,22 +2392,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:set(bot_id .. "spider:Lock:Sticker" .. msg.chat_id_, "del")
+                    database:set(bot_id .. "LARViN:Lock:Sticker" .. msg.chat_id_, "del")
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل الملصقات")
                     return false
                 end
                 if text == "قفل الملصقات بالتقيد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Sticker" .. msg.chat_id_, "ked")
+                    database:set(bot_id .. "LARViN:Lock:Sticker" .. msg.chat_id_, "ked")
                     Reply_Status(msg, msg.sender_user_id_, "lockkid", "܂𓍼 ️⁝ تم قفـل الملصقات")
                     return false
                 end
                 if text == "قفل الملصقات بالكتم" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Sticker" .. msg.chat_id_, "ktm")
+                    database:set(bot_id .. "LARViN:Lock:Sticker" .. msg.chat_id_, "ktm")
                     Reply_Status(msg, msg.sender_user_id_, "lockktm", "܂𓍼 ️⁝ تم قفـل الملصقات")
                     return false
                 end
                 if text == "قفل الملصقات بالطرد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Sticker" .. msg.chat_id_, "kick")
+                    database:set(bot_id .. "LARViN:Lock:Sticker" .. msg.chat_id_, "kick")
                     Reply_Status(msg, msg.sender_user_id_, "lockkick", "܂𓍼 ️⁝ تم قفـل الملصقات")
                     return false
                 end
@@ -2423,7 +2423,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Lock:Sticker" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:Sticker" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فتح الملصقات")
                     return false
                 end
@@ -2439,22 +2439,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:set(bot_id .. "spider:Lock:forward" .. msg.chat_id_, "del")
+                    database:set(bot_id .. "LARViN:Lock:forward" .. msg.chat_id_, "del")
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل التوجيه")
                     return false
                 end
                 if text == "قفل التوجيه بالتقيد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:forward" .. msg.chat_id_, "ked")
+                    database:set(bot_id .. "LARViN:Lock:forward" .. msg.chat_id_, "ked")
                     Reply_Status(msg, msg.sender_user_id_, "lockkid", "܂𓍼 ️⁝ تم قفـل التوجيه")
                     return false
                 end
                 if text == "قفل التوجيه بالكتم" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:forward" .. msg.chat_id_, "ktm")
+                    database:set(bot_id .. "LARViN:Lock:forward" .. msg.chat_id_, "ktm")
                     Reply_Status(msg, msg.sender_user_id_, "lockktm", "܂𓍼 ️⁝ تم قفـل التوجيه")
                     return false
                 end
                 if text == "قفل التوجيه بالطرد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:forward" .. msg.chat_id_, "kick")
+                    database:set(bot_id .. "LARViN:Lock:forward" .. msg.chat_id_, "kick")
                     Reply_Status(msg, msg.sender_user_id_, "lockkick", "܂𓍼 ️⁝ تم قفـل التوجيه")
                     return false
                 end
@@ -2470,32 +2470,32 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Lock:forward" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:forward" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فتح التوجيه")
                     return false
                 end
                 if text == "قفل الملفات" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Document" .. msg.chat_id_, "del")
+                    database:set(bot_id .. "LARViN:Lock:Document" .. msg.chat_id_, "del")
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل الملفات")
                     return false
                 end
                 if text == "قفل الملفات بالتقيد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Document" .. msg.chat_id_, "ked")
+                    database:set(bot_id .. "LARViN:Lock:Document" .. msg.chat_id_, "ked")
                     Reply_Status(msg, msg.sender_user_id_, "lockkid", "܂𓍼 ️⁝ تم قفـل الملفات")
                     return false
                 end
                 if text == "قفل الملفات بالكتم" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Document" .. msg.chat_id_, "ktm")
+                    database:set(bot_id .. "LARViN:Lock:Document" .. msg.chat_id_, "ktm")
                     Reply_Status(msg, msg.sender_user_id_, "lockktm", "܂𓍼 ️⁝ تم قفـل الملفات")
                     return false
                 end
                 if text == "قفل الملفات بالطرد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Document" .. msg.chat_id_, "kick")
+                    database:set(bot_id .. "LARViN:Lock:Document" .. msg.chat_id_, "kick")
                     Reply_Status(msg, msg.sender_user_id_, "lockkick", "܂𓍼 ️⁝ تم قفـل الملفات")
                     return false
                 end
                 if text == "فتح الملفات" and Addictive(msg) then
-                    database:del(bot_id .. "spider:Lock:Document" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:Document" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فتح الملفات")
                     return false
                 end
@@ -2511,22 +2511,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:set(bot_id .. "spider:Lock:Unsupported" .. msg.chat_id_, "del")
+                    database:set(bot_id .. "LARViN:Lock:Unsupported" .. msg.chat_id_, "del")
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل السيلفي")
                     return false
                 end
                 if text == "قفل السيلفي بالتقيد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Unsupported" .. msg.chat_id_, "ked")
+                    database:set(bot_id .. "LARViN:Lock:Unsupported" .. msg.chat_id_, "ked")
                     Reply_Status(msg, msg.sender_user_id_, "lockkid", "܂𓍼 ️⁝ تم قفـل السيلفي")
                     return false
                 end
                 if text == "قفل السيلفي بالكتم" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Unsupported" .. msg.chat_id_, "ktm")
+                    database:set(bot_id .. "LARViN:Lock:Unsupported" .. msg.chat_id_, "ktm")
                     Reply_Status(msg, msg.sender_user_id_, "lockktm", "܂𓍼 ️⁝ تم قفـل السيلفي")
                     return false
                 end
                 if text == "قفل السيلفي بالطرد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Unsupported" .. msg.chat_id_, "kick")
+                    database:set(bot_id .. "LARViN:Lock:Unsupported" .. msg.chat_id_, "kick")
                     Reply_Status(msg, msg.sender_user_id_, "lockkick", "܂𓍼 ️⁝ تم قفـل السيلفي")
                     return false
                 end
@@ -2542,27 +2542,27 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Lock:Unsupported" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:Unsupported" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فتح السيلفي")
                     return false
                 end
                 if text == "قفل الماركداون" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Markdaun" .. msg.chat_id_, "del")
+                    database:set(bot_id .. "LARViN:Lock:Markdaun" .. msg.chat_id_, "del")
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل الماركداون")
                     return false
                 end
                 if text == "قفل الماركداون بالتقيد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Markdaun" .. msg.chat_id_, "ked")
+                    database:set(bot_id .. "LARViN:Lock:Markdaun" .. msg.chat_id_, "ked")
                     Reply_Status(msg, msg.sender_user_id_, "lockkid", "܂𓍼 ️⁝ تم قفـل الماركداون")
                     return false
                 end
                 if text == "قفل الماركداون بالكتم" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Markdaun" .. msg.chat_id_, "ktm")
+                    database:set(bot_id .. "LARViN:Lock:Markdaun" .. msg.chat_id_, "ktm")
                     Reply_Status(msg, msg.sender_user_id_, "lockktm", "܂𓍼 ️⁝ تم قفـل الماركداون")
                     return false
                 end
                 if text == "قفل الماركداون بالطرد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Markdaun" .. msg.chat_id_, "kick")
+                    database:set(bot_id .. "LARViN:Lock:Markdaun" .. msg.chat_id_, "kick")
                     Reply_Status(msg, msg.sender_user_id_, "lockkick",
                         "܂𓍼 ️⁝ تم قفـل الماركداون")
                     return false
@@ -2579,27 +2579,27 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Lock:Markdaun" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:Markdaun" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فتح الماركداون")
                     return false
                 end
                 if text == "قفل الجهات" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Contact" .. msg.chat_id_, "del")
+                    database:set(bot_id .. "LARViN:Lock:Contact" .. msg.chat_id_, "del")
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل الجهات")
                     return false
                 end
                 if text == "قفل الجهات بالتقيد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Contact" .. msg.chat_id_, "ked")
+                    database:set(bot_id .. "LARViN:Lock:Contact" .. msg.chat_id_, "ked")
                     Reply_Status(msg, msg.sender_user_id_, "lockkid", "܂𓍼 ️⁝ تم قفـل الجهات")
                     return false
                 end
                 if text == "قفل الجهات بالكتم" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Contact" .. msg.chat_id_, "ktm")
+                    database:set(bot_id .. "LARViN:Lock:Contact" .. msg.chat_id_, "ktm")
                     Reply_Status(msg, msg.sender_user_id_, "lockktm", "܂𓍼 ️⁝ تم قفـل الجهات")
                     return false
                 end
                 if text == "قفل الجهات بالطرد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Contact" .. msg.chat_id_, "kick")
+                    database:set(bot_id .. "LARViN:Lock:Contact" .. msg.chat_id_, "kick")
                     Reply_Status(msg, msg.sender_user_id_, "lockkick", "܂𓍼 ️⁝ تم قفـل الجهات")
                     return false
                 end
@@ -2615,27 +2615,27 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Lock:Contact" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:Contact" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فتح الجهات")
                     return false
                 end
                 if text == "قفل الكلايش" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Spam" .. msg.chat_id_, "del")
+                    database:set(bot_id .. "LARViN:Lock:Spam" .. msg.chat_id_, "del")
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل الكلايش")
                     return false
                 end
                 if text == "قفل الكلايش بالتقيد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Spam" .. msg.chat_id_, "ked")
+                    database:set(bot_id .. "LARViN:Lock:Spam" .. msg.chat_id_, "ked")
                     Reply_Status(msg, msg.sender_user_id_, "lockkid", "܂𓍼 ️⁝ تم قفـل الكلايش")
                     return false
                 end
                 if text == "قفل الكلايش بالكتم" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Spam" .. msg.chat_id_, "ktm")
+                    database:set(bot_id .. "LARViN:Lock:Spam" .. msg.chat_id_, "ktm")
                     Reply_Status(msg, msg.sender_user_id_, "lockktm", "܂𓍼 ️⁝ تم قفـل الكلايش")
                     return false
                 end
                 if text == "قفل الكلايش بالطرد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Spam" .. msg.chat_id_, "kick")
+                    database:set(bot_id .. "LARViN:Lock:Spam" .. msg.chat_id_, "kick")
                     Reply_Status(msg, msg.sender_user_id_, "lockkick", "܂𓍼 ️⁝ تم قفـل الكلايش")
                     return false
                 end
@@ -2651,32 +2651,32 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Lock:Spam" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:Spam" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فتح الكلايش")
                     return false
                 end
                 if text == "قفل الانلاين" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Inlen" .. msg.chat_id_, "del")
+                    database:set(bot_id .. "LARViN:Lock:Inlen" .. msg.chat_id_, "del")
                     Reply_Status(msg, msg.sender_user_id_, "lock", "܂𓍼 ️⁝ تم قفـل الانلاين")
                     return false
                 end
                 if text == "قفل الانلاين بالتقيد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Inlen" .. msg.chat_id_, "ked")
+                    database:set(bot_id .. "LARViN:Lock:Inlen" .. msg.chat_id_, "ked")
                     Reply_Status(msg, msg.sender_user_id_, "lockkid", "܂𓍼 ️⁝ تم قفـل الانلاين")
                     return false
                 end
                 if text == "قفل الانلاين بالكتم" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Inlen" .. msg.chat_id_, "ktm")
+                    database:set(bot_id .. "LARViN:Lock:Inlen" .. msg.chat_id_, "ktm")
                     Reply_Status(msg, msg.sender_user_id_, "lockktm", "܂𓍼 ️⁝ تم قفـل الانلاين")
                     return false
                 end
                 if text == "قفل الانلاين بالطرد" and Addictive(msg) then
-                    database:set(bot_id .. "spider:Lock:Inlen" .. msg.chat_id_, "kick")
+                    database:set(bot_id .. "LARViN:Lock:Inlen" .. msg.chat_id_, "kick")
                     Reply_Status(msg, msg.sender_user_id_, "lockkick", "܂𓍼 ️⁝ تم قفـل الانلاين")
                     return false
                 end
                 if text == "فتح الانلاين" and Addictive(msg) then
-                    database:del(bot_id .. "spider:Lock:Inlen" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Lock:Inlen" .. msg.chat_id_)
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فتح الانلاين")
                     return false
                 end
@@ -2692,7 +2692,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:hset(bot_id .. "spider:flooding:settings:" .. msg.chat_id_, "flood", "kick")
+                    database:hset(bot_id .. "LARViN:flooding:settings:" .. msg.chat_id_, "flood", "kick")
                     Reply_Status(msg, msg.sender_user_id_, "lockkick", "܂𓍼 ️⁝ تم قفل التكرار")
                     return false
                 end
@@ -2708,7 +2708,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:hset(bot_id .. "spider:flooding:settings:" .. msg.chat_id_, "flood", "del")
+                    database:hset(bot_id .. "LARViN:flooding:settings:" .. msg.chat_id_, "flood", "del")
                     Reply_Status(msg, msg.sender_user_id_, "lock",
                         "܂𓍼 ️⁝ تم قفل التكرار بالحذف")
                     return false
@@ -2725,7 +2725,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:hset(bot_id .. "spider:flooding:settings:" .. msg.chat_id_, "flood", "keed")
+                    database:hset(bot_id .. "LARViN:flooding:settings:" .. msg.chat_id_, "flood", "keed")
                     Reply_Status(msg, msg.sender_user_id_, "lockkid", "܂𓍼 ️⁝ تم قفل التكرار")
                     return false
                 end
@@ -2741,7 +2741,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:hset(bot_id .. "spider:flooding:settings:" .. msg.chat_id_, "flood", "mute")
+                    database:hset(bot_id .. "LARViN:flooding:settings:" .. msg.chat_id_, "flood", "mute")
                     Reply_Status(msg, msg.sender_user_id_, "lockktm", "܂𓍼 ️⁝ تم قفل التكرار")
                     return false
                 end
@@ -2757,22 +2757,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:hdel(bot_id .. "spider:flooding:settings:" .. msg.chat_id_, "flood")
+                    database:hdel(bot_id .. "LARViN:flooding:settings:" .. msg.chat_id_, "flood")
                     Reply_Status(msg, msg.sender_user_id_, "unlock", "܂𓍼 ️⁝ تم فتح التكرار")
                     return false
                 end
 
-                if text == ("مسح قائمه العام") and Devspider(msg) then
-                    database:del(bot_id .. "spider:GBan:User")
+                if text == ("مسح قائمه العام") and DevLARViN(msg) then
+                    database:del(bot_id .. "LARViN:GBan:User")
                     send(msg.chat_id_, msg.id_, "\n܂𓍼 ⁝ تم مسح قائمه العام")
                     return false
                 end
-                if text == ("مسح المطورين") and Devspider(msg) then
-                    database:del(bot_id .. "spider:Sudo:User")
+                if text == ("مسح المطورين") and DevLARViN(msg) then
+                    database:del(bot_id .. "LARViN:Sudo:User")
                     send(msg.chat_id_, msg.id_, "\n܂𓍼 ⁝  تم مسح قائمة المطورين  ")
                 end
                 if text == "مسح المنشئين الاساسين" and DevBot(msg) then
-                    database:del(bot_id .. "spider:Basic:Constructor" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Basic:Constructor" .. msg.chat_id_)
                     texts = "܂𓍼 ⁝  تم مسح المنشئين الاساسيين"
                     send(msg.chat_id_, msg.id_, texts)
                 end
@@ -2788,7 +2788,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Constructor" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Constructor" .. msg.chat_id_)
                     texts = "܂𓍼 ⁝  تم مسح المنشئين "
                     send(msg.chat_id_, msg.id_, texts)
                 end
@@ -2804,7 +2804,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Manager" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Manager" .. msg.chat_id_)
                     texts = "܂𓍼 ⁝  تم مسح المدراء "
                     send(msg.chat_id_, msg.id_, texts)
                 end
@@ -2820,7 +2820,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Mod:User" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Mod:User" .. msg.chat_id_)
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝  تم مسح  قائمة الادمنية  ")
                 end
                 if text == "مسح المميزين" and Addictive(msg) then
@@ -2835,7 +2835,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Special:User" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Special:User" .. msg.chat_id_)
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝  تم مسح  قائمة الاعضاء المميزين  ")
                 end
                 if text == "مسح المكتومين" and Addictive(msg) then
@@ -2850,7 +2850,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Muted:User" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Muted:User" .. msg.chat_id_)
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝  تم مسح قائمه المكتومين ")
                 end
                 if text == "مسح المحظورين" and Addictive(msg) then
@@ -2865,14 +2865,14 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Ban:User" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Ban:User" .. msg.chat_id_)
                     send(msg.chat_id_, msg.id_, "\n܂𓍼 ⁝ تم مسح المحظورين")
                 end
-                if text == ("قائمه العام") and Devspider(msg) then
-                    local list = database:smembers(bot_id .. "spider:GBan:User")
+                if text == ("قائمه العام") and DevLARViN(msg) then
+                    local list = database:smembers(bot_id .. "LARViN:GBan:User")
                     t = "\n܂𓍼 ⁝ قائمة المحظورين عام \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ \n"
                     for k, v in pairs(list) do
-                        local username = database:get(bot_id .. "spider:User:Name" .. v)
+                        local username = database:get(bot_id .. "LARViN:User:Name" .. v)
                         if username then
                             t = t .. "" .. k .. "- ([@" .. username .. "])\n"
                         else
@@ -2885,11 +2885,11 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     send(msg.chat_id_, msg.id_, t)
                     return false
                 end
-                if text == ("المطورين") and Devspider(msg) then
-                    local list = database:smembers(bot_id .. "spider:Sudo:User")
+                if text == ("المطورين") and DevLARViN(msg) then
+                    local list = database:smembers(bot_id .. "LARViN:Sudo:User")
                     t = "\n܂𓍼 ⁝ قائمة مطورين البوت \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ \n"
                     for k, v in pairs(list) do
-                        local username = database:get(bot_id .. "spider:User:Name" .. v)
+                        local username = database:get(bot_id .. "LARViN:User:Name" .. v)
                         if username then
                             t = t .. "" .. k .. "- ([@" .. username .. "])\n"
                         else
@@ -2902,11 +2902,11 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     send(msg.chat_id_, msg.id_, t)
                 end
                 if text == "المنشئين الاساسين" and DevBot(msg) then
-                    local list = database:smembers(bot_id .. "spider:Basic:Constructor" .. msg.chat_id_)
+                    local list = database:smembers(bot_id .. "LARViN:Basic:Constructor" .. msg.chat_id_)
                     t =
                         "\n܂𓍼 ⁝ قائمة المنشئين الاساسين \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ \n"
                     for k, v in pairs(list) do
-                        local username = database:get(bot_id .. "spider:User:Name" .. v)
+                        local username = database:get(bot_id .. "LARViN:User:Name" .. v)
                         if username then
                             t = t .. "" .. k .. "- ([@" .. username .. "])\n"
                         else
@@ -2931,10 +2931,10 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    local list = database:smembers(bot_id .. "spider:Constructor" .. msg.chat_id_)
+                    local list = database:smembers(bot_id .. "LARViN:Constructor" .. msg.chat_id_)
                     t = "\n܂𓍼 ⁝ قائمة المنشئين \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ \n"
                     for k, v in pairs(list) do
-                        local username = database:get(bot_id .. "spider:User:Name" .. v)
+                        local username = database:get(bot_id .. "LARViN:User:Name" .. v)
                         if username then
                             t = t .. "" .. k .. "- ([@" .. username .. "])\n"
                         else
@@ -2958,10 +2958,10 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    local list = database:smembers(bot_id .. "spider:Manager" .. msg.chat_id_)
+                    local list = database:smembers(bot_id .. "LARViN:Manager" .. msg.chat_id_)
                     t = "\n܂𓍼 ⁝ قائمة المدراء \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ \n"
                     for k, v in pairs(list) do
-                        local username = database:get(bot_id .. "spider:User:Name" .. v)
+                        local username = database:get(bot_id .. "LARViN:User:Name" .. v)
                         if username then
                             t = t .. "" .. k .. "- ([@" .. username .. "])\n"
                         else
@@ -2985,10 +2985,10 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    local list = database:smembers(bot_id .. "spider:Mod:User" .. msg.chat_id_)
+                    local list = database:smembers(bot_id .. "LARViN:Mod:User" .. msg.chat_id_)
                     t = "\n܂𓍼 ⁝ قائمة الادمنيه \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ \n"
                     for k, v in pairs(list) do
-                        local username = database:get(bot_id .. "spider:User:Name" .. v)
+                        local username = database:get(bot_id .. "LARViN:User:Name" .. v)
                         if username then
                             t = t .. "" .. k .. "- ([@" .. username .. "])\n"
                         else
@@ -3001,10 +3001,10 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     send(msg.chat_id_, msg.id_, t)
                 end
                 if text == ("المميزين") and Addictive(msg) then
-                    local list = database:smembers(bot_id .. "spider:Special:User" .. msg.chat_id_)
+                    local list = database:smembers(bot_id .. "LARViN:Special:User" .. msg.chat_id_)
                     t = "\n܂𓍼 ⁝ قائمة مميزين المجموعه \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ \n"
                     for k, v in pairs(list) do
-                        local username = database:get(bot_id .. "spider:User:Name" .. v)
+                        local username = database:get(bot_id .. "LARViN:User:Name" .. v)
                         if username then
                             t = t .. "" .. k .. "- ([@" .. username .. "])\n"
                         else
@@ -3028,10 +3028,10 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    local list = database:smembers(bot_id .. "spider:Muted:User" .. msg.chat_id_)
+                    local list = database:smembers(bot_id .. "LARViN:Muted:User" .. msg.chat_id_)
                     t = "\n܂𓍼 ⁝ قائمة المكتومين \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ \n"
                     for k, v in pairs(list) do
-                        local username = database:get(bot_id .. "spider:User:Name" .. v)
+                        local username = database:get(bot_id .. "LARViN:User:Name" .. v)
                         if username then
                             t = t .. "" .. k .. "- ([@" .. username .. "])\n"
                         else
@@ -3056,11 +3056,11 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    local list = database:smembers(bot_id .. "spider:Ban:User" .. msg.chat_id_)
+                    local list = database:smembers(bot_id .. "LARViN:Ban:User" .. msg.chat_id_)
                     t =
                         "\n܂𓍼 ⁝ قائمة محظورين المجموعه \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ \n"
                     for k, v in pairs(list) do
-                        local username = database:get(bot_id .. "spider:User:Name" .. v)
+                        local username = database:get(bot_id .. "LARViN:User:Name" .. v)
                         if username then
                             t = t .. "" .. k .. "- ([@" .. username .. "])\n"
                         else
@@ -3073,8 +3073,8 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     send(msg.chat_id_, msg.id_, t)
                 end
 
-                if text == ("حظر عام") and tonumber(msg.reply_to_message_id_) ~= 0 and Devspider(msg) then
-                    function Function_spider(extra, result, success)
+                if text == ("حظر عام") and tonumber(msg.reply_to_message_id_) ~= 0 and DevLARViN(msg) then
+                    function Function_LARViN(extra, result, success)
                         if result.sender_user_id_ == tonumber(Id_Sudo) then
                             send(msg.chat_id_, msg.id_,
                                 "܂𓍼 ⁝ لا يمكنك حظر المطور الاساسي \n")
@@ -3084,7 +3084,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ لا تسطيع حظر البوت عام")
                             return false
                         end
-                        database:sadd(bot_id .. "spider:GBan:User", result.sender_user_id_)
+                        database:sadd(bot_id .. "LARViN:GBan:User", result.sender_user_id_)
                         Kick_Group(result.chat_id_, result.sender_user_id_)
                         Reply_Status(msg, result.sender_user_id_, "reply",
                             "܂𓍼 ⁝ تم حظره عام من المجموعات")
@@ -3093,12 +3093,12 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
-                if text and text:match("^حظر عام @(.*)$") and Devspider(msg) then
+                if text and text:match("^حظر عام @(.*)$") and DevLARViN(msg) then
                     local username = text:match("^حظر عام @(.*)$")
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if result.id_ then
                             if (result and result.type_ and result.type_.ID == "ChannelChatInfo") then
                                 send(msg.chat_id_, msg.id_,
@@ -3114,7 +3114,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                                     "܂𓍼 ⁝ لا يمكنك حظر المطور الاساسي \n")
                                 return false
                             end
-                            database:sadd(bot_id .. "spider:GBan:User", result.id_)
+                            database:sadd(bot_id .. "LARViN:GBan:User", result.id_)
                             Reply_Status(msg, result.id_, "reply",
                                 "܂𓍼 ⁝ تم حظره عام من المجموعات")
                         else
@@ -3124,10 +3124,10 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     tdcli_function({
                         ID = "SearchPublicChat",
                         username_ = username
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
-                if text and text:match("^حظر عام (%d+)$") and Devspider(msg) then
+                if text and text:match("^حظر عام (%d+)$") and DevLARViN(msg) then
                     local userid = text:match("^حظر عام (%d+)$")
                     if userid == tonumber(Id_Sudo) then
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ لا يمكنك حظر المطور الاساسي \n")
@@ -3137,13 +3137,13 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ لا تسطيع حظر البوت عام")
                         return false
                     end
-                    database:sadd(bot_id .. "spider:GBan:User", userid)
+                    database:sadd(bot_id .. "LARViN:GBan:User", userid)
                     Reply_Status(msg, userid, "reply", "܂𓍼 ⁝ تم حظره عام من المجموعات")
                     return false
                 end
-                if text == ("الغاء العام") and tonumber(msg.reply_to_message_id_) ~= 0 and Devspider(msg) then
-                    function Function_spider(extra, result, success)
-                        database:srem(bot_id .. "spider:GBan:User", result.sender_user_id_)
+                if text == ("الغاء العام") and tonumber(msg.reply_to_message_id_) ~= 0 and DevLARViN(msg) then
+                    function Function_LARViN(extra, result, success)
+                        database:srem(bot_id .. "LARViN:GBan:User", result.sender_user_id_)
                         Reply_Status(msg, result.sender_user_id_, "reply",
                             "܂𓍼 ⁝ تم الغاء حظره عام من المجموعات")
                     end
@@ -3151,16 +3151,16 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
-                if text and text:match("^الغاء العام @(.*)$") and Devspider(msg) then
+                if text and text:match("^الغاء العام @(.*)$") and DevLARViN(msg) then
                     local username = text:match("^الغاء العام @(.*)$")
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if result.id_ then
                             Reply_Status(msg, result.id_, "reply",
                                 "܂𓍼 ⁝ تم الغاء حظره عام من المجموعات")
-                            database:srem(bot_id .. "spider:GBan:User", result.id_)
+                            database:srem(bot_id .. "LARViN:GBan:User", result.id_)
                         else
                             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ لا يوجد حساب بهاذا المعرف")
                         end
@@ -3168,21 +3168,21 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     tdcli_function({
                         ID = "SearchPublicChat",
                         username_ = username
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
-                if text and text:match("^الغاء العام (%d+)$") and Devspider(msg) then
+                if text and text:match("^الغاء العام (%d+)$") and DevLARViN(msg) then
                     local userid = text:match("^الغاء العام (%d+)$")
-                    database:srem(bot_id .. "spider:GBan:User", userid)
+                    database:srem(bot_id .. "LARViN:GBan:User", userid)
                     Reply_Status(msg, userid, "reply",
                         "܂𓍼 ⁝ تم الغاء حظره عام من المجموعات")
                     return false
                 end
 
                 if text == ("اضف مطور") or text == ("رفع مطور") and tonumber(msg.reply_to_message_id_) ~=
-                    0 and Devspider(msg) then
-                    function Function_spider(extra, result, success)
-                        database:sadd(bot_id .. "spider:Sudo:User", result.sender_user_id_)
+                    0 and DevLARViN(msg) then
+                    function Function_LARViN(extra, result, success)
+                        database:sadd(bot_id .. "LARViN:Sudo:User", result.sender_user_id_)
                         Reply_Status(msg, result.sender_user_id_, "reply",
                             "܂𓍼 ⁝ تم ترقيته مطور في البوت")
                     end
@@ -3190,19 +3190,19 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
-                if text and text:match("^اضف مطور @(.*)$") and Devspider(msg) then
+                if text and text:match("^اضف مطور @(.*)$") and DevLARViN(msg) then
                     local username = text:match("^اضف مطور @(.*)$")
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if result.id_ then
                             if (result and result.type_ and result.type_.ID == "ChannelChatInfo") then
                                 send(msg.chat_id_, msg.id_,
                                     "܂𓍼 ⁝ عذرا عزيزي المستخدم هاذا معرف قناة يرجى استخدام الامر بصوره صحيحه !")
                                 return false
                             end
-                            database:sadd(bot_id .. "spider:Sudo:User", result.id_)
+                            database:sadd(bot_id .. "LARViN:Sudo:User", result.id_)
                             Reply_Status(msg, result.id_, "reply",
                                 "܂𓍼 ⁝ تم ترقيته مطور في البوت")
                         else
@@ -3212,19 +3212,19 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     tdcli_function({
                         ID = "SearchPublicChat",
                         username_ = username
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
-                if text and text:match("^اضف مطور (%d+)$") and Devspider(msg) then
+                if text and text:match("^اضف مطور (%d+)$") and DevLARViN(msg) then
                     local userid = text:match("^اضف مطور (%d+)$")
-                    database:sadd(bot_id .. "spider:Sudo:User", userid)
+                    database:sadd(bot_id .. "LARViN:Sudo:User", userid)
                     Reply_Status(msg, userid, "reply", "܂𓍼 ⁝ تم ترقيته مطور في البوت")
                     return false
                 end
                 if text == ("حذف مطور") or text == ("تنزيل المطور") and
-                    tonumber(msg.reply_to_message_id_) ~= 0 and Devspider(msg) then
-                    function Function_spider(extra, result, success)
-                        database:srem(bot_id .. "spider:Sudo:User", result.sender_user_id_)
+                    tonumber(msg.reply_to_message_id_) ~= 0 and DevLARViN(msg) then
+                    function Function_LARViN(extra, result, success)
+                        database:srem(bot_id .. "LARViN:Sudo:User", result.sender_user_id_)
                         Reply_Status(msg, result.sender_user_id_, "reply",
                             "܂𓍼 ⁝ تم تنزيله من المطورين")
                     end
@@ -3232,14 +3232,14 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
-                if text and text:match("^حذف مطور @(.*)$") and Devspider(msg) then
+                if text and text:match("^حذف مطور @(.*)$") and DevLARViN(msg) then
                     local username = text:match("^حذف مطور @(.*)$")
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if result.id_ then
-                            database:srem(bot_id .. "spider:Sudo:User", result.id_)
+                            database:srem(bot_id .. "LARViN:Sudo:User", result.id_)
                             Reply_Status(msg, result.id_, "reply", "܂𓍼 ⁝ تم تنزيله من المطورين")
                         else
                             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ لا يوجد حساب بهاذا المعرف")
@@ -3248,12 +3248,12 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     tdcli_function({
                         ID = "SearchPublicChat",
                         username_ = username
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
-                if text and text:match("^حذف مطور (%d+)$") and Devspider(msg) then
+                if text and text:match("^حذف مطور (%d+)$") and DevLARViN(msg) then
                     local userid = text:match("^حذف مطور (%d+)$")
-                    database:srem(bot_id .. "spider:Sudo:User", userid)
+                    database:srem(bot_id .. "LARViN:Sudo:User", userid)
                     Reply_Status(msg, userid, "reply", "܂𓍼 ⁝ تم تنزيله من المطورين")
                     return false
                 end
@@ -3271,8 +3271,8 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    function Function_spider(extra, result, success)
-                        database:sadd(bot_id .. "spider:Basic:Constructor" .. msg.chat_id_, result.sender_user_id_)
+                    function Function_LARViN(extra, result, success)
+                        database:sadd(bot_id .. "LARViN:Basic:Constructor" .. msg.chat_id_, result.sender_user_id_)
                         Reply_Status(msg, result.sender_user_id_, "reply",
                             "܂𓍼 ⁝ تم ترقيته منشئ اساسي")
                     end
@@ -3280,7 +3280,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
                 if text and text:match("^رفع منشئ اساسي @(.*)$") and BasicConstructor(msg) then
@@ -3296,14 +3296,14 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     local username = text:match("^رفع منشئ اساسي @(.*)$")
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if result.id_ then
                             if (result and result.type_ and result.type_.ID == "ChannelChatInfo") then
                                 send(msg.chat_id_, msg.id_,
                                     "܂𓍼 ⁝ عذرا عزيزي المستخدم هاذا معرف قناة يرجى استخدام الامر بصوره صحيحه !")
                                 return false
                             end
-                            database:sadd(bot_id .. "spider:Basic:Constructor" .. msg.chat_id_, result.id_)
+                            database:sadd(bot_id .. "LARViN:Basic:Constructor" .. msg.chat_id_, result.id_)
                             Reply_Status(msg, result.id_, "reply", "??⁝ تم ترقيته منشئ اساسي")
                         else
                             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ لا يوجد حساب بهاذا المعرف")
@@ -3312,7 +3312,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     tdcli_function({
                         ID = "SearchPublicChat",
                         username_ = username
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
                 if text and text:match("^رفع منشئ اساسي (%d+)$") and BasicConstructor(msg) then
@@ -3328,7 +3328,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     local userid = text:match("^رفع منشئ اساسي (%d+)$")
-                    database:sadd(bot_id .. "spider:Basic:Constructor" .. msg.chat_id_, userid)
+                    database:sadd(bot_id .. "LARViN:Basic:Constructor" .. msg.chat_id_, userid)
                     Reply_Status(msg, userid, "reply", "܂𓍼 ⁝ تم ترقيته منشئ اساسي")
                     return false
                 end
@@ -3345,8 +3345,8 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    function Function_spider(extra, result, success)
-                        database:srem(bot_id .. "spider:Basic:Constructor" .. msg.chat_id_, result.sender_user_id_)
+                    function Function_LARViN(extra, result, success)
+                        database:srem(bot_id .. "LARViN:Basic:Constructor" .. msg.chat_id_, result.sender_user_id_)
                         Reply_Status(msg, result.sender_user_id_, "reply",
                             "܂𓍼 ⁝ تم تنزيله من المنشئين")
                     end
@@ -3354,7 +3354,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
                 if text and text:match("^تنزيل منشئ اساسي @(.*)$") and BasicConstructor(msg) then
@@ -3370,9 +3370,9 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     local username = text:match("^تنزيل منشئ اساسي @(.*)$")
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if result.id_ then
-                            database:srem(bot_id .. "spider:Basic:Constructor" .. msg.chat_id_, result.id_)
+                            database:srem(bot_id .. "LARViN:Basic:Constructor" .. msg.chat_id_, result.id_)
 
                             Reply_Status(msg, result.id_, "reply", "܂𓍼 ⁝ تم تنزيله من المنشئين")
                         else
@@ -3382,7 +3382,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     tdcli_function({
                         ID = "SearchPublicChat",
                         username_ = username
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
                 if text and text:match("^تنزيل منشئ اساسي (%d+)$") and BasicConstructor(msg) then
@@ -3398,7 +3398,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     local userid = text:match("^تنزيل منشئ اساسي (%d+)$")
-                    database:srem(bot_id .. "spider:Basic:Constructor" .. msg.chat_id_, userid)
+                    database:srem(bot_id .. "LARViN:Basic:Constructor" .. msg.chat_id_, userid)
                     Reply_Status(msg, userid, "reply", "܂𓍼 ⁝ تم تنزيله من المنشئين")
                     return false
                 end
@@ -3415,8 +3415,8 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    function Function_spider(extra, result, success)
-                        database:sadd(bot_id .. "spider:Constructor" .. msg.chat_id_, result.sender_user_id_)
+                    function Function_LARViN(extra, result, success)
+                        database:sadd(bot_id .. "LARViN:Constructor" .. msg.chat_id_, result.sender_user_id_)
                         Reply_Status(msg, result.sender_user_id_, "reply",
                             "܂𓍼 ⁝ تم ترقيته منشئ في المجموعه")
                     end
@@ -3424,7 +3424,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                 end
                 if text and text:match("^رفع منشئ @(.*)$") and BasicConstructor(msg) then
                     if AddChannel(msg.sender_user_id_) == false then
@@ -3439,14 +3439,14 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     local username = text:match("^رفع منشئ @(.*)$")
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if result.id_ then
                             if (result and result.type_ and result.type_.ID == "ChannelChatInfo") then
                                 send(msg.chat_id_, msg.id_,
                                     "܂𓍼 ⁝ عذرا عزيزي المستخدم هاذا معرف قناة يرجى استخدام الامر بصوره صحيحه !")
                                 return false
                             end
-                            database:sadd(bot_id .. "spider:Constructor" .. msg.chat_id_, result.id_)
+                            database:sadd(bot_id .. "LARViN:Constructor" .. msg.chat_id_, result.id_)
                             Reply_Status(msg, result.id_, "reply",
                                 "܂𓍼 ⁝ تم ترقيته منشئ في المجموعه")
                         else
@@ -3456,7 +3456,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     tdcli_function({
                         ID = "SearchPublicChat",
                         username_ = username
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                 end
                 ------------------------------------------------------------------------
                 if text and text:match("^رفع منشئ (%d+)$") and BasicConstructor(msg) then
@@ -3472,13 +3472,13 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     local userid = text:match("^رفع منشئ (%d+)$")
-                    database:sadd(bot_id .. "spider:Constructor" .. msg.chat_id_, userid)
+                    database:sadd(bot_id .. "LARViN:Constructor" .. msg.chat_id_, userid)
                     Reply_Status(msg, userid, "reply", "܂𓍼 ⁝ تم ترقيته منشئ في المجموعه")
                 end
                 if text and text:match("^تنزيل منشئ$") and tonumber(msg.reply_to_message_id_) ~= 0 and
                     BasicConstructor(msg) then
-                    function Function_spider(extra, result, success)
-                        database:srem(bot_id .. "spider:Constructor" .. msg.chat_id_, result.sender_user_id_)
+                    function Function_LARViN(extra, result, success)
+                        database:srem(bot_id .. "LARViN:Constructor" .. msg.chat_id_, result.sender_user_id_)
                         Reply_Status(msg, result.sender_user_id_, "reply",
                             "܂𓍼 ⁝ تم تنزيله من المنشئين")
                     end
@@ -3486,7 +3486,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                 end
                 ------------------------------------------------------------------------
                 if text and text:match("^تنزيل منشئ @(.*)$") and BasicConstructor(msg) then
@@ -3502,9 +3502,9 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     local username = text:match("^تنزيل منشئ @(.*)$")
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if result.id_ then
-                            database:srem(bot_id .. "spider:Constructor" .. msg.chat_id_, result.id_)
+                            database:srem(bot_id .. "LARViN:Constructor" .. msg.chat_id_, result.id_)
                             Reply_Status(msg, result.id_, "reply", "܂𓍼 ⁝ تم تنزيله من المنشئين")
                         else
                             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ لا يوجد حساب بهاذا المعرف")
@@ -3513,7 +3513,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     tdcli_function({
                         ID = "SearchPublicChat",
                         username_ = username
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                 end
                 ------------------------------------------------------------------------
                 if text and text:match("^تنزيل منشئ (%d+)$") and BasicConstructor(msg) then
@@ -3529,7 +3529,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     local userid = text:match("^تنزيل منشئ (%d+)$")
-                    database:srem(bot_id .. "spider:Constructor" .. msg.chat_id_, userid)
+                    database:srem(bot_id .. "LARViN:Constructor" .. msg.chat_id_, userid)
                     Reply_Status(msg, userid, "reply", "܂𓍼 ⁝ تم تنزيله من المنشئين")
                 end
 
@@ -3545,8 +3545,8 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    function Function_spider(extra, result, success)
-                        database:sadd(bot_id .. "spider:Manager" .. msg.chat_id_, result.sender_user_id_)
+                    function Function_LARViN(extra, result, success)
+                        database:sadd(bot_id .. "LARViN:Manager" .. msg.chat_id_, result.sender_user_id_)
                         Reply_Status(msg, result.sender_user_id_, "reply",
                             "܂𓍼 ⁝ تم ترقيته مدير المجموعه")
                     end
@@ -3554,7 +3554,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
                 if text and text:match("^رفع مدير @(.*)$") and Constructor(msg) then
@@ -3570,14 +3570,14 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     local username = text:match("^رفع مدير @(.*)$")
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if result.id_ then
                             if (result and result.type_ and result.type_.ID == "ChannelChatInfo") then
                                 send(msg.chat_id_, msg.id_,
                                     "܂𓍼 ⁝ عذرا عزيزي المستخدم هاذا معرف قناة يرجى استخدام الامر بصوره صحيحه !")
                                 return false
                             end
-                            database:sadd(bot_id .. "spider:Manager" .. msg.chat_id_, result.id_)
+                            database:sadd(bot_id .. "LARViN:Manager" .. msg.chat_id_, result.id_)
                             Reply_Status(msg, result.id_, "reply",
                                 "܂𓍼 ⁝ تم ترقيته مدير المجموعه")
                         else
@@ -3587,7 +3587,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     tdcli_function({
                         ID = "SearchPublicChat",
                         username_ = username
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
 
@@ -3604,7 +3604,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     local userid = text:match("^رفع مدير (%d+)$")
-                    database:sadd(bot_id .. "spider:Manager" .. msg.chat_id_, userid)
+                    database:sadd(bot_id .. "LARViN:Manager" .. msg.chat_id_, userid)
                     Reply_Status(msg, userid, "reply", "܂𓍼 ⁝ تم ترقيته مدير المجموعه")
                     return false
                 end
@@ -3620,8 +3620,8 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    function Function_spider(extra, result, success)
-                        database:srem(bot_id .. "spider:Manager" .. msg.chat_id_, result.sender_user_id_)
+                    function Function_LARViN(extra, result, success)
+                        database:srem(bot_id .. "LARViN:Manager" .. msg.chat_id_, result.sender_user_id_)
                         Reply_Status(msg, result.sender_user_id_, "reply",
                             "܂𓍼 ⁝ تم تنزيله من المدراء")
                     end
@@ -3629,7 +3629,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
                 if text and text:match("^تنزيل مدير @(.*)$") and Constructor(msg) then
@@ -3645,9 +3645,9 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     local username = text:match("^تنزيل مدير @(.*)$")
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if result.id_ then
-                            database:srem(bot_id .. "spider:Manager" .. msg.chat_id_, result.id_)
+                            database:srem(bot_id .. "LARViN:Manager" .. msg.chat_id_, result.id_)
                             Reply_Status(msg, result.id_, "reply", "܂𓍼 ⁝ تم تنزيله من المدراء")
                         else
                             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ لا يوجد حساب بهاذا المعرف")
@@ -3656,7 +3656,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     tdcli_function({
                         ID = "SearchPublicChat",
                         username_ = username
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
                 if text and text:match("^تنزيل مدير (%d+)$") and Constructor(msg) then
@@ -3672,7 +3672,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     local userid = text:match("^تنزيل مدير (%d+)$")
-                    database:srem(bot_id .. "spider:Manager" .. msg.chat_id_, userid)
+                    database:srem(bot_id .. "LARViN:Manager" .. msg.chat_id_, userid)
                     Reply_Status(msg, userid, "reply", "܂𓍼 ⁝ تم تنزيله من المدراء")
                     return false
                 end
@@ -3694,8 +3694,8 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                             '܂𓍼 ⁝ لا تستطيع رفع احد وذالك لان تم تعطيل الرفع من قبل المنشئين')
                         return false
                     end
-                    function Function_spider(extra, result, success)
-                        database:sadd(bot_id .. "spider:Mod:User" .. msg.chat_id_, result.sender_user_id_)
+                    function Function_LARViN(extra, result, success)
+                        database:sadd(bot_id .. "LARViN:Mod:User" .. msg.chat_id_, result.sender_user_id_)
                         Reply_Status(msg, result.sender_user_id_, "reply",
                             "܂𓍼 ⁝ تم ترقيته ادمن للمجموعه")
                     end
@@ -3703,7 +3703,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
                 if text and text:match("^رفع ادمن @(.*)$") and Owner(msg) then
@@ -3724,14 +3724,14 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                             '܂𓍼 ⁝ لا تستطيع رفع احد وذالك لان تم تعطيل الرفع من قبل المنشئين')
                         return false
                     end
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if result.id_ then
                             if (result and result.type_ and result.type_.ID == "ChannelChatInfo") then
                                 send(msg.chat_id_, msg.id_,
                                     "܂𓍼 ⁝ عذرا عزيزي المستخدم هاذا معرف قناة يرجى استخدام الامر بصوره صحيحه !")
                                 return false
                             end
-                            database:sadd(bot_id .. "spider:Mod:User" .. msg.chat_id_, result.id_)
+                            database:sadd(bot_id .. "LARViN:Mod:User" .. msg.chat_id_, result.id_)
                             Reply_Status(msg, result.id_, "reply",
                                 "܂𓍼 ⁝ تم ترقيته ادمن للمجموعه")
                         else
@@ -3741,7 +3741,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     tdcli_function({
                         ID = "SearchPublicChat",
                         username_ = username
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
                 if text and text:match("^رفع ادمن (%d+)$") and Owner(msg) then
@@ -3762,7 +3762,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                             '܂𓍼 ⁝ لا تستطيع رفع احد وذالك لان تم تعطيل الرفع من قبل المنشئين')
                         return false
                     end
-                    database:sadd(bot_id .. "spider:Mod:User" .. msg.chat_id_, userid)
+                    database:sadd(bot_id .. "LARViN:Mod:User" .. msg.chat_id_, userid)
                     Reply_Status(msg, userid, "reply", "܂𓍼 ⁝ تم ترقيته ادمن للمجموعه")
                     return false
                 end
@@ -3778,8 +3778,8 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    function Function_spider(extra, result, success)
-                        database:srem(bot_id .. "spider:Mod:User" .. msg.chat_id_, result.sender_user_id_)
+                    function Function_LARViN(extra, result, success)
+                        database:srem(bot_id .. "LARViN:Mod:User" .. msg.chat_id_, result.sender_user_id_)
                         Reply_Status(msg, result.sender_user_id_, "reply",
                             "܂𓍼 ⁝ تم تنزيله من ادمنيه المجموعه")
                     end
@@ -3787,7 +3787,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
                 if text and text:match("^تنزيل ادمن @(.*)$") and Owner(msg) then
@@ -3803,9 +3803,9 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     local username = text:match("^تنزيل ادمن @(.*)$")
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if result.id_ then
-                            database:srem(bot_id .. "spider:Mod:User" .. msg.chat_id_, result.id_)
+                            database:srem(bot_id .. "LARViN:Mod:User" .. msg.chat_id_, result.id_)
                             Reply_Status(msg, result.id_, "reply",
                                 "܂𓍼 ⁝ تم تنزيله من ادمنيه المجموعه")
                         else
@@ -3815,7 +3815,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     tdcli_function({
                         ID = "SearchPublicChat",
                         username_ = username
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
                 if text and text:match("^تنزيل ادمن (%d+)$") and Owner(msg) then
@@ -3831,7 +3831,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     local userid = text:match("^تنزيل ادمن (%d+)$")
-                    database:srem(bot_id .. "spider:Mod:User" .. msg.chat_id_, userid)
+                    database:srem(bot_id .. "LARViN:Mod:User" .. msg.chat_id_, userid)
                     Reply_Status(msg, userid, "reply", "܂𓍼 ⁝ تم تنزيله من ادمنيه المجموعه")
                     return false
                 end
@@ -3853,8 +3853,8 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                             '܂𓍼 ⁝ لا تستطيع رفع احد وذالك لان تم تعطيل الرفع من قبل المنشئين')
                         return false
                     end
-                    function Function_spider(extra, result, success)
-                        database:sadd(bot_id .. "spider:Special:User" .. msg.chat_id_, result.sender_user_id_)
+                    function Function_LARViN(extra, result, success)
+                        database:sadd(bot_id .. "LARViN:Special:User" .. msg.chat_id_, result.sender_user_id_)
                         Reply_Status(msg, result.sender_user_id_, "reply",
                             "܂𓍼 ⁝ تم ترقيته مميز للمجموعه")
                     end
@@ -3862,7 +3862,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
                 if text and text:match("^رفع مميز @(.*)$") and Addictive(msg) then
@@ -3883,14 +3883,14 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                             '܂𓍼 ⁝ لا تستطيع رفع احد وذالك لان تم تعطيل الرفع من قبل المنشئين')
                         return false
                     end
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if result.id_ then
                             if (result and result.type_ and result.type_.ID == "ChannelChatInfo") then
                                 send(msg.chat_id_, msg.id_,
                                     "܂𓍼 ⁝ عذرا عزيزي المستخدم هاذا معرف قناة يرجى استخدام الامر بصوره صحيحه !")
                                 return false
                             end
-                            database:sadd(bot_id .. "spider:Special:User" .. msg.chat_id_, result.id_)
+                            database:sadd(bot_id .. "LARViN:Special:User" .. msg.chat_id_, result.id_)
                             Reply_Status(msg, result.id_, "reply",
                                 "܂𓍼 ⁝ تم ترقيته مميز للمجموعه")
                         else
@@ -3900,7 +3900,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     tdcli_function({
                         ID = "SearchPublicChat",
                         username_ = username
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
 
@@ -3922,7 +3922,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                             '܂𓍼 ⁝ لا تستطيع رفع احد وذالك لان تم تعطيل الرفع من قبل المنشئين')
                         return false
                     end
-                    database:sadd(bot_id .. "spider:Special:User" .. msg.chat_id_, userid)
+                    database:sadd(bot_id .. "LARViN:Special:User" .. msg.chat_id_, userid)
                     Reply_Status(msg, userid, "reply", "܂𓍼 ⁝ تم ترقيته مميز للمجموعه")
                     return false
                 end
@@ -3939,8 +3939,8 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    function Function_spider(extra, result, success)
-                        database:srem(bot_id .. "spider:Special:User" .. msg.chat_id_, result.sender_user_id_)
+                    function Function_LARViN(extra, result, success)
+                        database:srem(bot_id .. "LARViN:Special:User" .. msg.chat_id_, result.sender_user_id_)
                         Reply_Status(msg, result.sender_user_id_, "reply",
                             "܂𓍼 ⁝ تم تنزيله من المميزين")
                     end
@@ -3948,7 +3948,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
                 if text and text:match("^تنزيل مميز @(.*)$") and Addictive(msg) then
@@ -3964,9 +3964,9 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     local username = text:match("^تنزيل مميز @(.*)$")
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if result.id_ then
-                            database:srem(bot_id .. "spider:Special:User" .. msg.chat_id_, result.id_)
+                            database:srem(bot_id .. "LARViN:Special:User" .. msg.chat_id_, result.id_)
                             Reply_Status(msg, result.id_, "reply", "܂𓍼 ⁝ تم تنزيله من المميزين")
                         else
                             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ لا يوجد حساب بهاذا المعرف")
@@ -3975,7 +3975,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     tdcli_function({
                         ID = "SearchPublicChat",
                         username_ = username
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
                 if text and text:match("^تنزيل مميز (%d+)$") and Addictive(msg) then
@@ -3991,7 +3991,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     local userid = text:match("^تنزيل مميز (%d+)$")
-                    database:srem(bot_id .. "spider:Special:User" .. msg.chat_id_, userid)
+                    database:srem(bot_id .. "LARViN:Special:User" .. msg.chat_id_, userid)
                     Reply_Status(msg, userid, "reply", "܂𓍼 ⁝ تم تنزيله من المميزين")
                     return false
                 end
@@ -4008,40 +4008,40 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     local RTPA = text:match("رفع (.*)")
-                    if database:sismember(bot_id .. "spider:Coomds" .. msg.chat_id_, RTPA) then
+                    if database:sismember(bot_id .. "LARViN:Coomds" .. msg.chat_id_, RTPA) then
                         function by_reply(extra, result, success)
                             tdcli_function({
                                 ID = "GetUser",
                                 user_id_ = result.sender_user_id_
                             }, function(arg, data)
-                                local spiderrt = database:get(
-                                                     bot_id .. "spider:Comd:New:rt:bot:" .. RTPA .. msg.chat_id_)
-                                if spiderrt == "مميز" and Addictive(msg) then
+                                local LARViNrt = database:get(
+                                                     bot_id .. "LARViN:Comd:New:rt:bot:" .. RTPA .. msg.chat_id_)
+                                if LARViNrt == "مميز" and Addictive(msg) then
                                     send(msg.chat_id_, msg.id_,
                                         "\n܂𓍼 ⁝ العضو » [" .. data.first_name_ .. "](t.me/" ..
                                             (data.username_ or "Vc33h") .. ")" .. "\n܂𓍼 ⁝ تم رفعه " .. RTPA ..
                                             " هنا\n")
-                                    database:set(bot_id .. "spider:Comd:New:rt:User:" .. msg.chat_id_ ..
+                                    database:set(bot_id .. "LARViN:Comd:New:rt:User:" .. msg.chat_id_ ..
                                                      result.sender_user_id_, RTPA)
-                                    database:sadd(bot_id .. "spider:Special:User" .. msg.chat_id_,
+                                    database:sadd(bot_id .. "LARViN:Special:User" .. msg.chat_id_,
                                         result.sender_user_id_)
-                                elseif spiderrt == "ادمن" and Owner(msg) then
+                                elseif LARViNrt == "ادمن" and Owner(msg) then
                                     send(msg.chat_id_, msg.id_,
                                         "\n܂𓍼 ⁝ العضو » [" .. data.first_name_ .. "](t.me/" ..
                                             (data.username_ or "Vc33h") .. ")" .. "\n܂𓍼 ⁝ تم رفعه " .. RTPA ..
                                             " هنا\n")
-                                    database:set(bot_id .. "spider:Comd:New:rt:User:" .. msg.chat_id_ ..
+                                    database:set(bot_id .. "LARViN:Comd:New:rt:User:" .. msg.chat_id_ ..
                                                      result.sender_user_id_, RTPA)
-                                    database:sadd(bot_id .. "spider:Mod:User" .. msg.chat_id_, result.sender_user_id_)
-                                elseif spiderrt == "مدير" and Constructor(msg) then
+                                    database:sadd(bot_id .. "LARViN:Mod:User" .. msg.chat_id_, result.sender_user_id_)
+                                elseif LARViNrt == "مدير" and Constructor(msg) then
                                     send(msg.chat_id_, msg.id_,
                                         "\n܂𓍼 ⁝ العضو » [" .. data.first_name_ .. "](t.me/" ..
                                             (data.username_ or "Vc33h") .. ")" .. "\n܂𓍼 ⁝ تم رفعه " .. RTPA ..
                                             " هنا\n")
-                                    database:set(bot_id .. "spider:Comd:New:rt:User:" .. msg.chat_id_ ..
+                                    database:set(bot_id .. "LARViN:Comd:New:rt:User:" .. msg.chat_id_ ..
                                                      result.sender_user_id_, RTPA)
-                                    database:sadd(bot_id .. "spider:Manager" .. msg.chat_id_, result.sender_user_id_)
-                                elseif spiderrt == "عضو" and Addictive(msg) then
+                                    database:sadd(bot_id .. "LARViN:Manager" .. msg.chat_id_, result.sender_user_id_)
+                                elseif LARViNrt == "عضو" and Addictive(msg) then
                                     send(msg.chat_id_, msg.id_,
                                         "\n܂𓍼 ⁝ العضو » [" .. data.first_name_ .. "](t.me/" ..
                                             (data.username_ or "Vc33h") .. ")" .. "\n܂𓍼 ⁝ تم رفعه " .. RTPA ..
@@ -4069,40 +4069,40 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     local RTPA = text:match("تنزيل (.*)")
-                    if database:sismember(bot_id .. "spider:Coomds" .. msg.chat_id_, RTPA) then
+                    if database:sismember(bot_id .. "LARViN:Coomds" .. msg.chat_id_, RTPA) then
                         function by_reply(extra, result, success)
                             tdcli_function({
                                 ID = "GetUser",
                                 user_id_ = result.sender_user_id_
                             }, function(arg, data)
-                                local spiderrt = database:get(
-                                                     bot_id .. "spider:Comd:New:rt:bot:" .. RTPA .. msg.chat_id_)
-                                if spiderrt == "مميز" and Addictive(msg) then
+                                local LARViNrt = database:get(
+                                                     bot_id .. "LARViN:Comd:New:rt:bot:" .. RTPA .. msg.chat_id_)
+                                if LARViNrt == "مميز" and Addictive(msg) then
                                     send(msg.chat_id_, msg.id_,
                                         "\n܂𓍼 ⁝ العضو » [" .. data.first_name_ .. "](t.me/" ..
                                             (data.username_ or "Vc33h") .. ")" .. "\n܂𓍼 ⁝ تم تنزيله من " ..
                                             RTPA .. " هنا\n")
-                                    database:srem(bot_id .. "spider:Special:User" .. msg.chat_id_,
+                                    database:srem(bot_id .. "LARViN:Special:User" .. msg.chat_id_,
                                         result.sender_user_id_)
-                                    database:del(bot_id .. "spider:Comd:New:rt:User:" .. msg.chat_id_ ..
+                                    database:del(bot_id .. "LARViN:Comd:New:rt:User:" .. msg.chat_id_ ..
                                                      result.sender_user_id_)
-                                elseif spiderrt == "ادمن" and Owner(msg) then
+                                elseif LARViNrt == "ادمن" and Owner(msg) then
                                     send(msg.chat_id_, msg.id_,
                                         "\n܂𓍼 ⁝ العضو » [" .. data.first_name_ .. "](t.me/" ..
                                             (data.username_ or "Vc33h") .. ")" .. "\n܂𓍼 ⁝ تم تنزيله من " ..
                                             RTPA .. " هنا\n")
-                                    database:srem(bot_id .. "spider:Mod:User" .. msg.chat_id_, result.sender_user_id_)
-                                    database:del(bot_id .. "spider:Comd:New:rt:User:" .. msg.chat_id_ ..
+                                    database:srem(bot_id .. "LARViN:Mod:User" .. msg.chat_id_, result.sender_user_id_)
+                                    database:del(bot_id .. "LARViN:Comd:New:rt:User:" .. msg.chat_id_ ..
                                                      result.sender_user_id_)
-                                elseif spiderrt == "مدير" and Constructor(msg) then
+                                elseif LARViNrt == "مدير" and Constructor(msg) then
                                     send(msg.chat_id_, msg.id_,
                                         "\n܂𓍼 ⁝ العضو » [" .. data.first_name_ .. "](t.me/" ..
                                             (data.username_ or "Vc33h") .. ")" .. "\n܂𓍼 ⁝ تم تنزيله من " ..
                                             RTPA .. " هنا\n")
-                                    database:srem(bot_id .. "spider:Manager" .. msg.chat_id_, result.sender_user_id_)
-                                    database:del(bot_id .. "spider:Comd:New:rt:User:" .. msg.chat_id_ ..
+                                    database:srem(bot_id .. "LARViN:Manager" .. msg.chat_id_, result.sender_user_id_)
+                                    database:del(bot_id .. "LARViN:Comd:New:rt:User:" .. msg.chat_id_ ..
                                                      result.sender_user_id_)
-                                elseif spiderrt == "عضو" and Addictive(msg) then
+                                elseif LARViNrt == "عضو" and Addictive(msg) then
                                     send(msg.chat_id_, msg.id_,
                                         "\n܂𓍼 ⁝ العضو » [" .. data.first_name_ .. "](t.me/" ..
                                             (data.username_ or "Vc33h") .. ")" .. "\n܂𓍼 ⁝ تم تنزيله من " ..
@@ -4130,36 +4130,36 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     local text1 = {string.match(text, "^(رفع) (.*) @(.*)$")}
-                    if database:sismember(bot_id .. "spider:Coomds" .. msg.chat_id_, text1[2]) then
+                    if database:sismember(bot_id .. "LARViN:Coomds" .. msg.chat_id_, text1[2]) then
                         function py_username(extra, result, success)
                             if result.id_ then
-                                local spiderrt = database:get(
-                                                     bot_id .. "spider:Comd:New:rt:bot:" .. text1[2] .. msg.chat_id_)
-                                if spiderrt == "مميز" and Addictive(msg) then
+                                local LARViNrt = database:get(
+                                                     bot_id .. "LARViN:Comd:New:rt:bot:" .. text1[2] .. msg.chat_id_)
+                                if LARViNrt == "مميز" and Addictive(msg) then
                                     send(msg.chat_id_, msg.id_,
                                         "\n܂𓍼 ⁝ العضو » [" .. result.title_ .. "](t.me/" ..
                                             (text1[3] or "Vc33h") .. ")" .. "\n܂𓍼 ⁝ تم رفعه " .. text1[2] ..
                                             " هنا")
-                                    database:sadd(bot_id .. "spider:Special:User" .. msg.chat_id_, result.id_)
-                                    database:set(bot_id .. "spider:Comd:New:rt:User:" .. msg.chat_id_ .. result.id_,
+                                    database:sadd(bot_id .. "LARViN:Special:User" .. msg.chat_id_, result.id_)
+                                    database:set(bot_id .. "LARViN:Comd:New:rt:User:" .. msg.chat_id_ .. result.id_,
                                         text1[2])
-                                elseif spiderrt == "ادمن" and Owner(msg) then
+                                elseif LARViNrt == "ادمن" and Owner(msg) then
                                     send(msg.chat_id_, msg.id_,
                                         "\n܂𓍼 ⁝ العضو » [" .. result.title_ .. "](t.me/" ..
                                             (text1[3] or "Vc33h") .. ")" .. "\n܂𓍼 ⁝ تم رفعه " .. text1[2] ..
                                             " هنا")
-                                    database:sadd(bot_id .. "spider:Mod:User" .. msg.chat_id_, result.id_)
-                                    database:set(bot_id .. "spider:Comd:New:rt:User:" .. msg.chat_id_ .. result.id_,
+                                    database:sadd(bot_id .. "LARViN:Mod:User" .. msg.chat_id_, result.id_)
+                                    database:set(bot_id .. "LARViN:Comd:New:rt:User:" .. msg.chat_id_ .. result.id_,
                                         text1[2])
-                                elseif spiderrt == "مدير" and Constructor(msg) then
+                                elseif LARViNrt == "مدير" and Constructor(msg) then
                                     send(msg.chat_id_, msg.id_,
                                         "\n܂𓍼 ⁝ العضو » [" .. result.title_ .. "](t.me/" ..
                                             (text1[3] or "Vc33h") .. ")" .. "\n܂𓍼 ⁝ تم رفعه " .. text1[2] ..
                                             " هنا")
-                                    database:sadd(bot_id .. "spider:Manager" .. msg.chat_id_, result.id_)
-                                    database:set(bot_id .. "spider:Comd:New:rt:User:" .. msg.chat_id_ .. result.id_,
+                                    database:sadd(bot_id .. "LARViN:Manager" .. msg.chat_id_, result.id_)
+                                    database:set(bot_id .. "LARViN:Comd:New:rt:User:" .. msg.chat_id_ .. result.id_,
                                         text1[2])
-                                elseif spiderrt == "عضو" and Addictive(msg) then
+                                elseif LARViNrt == "عضو" and Addictive(msg) then
                                     send(msg.chat_id_, msg.id_,
                                         "\n܂𓍼 ⁝ العضو » [" .. result.title_ .. "](t.me/" ..
                                             (text1[3] or "Vc33h") .. ")" .. "\n܂𓍼 ⁝ تم رفعه " .. text1[2] ..
@@ -4189,33 +4189,33 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     local text1 = {string.match(text, "^(تنزيل) (.*) @(.*)$")}
-                    if database:sismember(bot_id .. "spider:Coomds" .. msg.chat_id_, text1[2]) then
+                    if database:sismember(bot_id .. "LARViN:Coomds" .. msg.chat_id_, text1[2]) then
                         function py_username(extra, result, success)
                             if result.id_ then
-                                local spiderrt = database:get(
-                                                     bot_id .. "spider:Comd:New:rt:bot:" .. text1[2] .. msg.chat_id_)
-                                if spiderrt == "مميز" and Addictive(msg) then
+                                local LARViNrt = database:get(
+                                                     bot_id .. "LARViN:Comd:New:rt:bot:" .. text1[2] .. msg.chat_id_)
+                                if LARViNrt == "مميز" and Addictive(msg) then
                                     send(msg.chat_id_, msg.id_,
                                         "\n܂𓍼 ⁝ العضو » [" .. result.title_ .. "](t.me/" ..
                                             (text1[3] or "Vc33h") .. ")" .. "\n܂𓍼 ⁝ تم تنريله من " ..
                                             text1[2] .. " هنا")
-                                    database:srem(bot_id .. "spider:Special:User" .. msg.chat_id_, result.id_)
-                                    database:del(bot_id .. "spider:Comd:New:rt:User:" .. msg.chat_id_ .. result.id_)
-                                elseif spiderrt == "ادمن" and Owner(msg) then
+                                    database:srem(bot_id .. "LARViN:Special:User" .. msg.chat_id_, result.id_)
+                                    database:del(bot_id .. "LARViN:Comd:New:rt:User:" .. msg.chat_id_ .. result.id_)
+                                elseif LARViNrt == "ادمن" and Owner(msg) then
                                     send(msg.chat_id_, msg.id_,
                                         "\n܂𓍼 ⁝ العضو » [" .. result.title_ .. "](t.me/" ..
                                             (text1[3] or "Vc33h") .. ")" .. "\n܂𓍼 ⁝ تم تنريله من " ..
                                             text1[2] .. " هنا")
-                                    database:srem(bot_id .. "spider:Mod:User" .. msg.chat_id_, result.id_)
-                                    database:del(bot_id .. "spider:Comd:New:rt:User:" .. msg.chat_id_ .. result.id_)
-                                elseif spiderrt == "مدير" and Constructor(msg) then
+                                    database:srem(bot_id .. "LARViN:Mod:User" .. msg.chat_id_, result.id_)
+                                    database:del(bot_id .. "LARViN:Comd:New:rt:User:" .. msg.chat_id_ .. result.id_)
+                                elseif LARViNrt == "مدير" and Constructor(msg) then
                                     send(msg.chat_id_, msg.id_,
                                         "\n܂𓍼 ⁝ العضو » [" .. result.title_ .. "](t.me/" ..
                                             (text1[3] or "Vc33h") .. ")" .. "\n܂𓍼 ⁝ تم تنريله من " ..
                                             text1[2] .. " هنا")
-                                    database:srem(bot_id .. "spider:Manager" .. msg.chat_id_, result.id_)
-                                    database:del(bot_id .. "spider:Comd:New:rt:User:" .. msg.chat_id_ .. result.id_)
-                                elseif spiderrt == "عضو" and Addictive(msg) then
+                                    database:srem(bot_id .. "LARViN:Manager" .. msg.chat_id_, result.id_)
+                                    database:del(bot_id .. "LARViN:Comd:New:rt:User:" .. msg.chat_id_ .. result.id_)
+                                elseif LARViNrt == "عضو" and Addictive(msg) then
                                     send(msg.chat_id_, msg.id_,
                                         "\n܂𓍼 ⁝ العضو » [" .. result.title_ .. "](t.me/" ..
                                             (text1[3] or "Vc33h") .. ")" .. "\n܂𓍼 ⁝ تم تنريله من " ..
@@ -4233,13 +4233,13 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     end
                 end
                 if text == 'المجموعات' and DevBot(msg) then
-                    local Groups = database:scard(bot_id .. 'spider:Chek:Groups')
+                    local Groups = database:scard(bot_id .. 'LARViN:Chek:Groups')
                     send(msg.chat_id_, msg.id_,
                         '*܂𓍼 ⁝ احصائيات البوت \n\n܂𓍼 ⁝ عدد المجموعات *~ ' .. Groups ..
                             '')
                 end
                 if text == 'المشتركين' and DevBot(msg) then
-                    local Users = database:scard(bot_id .. 'spider:UsersBot')
+                    local Users = database:scard(bot_id .. 'LARViN:UsersBot')
                     send(msg.chat_id_, msg.id_,
                         '܂𓍼 ⁝ احصائيات البوت \n\n܂𓍼 ⁝ عدد المشتركين ~ ' .. Users ..
                             '')
@@ -4261,7 +4261,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                             '܂𓍼 ⁝ لقد تم تعطيل الحظر و الطرد من قبل المنشئين')
                         return false
                     end
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if Rank_Checking(result.sender_user_id_, msg.chat_id_) == true then
                             send(msg.chat_id_, msg.id_,
                                 "\n܂𓍼 ⁝ عذرا لا تستطيع طرد او حظر او كتم او تقييد ( " ..
@@ -4285,7 +4285,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                                         "܂𓍼 ⁝ البوت ليس ادمن يرجى ترقيتي !")
                                     return false
                                 end
-                                database:sadd(bot_id .. "spider:Ban:User" .. msg.chat_id_, result.sender_user_id_)
+                                database:sadd(bot_id .. "LARViN:Ban:User" .. msg.chat_id_, result.sender_user_id_)
                                 Kick_Group(result.chat_id_, result.sender_user_id_)
                                 Reply_Status(msg, result.sender_user_id_, "reply",
                                     "܂𓍼 ⁝ تم حظره من المجموعه")
@@ -4296,7 +4296,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
 
@@ -4318,7 +4318,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                             '܂𓍼 ⁝ لقد تم تعطيل الحظر و الطرد من قبل المنشئين')
                         return false
                     end
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if result.id_ then
                             if Rank_Checking(result.id_, msg.chat_id_) == true then
                                 send(msg.chat_id_, msg.id_,
@@ -4349,7 +4349,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                                             "܂𓍼 ⁝ البوت ليس ادمن يرجى ترقيتي !")
                                         return false
                                     end
-                                    database:sadd(bot_id .. "spider:Ban:User" .. msg.chat_id_, result.id_)
+                                    database:sadd(bot_id .. "LARViN:Ban:User" .. msg.chat_id_, result.id_)
                                     Kick_Group(msg.chat_id_, result.id_)
                                     Reply_Status(msg, result.id_, "reply",
                                         "܂𓍼 ⁝ تم حظره من المجموعه")
@@ -4362,7 +4362,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     tdcli_function({
                         ID = "SearchPublicChat",
                         username_ = username
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
 
@@ -4407,7 +4407,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                                     "܂𓍼 ⁝ البوت ليس ادمن يرجى ترقيتي !")
                                 return false
                             end
-                            database:sadd(bot_id .. "spider:Ban:User" .. msg.chat_id_, userid)
+                            database:sadd(bot_id .. "LARViN:Ban:User" .. msg.chat_id_, userid)
                             Kick_Group(msg.chat_id_, userid)
                             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ العضو » ["..userid.."](https://t.me/Vc33h)\n܂𓍼 ⁝ تم حظره من المجموعه")
                         end, nil)
@@ -4426,12 +4426,12 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if tonumber(result.sender_user_id_) == tonumber(bot_id) then
                             send(msg.chat_id_, msg.id_, "܂𓍼 ️⁝ انا لست محظورا \n")
                             return false
                         end
-                        database:srem(bot_id .. "spider:Ban:User" .. msg.chat_id_, result.sender_user_id_)
+                        database:srem(bot_id .. "LARViN:Ban:User" .. msg.chat_id_, result.sender_user_id_)
                         tdcli_function({
                             ID = "ChangeChatMemberStatus",
                             chat_id_ = msg.chat_id_,
@@ -4448,7 +4448,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
 
@@ -4465,13 +4465,13 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     local username = text:match("^الغاء حظر @(.*)$")
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if result.id_ then
                             if tonumber(result.id_) == tonumber(bot_id) then
                                 send(msg.chat_id_, msg.id_, "܂𓍼 ️⁝ انا لست محظورا \n")
                                 return false
                             end
-                            database:srem(bot_id .. "spider:Ban:User" .. msg.chat_id_, result.id_)
+                            database:srem(bot_id .. "LARViN:Ban:User" .. msg.chat_id_, result.id_)
                             tdcli_function({
                                 ID = "ChangeChatMemberStatus",
                                 chat_id_ = msg.chat_id_,
@@ -4489,7 +4489,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     tdcli_function({
                         ID = "SearchPublicChat",
                         username_ = username
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
 
@@ -4510,7 +4510,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         send(msg.chat_id_, msg.id_, "܂𓍼 ️⁝ انا لست محظورا \n")
                         return false
                     end
-                    database:srem(bot_id .. "spider:Ban:User" .. msg.chat_id_, userid)
+                    database:srem(bot_id .. "LARViN:Ban:User" .. msg.chat_id_, userid)
                     tdcli_function({
                         ID = "ChangeChatMemberStatus",
                         chat_id_ = msg.chat_id_,
@@ -4536,7 +4536,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if Rank_Checking(result.sender_user_id_, msg.chat_id_) == true then
                             send(msg.chat_id_, msg.id_,
                                 "\n܂𓍼 ⁝ عذرا لا تستطيع طرد او حظر او كتم او تقييد ( " ..
@@ -4547,14 +4547,14 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ البوت ليس ادمن يرجى ترقيتي !")
                             return false
                         end
-                        database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, result.sender_user_id_)
+                        database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, result.sender_user_id_)
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ العضو » ["..result.sender_user_id_.."](https://t.me/Vc33h) \n܂𓍼 ⁝ تم كتمه من المجموعة")
                     end
                     tdcli_function({
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
                 if text and text:match("^كتم @(.*)$") and Addictive(msg) then
@@ -4574,7 +4574,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ البوت ليس ادمن يرجى ترقيتي !")
                         return false
                     end
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if result.id_ then
                             if Rank_Checking(result.id_, msg.chat_id_) == true then
                                 send(msg.chat_id_, msg.id_,
@@ -4587,7 +4587,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                                     "܂𓍼 ⁝ عذرا عزيزي المستخدم هاذا معرف قناة يرجى استخدام الامر بصوره صحيحه !")
                                 return false
                             end
-                            database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, result.id_)
+                            database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, result.id_)
                             send(msg.chat_id_, msg.id_,  "܂𓍼 ⁝ العضو » ["..result.id_.."](https://t.me/Vc33h) \n܂𓍼 ⁝ تم كتمه من المجموعة")
                         else
                             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ لا يوجد حساب بهاذا المعرف")
@@ -4596,7 +4596,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     tdcli_function({
                         ID = "SearchPublicChat",
                         username_ = username
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
                 if text and text:match("^كتم (%d+)$") and Addictive(msg) then
@@ -4621,7 +4621,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ البوت ليس ادمن يرجى ترقيتي !")
                             return false
                         end
-                        database:sadd(bot_id .. "spider:Muted:User" .. msg.chat_id_, userid)
+                        database:sadd(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, userid)
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ العضو » ["..userid.."](https://t.me/Vc33h)\n܂𓍼 ⁝ تم كتمه  من المجموعة")
                     end
                     return false
@@ -4638,22 +4638,22 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    function Function_spider(extra, result, success)
-                        database:srem(bot_id .. "spider:Muted:User" .. msg.chat_id_, result.sender_user_id_)
+                    function Function_LARViN(extra, result, success)
+                        database:srem(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, result.sender_user_id_)
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ العضو » ["..result.sender_user_id_.."](https://t.me/Vc33h)\n܂𓍼 ⁝ تم الغاء كتمه  من المجموعة")
                     end
                     tdcli_function({
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
                 if text and text:match("^الغاء كتم @(.*)$") and Addictive(msg) then
                     local username = text:match("^الغاء كتم @(.*)$")
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if result.id_ then
-                            database:srem(bot_id .. "spider:Muted:User" .. msg.chat_id_, result.id_)
+                            database:srem(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, result.id_)
                             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ العضو » [@"..username.."](https://t.me/Vc33h)\n܂𓍼 ⁝ تم الغاء كتمه من المجموعة")
                         else
                             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ لا يوجد حساب بهاذا المعرف")
@@ -4662,7 +4662,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     tdcli_function({
                         ID = "SearchPublicChat",
                         username_ = username
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
 
@@ -4679,7 +4679,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     local userid = text:match("^الغاء كتم (%d+)$")
-                    database:srem(bot_id .. "spider:Muted:User" .. msg.chat_id_, userid)
+                    database:srem(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, userid)
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ العضو » ["..userid.."](https://t.me/Vc33h) \n܂𓍼 ⁝ تم الغاء كتمه  من المجموعة")
                     return false
                 end
@@ -4696,7 +4696,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if Rank_Checking(result.sender_user_id_, msg.chat_id_) then
                             send(msg.chat_id_, msg.id_,
                                 "\n܂𓍼 ⁝ عذرا لا تستطيع طرد او حظر او كتم او تقييد ( " ..
@@ -4711,7 +4711,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
                 ------------------------------------------------------------------------
@@ -4728,7 +4728,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     local username = text:match("^تقيد @(.*)$")
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if result.id_ then
                             if (result and result.type_ and result.type_.ID == "ChannelChatInfo") then
                                 send(msg.chat_id_, msg.id_,
@@ -4751,7 +4751,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     tdcli_function({
                         ID = "SearchPublicChat",
                         username_ = username
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
                 ------------------------------------------------------------------------
@@ -4792,7 +4792,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         https.request("https://api.telegram.org/bot" .. token .. "/restrictChatMember?chat_id=" ..
                                           msg.chat_id_ .. "&user_id=" .. result.sender_user_id_ ..
                                           "&can_send_messages=True&can_send_media_messages=True&can_send_other_messages=True&can_add_web_page_previews=True")
@@ -4802,7 +4802,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
                 ------------------------------------------------------------------------
@@ -4819,7 +4819,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     local username = text:match("^الغاء تقيد @(.*)$")
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if result.id_ then
                             https.request("https://api.telegram.org/bot" .. token .. "/restrictChatMember?chat_id=" ..
                                               msg.chat_id_ .. "&user_id=" .. result.id_ ..
@@ -4832,7 +4832,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     tdcli_function({
                         ID = "SearchPublicChat",
                         username_ = username
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
                 ------------------------------------------------------------------------
@@ -4872,7 +4872,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                             '܂𓍼 ⁝ لقد تم تعطيل الحظر و الطرد من قبل المنشئين')
                         return false
                     end
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if Rank_Checking(result.sender_user_id_, msg.chat_id_) == true then
                             send(msg.chat_id_, msg.id_,
                                 "\n܂𓍼 ⁝ عذرا لا تستطيع طرد او حظر او كتم او تقييد ( " ..
@@ -4906,7 +4906,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
                 if text and text:match("^طرد @(.*)$") and Addictive(msg) then
@@ -4927,7 +4927,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                             '܂𓍼 ⁝ لقد تم تعطيل الحظر و الطرد من قبل المنشئين')
                         return false
                     end
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if result.id_ then
                             if Rank_Checking(result.id_, msg.chat_id_) == true then
                                 send(msg.chat_id_, msg.id_,
@@ -4969,7 +4969,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     tdcli_function({
                         ID = "SearchPublicChat",
                         username_ = username
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
 
@@ -5105,7 +5105,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    if database:sismember(bot_id .. "spider:Lock:pin", msg.chat_id_) and not Constructor(msg) then
+                    if database:sismember(bot_id .. "LARViN:Lock:pin", msg.chat_id_) and not Constructor(msg) then
                         send(msg.chat_id_, msg.id_,
                             "܂𓍼 ⁝ التثبيت والغاء التثبيت تم قفله من قبل المنشئين")
                         return false
@@ -5118,7 +5118,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     }, function(arg, data)
                         if data.ID == "Ok" then
                             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم تثبيت الرساله")
-                            database:set(bot_id .. "spider:Pin:Id:Msg" .. msg.chat_id_, msg.reply_to_message_id_)
+                            database:set(bot_id .. "LARViN:Pin:Id:Msg" .. msg.chat_id_, msg.reply_to_message_id_)
                         elseif data.code_ == 6 then
                             send(msg.chat_id_, msg.id_,
                                 "܂𓍼 ⁝ انا لست اد من المجموعة يرجى ترقيتي ادمن ثم اعد المحاوله")
@@ -5140,7 +5140,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    if database:sismember(bot_id .. "spider:Lock:pin", msg.chat_id_) and not Constructor(msg) then
+                    if database:sismember(bot_id .. "LARViN:Lock:pin", msg.chat_id_) and not Constructor(msg) then
                         send(msg.chat_id_, msg.id_,
                             "܂𓍼 ⁝ التثبيت والغاء التثبيت تم قفله من قبل المنشئين")
                         return false
@@ -5151,7 +5151,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     }, function(arg, data)
                         if data.ID == "Ok" then
                             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم الغاء تثبيت الرساله")
-                            database:del(bot_id .. "spider:Pin:Id:Msg" .. msg.chat_id_)
+                            database:del(bot_id .. "LARViN:Pin:Id:Msg" .. msg.chat_id_)
                         elseif data.code_ == 6 then
                             send(msg.chat_id_, msg.id_,
                                 "܂𓍼 ⁝ انا لست اد من المجموعة يرجى ترقيتي ادمن ثم اعد المحاوله")
@@ -5164,12 +5164,12 @@ function spider_Started_Bot(msg, data) -- بداية العمل
 
                 if text and text:match("^وضع تكرار (%d+)$") and Addictive(msg) then
                     local Num = text:match("وضع تكرار (.*)")
-                    database:hset(bot_id .. "spider:flooding:settings:" .. msg.chat_id_, "floodmax", Num)
+                    database:hset(bot_id .. "LARViN:flooding:settings:" .. msg.chat_id_, "floodmax", Num)
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم وضع عدد التكرار (" .. Num .. ")")
                 end
                 if text and text:match("^وضع زمن التكرار (%d+)$") and Addictive(msg) then
                     local Num = text:match("^وضع زمن التكرار (%d+)$")
-                    database:hset(bot_id .. "spider:flooding:settings:" .. msg.chat_id_, "floodtime", Num)
+                    database:hset(bot_id .. "LARViN:flooding:settings:" .. msg.chat_id_, "floodtime", Num)
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم وضع زمن التكرار (" .. Num .. ")")
                 end
                 if text == "ضع رابط" or text == "وضع رابط" then
@@ -5187,7 +5187,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     if msg.reply_to_message_id_ == 0 and Addictive(msg) then
                         send(msg.chat_id_, msg.id_,
                             "܂𓍼 ⁝ ارسل رابط المجموعه او رابط قناة المجموعه")
-                        database:setex(bot_id .. "spider:Set:Priovate:Group:Link" .. msg.chat_id_ .. "" ..
+                        database:setex(bot_id .. "LARViN:Set:Priovate:Group:Link" .. msg.chat_id_ .. "" ..
                                            msg.sender_user_id_, 120, true)
                         return false
                     end
@@ -5205,7 +5205,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     if Addictive(msg) then
-                        database:set(bot_id .. "spider:Link_Group" .. msg.chat_id_, true)
+                        database:set(bot_id .. "LARViN:Link_Group" .. msg.chat_id_, true)
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم تفعيل جلب الرابط المجموعه")
                         return false
                     end
@@ -5223,7 +5223,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     if Addictive(msg) then
-                        database:del(bot_id .. "spider:Link_Group" .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Link_Group" .. msg.chat_id_)
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم تعطيل جلب رابط المجموعه")
                         return false
                     end
@@ -5241,12 +5241,12 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    local status_Link = database:get(bot_id .. "spider:Link_Group" .. msg.chat_id_)
+                    local status_Link = database:get(bot_id .. "LARViN:Link_Group" .. msg.chat_id_)
                     if not status_Link then
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ جلب الرابط معطل")
                         return false
                     end
-                    local link = database:get(bot_id .. "spider:Private:Group:Link" .. msg.chat_id_)
+                    local link = database:get(bot_id .. "LARViN:Private:Group:Link" .. msg.chat_id_)
                     if link then
                         send(msg.chat_id_, msg.id_, '܂𓍼 ⁝ رابط المجموعة ~\n [' .. link .. ']')
                     else
@@ -5275,7 +5275,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     end
                     if Addictive(msg) then
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم مسح الرابط ")
-                        database:del(bot_id .. "spider:Private:Group:Link" .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Private:Group:Link" .. msg.chat_id_)
                         return false
                     end
                     return false
@@ -5293,7 +5293,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:set(bot_id .. "spider:Change:Chat:Photo" .. msg.chat_id_ .. ":" .. msg.sender_user_id_,
+                    database:set(bot_id .. "LARViN:Change:Chat:Photo" .. msg.chat_id_ .. ":" .. msg.sender_user_id_,
                         true)
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ ارسل لي الصوره")
                     return false
@@ -5330,7 +5330,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     if Addictive(msg) then
-                        database:setex(bot_id .. "spider:Set:Description" .. msg.chat_id_ .. "" .. msg.sender_user_id_,
+                        database:setex(bot_id .. "LARViN:Set:Description" .. msg.chat_id_ .. "" .. msg.sender_user_id_,
                             120, true)
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ ارسل الان الوصف")
                     end
@@ -5349,7 +5349,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     if Addictive(msg) then
-                        database:setex(bot_id .. "spider:Welcome:Group" .. msg.chat_id_ .. "" .. msg.sender_user_id_,
+                        database:setex(bot_id .. "LARViN:Welcome:Group" .. msg.chat_id_ .. "" .. msg.sender_user_id_,
                             120, true)
                         t = "܂𓍼 ⁝ ارسل لي الترحيب الان"
                         tt =
@@ -5370,8 +5370,8 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    if database:get(bot_id .. "spider:Get:Welcome:Group" .. msg.chat_id_) then
-                        Welcome = database:get(bot_id .. "spider:Get:Welcome:Group" .. msg.chat_id_)
+                    if database:get(bot_id .. "LARViN:Get:Welcome:Group" .. msg.chat_id_) then
+                        Welcome = database:get(bot_id .. "LARViN:Get:Welcome:Group" .. msg.chat_id_)
                     else
                         Welcome = "܂𓍼 ⁝ لم يتم تعيين ترحيب للمجموعه"
                     end
@@ -5390,7 +5390,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:set(bot_id .. "spider:Chek:Welcome" .. msg.chat_id_, true)
+                    database:set(bot_id .. "LARViN:Chek:Welcome" .. msg.chat_id_, true)
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم تفعيل ترحيب المجموعه")
                     return false
                 end
@@ -5406,7 +5406,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Chek:Welcome" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Chek:Welcome" .. msg.chat_id_)
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم تعطيل ترحيب المجموعه")
                     return false
                 end
@@ -5423,7 +5423,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     if Addictive(msg) then
-                        database:del(bot_id .. "spider:Get:Welcome:Group" .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Get:Welcome:Group" .. msg.chat_id_)
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم ازالة ترحيب المجموعه")
                     end
                     return false
@@ -5441,11 +5441,11 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    local list = database:smembers(bot_id .. "spider:List:Filter" .. msg.chat_id_)
+                    local list = database:smembers(bot_id .. "LARViN:List:Filter" .. msg.chat_id_)
                     for k, v in pairs(list) do
-                        database:del(bot_id .. "spider:Add:Filter:Rp1" .. msg.sender_user_id_ .. msg.chat_id_)
-                        database:del(bot_id .. "spider:Add:Filter:Rp2" .. v .. msg.chat_id_)
-                        database:srem(bot_id .. "spider:List:Filter" .. msg.chat_id_, v)
+                        database:del(bot_id .. "LARViN:Add:Filter:Rp1" .. msg.sender_user_id_ .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Add:Filter:Rp2" .. v .. msg.chat_id_)
+                        database:srem(bot_id .. "LARViN:List:Filter" .. msg.chat_id_, v)
                     end
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم مسح قائمه المنع")
                 end
@@ -5462,11 +5462,11 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    local list = database:smembers(bot_id .. "spider:List:Filter" .. msg.chat_id_)
+                    local list = database:smembers(bot_id .. "LARViN:List:Filter" .. msg.chat_id_)
                     t = "\n܂𓍼 ⁝ قائمة المنع \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ \n"
                     for k, v in pairs(list) do
-                        local spider_Msg = database:get(bot_id .. "spider:Add:Filter:Rp2" .. v .. msg.chat_id_)
-                        t = t .. "" .. k .. "- " .. v .. " » {" .. spider_Msg .. "}\n"
+                        local LARViN_Msg = database:get(bot_id .. "LARViN:Add:Filter:Rp2" .. v .. msg.chat_id_)
+                        t = t .. "" .. k .. "- " .. v .. " » {" .. LARViN_Msg .. "}\n"
                     end
                     if #list == 0 then
                         t = "܂𓍼 ⁝ لا يوجد كلمات ممنوعه"
@@ -5475,31 +5475,31 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                 end
                 if text and text == "منع" and msg.reply_to_message_id_ == 0 and Addictive(msg) then
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ ارسل الكلمه لمنعها")
-                    database:set(bot_id .. "spider:Add:Filter:Rp1" .. msg.sender_user_id_ .. msg.chat_id_, "rep")
+                    database:set(bot_id .. "LARViN:Add:Filter:Rp1" .. msg.sender_user_id_ .. msg.chat_id_, "rep")
                     return false
                 end
                 if text then
                     local tsssst =
-                        database:get(bot_id .. "spider:Add:Filter:Rp1" .. msg.sender_user_id_ .. msg.chat_id_)
+                        database:get(bot_id .. "LARViN:Add:Filter:Rp1" .. msg.sender_user_id_ .. msg.chat_id_)
                     if tsssst == "rep" then
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ ارسل التحذير عند ارسال الكلمه")
-                        database:set(bot_id .. "spider:Add:Filter:Rp1" .. msg.sender_user_id_ .. msg.chat_id_, "repp")
-                        database:set(bot_id .. "spider:filtr1:add:reply2" .. msg.sender_user_id_ .. msg.chat_id_, text)
-                        database:sadd(bot_id .. "spider:List:Filter" .. msg.chat_id_, text)
+                        database:set(bot_id .. "LARViN:Add:Filter:Rp1" .. msg.sender_user_id_ .. msg.chat_id_, "repp")
+                        database:set(bot_id .. "LARViN:filtr1:add:reply2" .. msg.sender_user_id_ .. msg.chat_id_, text)
+                        database:sadd(bot_id .. "LARViN:List:Filter" .. msg.chat_id_, text)
                         return false
                     end
                 end
                 if text then
-                    local test = database:get(bot_id .. "spider:Add:Filter:Rp1" .. msg.sender_user_id_ .. msg.chat_id_)
+                    local test = database:get(bot_id .. "LARViN:Add:Filter:Rp1" .. msg.sender_user_id_ .. msg.chat_id_)
                     if test == "repp" then
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم منع الكلمه مع التحذير")
-                        database:del(bot_id .. "spider:Add:Filter:Rp1" .. msg.sender_user_id_ .. msg.chat_id_)
-                        local test = database:get(bot_id .. "spider:filtr1:add:reply2" .. msg.sender_user_id_ ..
+                        database:del(bot_id .. "LARViN:Add:Filter:Rp1" .. msg.sender_user_id_ .. msg.chat_id_)
+                        local test = database:get(bot_id .. "LARViN:filtr1:add:reply2" .. msg.sender_user_id_ ..
                                                       msg.chat_id_)
                         if text then
-                            database:set(bot_id .. "spider:Add:Filter:Rp2" .. test .. msg.chat_id_, text)
+                            database:set(bot_id .. "LARViN:Add:Filter:Rp2" .. test .. msg.chat_id_, text)
                         end
-                        database:del(bot_id .. "spider:filtr1:add:reply2" .. msg.sender_user_id_ .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:filtr1:add:reply2" .. msg.sender_user_id_ .. msg.chat_id_)
                         return false
                     end
                 end
@@ -5517,16 +5517,16 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ ارسل الكلمه الان")
-                    database:set(bot_id .. "spider:Add:Filter:Rp1" .. msg.sender_user_id_ .. msg.chat_id_, "reppp")
+                    database:set(bot_id .. "LARViN:Add:Filter:Rp1" .. msg.sender_user_id_ .. msg.chat_id_, "reppp")
                     return false
                 end
                 if text then
-                    local test = database:get(bot_id .. "spider:Add:Filter:Rp1" .. msg.sender_user_id_ .. msg.chat_id_)
+                    local test = database:get(bot_id .. "LARViN:Add:Filter:Rp1" .. msg.sender_user_id_ .. msg.chat_id_)
                     if test and test == "reppp" then
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم الغاء منعها ")
-                        database:del(bot_id .. "spider:Add:Filter:Rp1" .. msg.sender_user_id_ .. msg.chat_id_)
-                        database:del(bot_id .. "spider:Add:Filter:Rp2" .. text .. msg.chat_id_)
-                        database:srem(bot_id .. "spider:List:Filter" .. msg.chat_id_, text)
+                        database:del(bot_id .. "LARViN:Add:Filter:Rp1" .. msg.sender_user_id_ .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Add:Filter:Rp2" .. text .. msg.chat_id_)
+                        database:srem(bot_id .. "LARViN:List:Filter" .. msg.chat_id_, text)
                         return false
                     end
                 end
@@ -5631,15 +5631,15 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     end, nil)
                 end
 
-                if database:get(bot_id .. "spider:Set:Rules:" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then
+                if database:get(bot_id .. "LARViN:Set:Rules:" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then
                     if text == "الغاء" then
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم الغاء حفظ القوانين")
-                        database:del(bot_id .. "spider:Set:Rules:" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
+                        database:del(bot_id .. "LARViN:Set:Rules:" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
                         return false
                     end
-                    database:set(bot_id .. "spider:Set:Rules:Group" .. msg.chat_id_, text)
+                    database:set(bot_id .. "LARViN:Set:Rules:Group" .. msg.chat_id_, text)
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم حفظ قوانين المجموعه")
-                    database:del(bot_id .. "spider:Set:Rules:" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
+                    database:del(bot_id .. "LARViN:Set:Rules:" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
                 end
 
                 if text == "ضع قوانين" or text == "وضع قوانين" then
@@ -5655,7 +5655,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     if Addictive(msg) then
-                        database:setex(bot_id .. "spider:Set:Rules:" .. msg.chat_id_ .. ":" .. msg.sender_user_id_, 600,
+                        database:setex(bot_id .. "LARViN:Set:Rules:" .. msg.chat_id_ .. ":" .. msg.sender_user_id_, 600,
                             true)
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ ارسل لي القوانين الان")
                     end
@@ -5674,7 +5674,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     end
                     if Addictive(msg) then
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم ازالة قوانين المجموعه")
-                        database:del(bot_id .. "spider:Set:Rules:Group" .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Set:Rules:Group" .. msg.chat_id_)
                     end
                 end
                 if text == "القوانين" then
@@ -5689,7 +5689,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    local Set_Rules = database:get(bot_id .. "spider:Set:Rules:Group" .. msg.chat_id_)
+                    local Set_Rules = database:get(bot_id .. "LARViN:Set:Rules:Group" .. msg.chat_id_)
                     if Set_Rules then
                         send(msg.chat_id_, msg.id_, Set_Rules)
                     else
@@ -5709,10 +5709,10 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    local list = database:smembers(bot_id .. "spider:List:Cmd:Group:New" .. msg.chat_id_ .. "")
+                    local list = database:smembers(bot_id .. "LARViN:List:Cmd:Group:New" .. msg.chat_id_ .. "")
                     t = "܂𓍼 ⁝ قائمه الاوامر المضافه  \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ \n"
                     for k, v in pairs(list) do
-                        Cmds = database:get(bot_id .. "spider:Set:Cmd:Group:New1" .. msg.chat_id_ .. ":" .. v)
+                        Cmds = database:get(bot_id .. "LARViN:Set:Cmd:Group:New1" .. msg.chat_id_ .. ":" .. v)
                         if Cmds then
                             t = t .. "" .. k .. "- (" .. v .. ") ~ {" .. Cmds .. "}\n"
                         else
@@ -5737,10 +5737,10 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     if Constructor(msg) then
-                        local list = database:smembers(bot_id .. "spider:List:Cmd:Group:New" .. msg.chat_id_)
+                        local list = database:smembers(bot_id .. "LARViN:List:Cmd:Group:New" .. msg.chat_id_)
                         for k, v in pairs(list) do
-                            database:del(bot_id .. "spider:Set:Cmd:Group:New1" .. msg.chat_id_ .. ":" .. v)
-                            database:del(bot_id .. "spider:List:Cmd:Group:New" .. msg.chat_id_)
+                            database:del(bot_id .. "LARViN:Set:Cmd:Group:New1" .. msg.chat_id_ .. ":" .. v)
+                            database:del(bot_id .. "LARViN:List:Cmd:Group:New" .. msg.chat_id_)
                         end
                         send(msg.chat_id_, msg.id_,
                             "܂𓍼 ⁝ تم مسح جميع الاوامر التي تم اضافتها")
@@ -5758,7 +5758,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    database:set(bot_id .. "spider:Set:Cmd:Group" .. msg.chat_id_ .. ":" .. msg.sender_user_id_, "true")
+                    database:set(bot_id .. "LARViN:Set:Cmd:Group" .. msg.chat_id_ .. ":" .. msg.sender_user_id_, "true")
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ الان ارسل لي الامر القديم ..")
                     return false
                 end
@@ -5775,7 +5775,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     if Constructor(msg) then
-                        database:set(bot_id .. "spider:Del:Cmd:Group" .. msg.chat_id_ .. ":" .. msg.sender_user_id_,
+                        database:set(bot_id .. "LARViN:Del:Cmd:Group" .. msg.chat_id_ .. ":" .. msg.sender_user_id_,
                             "true")
                         send(msg.chat_id_, msg.id_,
                             "܂𓍼 ⁝ ارسل الامر الذي قم بوضعه بدلا عن القديم")
@@ -5795,7 +5795,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         end
                         return false
                     end
-                    local list = database:smembers(bot_id .. "spider:Coomds" .. msg.chat_id_)
+                    local list = database:smembers(bot_id .. "LARViN:Coomds" .. msg.chat_id_)
                     if #list == 0 then
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ لا توجد صلاحيات مضافه")
                         return false
@@ -5803,7 +5803,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     t =
                         "\n܂𓍼 ⁝ قائمة الصلاحيات المضافه \n━━━━━━━━━━━━━\n"
                     for k, v in pairs(list) do
-                        var = database:get(bot_id .. "spider:Comd:New:rt:bot:" .. v .. msg.chat_id_)
+                        var = database:get(bot_id .. "LARViN:Comd:New:rt:bot:" .. v .. msg.chat_id_)
                         if var then
                             t = t .. "" .. k .. "- " .. v .. " ~ (" .. var .. ")\n"
                         else
@@ -5813,10 +5813,10 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     send(msg.chat_id_, msg.id_, t)
                 end
                 if text == "مسح الصلاحيات" then
-                    local list = database:smembers(bot_id .. "spider:Coomds" .. msg.chat_id_)
+                    local list = database:smembers(bot_id .. "LARViN:Coomds" .. msg.chat_id_)
                     for k, v in pairs(list) do
-                        database:del(bot_id .. "spider:Comd:New:rt:bot:" .. v .. msg.chat_id_)
-                        database:del(bot_id .. "spider:Coomds" .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Comd:New:rt:bot:" .. v .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Coomds" .. msg.chat_id_)
                     end
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم مسح الصلاحيات")
                 end
@@ -5833,9 +5833,9 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     ComdNew = text:match("^اضف صلاحيه (.*)$")
-                    database:set(bot_id .. "spider:Comd:New:rt" .. msg.chat_id_ .. msg.sender_user_id_, ComdNew)
-                    database:sadd(bot_id .. "spider:Coomds" .. msg.chat_id_, ComdNew)
-                    database:setex(bot_id .. "spider:Comd:New" .. msg.chat_id_ .. "" .. msg.sender_user_id_, 200, true)
+                    database:set(bot_id .. "LARViN:Comd:New:rt" .. msg.chat_id_ .. msg.sender_user_id_, ComdNew)
+                    database:sadd(bot_id .. "LARViN:Coomds" .. msg.chat_id_, ComdNew)
+                    database:setex(bot_id .. "LARViN:Comd:New" .. msg.chat_id_ .. "" .. msg.sender_user_id_, 200, true)
                     send(msg.chat_id_, msg.id_,
                         "܂𓍼 ⁝ ارسل نوع الصلاحيه ܂𓍼 \n܂𓍼 ⁝ (عضو ~ مميز  ~ ادمن  ~ مدير )")
                 end
@@ -5853,13 +5853,13 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     ComdNew = text:match("^مسح صلاحيه (.*)$") or text:match("^حذف صلاحيه (.*)$")
-                    database:del(bot_id .. "spider:Comd:New:rt:bot:" .. ComdNew .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Comd:New:rt:bot:" .. ComdNew .. msg.chat_id_)
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم مسح الصلاحيه ")
                 end
-                if database:get(bot_id .. "spider:Comd:New" .. msg.chat_id_ .. "" .. msg.sender_user_id_) then
+                if database:get(bot_id .. "LARViN:Comd:New" .. msg.chat_id_ .. "" .. msg.sender_user_id_) then
                     if text and text:match("^الغاء$") then
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم الغاء الامر ")
-                        database:del(bot_id .. "spider:Comd:New" .. msg.chat_id_ .. "" .. msg.sender_user_id_)
+                        database:del(bot_id .. "LARViN:Comd:New" .. msg.chat_id_ .. "" .. msg.sender_user_id_)
                         return false
                     end
                     if text == "مدير" then
@@ -5885,85 +5885,85 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                     end
                     if text == "مدير" or text == "ادمن" or text == "مميز" or text == "عضو" then
                         local textn =
-                            database:get(bot_id .. "spider:Comd:New:rt" .. msg.chat_id_ .. msg.sender_user_id_)
-                        database:set(bot_id .. "spider:Comd:New:rt:bot:" .. textn .. msg.chat_id_, text)
+                            database:get(bot_id .. "LARViN:Comd:New:rt" .. msg.chat_id_ .. msg.sender_user_id_)
+                        database:set(bot_id .. "LARViN:Comd:New:rt:bot:" .. textn .. msg.chat_id_, text)
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم اضافة صلاحية ")
-                        database:del(bot_id .. "spider:Comd:New" .. msg.chat_id_ .. "" .. msg.sender_user_id_)
+                        database:del(bot_id .. "LARViN:Comd:New" .. msg.chat_id_ .. "" .. msg.sender_user_id_)
                         return false
                     end
                 end
 
                 if text and text:match("^تغير رد المطور (.*)$") and Owner(msg) then
                     local Teext = text:match("^تغير رد المطور (.*)$")
-                    database:set(bot_id .. "spider:Sudo:Rd" .. msg.chat_id_, Teext)
+                    database:set(bot_id .. "LARViN:Sudo:Rd" .. msg.chat_id_, Teext)
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝  تم تغير رد المطور الى » " .. Teext)
                 end
                 if text and text:match("^تغير رد المنشئ الاساسي (.*)$") and Owner(msg) then
                     local Teext = text:match("^تغير رد المنشئ الاساسي (.*)$")
-                    database:set(bot_id .. "spider:BasicConstructor:Rd" .. msg.chat_id_, Teext)
+                    database:set(bot_id .. "LARViN:BasicConstructor:Rd" .. msg.chat_id_, Teext)
                     send(msg.chat_id_, msg.id_,
                         "܂𓍼 ⁝  تم تغير رد المنشئ الاساسي الى » " .. Teext)
                 end
                 if text and text:match("^تغير رد المنشئ (.*)$") and Owner(msg) then
                     local Teext = text:match("^تغير رد المنشئ (.*)$")
-                    database:set(bot_id .. "spider:Constructor:Rd" .. msg.chat_id_, Teext)
+                    database:set(bot_id .. "LARViN:Constructor:Rd" .. msg.chat_id_, Teext)
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝  تم تغير رد المنشئ الى » " .. Teext)
                 end
                 if text and text:match("^تغير رد المدير (.*)$") and Owner(msg) then
                     local Teext = text:match("^تغير رد المدير (.*)$")
-                    database:set(bot_id .. "spider:Manager:Rd" .. msg.chat_id_, Teext)
+                    database:set(bot_id .. "LARViN:Manager:Rd" .. msg.chat_id_, Teext)
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝  تم تغير رد المدير الى » " .. Teext)
                 end
                 if text and text:match("^تغير رد الادمن (.*)$") and Owner(msg) then
                     local Teext = text:match("^تغير رد الادمن (.*)$")
-                    database:set(bot_id .. "spider:Mod:Rd" .. msg.chat_id_, Teext)
+                    database:set(bot_id .. "LARViN:Mod:Rd" .. msg.chat_id_, Teext)
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝  تم تغير رد الادمن الى » " .. Teext)
                 end
                 if text and text:match("^تغير رد المميز (.*)$") and Owner(msg) then
                     local Teext = text:match("^تغير رد المميز (.*)$")
-                    database:set(bot_id .. "spider:Special:Rd" .. msg.chat_id_, Teext)
+                    database:set(bot_id .. "LARViN:Special:Rd" .. msg.chat_id_, Teext)
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝  تم تغير رد المميز الى » " .. Teext)
                 end
                 if text and text:match("^تغير رد العضو (.*)$") and Owner(msg) then
                     local Teext = text:match("^تغير رد العضو (.*)$")
-                    database:set(bot_id .. "spider:Memp:Rd" .. msg.chat_id_, Teext)
+                    database:set(bot_id .. "LARViN:Memp:Rd" .. msg.chat_id_, Teext)
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝  تم تغير رد العضو الى » " .. Teext)
                 end
 
                 if text == ("مسح ردود المدير") and BasicConstructor(msg) then
-                    local list = database:smembers(bot_id .. "spider:List:Manager" .. msg.chat_id_ .. "")
+                    local list = database:smembers(bot_id .. "LARViN:List:Manager" .. msg.chat_id_ .. "")
                     for k, v in pairs(list) do
-                        database:del(bot_id .. "spider:Add:Rd:Manager:Gif" .. v .. msg.chat_id_)
-                        database:del(bot_id .. "spider:Add:Rd:Manager:Vico" .. v .. msg.chat_id_)
-                        database:del(bot_id .. "spider:Add:Rd:Manager:Stekrs" .. v .. msg.chat_id_)
-                        database:del(bot_id .. "spider:Add:Rd:Manager:Text" .. v .. msg.chat_id_)
-                        database:del(bot_id .. "spider:Add:Rd:Manager:Photo" .. v .. msg.chat_id_)
-                        database:del(bot_id .. "spider:Add:Rd:Manager:Video" .. v .. msg.chat_id_)
-                        database:del(bot_id .. "spider:Add:Rd:Manager:File" .. v .. msg.chat_id_)
-                        database:del(bot_id .. "spider:Add:Rd:Manager:Audio" .. v .. msg.chat_id_)
-                        database:del(bot_id .. "spider:List:Manager" .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Add:Rd:Manager:Gif" .. v .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Add:Rd:Manager:Vico" .. v .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Add:Rd:Manager:Stekrs" .. v .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Add:Rd:Manager:Text" .. v .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Add:Rd:Manager:Photo" .. v .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Add:Rd:Manager:Video" .. v .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Add:Rd:Manager:File" .. v .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Add:Rd:Manager:Audio" .. v .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:List:Manager" .. msg.chat_id_)
                     end
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم مسح ردود المدير")
                 end
                 if text == ("ردود المدير") and Owner(msg) then
-                    local list = database:smembers(bot_id .. "spider:List:Manager" .. msg.chat_id_ .. "")
+                    local list = database:smembers(bot_id .. "LARViN:List:Manager" .. msg.chat_id_ .. "")
                     text = "📑⁝ قائمه ردود المدير \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n"
                     for k, v in pairs(list) do
-                        if database:get(bot_id .. "spider:Add:Rd:Manager:Gif" .. v .. msg.chat_id_) then
+                        if database:get(bot_id .. "LARViN:Add:Rd:Manager:Gif" .. v .. msg.chat_id_) then
                             db = "متحركه 🎭"
-                        elseif database:get(bot_id .. "spider:Add:Rd:Manager:Vico" .. v .. msg.chat_id_) then
+                        elseif database:get(bot_id .. "LARViN:Add:Rd:Manager:Vico" .. v .. msg.chat_id_) then
                             db = "بصمه 📢"
-                        elseif database:get(bot_id .. "spider:Add:Rd:Manager:Stekrs" .. v .. msg.chat_id_) then
+                        elseif database:get(bot_id .. "LARViN:Add:Rd:Manager:Stekrs" .. v .. msg.chat_id_) then
                             db = "ملصق 𓍼"
-                        elseif database:get(bot_id .. "spider:Add:Rd:Manager:Text" .. v .. msg.chat_id_) then
+                        elseif database:get(bot_id .. "LARViN:Add:Rd:Manager:Text" .. v .. msg.chat_id_) then
                             db = "رساله ✉"
-                        elseif database:get(bot_id .. "spider:Add:Rd:Manager:Photo" .. v .. msg.chat_id_) then
+                        elseif database:get(bot_id .. "LARViN:Add:Rd:Manager:Photo" .. v .. msg.chat_id_) then
                             db = "صوره ܂𓍼 "
-                        elseif database:get(bot_id .. "spider:Add:Rd:Manager:Video" .. v .. msg.chat_id_) then
+                        elseif database:get(bot_id .. "LARViN:Add:Rd:Manager:Video" .. v .. msg.chat_id_) then
                             db = "فيديو 📹"
-                        elseif database:get(bot_id .. "spider:Add:Rd:Manager:File" .. v .. msg.chat_id_) then
+                        elseif database:get(bot_id .. "LARViN:Add:Rd:Manager:File" .. v .. msg.chat_id_) then
                             db = "ملف 𓍼"
-                        elseif database:get(bot_id .. "spider:Add:Rd:Manager:Audio" .. v .. msg.chat_id_) then
+                        elseif database:get(bot_id .. "LARViN:Add:Rd:Manager:Audio" .. v .. msg.chat_id_) then
                             db = "اغنيه 🎵"
                         end
                         text = text .. "" .. k .. ">> (" .. v .. ") » {" .. db .. "}\n"
@@ -5975,21 +5975,21 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                 end
                 if text or msg.content_.sticker_ or msg.content_.voice_ or msg.content_.animation_ or
                     msg.content_.audio_ or msg.content_.document_ or msg.content_.photo_ or msg.content_.video_ then
-                    local test = database:get(bot_id .. "spider:Text:Manager" .. msg.sender_user_id_ .. ":" ..
+                    local test = database:get(bot_id .. "LARViN:Text:Manager" .. msg.sender_user_id_ .. ":" ..
                                                   msg.chat_id_ .. "")
-                    if database:get(bot_id .. "spider:Set:Manager:rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_) ==
+                    if database:get(bot_id .. "LARViN:Set:Manager:rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_) ==
                         "true1" then
-                        database:del(bot_id .. "spider:Set:Manager:rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Set:Manager:rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_)
                         if msg.content_.sticker_ then
-                            database:set(bot_id .. "spider:Add:Rd:Manager:Stekrs" .. test .. msg.chat_id_,
+                            database:set(bot_id .. "LARViN:Add:Rd:Manager:Stekrs" .. test .. msg.chat_id_,
                                 msg.content_.sticker_.sticker_.persistent_id_)
                         end
                         if msg.content_.voice_ then
-                            database:set(bot_id .. "spider:Add:Rd:Manager:Vico" .. test .. msg.chat_id_,
+                            database:set(bot_id .. "LARViN:Add:Rd:Manager:Vico" .. test .. msg.chat_id_,
                                 msg.content_.voice_.voice_.persistent_id_)
                         end
                         if msg.content_.animation_ then
-                            database:set(bot_id .. "spider:Add:Rd:Manager:Gif" .. test .. msg.chat_id_,
+                            database:set(bot_id .. "LARViN:Add:Rd:Manager:Gif" .. test .. msg.chat_id_,
                                 msg.content_.animation_.animation_.persistent_id_)
                         end
                         if text then
@@ -5997,18 +5997,18 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                             text = text:gsub('"', "")
                             text = text:gsub("`", "")
                             text = text:gsub("*", "")
-                            database:set(bot_id .. "spider:Add:Rd:Manager:Text" .. test .. msg.chat_id_, text)
+                            database:set(bot_id .. "LARViN:Add:Rd:Manager:Text" .. test .. msg.chat_id_, text)
                         end
                         if msg.content_.audio_ then
-                            database:set(bot_id .. "spider:Add:Rd:Manager:Audio" .. test .. msg.chat_id_,
+                            database:set(bot_id .. "LARViN:Add:Rd:Manager:Audio" .. test .. msg.chat_id_,
                                 msg.content_.audio_.audio_.persistent_id_)
                         end
                         if msg.content_.document_ then
-                            database:set(bot_id .. "spider:Add:Rd:Manager:File" .. test .. msg.chat_id_,
+                            database:set(bot_id .. "LARViN:Add:Rd:Manager:File" .. test .. msg.chat_id_,
                                 msg.content_.document_.document_.persistent_id_)
                         end
                         if msg.content_.video_ then
-                            database:set(bot_id .. "spider:Add:Rd:Manager:Video" .. test .. msg.chat_id_,
+                            database:set(bot_id .. "LARViN:Add:Rd:Manager:Video" .. test .. msg.chat_id_,
                                 msg.content_.video_.video_.persistent_id_)
                         end
                         if msg.content_.photo_ then
@@ -6024,7 +6024,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                             if msg.content_.photo_.sizes_[3] then
                                 photo_in_group = msg.content_.photo_.sizes_[3].photo_.persistent_id_
                             end
-                            database:set(bot_id .. "spider:Add:Rd:Manager:Photo" .. test .. msg.chat_id_, photo_in_group)
+                            database:set(bot_id .. "LARViN:Add:Rd:Manager:Photo" .. test .. msg.chat_id_, photo_in_group)
                         end
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم حفظ الرد بنجاح")
                         return false
@@ -6043,7 +6043,7 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ ارسل الكلمه التري تريد اضافتها")
-                    database:set(bot_id .. "spider:Set:Manager:rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_, true)
+                    database:set(bot_id .. "LARViN:Set:Manager:rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_, true)
                     return false
                 end
                 if text == "حذف رد" and Owner(msg) then
@@ -6059,68 +6059,68 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                         return false
                     end
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ ارسل الكلمه التري تريد حذفها")
-                    database:set(bot_id .. "spider:Set:Manager:rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_,
+                    database:set(bot_id .. "LARViN:Set:Manager:rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_,
                         "true2")
                     return false
                 end
                 if text and text:match("^(.*)$") then
-                    if database:get(bot_id .. "spider:Set:Manager:rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_) ==
+                    if database:get(bot_id .. "LARViN:Set:Manager:rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_) ==
                         "true" then
                         send(msg.chat_id_, msg.id_,
                             '܂𓍼 ⁝ الان ارسل الرد الذي تريد اضافته \n܂𓍼 ⁝  قد يكون (ملف - فديو - نص - ملصق - بصمه - متحركه )\n܂𓍼 ⁝  يمكنك اضافه الى النص :\n- `#username` > اسم المستخدم\n- `#msgs` > عدد رسائل المستخدم\n- `#name` > اسم المستخدم\n- `#id` > ايدي المستخدم\n- `#stast` > موقع المستخدم \n- `#edit` > عدد السحكات ')
-                        database:set(bot_id .. "spider:Set:Manager:rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_,
+                        database:set(bot_id .. "LARViN:Set:Manager:rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_,
                             "true1")
-                        database:set(bot_id .. "spider:Text:Manager" .. msg.sender_user_id_ .. ":" .. msg.chat_id_, text)
-                        database:del(bot_id .. "spider:Add:Rd:Manager:Gif" .. text .. msg.chat_id_)
-                        database:del(bot_id .. "spider:Add:Rd:Manager:Vico" .. text .. msg.chat_id_)
-                        database:del(bot_id .. "spider:Add:Rd:Manager:Stekrs" .. text .. msg.chat_id_)
-                        database:del(bot_id .. "spider:Add:Rd:Manager:Text" .. text .. msg.chat_id_)
-                        database:del(bot_id .. "spider:Add:Rd:Manager:Photo" .. text .. msg.chat_id_)
-                        database:del(bot_id .. "spider:Add:Rd:Manager:Video" .. text .. msg.chat_id_)
-                        database:del(bot_id .. "spider:Add:Rd:Manager:File" .. text .. msg.chat_id_)
-                        database:del(bot_id .. "spider:Add:Rd:Manager:Audio" .. text .. msg.chat_id_)
-                        database:sadd(bot_id .. "spider:List:Manager" .. msg.chat_id_ .. "", text)
+                        database:set(bot_id .. "LARViN:Text:Manager" .. msg.sender_user_id_ .. ":" .. msg.chat_id_, text)
+                        database:del(bot_id .. "LARViN:Add:Rd:Manager:Gif" .. text .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Add:Rd:Manager:Vico" .. text .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Add:Rd:Manager:Stekrs" .. text .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Add:Rd:Manager:Text" .. text .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Add:Rd:Manager:Photo" .. text .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Add:Rd:Manager:Video" .. text .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Add:Rd:Manager:File" .. text .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Add:Rd:Manager:Audio" .. text .. msg.chat_id_)
+                        database:sadd(bot_id .. "LARViN:List:Manager" .. msg.chat_id_ .. "", text)
                         return false
                     end
                 end
                 if text and text:match("^(.*)$") then
-                    if database:get(bot_id .. "spider:Set:Manager:rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_ ..
+                    if database:get(bot_id .. "LARViN:Set:Manager:rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_ ..
                                         "") == "true2" then
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم ازالة الرد من قائمه الردود")
-                        database:del(bot_id .. "spider:Add:Rd:Manager:Gif" .. text .. msg.chat_id_)
-                        database:del(bot_id .. "spider:Add:Rd:Manager:Vico" .. text .. msg.chat_id_)
-                        database:del(bot_id .. "spider:Add:Rd:Manager:Stekrs" .. text .. msg.chat_id_)
-                        database:del(bot_id .. "spider:Add:Rd:Manager:Text" .. text .. msg.chat_id_)
-                        database:del(bot_id .. "spider:Add:Rd:Manager:Photo" .. text .. msg.chat_id_)
-                        database:del(bot_id .. "spider:Add:Rd:Manager:Video" .. text .. msg.chat_id_)
-                        database:del(bot_id .. "spider:Add:Rd:Manager:File" .. text .. msg.chat_id_)
-                        database:del(bot_id .. "spider:Add:Rd:Manager:Audio" .. text .. msg.chat_id_)
-                        database:del(bot_id .. "spider:Set:Manager:rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_)
-                        database:srem(bot_id .. "spider:List:Manager" .. msg.chat_id_ .. "", text)
+                        database:del(bot_id .. "LARViN:Add:Rd:Manager:Gif" .. text .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Add:Rd:Manager:Vico" .. text .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Add:Rd:Manager:Stekrs" .. text .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Add:Rd:Manager:Text" .. text .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Add:Rd:Manager:Photo" .. text .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Add:Rd:Manager:Video" .. text .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Add:Rd:Manager:File" .. text .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Add:Rd:Manager:Audio" .. text .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Set:Manager:rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_)
+                        database:srem(bot_id .. "LARViN:List:Manager" .. msg.chat_id_ .. "", text)
                         return false
                     end
                 end
-                if text and not database:get(bot_id .. "spider:Reply:Manager" .. msg.chat_id_) then
-                    if not database:sismember(bot_id .. 'spider:Spam:Group' .. msg.sender_user_id_, text) then
-                        local anemi = database:get(bot_id .. "spider:Add:Rd:Manager:Gif" .. text .. msg.chat_id_)
-                        local veico = database:get(bot_id .. "spider:Add:Rd:Manager:Vico" .. text .. msg.chat_id_)
-                        local stekr = database:get(bot_id .. "spider:Add:Rd:Manager:Stekrs" .. text .. msg.chat_id_)
-                        local Text = database:get(bot_id .. "spider:Add:Rd:Manager:Text" .. text .. msg.chat_id_)
-                        local photo = database:get(bot_id .. "spider:Add:Rd:Manager:Photo" .. text .. msg.chat_id_)
-                        local video = database:get(bot_id .. "spider:Add:Rd:Manager:Video" .. text .. msg.chat_id_)
-                        local document = database:get(bot_id .. "spider:Add:Rd:Manager:File" .. text .. msg.chat_id_)
-                        local audio = database:get(bot_id .. "spider:Add:Rd:Manager:Audio" .. text .. msg.chat_id_)
+                if text and not database:get(bot_id .. "LARViN:Reply:Manager" .. msg.chat_id_) then
+                    if not database:sismember(bot_id .. 'LARViN:Spam:Group' .. msg.sender_user_id_, text) then
+                        local anemi = database:get(bot_id .. "LARViN:Add:Rd:Manager:Gif" .. text .. msg.chat_id_)
+                        local veico = database:get(bot_id .. "LARViN:Add:Rd:Manager:Vico" .. text .. msg.chat_id_)
+                        local stekr = database:get(bot_id .. "LARViN:Add:Rd:Manager:Stekrs" .. text .. msg.chat_id_)
+                        local Text = database:get(bot_id .. "LARViN:Add:Rd:Manager:Text" .. text .. msg.chat_id_)
+                        local photo = database:get(bot_id .. "LARViN:Add:Rd:Manager:Photo" .. text .. msg.chat_id_)
+                        local video = database:get(bot_id .. "LARViN:Add:Rd:Manager:Video" .. text .. msg.chat_id_)
+                        local document = database:get(bot_id .. "LARViN:Add:Rd:Manager:File" .. text .. msg.chat_id_)
+                        local audio = database:get(bot_id .. "LARViN:Add:Rd:Manager:Audio" .. text .. msg.chat_id_)
                         if Text then
                             tdcli_function({
                                 ID = "GetUser",
                                 user_id_ = msg.sender_user_id_
                             }, function(arg, data)
-                                local NumMsg = database:get(bot_id .. 'spider:messageUser' .. msg.chat_id_ .. ':' ..
+                                local NumMsg = database:get(bot_id .. 'LARViN:messageUser' .. msg.chat_id_ .. ':' ..
                                                                 msg.sender_user_id_) or 0
                                 local TotalMsg = Total_message(NumMsg)
                                 local Status_Gps = Get_Rank(msg.sender_user_id_, msg.chat_id_)
                                 local message_edit = database:get(
-                                                         bot_id .. 'spider:message_edit' .. msg.chat_id_ ..
+                                                         bot_id .. 'LARViN:message_edit' .. msg.chat_id_ ..
                                                              msg.sender_user_id_) or 0
                                 local Text = Text:gsub('#username', (data.username_ or 'لا يوجد'))
                                 local Text = Text:gsub('#name', data.first_name_)
@@ -6129,74 +6129,74 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                                 local Text = Text:gsub('#msgs', NumMsg)
                                 local Text = Text:gsub('#stast', Status_Gps)
                                 send(msg.chat_id_, msg.id_, Text)
-                                database:sadd(bot_id .. "spider:Spam:Group" .. msg.sender_user_id_, text)
+                                database:sadd(bot_id .. "LARViN:Spam:Group" .. msg.sender_user_id_, text)
                             end, nil)
                         end
                         if stekr then
                             sendSticker(msg.chat_id_, msg.id_, stekr)
-                            database:sadd(bot_id .. "spider:Spam:Group" .. msg.sender_user_id_, text)
+                            database:sadd(bot_id .. "LARViN:Spam:Group" .. msg.sender_user_id_, text)
                         end
                         if veico then
                             sendVoice(msg.chat_id_, msg.id_, veico, "")
-                            database:sadd(bot_id .. "spider:Spam:Group" .. msg.sender_user_id_, text)
+                            database:sadd(bot_id .. "LARViN:Spam:Group" .. msg.sender_user_id_, text)
                         end
                         if video then
                             sendVideo(msg.chat_id_, msg.id_, video, "")
-                            database:sadd(bot_id .. "spider:Spam:Group" .. msg.sender_user_id_, text)
+                            database:sadd(bot_id .. "LARViN:Spam:Group" .. msg.sender_user_id_, text)
                         end
                         if anemi then
                             sendAnimation(msg.chat_id_, msg.id_, anemi, "")
-                            database:sadd(bot_id .. "spider:Spam:Group" .. msg.sender_user_id_, text)
+                            database:sadd(bot_id .. "LARViN:Spam:Group" .. msg.sender_user_id_, text)
                         end
                         if document then
                             sendDocument(msg.chat_id_, msg.id_, document)
-                            database:sadd(bot_id .. "spider:Spam:Group" .. msg.sender_user_id_, text)
+                            database:sadd(bot_id .. "LARViN:Spam:Group" .. msg.sender_user_id_, text)
                         end
                         if audio then
                             sendAudio(msg.chat_id_, msg.id_, audio)
-                            database:sadd(bot_id .. "spider:Spam:Group" .. msg.sender_user_id_, text)
+                            database:sadd(bot_id .. "LARViN:Spam:Group" .. msg.sender_user_id_, text)
                         end
                         if photo then
                             sendPhoto(msg.chat_id_, msg.id_, photo, photo_caption)
-                            database:sadd(bot_id .. "spider:Spam:Group" .. msg.sender_user_id_, text)
+                            database:sadd(bot_id .. "LARViN:Spam:Group" .. msg.sender_user_id_, text)
                         end
                     end
                 end
                 ------------------------------------------------------------------------
-                if text == ("مسح ردود المطور") and Devspider(msg) then
-                    local list = database:smembers(bot_id .. "spider:List:Rd:Sudo")
+                if text == ("مسح ردود المطور") and DevLARViN(msg) then
+                    local list = database:smembers(bot_id .. "LARViN:List:Rd:Sudo")
                     for k, v in pairs(list) do
-                        database:del(bot_id .. "spider:Add:Rd:Sudo:Gif" .. v)
-                        database:del(bot_id .. "spider:Add:Rd:Sudo:vico" .. v)
-                        database:del(bot_id .. "spider:Add:Rd:Sudo:stekr" .. v)
-                        database:del(bot_id .. "spider:Add:Rd:Sudo:Text" .. v)
-                        database:del(bot_id .. "spider:Add:Rd:Sudo:Photo" .. v)
-                        database:del(bot_id .. "spider:Add:Rd:Sudo:Video" .. v)
-                        database:del(bot_id .. "spider:Add:Rd:Sudo:File" .. v)
-                        database:del(bot_id .. "spider:Add:Rd:Sudo:Audio" .. v)
-                        database:del(bot_id .. "spider:List:Rd:Sudo")
+                        database:del(bot_id .. "LARViN:Add:Rd:Sudo:Gif" .. v)
+                        database:del(bot_id .. "LARViN:Add:Rd:Sudo:vico" .. v)
+                        database:del(bot_id .. "LARViN:Add:Rd:Sudo:stekr" .. v)
+                        database:del(bot_id .. "LARViN:Add:Rd:Sudo:Text" .. v)
+                        database:del(bot_id .. "LARViN:Add:Rd:Sudo:Photo" .. v)
+                        database:del(bot_id .. "LARViN:Add:Rd:Sudo:Video" .. v)
+                        database:del(bot_id .. "LARViN:Add:Rd:Sudo:File" .. v)
+                        database:del(bot_id .. "LARViN:Add:Rd:Sudo:Audio" .. v)
+                        database:del(bot_id .. "LARViN:List:Rd:Sudo")
                     end
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم مسح ردود المطور")
                 end
                 if text == ("ردود المطور") and DevBot(msg) then
-                    local list = database:smembers(bot_id .. "spider:List:Rd:Sudo")
+                    local list = database:smembers(bot_id .. "LARViN:List:Rd:Sudo")
                     text = "\n܂𓍼 ⁝ قائمة ردود المطور \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n"
                     for k, v in pairs(list) do
-                        if database:get(bot_id .. "spider:Add:Rd:Sudo:Gif" .. v) then
+                        if database:get(bot_id .. "LARViN:Add:Rd:Sudo:Gif" .. v) then
                             db = "متحركه 🎭"
-                        elseif database:get(bot_id .. "spider:Add:Rd:Sudo:vico" .. v) then
+                        elseif database:get(bot_id .. "LARViN:Add:Rd:Sudo:vico" .. v) then
                             db = "بصمه 📢"
-                        elseif database:get(bot_id .. "spider:Add:Rd:Sudo:stekr" .. v) then
+                        elseif database:get(bot_id .. "LARViN:Add:Rd:Sudo:stekr" .. v) then
                             db = "ملصق 𓍼"
-                        elseif database:get(bot_id .. "spider:Add:Rd:Sudo:Text" .. v) then
+                        elseif database:get(bot_id .. "LARViN:Add:Rd:Sudo:Text" .. v) then
                             db = "رساله ✉"
-                        elseif database:get(bot_id .. "spider:Add:Rd:Sudo:Photo" .. v) then
+                        elseif database:get(bot_id .. "LARViN:Add:Rd:Sudo:Photo" .. v) then
                             db = "صوره ܂𓍼 "
-                        elseif database:get(bot_id .. "spider:Add:Rd:Sudo:Video" .. v) then
+                        elseif database:get(bot_id .. "LARViN:Add:Rd:Sudo:Video" .. v) then
                             db = "فيديو 📹"
-                        elseif database:get(bot_id .. "spider:Add:Rd:Sudo:File" .. v) then
+                        elseif database:get(bot_id .. "LARViN:Add:Rd:Sudo:File" .. v) then
                             db = "ملف 𓍼"
-                        elseif database:get(bot_id .. "spider:Add:Rd:Sudo:Audio" .. v) then
+                        elseif database:get(bot_id .. "LARViN:Add:Rd:Sudo:Audio" .. v) then
                             db = "اغنيه 🎵"
                         end
                         text = text .. "" .. k .. " >> (" .. v .. ") » {" .. db .. "}\n"
@@ -6208,20 +6208,20 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                 end
                 if text or msg.content_.sticker_ or msg.content_.voice_ or msg.content_.animation_ or
                     msg.content_.audio_ or msg.content_.document_ or msg.content_.photo_ or msg.content_.video_ then
-                    local test = database:get(bot_id .. "spider:Text:Sudo:Bot" .. msg.sender_user_id_ .. ":" ..
+                    local test = database:get(bot_id .. "LARViN:Text:Sudo:Bot" .. msg.sender_user_id_ .. ":" ..
                                                   msg.chat_id_)
-                    if database:get(bot_id .. "spider:Set:Rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_) == "true1" then
-                        database:del(bot_id .. "spider:Set:Rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_)
+                    if database:get(bot_id .. "LARViN:Set:Rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_) == "true1" then
+                        database:del(bot_id .. "LARViN:Set:Rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_)
                         if msg.content_.sticker_ then
-                            database:set(bot_id .. "spider:Add:Rd:Sudo:stekr" .. test,
+                            database:set(bot_id .. "LARViN:Add:Rd:Sudo:stekr" .. test,
                                 msg.content_.sticker_.sticker_.persistent_id_)
                         end
                         if msg.content_.voice_ then
-                            database:set(bot_id .. "spider:Add:Rd:Sudo:vico" .. test,
+                            database:set(bot_id .. "LARViN:Add:Rd:Sudo:vico" .. test,
                                 msg.content_.voice_.voice_.persistent_id_)
                         end
                         if msg.content_.animation_ then
-                            database:set(bot_id .. "spider:Add:Rd:Sudo:Gif" .. test,
+                            database:set(bot_id .. "LARViN:Add:Rd:Sudo:Gif" .. test,
                                 msg.content_.animation_.animation_.persistent_id_)
                         end
                         if text then
@@ -6229,18 +6229,18 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                             text = text:gsub('"', "")
                             text = text:gsub("`", "")
                             text = text:gsub("*", "")
-                            database:set(bot_id .. "spider:Add:Rd:Sudo:Text" .. test, text)
+                            database:set(bot_id .. "LARViN:Add:Rd:Sudo:Text" .. test, text)
                         end
                         if msg.content_.audio_ then
-                            database:set(bot_id .. "spider:Add:Rd:Sudo:Audio" .. test,
+                            database:set(bot_id .. "LARViN:Add:Rd:Sudo:Audio" .. test,
                                 msg.content_.audio_.audio_.persistent_id_)
                         end
                         if msg.content_.document_ then
-                            database:set(bot_id .. "spider:Add:Rd:Sudo:File" .. test,
+                            database:set(bot_id .. "LARViN:Add:Rd:Sudo:File" .. test,
                                 msg.content_.document_.document_.persistent_id_)
                         end
                         if msg.content_.video_ then
-                            database:set(bot_id .. "spider:Add:Rd:Sudo:Video" .. test,
+                            database:set(bot_id .. "LARViN:Add:Rd:Sudo:Video" .. test,
                                 msg.content_.video_.video_.persistent_id_)
                         end
                         if msg.content_.photo_ then
@@ -6256,81 +6256,81 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                             if msg.content_.photo_.sizes_[3] then
                                 photo_in_group = msg.content_.photo_.sizes_[3].photo_.persistent_id_
                             end
-                            database:set(bot_id .. "spider:Add:Rd:Sudo:Photo" .. test, photo_in_group)
+                            database:set(bot_id .. "LARViN:Add:Rd:Sudo:Photo" .. test, photo_in_group)
                         end
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم حفظ الرد بنجاح")
                         return false
                     end
                 end
 
-                if text == "اضف رد للكل" and Devspider(msg) then
+                if text == "اضف رد للكل" and DevLARViN(msg) then
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝  ارسل الكلمه التري تريد اضافتها")
-                    database:set(bot_id .. "spider:Set:Rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_, true)
+                    database:set(bot_id .. "LARViN:Set:Rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_, true)
                     return false
                 end
-                if text == "اضف رد عام" and Devspider(msg) then
+                if text == "اضف رد عام" and DevLARViN(msg) then
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝  ارسل الكلمه التري تريد اضافتها")
-                    database:set(bot_id .. "spider:Set:Rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_, true)
+                    database:set(bot_id .. "LARViN:Set:Rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_, true)
                     return false
                 end
-                if text == "حذف رد للكل" and text == "حذف رد عام" and Devspider(msg) then
+                if text == "حذف رد للكل" and text == "حذف رد عام" and DevLARViN(msg) then
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝  ارسل الكلمه التري تريد حذفها")
-                    database:set(bot_id .. "spider:Set:On" .. msg.sender_user_id_ .. ":" .. msg.chat_id_, true)
+                    database:set(bot_id .. "LARViN:Set:On" .. msg.sender_user_id_ .. ":" .. msg.chat_id_, true)
                     return false
                 end
-                if text == "حذف رد عام" and Devspider(msg) then
+                if text == "حذف رد عام" and DevLARViN(msg) then
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝  ارسل الكلمه التري تريد حذفها")
-                    database:set(bot_id .. "spider:Set:On" .. msg.sender_user_id_ .. ":" .. msg.chat_id_, true)
+                    database:set(bot_id .. "LARViN:Set:On" .. msg.sender_user_id_ .. ":" .. msg.chat_id_, true)
                     return false
                 end
                 if text and text:match("^(.*)$") then
-                    if database:get(bot_id .. "spider:Set:Rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_) == "true" then
+                    if database:get(bot_id .. "LARViN:Set:Rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_) == "true" then
                         send(msg.chat_id_, msg.id_,
                             '܂𓍼 ⁝ الان ارسل الرد الذي تريد اضافته \n܂𓍼 ⁝  قد يكون (ملف - فديو - نص - ملصق - بصمه - متحركه )\n܂𓍼 ⁝  يمكنك اضافه الى النص :\n- `#username` > اسم المستخدم\n- `#msgs` > عدد رسائل المستخدم\n- `#name` > اسم المستخدم\n- `#id` > ايدي المستخدم\n- `#stast` > موقع المستخدم \n- `#edit` > عدد السحكات ')
-                        database:set(bot_id .. "spider:Set:Rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_, "true1")
-                        database:set(bot_id .. "spider:Text:Sudo:Bot" .. msg.sender_user_id_ .. ":" .. msg.chat_id_,
+                        database:set(bot_id .. "LARViN:Set:Rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_, "true1")
+                        database:set(bot_id .. "LARViN:Text:Sudo:Bot" .. msg.sender_user_id_ .. ":" .. msg.chat_id_,
                             text)
-                        database:sadd(bot_id .. "spider:List:Rd:Sudo", text)
+                        database:sadd(bot_id .. "LARViN:List:Rd:Sudo", text)
                         return false
                     end
                 end
                 if text and text:match("^(.*)$") then
-                    if database:get(bot_id .. "spider:Set:On" .. msg.sender_user_id_ .. ":" .. msg.chat_id_) == "true" then
+                    if database:get(bot_id .. "LARViN:Set:On" .. msg.sender_user_id_ .. ":" .. msg.chat_id_) == "true" then
                         send(msg.chat_id_, msg.id_,
                             "܂𓍼 ⁝ تم ازالة الرد من قائمه ردود المطور")
                         list = {"Add:Rd:Sudo:Audio", "Add:Rd:Sudo:File", "Add:Rd:Sudo:Video", "Add:Rd:Sudo:Photo",
                                 "Add:Rd:Sudo:Text", "Add:Rd:Sudo:stekr", "Add:Rd:Sudo:vico", "Add:Rd:Sudo:Gif"}
                         for k, v in pairs(list) do
-                            database:del(bot_id .. 'spider:' .. v .. text)
+                            database:del(bot_id .. 'LARViN:' .. v .. text)
                         end
-                        database:del(bot_id .. "spider:Set:On" .. msg.sender_user_id_ .. ":" .. msg.chat_id_)
-                        database:srem(bot_id .. "spider:List:Rd:Sudo", text)
+                        database:del(bot_id .. "LARViN:Set:On" .. msg.sender_user_id_ .. ":" .. msg.chat_id_)
+                        database:srem(bot_id .. "LARViN:List:Rd:Sudo", text)
                         return false
                     end
                 end
 
-                if text and not database:get(bot_id .. "spider:Reply:Sudo" .. msg.chat_id_) then
-                    if not database:sismember(bot_id .. 'spider:Spam:Group' .. msg.sender_user_id_, text) then
-                        local anemi = database:get(bot_id .. "spider:Add:Rd:Sudo:Gif" .. text)
-                        local veico = database:get(bot_id .. "spider:Add:Rd:Sudo:vico" .. text)
-                        local stekr = database:get(bot_id .. "spider:Add:Rd:Sudo:stekr" .. text)
-                        local Text = database:get(bot_id .. "spider:Add:Rd:Sudo:Text" .. text)
-                        local photo = database:get(bot_id .. "spider:Add:Rd:Sudo:Photo" .. text)
-                        local video = database:get(bot_id .. "spider:Add:Rd:Sudo:Video" .. text)
-                        local document = database:get(bot_id .. "spider:Add:Rd:Sudo:File" .. text)
-                        local audio = database:get(bot_id .. "spider:Add:Rd:Sudo:Audio" .. text)
+                if text and not database:get(bot_id .. "LARViN:Reply:Sudo" .. msg.chat_id_) then
+                    if not database:sismember(bot_id .. 'LARViN:Spam:Group' .. msg.sender_user_id_, text) then
+                        local anemi = database:get(bot_id .. "LARViN:Add:Rd:Sudo:Gif" .. text)
+                        local veico = database:get(bot_id .. "LARViN:Add:Rd:Sudo:vico" .. text)
+                        local stekr = database:get(bot_id .. "LARViN:Add:Rd:Sudo:stekr" .. text)
+                        local Text = database:get(bot_id .. "LARViN:Add:Rd:Sudo:Text" .. text)
+                        local photo = database:get(bot_id .. "LARViN:Add:Rd:Sudo:Photo" .. text)
+                        local video = database:get(bot_id .. "LARViN:Add:Rd:Sudo:Video" .. text)
+                        local document = database:get(bot_id .. "LARViN:Add:Rd:Sudo:File" .. text)
+                        local audio = database:get(bot_id .. "LARViN:Add:Rd:Sudo:Audio" .. text)
 
                         if Text then
                             tdcli_function({
                                 ID = "GetUser",
                                 user_id_ = msg.sender_user_id_
                             }, function(arg, data)
-                                local NumMsg = database:get(bot_id .. 'spider:messageUser' .. msg.chat_id_ .. ':' ..
+                                local NumMsg = database:get(bot_id .. 'LARViN:messageUser' .. msg.chat_id_ .. ':' ..
                                                                 msg.sender_user_id_) or 0
                                 local TotalMsg = Total_message(NumMsg)
                                 local Status_Gps = Get_Rank(msg.sender_user_id_, msg.chat_id_)
                                 local message_edit = database:get(
-                                                         bot_id .. 'spider:message_edit' .. msg.chat_id_ ..
+                                                         bot_id .. 'LARViN:message_edit' .. msg.chat_id_ ..
                                                              msg.sender_user_id_) or 0
                                 local Text = Text:gsub('#username', (data.username_ or 'لا يوجد'))
                                 local Text = Text:gsub('#name', data.first_name_)
@@ -6339,36 +6339,36 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                                 local Text = Text:gsub('#msgs', NumMsg)
                                 local Text = Text:gsub('#stast', Status_Gps)
                                 send(msg.chat_id_, msg.id_, Text)
-                                database:sadd(bot_id .. "spider:Spam:Group" .. msg.sender_user_id_, text)
+                                database:sadd(bot_id .. "LARViN:Spam:Group" .. msg.sender_user_id_, text)
                             end, nil)
                         end
                         if stekr then
                             sendSticker(msg.chat_id_, msg.id_, stekr)
-                            database:sadd(bot_id .. "spider:Spam:Group" .. msg.sender_user_id_, text)
+                            database:sadd(bot_id .. "LARViN:Spam:Group" .. msg.sender_user_id_, text)
                         end
                         if veico then
                             sendVoice(msg.chat_id_, msg.id_, veico, "")
-                            database:sadd(bot_id .. "spider:Spam:Group" .. msg.sender_user_id_, text)
+                            database:sadd(bot_id .. "LARViN:Spam:Group" .. msg.sender_user_id_, text)
                         end
                         if video then
                             sendVideo(msg.chat_id_, msg.id_, video, "")
-                            database:sadd(bot_id .. "spider:Spam:Group" .. msg.sender_user_id_, text)
+                            database:sadd(bot_id .. "LARViN:Spam:Group" .. msg.sender_user_id_, text)
                         end
                         if anemi then
                             sendAnimation(msg.chat_id_, msg.id_, anemi, "")
-                            database:sadd(bot_id .. "spider:Spam:Group" .. msg.sender_user_id_, text)
+                            database:sadd(bot_id .. "LARViN:Spam:Group" .. msg.sender_user_id_, text)
                         end
                         if document then
                             sendDocument(msg.chat_id_, msg.id_, document)
-                            database:sadd(bot_id .. "spider:Spam:Group" .. msg.sender_user_id_, text)
+                            database:sadd(bot_id .. "LARViN:Spam:Group" .. msg.sender_user_id_, text)
                         end
                         if audio then
                             sendAudio(msg.chat_id_, msg.id_, audio)
-                            database:sadd(bot_id .. "spider:Spam:Group" .. msg.sender_user_id_, text)
+                            database:sadd(bot_id .. "LARViN:Spam:Group" .. msg.sender_user_id_, text)
                         end
                         if photo then
                             sendPhoto(msg.chat_id_, msg.id_, photo, "")
-                            database:sadd(bot_id .. "spider:Spam:Group" .. msg.sender_user_id_, text)
+                            database:sadd(bot_id .. "LARViN:Spam:Group" .. msg.sender_user_id_, text)
                         end
                     end
                 end
@@ -6407,20 +6407,20 @@ function spider_Started_Bot(msg, data) -- بداية العمل
                 end
 
                 if text == "تفعيل ردود المدير" and Owner(msg) then
-                    database:del(bot_id .. "spider:Reply:Manager" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Reply:Manager" .. msg.chat_id_)
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم تفعيل ردود المدير")
                 end
                 if text == "تعطيل ردود المدير" and Owner(msg) then
-                    database:set(bot_id .. "spider:Reply:Manager" .. msg.chat_id_, true)
+                    database:set(bot_id .. "LARViN:Reply:Manager" .. msg.chat_id_, true)
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم تعطيل ردود المدير")
                 end
                 if text == "تفعيل ردود المطور" and Owner(msg) then
-                    database:del(bot_id .. "spider:Reply:Sudo" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Reply:Sudo" .. msg.chat_id_)
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم تفعيل ردود المطور")
                 end
                 if text == "تعطيل ردود المطور" and Owner(msg) then
 
-                    database:set(bot_id .. "spider:Reply:Sudo" .. msg.chat_id_, true)
+                    database:set(bot_id .. "LARViN:Reply:Sudo" .. msg.chat_id_, true)
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم تعطيل ردود المطور")
                 end
 if text and text:match("^تنزيل الكل @(.*)$") and Owner(msg) then
@@ -6431,17 +6431,17 @@ if tonumber(Id_Sudo) == tonumber(result.id_) then
 send(msg.chat_id_, msg.id_,"⌔︙ لا تستطيع تنزيل المطور الاساسي")
 return false 
 end
-if database:sismember(bot_id.."spider:Sudo:User",result.id_) then
+if database:sismember(bot_id.."LARViN:Sudo:User",result.id_) then
 dev = "المطور، \n" else dev = "" end
-if database:sismember(bot_id.."spider:Basic:Constructor"..msg.chat_id_, result.id_) then
+if database:sismember(bot_id.."LARViN:Basic:Constructor"..msg.chat_id_, result.id_) then
 crr = "المنشئ الاساسي، \n" else crr = "" end
-if database:sismember(bot_id..'spider:Constructor'..msg.chat_id_, result.id_) then
+if database:sismember(bot_id..'LARViN:Constructor'..msg.chat_id_, result.id_) then
 cr = "المنشئ، \n" else cr = "" end
-if database:sismember(bot_id..'spider:Manager'..msg.chat_id_, result.id_) then
+if database:sismember(bot_id..'LARViN:Manager'..msg.chat_id_, result.id_) then
 own = "المدير، \n" else own = "" end
-if database:sismember(bot_id..'spider:Mod:User'..msg.chat_id_, result.id_) then
+if database:sismember(bot_id..'LARViN:Mod:User'..msg.chat_id_, result.id_) then
 mod = "الادمن، \n" else mod = "" end
-if database:sismember(bot_id..'spider:Special:User'..msg.chat_id_, result.id_) then
+if database:sismember(bot_id..'LARViN:Special:User'..msg.chat_id_, result.id_) then
 vip = "المميز، \n" else vip = ""
 end
 if Rank_Checking(result.id_,msg.chat_id_) ~= false then
@@ -6450,30 +6450,30 @@ else
 send(msg.chat_id_, msg.id_,"\n܂𓍼 ⁝ ليس لديه رتب حتى استطيع تنزيله \n")
 end
 if tonumber(Id_Sudo) == tonumber(msg.sender_user_id_) then
-                            database:srem(bot_id .. "spider:Sudo:User", result.id_)
-                            database:srem(bot_id .. "spider:Basic:Constructor"..msg.chat_id_, result.id_)
-                            database:srem(bot_id .. "spider:Constructor"..msg.chat_id_, result.id_)
-                            database:srem(bot_id .. "spider:Manager"..msg.chat_id_, result.id_)
-                            database:srem(bot_id .. "spider:Mod:User"..msg.chat_id_, result.id_)
-                            database:srem(bot_id .. "spider:Special:User"..msg.chat_id_, result.id_)
-                        elseif database:sismember(bot_id .. "spider:Sudo:User", msg.sender_user_id_) then
-                            database:srem(bot_id .. "spider:Mod:User"..msg.chat_id_, result.id_)
-                            database:srem(bot_id .. "spider:Special:User"..msg.chat_id_, result.id_)
-                            database:srem(bot_id .. "spider:Manager"..msg.chat_id_, result.id_)
-                            database:srem(bot_id .. "spider:Constructor"..msg.chat_id_, result.id_)
-                            database:srem(bot_id .. "spider:Basic:Constructor"..msg.chat_id_, result.id_)
-                        elseif database:sismember(bot_id .. "spider:Basic:Constructor", msg.sender_user_id_) then
-                            database:srem(bot_id .. "spider:Mod:User"..msg.chat_id_, result.id_)
-                            database:srem(bot_id .. "spider:Special:User"..msg.chat_id_, result.id_)
-                            database:srem(bot_id .. "spider:Manager"..msg.chat_id_, result.id_)
-                            database:srem(bot_id .. "spider:Constructor"..msg.chat_id_, result.id_)
-                        elseif database:sismember(bot_id .. "spider:Constructor", msg.sender_user_id_) then
-                            database:srem(bot_id .. "spider:Mod:User"..msg.chat_id_, result.id_)
-                            database:srem(bot_id .. "spider:Special:User"..msg.chat_id_, result.id_)
-                            database:srem(bot_id .. "spider:Manager"..msg.chat_id_, result.id_)
-                        elseif database:sismember(bot_id .. "spider:Manager", msg.sender_user_id_) then
-                            database:srem(bot_id .. "spider:Mod:User"..msg.chat_id_, result.id_)
-                            database:srem(bot_id .. "spider:Special:User"..msg.chat_id_, result.id_)
+                            database:srem(bot_id .. "LARViN:Sudo:User", result.id_)
+                            database:srem(bot_id .. "LARViN:Basic:Constructor"..msg.chat_id_, result.id_)
+                            database:srem(bot_id .. "LARViN:Constructor"..msg.chat_id_, result.id_)
+                            database:srem(bot_id .. "LARViN:Manager"..msg.chat_id_, result.id_)
+                            database:srem(bot_id .. "LARViN:Mod:User"..msg.chat_id_, result.id_)
+                            database:srem(bot_id .. "LARViN:Special:User"..msg.chat_id_, result.id_)
+                        elseif database:sismember(bot_id .. "LARViN:Sudo:User", msg.sender_user_id_) then
+                            database:srem(bot_id .. "LARViN:Mod:User"..msg.chat_id_, result.id_)
+                            database:srem(bot_id .. "LARViN:Special:User"..msg.chat_id_, result.id_)
+                            database:srem(bot_id .. "LARViN:Manager"..msg.chat_id_, result.id_)
+                            database:srem(bot_id .. "LARViN:Constructor"..msg.chat_id_, result.id_)
+                            database:srem(bot_id .. "LARViN:Basic:Constructor"..msg.chat_id_, result.id_)
+                        elseif database:sismember(bot_id .. "LARViN:Basic:Constructor", msg.sender_user_id_) then
+                            database:srem(bot_id .. "LARViN:Mod:User"..msg.chat_id_, result.id_)
+                            database:srem(bot_id .. "LARViN:Special:User"..msg.chat_id_, result.id_)
+                            database:srem(bot_id .. "LARViN:Manager"..msg.chat_id_, result.id_)
+                            database:srem(bot_id .. "LARViN:Constructor"..msg.chat_id_, result.id_)
+                        elseif database:sismember(bot_id .. "LARViN:Constructor", msg.sender_user_id_) then
+                            database:srem(bot_id .. "LARViN:Mod:User"..msg.chat_id_, result.id_)
+                            database:srem(bot_id .. "LARViN:Special:User"..msg.chat_id_, result.id_)
+                            database:srem(bot_id .. "LARViN:Manager"..msg.chat_id_, result.id_)
+                        elseif database:sismember(bot_id .. "LARViN:Manager", msg.sender_user_id_) then
+                            database:srem(bot_id .. "LARViN:Mod:User"..msg.chat_id_, result.id_)
+                            database:srem(bot_id .. "LARViN:Special:User"..msg.chat_id_, result.id_)
 end
 end
 end
@@ -6491,39 +6491,39 @@ end
                         end
                         return false
                     end
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if tonumber(Id_Sudo) == tonumber(result.sender_user_id_) then
                             send(msg.chat_id_, msg.id_,
                                 "܂𓍼 ⁝  لا تستطيع تنزيل المطور الاساسي")
                             return false
                         end
-                        if database:sismember(bot_id .. "spider:Sudo:User", result.sender_user_id_) then
+                        if database:sismember(bot_id .. "LARViN:Sudo:User", result.sender_user_id_) then
                             dev = "المطور ،"
                         else
                             dev = ""
                         end
-                        if database:sismember(bot_id .. "spider:Basic:Constructor" .. msg.chat_id_,
+                        if database:sismember(bot_id .. "LARViN:Basic:Constructor" .. msg.chat_id_,
                             result.sender_user_id_) then
                             crr = "منشئ اساسي ،"
                         else
                             crr = ""
                         end
-                        if database:sismember(bot_id .. "spider:Constructor" .. msg.chat_id_, result.sender_user_id_) then
+                        if database:sismember(bot_id .. "LARViN:Constructor" .. msg.chat_id_, result.sender_user_id_) then
                             cr = "منشئ ،"
                         else
                             cr = ""
                         end
-                        if database:sismember(bot_id .. "spider:Manager" .. msg.chat_id_, result.sender_user_id_) then
+                        if database:sismember(bot_id .. "LARViN:Manager" .. msg.chat_id_, result.sender_user_id_) then
                             own = "مدير ،"
                         else
                             own = ""
                         end
-                        if database:sismember(bot_id .. "spider:Mod:User" .. msg.chat_id_, result.sender_user_id_) then
+                        if database:sismember(bot_id .. "LARViN:Mod:User" .. msg.chat_id_, result.sender_user_id_) then
                             mod = "ادمن ،"
                         else
                             mod = ""
                         end
-                        if database:sismember(bot_id .. "spider:Special:User" .. msg.chat_id_, result.sender_user_id_) then
+                        if database:sismember(bot_id .. "LARViN:Special:User" .. msg.chat_id_, result.sender_user_id_) then
                             vip = "مميز ،"
                         else
                             vip = ""
@@ -6537,38 +6537,38 @@ end
                                 "\n܂𓍼 ⁝ ليس لديه رتب حتى استطيع تنزيله \n")
                         end
                         if tonumber(Id_Sudo) == tonumber(msg.sender_user_id_) then
-                            database:srem(bot_id .. "spider:Sudo:User", result.sender_user_id_)
-                            database:srem(bot_id .. "spider:Basic:Constructor" .. msg.chat_id_, result.sender_user_id_)
-                            database:srem(bot_id .. "spider:Constructor" .. msg.chat_id_, result.sender_user_id_)
-                            database:srem(bot_id .. "spider:Manager" .. msg.chat_id_, result.sender_user_id_)
-                            database:srem(bot_id .. "spider:Mod:User" .. msg.chat_id_, result.sender_user_id_)
-                            database:srem(bot_id .. "spider:Special:User" .. msg.chat_id_, result.sender_user_id_)
-                        elseif database:sismember(bot_id .. "spider:Sudo:User", msg.sender_user_id_) then
-                            database:srem(bot_id .. "spider:Mod:User" .. msg.chat_id_, result.sender_user_id_)
-                            database:srem(bot_id .. "spider:Special:User" .. msg.chat_id_, result.sender_user_id_)
-                            database:srem(bot_id .. "spider:Manager" .. msg.chat_id_, result.sender_user_id_)
-                            database:srem(bot_id .. "spider:Constructor" .. msg.chat_id_, result.sender_user_id_)
-                            database:srem(bot_id .. "spider:Basic:Constructor" .. msg.chat_id_, result.sender_user_id_)
-                        elseif database:sismember(bot_id .. "spider:Basic:Constructor" .. msg.chat_id_,
+                            database:srem(bot_id .. "LARViN:Sudo:User", result.sender_user_id_)
+                            database:srem(bot_id .. "LARViN:Basic:Constructor" .. msg.chat_id_, result.sender_user_id_)
+                            database:srem(bot_id .. "LARViN:Constructor" .. msg.chat_id_, result.sender_user_id_)
+                            database:srem(bot_id .. "LARViN:Manager" .. msg.chat_id_, result.sender_user_id_)
+                            database:srem(bot_id .. "LARViN:Mod:User" .. msg.chat_id_, result.sender_user_id_)
+                            database:srem(bot_id .. "LARViN:Special:User" .. msg.chat_id_, result.sender_user_id_)
+                        elseif database:sismember(bot_id .. "LARViN:Sudo:User", msg.sender_user_id_) then
+                            database:srem(bot_id .. "LARViN:Mod:User" .. msg.chat_id_, result.sender_user_id_)
+                            database:srem(bot_id .. "LARViN:Special:User" .. msg.chat_id_, result.sender_user_id_)
+                            database:srem(bot_id .. "LARViN:Manager" .. msg.chat_id_, result.sender_user_id_)
+                            database:srem(bot_id .. "LARViN:Constructor" .. msg.chat_id_, result.sender_user_id_)
+                            database:srem(bot_id .. "LARViN:Basic:Constructor" .. msg.chat_id_, result.sender_user_id_)
+                        elseif database:sismember(bot_id .. "LARViN:Basic:Constructor" .. msg.chat_id_,
                             msg.sender_user_id_) then
-                            database:srem(bot_id .. "spider:Mod:User" .. msg.chat_id_, result.sender_user_id_)
-                            database:srem(bot_id .. "spider:Special:User" .. msg.chat_id_, result.sender_user_id_)
-                            database:srem(bot_id .. "spider:Manager" .. msg.chat_id_, result.sender_user_id_)
-                            database:srem(bot_id .. "spider:Constructor" .. msg.chat_id_, result.sender_user_id_)
-                        elseif database:sismember(bot_id .. "spider:Constructor" .. msg.chat_id_, msg.sender_user_id_) then
-                            database:srem(bot_id .. "spider:Mod:User" .. msg.chat_id_, result.sender_user_id_)
-                            database:srem(bot_id .. "spider:Special:User" .. msg.chat_id_, result.sender_user_id_)
-                            database:srem(bot_id .. "spider:Manager" .. msg.chat_id_, result.sender_user_id_)
-                        elseif database:sismember(bot_id .. "spider:Manager" .. msg.chat_id_, msg.sender_user_id_) then
-                            database:srem(bot_id .. "spider:Mod:User" .. msg.chat_id_, result.sender_user_id_)
-                            database:srem(bot_id .. "spider:Special:User" .. msg.chat_id_, result.sender_user_id_)
+                            database:srem(bot_id .. "LARViN:Mod:User" .. msg.chat_id_, result.sender_user_id_)
+                            database:srem(bot_id .. "LARViN:Special:User" .. msg.chat_id_, result.sender_user_id_)
+                            database:srem(bot_id .. "LARViN:Manager" .. msg.chat_id_, result.sender_user_id_)
+                            database:srem(bot_id .. "LARViN:Constructor" .. msg.chat_id_, result.sender_user_id_)
+                        elseif database:sismember(bot_id .. "LARViN:Constructor" .. msg.chat_id_, msg.sender_user_id_) then
+                            database:srem(bot_id .. "LARViN:Mod:User" .. msg.chat_id_, result.sender_user_id_)
+                            database:srem(bot_id .. "LARViN:Special:User" .. msg.chat_id_, result.sender_user_id_)
+                            database:srem(bot_id .. "LARViN:Manager" .. msg.chat_id_, result.sender_user_id_)
+                        elseif database:sismember(bot_id .. "LARViN:Manager" .. msg.chat_id_, msg.sender_user_id_) then
+                            database:srem(bot_id .. "LARViN:Mod:User" .. msg.chat_id_, result.sender_user_id_)
+                            database:srem(bot_id .. "LARViN:Special:User" .. msg.chat_id_, result.sender_user_id_)
                         end
                     end
                     tdcli_function({
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                 end
                 if text == "تاك للكل" and Addictive(msg) then
                     if AddChannel(msg.sender_user_id_) == false then
@@ -6593,9 +6593,9 @@ end
                         local list = taha.members_
                         for k, v in pairs(list) do
                             x = x + 1
-                            if database:get(bot_id .. "spider:User:Name" .. v.user_id_) then
+                            if database:get(bot_id .. "LARViN:User:Name" .. v.user_id_) then
                                 t =
-                                    t .. "" .. x .. " : [@" .. database:get(bot_id .. "spider:User:Name" .. v.user_id_) ..
+                                    t .. "" .. x .. " : [@" .. database:get(bot_id .. "LARViN:User:Name" .. v.user_id_) ..
                                         "]\n"
                             end
                         end
@@ -6692,7 +6692,7 @@ end
                         end
                         return false
                     end
-                    if not database:get(bot_id .. "spider:Kick:Me" .. msg.chat_id_) then
+                    if not database:get(bot_id .. "LARViN:Kick:Me" .. msg.chat_id_) then
                         if Rank_Checking(msg.sender_user_id_, msg.chat_id_) == true then
                             send(msg.chat_id_, msg.id_, "\n܂𓍼 ⁝  عذرا لا استطيع طرد ( " ..
                                 Get_Rank(msg.sender_user_id_, msg.chat_id_) .. " )")
@@ -6753,7 +6753,7 @@ end
                         end
                         return false
                     end
-                    database:del(bot_id .. "spider:Kick:Me" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Kick:Me" .. msg.chat_id_)
                     send(msg.chat_id_, msg.id_, Text)
                 end
                 if text == "تعطيل اطردني" and Owner(msg) then
@@ -6768,7 +6768,7 @@ end
                         end
                         return false
                     end
-                    database:set(bot_id .. "spider:Kick:Me" .. msg.chat_id_, true)
+                    database:set(bot_id .. "LARViN:Kick:Me" .. msg.chat_id_, true)
                     Text = "\n܂𓍼 ⁝ تم تعطيل امر اطردني"
                     send(msg.chat_id_, msg.id_, Text)
                 end
@@ -6786,20 +6786,20 @@ end
                         return false
                     end
                     local username = text:match("^رفع القيود @(.*)")
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if result.id_ then
-                            if Devspider(msg) then
-                                database:srem(bot_id .. "spider:GBan:User", result.id_)
-                                database:srem(bot_id .. "spider:Ban:User" .. msg.chat_id_, result.id_)
-                                database:srem(bot_id .. "spider:Muted:User" .. msg.chat_id_, result.id_)
+                            if DevLARViN(msg) then
+                                database:srem(bot_id .. "LARViN:GBan:User", result.id_)
+                                database:srem(bot_id .. "LARViN:Ban:User" .. msg.chat_id_, result.id_)
+                                database:srem(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, result.id_)
                                 usertext = "\n܂𓍼 ⁝  العضو » [" .. result.title_ .. "](t.me/" ..
                                                (username or "kenwa") .. ")"
                                 status = "\n܂𓍼 ⁝  تم الغاء القيود عنه"
                                 texts = usertext .. status
                                 send(msg.chat_id_, msg.id_, texts)
                             else
-                                database:srem(bot_id .. "spider:Ban:User" .. msg.chat_id_, result.id_)
-                                database:srem(bot_id .. "spider:Muted:User" .. msg.chat_id_, result.id_)
+                                database:srem(bot_id .. "LARViN:Ban:User" .. msg.chat_id_, result.id_)
+                                database:srem(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, result.id_)
                                 Reply_Status(msg, result.id_, "reply",
                                     "\n܂𓍼 ⁝  تم الغاء القيود عنه")
                             end
@@ -6811,7 +6811,7 @@ end
                     tdcli_function({
                         ID = "SearchPublicChat",
                         username_ = username
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                 end
                 if text == "رفع القيود" and Owner(msg) then
                     if AddChannel(msg.sender_user_id_) == false then
@@ -6825,16 +6825,16 @@ end
                         end
                         return false
                     end
-                    function Function_spider(extra, result, success)
-                        if Devspider(msg) then
-                            database:srem(bot_id .. "spider:GBan:User", result.sender_user_id_)
-                            database:srem(bot_id .. "spider:Ban:User" .. msg.chat_id_, result.sender_user_id_)
-                            database:srem(bot_id .. "spider:Muted:User" .. msg.chat_id_, result.sender_user_id_)
+                    function Function_LARViN(extra, result, success)
+                        if DevLARViN(msg) then
+                            database:srem(bot_id .. "LARViN:GBan:User", result.sender_user_id_)
+                            database:srem(bot_id .. "LARViN:Ban:User" .. msg.chat_id_, result.sender_user_id_)
+                            database:srem(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, result.sender_user_id_)
                             Reply_Status(msg, result.sender_user_id_, "reply",
                                 "\n܂𓍼 ⁝  تم الغاء القيود عنه")
                         else
-                            database:srem(bot_id .. "spider:Ban:User" .. msg.chat_id_, result.sender_user_id_)
-                            database:srem(bot_id .. "spider:Muted:User" .. msg.chat_id_, result.sender_user_id_)
+                            database:srem(bot_id .. "LARViN:Ban:User" .. msg.chat_id_, result.sender_user_id_)
+                            database:srem(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, result.sender_user_id_)
                             tdcli_function({
                                 ID = "GetUser",
                                 user_id_ = result.sender_user_id_
@@ -6850,7 +6850,7 @@ end
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                 end
                 if text and text:match("^كشف القيود @(.*)") and Owner(msg) then
                     if AddChannel(msg.sender_user_id_) == false then
@@ -6865,19 +6865,19 @@ end
                         return false
                     end
                     local username = text:match("^كشف القيود @(.*)")
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if result.id_ then
-                            if database:sismember(bot_id .. "spider:Muted:User" .. msg.chat_id_, result.id_) then
+                            if database:sismember(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, result.id_) then
                                 Muted = "مكتوم"
                             else
                                 Muted = "غير مكتوم"
                             end
-                            if database:sismember(bot_id .. "spider:Ban:User" .. msg.chat_id_, result.id_) then
+                            if database:sismember(bot_id .. "LARViN:Ban:User" .. msg.chat_id_, result.id_) then
                                 Ban = "محظور"
                             else
                                 Ban = "غير محظور"
                             end
-                            if database:sismember(bot_id .. "spider:GBan:User", result.id_) then
+                            if database:sismember(bot_id .. "LARViN:GBan:User", result.id_) then
                                 GBan = "محظور عام"
                             else
                                 GBan = "غير محظور عام"
@@ -6892,7 +6892,7 @@ end
                     tdcli_function({
                         ID = "SearchPublicChat",
                         username_ = username
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                 end
 
                 if text == "كشف القيود" and Owner(msg) then
@@ -6907,18 +6907,18 @@ end
                         end
                         return false
                     end
-                    function Function_spider(extra, result, success)
-                        if database:sismember(bot_id .. "spider:Muted:User" .. msg.chat_id_, result.sender_user_id_) then
+                    function Function_LARViN(extra, result, success)
+                        if database:sismember(bot_id .. "LARViN:Muted:User" .. msg.chat_id_, result.sender_user_id_) then
                             Muted = "مكتوم"
                         else
                             Muted = "غير مكتوم"
                         end
-                        if database:sismember(bot_id .. "spider:Ban:User" .. msg.chat_id_, result.sender_user_id_) then
+                        if database:sismember(bot_id .. "LARViN:Ban:User" .. msg.chat_id_, result.sender_user_id_) then
                             Ban = "محظور"
                         else
                             Ban = "غير محظور"
                         end
-                        if database:sismember(bot_id .. "spider:GBan:User", result.sender_user_id_) then
+                        if database:sismember(bot_id .. "LARViN:GBan:User", result.sender_user_id_) then
                             GBan = "محظور عام"
                         else
                             GBan = "غير محظور عام"
@@ -6932,7 +6932,7 @@ end
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                 end
 
                 if text and text:match("^ضع اسم (.*)") and Owner(msg) or text and text:match("^وضع اسم (.*)") and
@@ -6994,7 +6994,7 @@ end
                         for i = 0, #admins do
                             if data.members_[i].bot_info_ == false and data.members_[i].status_.ID ==
                                 "ChatMemberStatusEditor" then
-                                database:sadd(bot_id .. "spider:Mod:User" .. msg.chat_id_, admins[i].user_id_)
+                                database:sadd(bot_id .. "LARViN:Mod:User" .. msg.chat_id_, admins[i].user_id_)
                                 num2 = num2 + 1
                                 tdcli_function({
                                     ID = "GetUser",
@@ -7003,11 +7003,11 @@ end
                                     if b.username_ == true then
                                     end
                                     if b.first_name_ == false then
-                                        database:srem(bot_id .. "spider:Mod:User" .. msg.chat_id_, admins[i].user_id_)
+                                        database:srem(bot_id .. "LARViN:Mod:User" .. msg.chat_id_, admins[i].user_id_)
                                     end
                                 end, nil)
                             else
-                                database:srem(bot_id .. "spider:Mod:User" .. msg.chat_id_, admins[i].user_id_)
+                                database:srem(bot_id .. "LARViN:Mod:User" .. msg.chat_id_, admins[i].user_id_)
                             end
                         end
                         if num2 == 0 then
@@ -7040,7 +7040,7 @@ end
                                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝  حساب المنشئ محذوف")
                                         return false
                                     end
-                                    local UserName = (b.username_ or "spiderTEAM")
+                                    local UserName = (b.username_ or "LARViNTEAM")
                                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ منشئ المجموعه ~ [" ..
                                         b.first_name_ .. "](T.me/" .. UserName .. ")")
                                 end, nil)
@@ -7072,16 +7072,16 @@ end
                                 send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ حساب المنشئ محذوف")
                                 return false
                             end
-                            local UserName = (b.username_ or "spiderTEAM")
+                            local UserName = (b.username_ or "LARViNTEAM")
                             send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم ترقية منشئ المجموعه ~ [" ..
                                 b.first_name_ .. "](T.me/" .. UserName .. ")")
-                            database:sadd(bot_id .. "spider:Basic:Constructor" .. msg.chat_id_, b.id_)
+                            database:sadd(bot_id .. "LARViN:Basic:Constructor" .. msg.chat_id_, b.id_)
                         end, nil)
                     end, nil)
                 end
 
                 if text == "غادر" then
-                    if DevBot(msg) and not database:get(bot_id .. "spider:Left:Bot" .. msg.chat_id_) then
+                    if DevBot(msg) and not database:get(bot_id .. "LARViN:Left:Bot" .. msg.chat_id_) then
                         tdcli_function({
                             ID = "ChangeChatMemberStatus",
                             chat_id_ = msg.chat_id_,
@@ -7092,13 +7092,13 @@ end
                         }, function(e, g)
                         end, nil)
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝  تم مغادرة المجموعه")
-                        database:srem(bot_id .. "spider:Chek:Groups", msg.chat_id_)
+                        database:srem(bot_id .. "LARViN:Chek:Groups", msg.chat_id_)
                     end
                     return false
                 end
                 if text and text:match("^غادر (-%d+)$") then
                     local GP_ID = {string.match(text, "^(غادر) (-%d+)$")}
-                    if DevBot(msg) and not database:get(bot_id .. "spider:Left:Bot" .. msg.chat_id_) then
+                    if DevBot(msg) and not database:get(bot_id .. "LARViN:Left:Bot" .. msg.chat_id_) then
                         tdcli_function({
                             ID = "ChangeChatMemberStatus",
                             chat_id_ = GP_ID[2],
@@ -7111,21 +7111,21 @@ end
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝  تم مغادرة المجموعه")
                         send(GP_ID[2], 0,
                             "܂𓍼 ⁝  تم مغادرة المجموعه بامر من مطور البوت")
-                        database:srem(bot_id .. "spider:Chek:Groups", GP_ID[2])
+                        database:srem(bot_id .. "LARViN:Chek:Groups", GP_ID[2])
                         return false
                     end
                 end
-                if text == "تفعيل المغادره" and Devspider(msg) then
-                    database:del(bot_id .. "spider:Left:Bot" .. msg.chat_id_)
+                if text == "تفعيل المغادره" and DevLARViN(msg) then
+                    database:del(bot_id .. "LARViN:Left:Bot" .. msg.chat_id_)
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم تفعيل مغادرة البوت")
                     return false
                 end
-                if text == "تعطيل المغادره" and Devspider(msg) then
-                    database:set(bot_id .. "spider:Left:Bot" .. msg.chat_id_, true)
+                if text == "تعطيل المغادره" and DevLARViN(msg) then
+                    database:set(bot_id .. "LARViN:Left:Bot" .. msg.chat_id_, true)
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم تعطيل مغادرة البوت")
                     return false
                 end
-                if text == (database:get(bot_id .. "spider:Name:Bot") or "لارفين") then
+                if text == (database:get(bot_id .. "LARViN:Name:Bot") or "لارفين") then
                     if AddChannel(msg.sender_user_id_) == false then
                         local textchuser = database:get(bot_id .. 'text:ch:user')
                         if textchuser then
@@ -7137,7 +7137,7 @@ end
                         end
                         return false
                     end
-                    Namebot = (database:get(bot_id .. "spider:Name:Bot") or "لارفين")
+                    Namebot = (database:get(bot_id .. "LARViN:Name:Bot") or "لارفين")
                     local namebot = {"عمري فداك " .. Namebot .. " كول حب ",
                                      "كول حبيبي ؟ اني " .. Namebot,
                                      'ها حبي وياك مكتب ئلسيد .', 'الو الو رد مخنوك',
@@ -7151,12 +7151,12 @@ end
                 end
 
                 if text == "بوت" then
-                    Namebot = (database:get(bot_id .. "spider:Name:Bot") or "لارفين")
+                    Namebot = (database:get(bot_id .. "LARViN:Name:Bot") or "لارفين")
                     send(msg.chat_id_, msg.id_, "اسمي القميل [" .. Namebot .. "] ")
                 end
                 if text == "تغير اسم البوت" or text == "تغيير اسم البوت" then
-                    if Devspider(msg) then
-                        database:setex(bot_id .. "spider:Set:Name:Bot" .. msg.sender_user_id_, 300, true)
+                    if DevLARViN(msg) then
+                        database:setex(bot_id .. "LARViN:Set:Name:Bot" .. msg.sender_user_id_, 300, true)
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝  ارسل لي الاسم الان ")
                     end
                     return false
@@ -7197,365 +7197,365 @@ end
                     })
                 end
                 if text == "اذاعه خاص" and msg.reply_to_message_id_ == 0 and DevBot(msg) then
-                    if database:get(bot_id .. "spider:Status:Bc") and not Devspider(msg) then
+                    if database:get(bot_id .. "LARViN:Status:Bc") and not DevLARViN(msg) then
                         send(msg.chat_id_, msg.id_,
                             "܂𓍼 ⁝ الاذاعه معطله من قبل المطور الاساسي")
                         return false
                     end
-                    database:setex(bot_id .. "spider:spider:Bc:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_, 600,
+                    database:setex(bot_id .. "LARViN:LARViN:Bc:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_, 600,
                         true)
                     send(msg.chat_id_, msg.id_,
                         "܂𓍼 ⁝ ارسل لي سواء ~ { ملصق, متحركه, صوره, رساله }\n܂𓍼 ⁝ للخروج ارسل الغاء ")
                     return false
                 end
                 if text == "اذاعه" and msg.reply_to_message_id_ == 0 and DevBot(msg) then
-                    if database:get(bot_id .. "spider:Status:Bc") and not Devspider(msg) then
+                    if database:get(bot_id .. "LARViN:Status:Bc") and not DevLARViN(msg) then
                         send(msg.chat_id_, msg.id_,
                             "܂𓍼 ⁝ الاذاعه معطله من قبل المطور الاساسي")
                         return false
                     end
-                    database:setex(bot_id .. "spider:spider:Bc:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_,
+                    database:setex(bot_id .. "LARViN:LARViN:Bc:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_,
                         600, true)
                     send(msg.chat_id_, msg.id_,
                         "܂𓍼 ⁝ ارسل لي سواء ~ { ملصق, متحركه, صوره, رساله }\n܂𓍼 ⁝ للخروج ارسل الغاء ")
                     return false
                 end
                 if text == "اذاعه بالتثبيت" and msg.reply_to_message_id_ == 0 and DevBot(msg) then
-                    if database:get(bot_id .. "spider:Status:Bc") and not Devspider(msg) then
+                    if database:get(bot_id .. "LARViN:Status:Bc") and not DevLARViN(msg) then
                         send(msg.chat_id_, msg.id_,
                             "܂𓍼 ⁝ الاذاعه معطله من قبل المطور الاساسي")
                         return false
                     end
-                    database:setex(bot_id .. "spider:spider:Bc:Grops:Pin" .. msg.chat_id_ .. ":" .. msg.sender_user_id_,
+                    database:setex(bot_id .. "LARViN:LARViN:Bc:Grops:Pin" .. msg.chat_id_ .. ":" .. msg.sender_user_id_,
                         600, true)
                     send(msg.chat_id_, msg.id_,
                         "܂𓍼 ⁝ ارسل لي سواء ~ { ملصق, متحركه, صوره, رساله }\n܂𓍼 ⁝ للخروج ارسل الغاء ")
                     return false
                 end
                 if text == "اذاعه بالتوجيه" and msg.reply_to_message_id_ == 0 and DevBot(msg) then
-                    if database:get(bot_id .. "spider:Status:Bc") and not Devspider(msg) then
+                    if database:get(bot_id .. "LARViN:Status:Bc") and not DevLARViN(msg) then
                         send(msg.chat_id_, msg.id_,
                             "܂𓍼 ⁝ الاذاعه معطله من قبل المطور الاساسي")
                         return false
                     end
-                    database:setex(bot_id .. "spider:spider:Fwd:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_,
+                    database:setex(bot_id .. "LARViN:LARViN:Fwd:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_,
                         600, true)
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ ارسل لي التوجيه الان")
                     return false
                 end
                 if text == "اذاعه بالتوجيه خاص" and msg.reply_to_message_id_ == 0 and DevBot(msg) then
-                    if database:get(bot_id .. "spider:Status:Bc") and not Devspider(msg) then
+                    if database:get(bot_id .. "LARViN:Status:Bc") and not DevLARViN(msg) then
                         send(msg.chat_id_, msg.id_,
                             "܂𓍼 ⁝ الاذاعه معطله من قبل المطور الاساسي")
                         return false
                     end
-                    database:setex(bot_id .. "spider:spider:Fwd:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_, 600,
+                    database:setex(bot_id .. "LARViN:LARViN:Fwd:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_, 600,
                         true)
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ ارسل لي التوجيه الان")
                     return false
                 end
 
-                if text == "تفعيل الاذاعه" and Devspider(msg) then
-                    database:del(bot_id .. "spider:Status:Bc")
+                if text == "تفعيل الاذاعه" and DevLARViN(msg) then
+                    database:del(bot_id .. "LARViN:Status:Bc")
                     send(msg.chat_id_, msg.id_, "\n܂𓍼 ⁝ تم تفعيل الاذاعه ")
                     return false
                 end
-                if text == "تعطيل الاذاعه" and Devspider(msg) then
-                    database:set(bot_id .. "spider:Status:Bc", true)
+                if text == "تعطيل الاذاعه" and DevLARViN(msg) then
+                    database:set(bot_id .. "LARViN:Status:Bc", true)
                     send(msg.chat_id_, msg.id_, "\n܂𓍼 ⁝ تم تعطيل الاذاعه")
                     return false
                 end
 
                 if text == "الاعدادات" and Addictive(msg) then
-                    if database:get(bot_id .. "spider:lockpin" .. msg.chat_id_) then
+                    if database:get(bot_id .. "LARViN:lockpin" .. msg.chat_id_) then
                         lock_pin = "✓"
                     else
                         lock_pin = "✘"
                     end
-                    if database:get(bot_id .. "spider:Lock:tagservr" .. msg.chat_id_) then
+                    if database:get(bot_id .. "LARViN:Lock:tagservr" .. msg.chat_id_) then
                         lock_tagservr = "✓"
                     else
                         lock_tagservr = "✘"
                     end
-                    if database:get(bot_id .. "spider:Lock:text" .. msg.chat_id_) then
+                    if database:get(bot_id .. "LARViN:Lock:text" .. msg.chat_id_) then
                         lock_text = "✓"
                     else
                         lock_text = "✘"
                     end
-                    if database:get(bot_id .. "spider:Lock:AddMempar" .. msg.chat_id_) == "kick" then
+                    if database:get(bot_id .. "LARViN:Lock:AddMempar" .. msg.chat_id_) == "kick" then
                         lock_add = "✓"
                     else
                         lock_add = "✘"
                     end
-                    if database:get(bot_id .. "spider:Lock:Join" .. msg.chat_id_) == "kick" then
+                    if database:get(bot_id .. "LARViN:Lock:Join" .. msg.chat_id_) == "kick" then
                         lock_join = "✓"
                     else
                         lock_join = "✘"
                     end
-                    if database:get(bot_id .. "spider:Lock:edit" .. msg.chat_id_) then
+                    if database:get(bot_id .. "LARViN:Lock:edit" .. msg.chat_id_) then
                         lock_edit = "✓"
                     else
                         lock_edit = "✘"
                     end
-                    if database:get(bot_id .. "spider:Get:Welcome:Group" .. msg.chat_id_) then
+                    if database:get(bot_id .. "LARViN:Get:Welcome:Group" .. msg.chat_id_) then
                         welcome = "✓"
                     else
                         welcome = "✘"
                     end
-                    if database:hget(bot_id .. "spider:flooding:settings:" .. msg.chat_id_, "flood") == "kick" then
+                    if database:hget(bot_id .. "LARViN:flooding:settings:" .. msg.chat_id_, "flood") == "kick" then
                         flood = "بالطرد"
-                    elseif database:hget(bot_id .. "spider:flooding:settings:" .. msg.chat_id_, "flood") == "keed" then
+                    elseif database:hget(bot_id .. "LARViN:flooding:settings:" .. msg.chat_id_, "flood") == "keed" then
                         flood = "بالتقيد"
-                    elseif database:hget(bot_id .. "spider:flooding:settings:" .. msg.chat_id_, "flood") == "mute" then
+                    elseif database:hget(bot_id .. "LARViN:flooding:settings:" .. msg.chat_id_, "flood") == "mute" then
                         flood = "بالكتم"
-                    elseif database:hget(bot_id .. "spider:flooding:settings:" .. msg.chat_id_, "flood") == "del" then
+                    elseif database:hget(bot_id .. "LARViN:flooding:settings:" .. msg.chat_id_, "flood") == "del" then
                         flood = "بالمسح"
                     else
                         flood = "✘"
                     end
-                    if database:get(bot_id .. "spider:Lock:Photo" .. msg.chat_id_) == "del" then
+                    if database:get(bot_id .. "LARViN:Lock:Photo" .. msg.chat_id_) == "del" then
                         lock_photo = "✓"
-                    elseif database:get(bot_id .. "spider:Lock:Photo" .. msg.chat_id_) == "ked" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Photo" .. msg.chat_id_) == "ked" then
                         lock_photo = "بالتقيد"
-                    elseif database:get(bot_id .. "spider:Lock:Photo" .. msg.chat_id_) == "ktm" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Photo" .. msg.chat_id_) == "ktm" then
                         lock_photo = "بالكتم"
-                    elseif database:get(bot_id .. "spider:Lock:Photo" .. msg.chat_id_) == "kick" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Photo" .. msg.chat_id_) == "kick" then
                         lock_photo = "بالطرد"
                     else
                         lock_photo = "✘"
                     end
-                    if database:get(bot_id .. "spider:Lock:Contact" .. msg.chat_id_) == "del" then
+                    if database:get(bot_id .. "LARViN:Lock:Contact" .. msg.chat_id_) == "del" then
                         lock_phon = "✓"
-                    elseif database:get(bot_id .. "spider:Lock:Contact" .. msg.chat_id_) == "ked" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Contact" .. msg.chat_id_) == "ked" then
                         lock_phon = "بالتقيد"
-                    elseif database:get(bot_id .. "spider:Lock:Contact" .. msg.chat_id_) == "ktm" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Contact" .. msg.chat_id_) == "ktm" then
                         lock_phon = "بالكتم"
-                    elseif database:get(bot_id .. "spider:Lock:Contact" .. msg.chat_id_) == "kick" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Contact" .. msg.chat_id_) == "kick" then
                         lock_phon = "بالطرد"
                     else
                         lock_phon = "✘"
                     end
-                    if database:get(bot_id .. "spider:Lock:Link" .. msg.chat_id_) == "del" then
+                    if database:get(bot_id .. "LARViN:Lock:Link" .. msg.chat_id_) == "del" then
                         lock_links = "✓"
-                    elseif database:get(bot_id .. "spider:Lock:Link" .. msg.chat_id_) == "ked" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Link" .. msg.chat_id_) == "ked" then
                         lock_links = "بالتقيد"
-                    elseif database:get(bot_id .. "spider:Lock:Link" .. msg.chat_id_) == "ktm" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Link" .. msg.chat_id_) == "ktm" then
                         lock_links = "بالكتم"
-                    elseif database:get(bot_id .. "spider:Lock:Link" .. msg.chat_id_) == "kick" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Link" .. msg.chat_id_) == "kick" then
                         lock_links = "بالطرد"
                     else
                         lock_links = "✘"
                     end
-                    if database:get(bot_id .. "spider:Lock:Cmd" .. msg.chat_id_) == "del" then
+                    if database:get(bot_id .. "LARViN:Lock:Cmd" .. msg.chat_id_) == "del" then
                         lock_cmds = "✓"
-                    elseif database:get(bot_id .. "spider:Lock:Cmd" .. msg.chat_id_) == "ked" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Cmd" .. msg.chat_id_) == "ked" then
                         lock_cmds = "بالتقيد"
-                    elseif database:get(bot_id .. "spider:Lock:Cmd" .. msg.chat_id_) == "ktm" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Cmd" .. msg.chat_id_) == "ktm" then
                         lock_cmds = "بالكتم"
-                    elseif database:get(bot_id .. "spider:Lock:Cmd" .. msg.chat_id_) == "kick" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Cmd" .. msg.chat_id_) == "kick" then
                         lock_cmds = "بالطرد"
                     else
                         lock_cmds = "✘"
                     end
-                    if database:get(bot_id .. "spider:Lock:User:Name" .. msg.chat_id_) == "del" then
+                    if database:get(bot_id .. "LARViN:Lock:User:Name" .. msg.chat_id_) == "del" then
                         lock_user = "✓"
-                    elseif database:get(bot_id .. "spider:Lock:User:Name" .. msg.chat_id_) == "ked" then
+                    elseif database:get(bot_id .. "LARViN:Lock:User:Name" .. msg.chat_id_) == "ked" then
                         lock_user = "بالتقيد"
-                    elseif database:get(bot_id .. "spider:Lock:User:Name" .. msg.chat_id_) == "ktm" then
+                    elseif database:get(bot_id .. "LARViN:Lock:User:Name" .. msg.chat_id_) == "ktm" then
                         lock_user = "بالكتم"
-                    elseif database:get(bot_id .. "spider:Lock:User:Name" .. msg.chat_id_) == "kick" then
+                    elseif database:get(bot_id .. "LARViN:Lock:User:Name" .. msg.chat_id_) == "kick" then
                         lock_user = "بالطرد"
                     else
                         lock_user = "✘"
                     end
-                    if database:get(bot_id .. "spider:Lock:hashtak" .. msg.chat_id_) == "del" then
+                    if database:get(bot_id .. "LARViN:Lock:hashtak" .. msg.chat_id_) == "del" then
                         lock_hash = "✓"
-                    elseif database:get(bot_id .. "spider:Lock:hashtak" .. msg.chat_id_) == "ked" then
+                    elseif database:get(bot_id .. "LARViN:Lock:hashtak" .. msg.chat_id_) == "ked" then
                         lock_hash = "بالتقيد"
-                    elseif database:get(bot_id .. "spider:Lock:hashtak" .. msg.chat_id_) == "ktm" then
+                    elseif database:get(bot_id .. "LARViN:Lock:hashtak" .. msg.chat_id_) == "ktm" then
                         lock_hash = "بالكتم"
-                    elseif database:get(bot_id .. "spider:Lock:hashtak" .. msg.chat_id_) == "kick" then
+                    elseif database:get(bot_id .. "LARViN:Lock:hashtak" .. msg.chat_id_) == "kick" then
                         lock_hash = "بالطرد"
                     else
                         lock_hash = "✘"
                     end
-                    if database:get(bot_id .. "spider:Lock:vico" .. msg.chat_id_) == "del" then
+                    if database:get(bot_id .. "LARViN:Lock:vico" .. msg.chat_id_) == "del" then
                         lock_muse = "✓"
-                    elseif database:get(bot_id .. "spider:Lock:vico" .. msg.chat_id_) == "ked" then
+                    elseif database:get(bot_id .. "LARViN:Lock:vico" .. msg.chat_id_) == "ked" then
                         lock_muse = "بالتقيد"
-                    elseif database:get(bot_id .. "spider:Lock:vico" .. msg.chat_id_) == "ktm" then
+                    elseif database:get(bot_id .. "LARViN:Lock:vico" .. msg.chat_id_) == "ktm" then
                         lock_muse = "بالكتم"
-                    elseif database:get(bot_id .. "spider:Lock:vico" .. msg.chat_id_) == "kick" then
+                    elseif database:get(bot_id .. "LARViN:Lock:vico" .. msg.chat_id_) == "kick" then
                         lock_muse = "بالطرد"
                     else
                         lock_muse = "✘"
                     end
-                    if database:get(bot_id .. "spider:Lock:Video" .. msg.chat_id_) == "del" then
+                    if database:get(bot_id .. "LARViN:Lock:Video" .. msg.chat_id_) == "del" then
                         lock_ved = "✓"
-                    elseif database:get(bot_id .. "spider:Lock:Video" .. msg.chat_id_) == "ked" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Video" .. msg.chat_id_) == "ked" then
                         lock_ved = "بالتقيد"
-                    elseif database:get(bot_id .. "spider:Lock:Video" .. msg.chat_id_) == "ktm" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Video" .. msg.chat_id_) == "ktm" then
                         lock_ved = "بالكتم"
-                    elseif database:get(bot_id .. "spider:Lock:Video" .. msg.chat_id_) == "kick" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Video" .. msg.chat_id_) == "kick" then
                         lock_ved = "بالطرد"
                     else
                         lock_ved = "✘"
                     end
-                    if database:get(bot_id .. "spider:Lock:Animation" .. msg.chat_id_) == "del" then
+                    if database:get(bot_id .. "LARViN:Lock:Animation" .. msg.chat_id_) == "del" then
                         lock_gif = "✓"
-                    elseif database:get(bot_id .. "spider:Lock:Animation" .. msg.chat_id_) == "ked" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Animation" .. msg.chat_id_) == "ked" then
                         lock_gif = "بالتقيد"
-                    elseif database:get(bot_id .. "spider:Lock:Animation" .. msg.chat_id_) == "ktm" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Animation" .. msg.chat_id_) == "ktm" then
                         lock_gif = "بالكتم"
-                    elseif database:get(bot_id .. "spider:Lock:Animation" .. msg.chat_id_) == "kick" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Animation" .. msg.chat_id_) == "kick" then
                         lock_gif = "بالطرد"
                     else
                         lock_gif = "✘"
                     end
-                    if database:get(bot_id .. "spider:Lock:Sticker" .. msg.chat_id_) == "del" then
+                    if database:get(bot_id .. "LARViN:Lock:Sticker" .. msg.chat_id_) == "del" then
                         lock_ste = "✓"
-                    elseif database:get(bot_id .. "spider:Lock:Sticker" .. msg.chat_id_) == "ked" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Sticker" .. msg.chat_id_) == "ked" then
                         lock_ste = "بالتقيد "
-                    elseif database:get(bot_id .. "spider:Lock:Sticker" .. msg.chat_id_) == "ktm" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Sticker" .. msg.chat_id_) == "ktm" then
                         lock_ste = "بالكتم "
-                    elseif database:get(bot_id .. "spider:Lock:Sticker" .. msg.chat_id_) == "kick" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Sticker" .. msg.chat_id_) == "kick" then
                         lock_ste = "بالطرد"
                     else
                         lock_ste = "✘"
                     end
-                    if database:get(bot_id .. "spider:Lock:geam" .. msg.chat_id_) == "del" then
+                    if database:get(bot_id .. "LARViN:Lock:geam" .. msg.chat_id_) == "del" then
                         lock_geam = "✓"
-                    elseif database:get(bot_id .. "spider:Lock:geam" .. msg.chat_id_) == "ked" then
+                    elseif database:get(bot_id .. "LARViN:Lock:geam" .. msg.chat_id_) == "ked" then
                         lock_geam = "بالتقيد"
-                    elseif database:get(bot_id .. "spider:Lock:geam" .. msg.chat_id_) == "ktm" then
+                    elseif database:get(bot_id .. "LARViN:Lock:geam" .. msg.chat_id_) == "ktm" then
                         lock_geam = "بالكتم"
-                    elseif database:get(bot_id .. "spider:Lock:geam" .. msg.chat_id_) == "kick" then
+                    elseif database:get(bot_id .. "LARViN:Lock:geam" .. msg.chat_id_) == "kick" then
                         lock_geam = "بالطرد"
                     else
                         lock_geam = "✘"
                     end
-                    if database:get(bot_id .. "spider:Lock:vico" .. msg.chat_id_) == "del" then
+                    if database:get(bot_id .. "LARViN:Lock:vico" .. msg.chat_id_) == "del" then
                         lock_vico = "✓"
-                    elseif database:get(bot_id .. "spider:Lock:vico" .. msg.chat_id_) == "ked" then
+                    elseif database:get(bot_id .. "LARViN:Lock:vico" .. msg.chat_id_) == "ked" then
                         lock_vico = "بالتقيد"
-                    elseif database:get(bot_id .. "spider:Lock:vico" .. msg.chat_id_) == "ktm" then
+                    elseif database:get(bot_id .. "LARViN:Lock:vico" .. msg.chat_id_) == "ktm" then
                         lock_vico = "بالكتم"
-                    elseif database:get(bot_id .. "spider:Lock:vico" .. msg.chat_id_) == "kick" then
+                    elseif database:get(bot_id .. "LARViN:Lock:vico" .. msg.chat_id_) == "kick" then
                         lock_vico = "بالطرد"
                     else
                         lock_vico = "✘"
                     end
-                    if database:get(bot_id .. "spider:Lock:Keyboard" .. msg.chat_id_) == "del" then
+                    if database:get(bot_id .. "LARViN:Lock:Keyboard" .. msg.chat_id_) == "del" then
                         lock_inlin = "✓"
-                    elseif database:get(bot_id .. "spider:Lock:Keyboard" .. msg.chat_id_) == "ked" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Keyboard" .. msg.chat_id_) == "ked" then
                         lock_inlin = "بالتقيد"
-                    elseif database:get(bot_id .. "spider:Lock:Keyboard" .. msg.chat_id_) == "ktm" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Keyboard" .. msg.chat_id_) == "ktm" then
                         lock_inlin = "بالكتم"
-                    elseif database:get(bot_id .. "spider:Lock:Keyboard" .. msg.chat_id_) == "kick" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Keyboard" .. msg.chat_id_) == "kick" then
                         lock_inlin = "بالطرد"
                     else
                         lock_inlin = "✘"
                     end
-                    if database:get(bot_id .. "spider:Lock:forward" .. msg.chat_id_) == "del" then
+                    if database:get(bot_id .. "LARViN:Lock:forward" .. msg.chat_id_) == "del" then
                         lock_fwd = "✓"
-                    elseif database:get(bot_id .. "spider:Lock:forward" .. msg.chat_id_) == "ked" then
+                    elseif database:get(bot_id .. "LARViN:Lock:forward" .. msg.chat_id_) == "ked" then
                         lock_fwd = "بالتقيد"
-                    elseif database:get(bot_id .. "spider:Lock:forward" .. msg.chat_id_) == "ktm" then
+                    elseif database:get(bot_id .. "LARViN:Lock:forward" .. msg.chat_id_) == "ktm" then
                         lock_fwd = "بالكتم"
-                    elseif database:get(bot_id .. "spider:Lock:forward" .. msg.chat_id_) == "kick" then
+                    elseif database:get(bot_id .. "LARViN:Lock:forward" .. msg.chat_id_) == "kick" then
                         lock_fwd = "بالطرد"
                     else
                         lock_fwd = "✘"
                     end
-                    if database:get(bot_id .. "spider:Lock:Document" .. msg.chat_id_) == "del" then
+                    if database:get(bot_id .. "LARViN:Lock:Document" .. msg.chat_id_) == "del" then
                         lock_file = "✓"
-                    elseif database:get(bot_id .. "spider:Lock:Document" .. msg.chat_id_) == "ked" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Document" .. msg.chat_id_) == "ked" then
                         lock_file = "بالتقيد"
-                    elseif database:get(bot_id .. "spider:Lock:Document" .. msg.chat_id_) == "ktm" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Document" .. msg.chat_id_) == "ktm" then
                         lock_file = "بالكتم"
-                    elseif database:get(bot_id .. "spider:Lock:Document" .. msg.chat_id_) == "kick" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Document" .. msg.chat_id_) == "kick" then
                         lock_file = "بالطرد"
                     else
                         lock_file = "✘"
                     end
-                    if database:get(bot_id .. "spider:Lock:Unsupported" .. msg.chat_id_) == "del" then
+                    if database:get(bot_id .. "LARViN:Lock:Unsupported" .. msg.chat_id_) == "del" then
                         lock_self = "✓"
-                    elseif database:get(bot_id .. "spider:Lock:Unsupported" .. msg.chat_id_) == "ked" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Unsupported" .. msg.chat_id_) == "ked" then
                         lock_self = "بالتقيد"
-                    elseif database:get(bot_id .. "spider:Lock:Unsupported" .. msg.chat_id_) == "ktm" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Unsupported" .. msg.chat_id_) == "ktm" then
                         lock_self = "بالكتم"
-                    elseif database:get(bot_id .. "spider:Lock:Unsupported" .. msg.chat_id_) == "kick" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Unsupported" .. msg.chat_id_) == "kick" then
                         lock_self = "بالطرد"
                     else
                         lock_self = "✘"
                     end
-                    if database:get(bot_id .. "spider:Lock:Bot:kick" .. msg.chat_id_) == "del" then
+                    if database:get(bot_id .. "LARViN:Lock:Bot:kick" .. msg.chat_id_) == "del" then
                         lock_bots = "✓"
-                    elseif database:get(bot_id .. "spider:Lock:Bot:kick" .. msg.chat_id_) == "ked" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Bot:kick" .. msg.chat_id_) == "ked" then
                         lock_bots = "بالتقيد"
-                    elseif database:get(bot_id .. "spider:Lock:Bot:kick" .. msg.chat_id_) == "kick" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Bot:kick" .. msg.chat_id_) == "kick" then
                         lock_bots = "بالطرد"
                     else
                         lock_bots = "✘"
                     end
-                    if database:get(bot_id .. "spider:Lock:Markdaun" .. msg.chat_id_) == "del" then
+                    if database:get(bot_id .. "LARViN:Lock:Markdaun" .. msg.chat_id_) == "del" then
                         lock_mark = "✓"
-                    elseif database:get(bot_id .. "spider:Lock:Markdaun" .. msg.chat_id_) == "ked" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Markdaun" .. msg.chat_id_) == "ked" then
                         lock_mark = "بالتقيد"
-                    elseif database:get(bot_id .. "spider:Lock:Markdaun" .. msg.chat_id_) == "ktm" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Markdaun" .. msg.chat_id_) == "ktm" then
                         lock_mark = "بالكتم"
-                    elseif database:get(bot_id .. "spider:Lock:Markdaun" .. msg.chat_id_) == "kick" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Markdaun" .. msg.chat_id_) == "kick" then
                         lock_mark = "بالطرد"
                     else
                         lock_mark = "✘"
                     end
-                    if database:get(bot_id .. "spider:Lock:Spam" .. msg.chat_id_) == "del" then
+                    if database:get(bot_id .. "LARViN:Lock:Spam" .. msg.chat_id_) == "del" then
                         lock_spam = "✓"
-                    elseif database:get(bot_id .. "spider:Lock:Spam" .. msg.chat_id_) == "ked" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Spam" .. msg.chat_id_) == "ked" then
                         lock_spam = "بالتقيد"
-                    elseif database:get(bot_id .. "spider:Lock:Spam" .. msg.chat_id_) == "ktm" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Spam" .. msg.chat_id_) == "ktm" then
                         lock_spam = "بالكتم"
-                    elseif database:get(bot_id .. "spider:Lock:Spam" .. msg.chat_id_) == "kick" then
+                    elseif database:get(bot_id .. "LARViN:Lock:Spam" .. msg.chat_id_) == "kick" then
                         lock_spam = "بالطرد"
                     else
                         lock_spam = "✘"
                     end
-                    if not database:get(bot_id .. "spider:Reply:Manager" .. msg.chat_id_) then
+                    if not database:get(bot_id .. "LARViN:Reply:Manager" .. msg.chat_id_) then
                         rdmder = "✓"
                     else
                         rdmder = "✘"
                     end
-                    if not database:get(bot_id .. "spider:Reply:Sudo" .. msg.chat_id_) then
+                    if not database:get(bot_id .. "LARViN:Reply:Sudo" .. msg.chat_id_) then
                         rdsudo = "✓"
                     else
                         rdsudo = "✘"
                     end
-                    if not database:get(bot_id .. "spider:Lock:ID:Bot" .. msg.chat_id_) then
+                    if not database:get(bot_id .. "LARViN:Lock:ID:Bot" .. msg.chat_id_) then
                         idgp = "✓"
                     else
                         idgp = "✘"
                     end
-                    if not database:get(bot_id .. "spider:Lock:ID:Bot:Photo" .. msg.chat_id_) then
+                    if not database:get(bot_id .. "LARViN:Lock:ID:Bot:Photo" .. msg.chat_id_) then
                         idph = "✓"
                     else
                         idph = "✘"
                     end
-                    if not database:get(bot_id .. "spider:Lock:kick" .. msg.chat_id_) then
+                    if not database:get(bot_id .. "LARViN:Lock:kick" .. msg.chat_id_) then
                         setadd = "✓"
                     else
                         setadd = "✘"
                     end
-                    if not database:get(bot_id .. "spider:Lock:Add:Bot" .. msg.chat_id_) then
+                    if not database:get(bot_id .. "LARViN:Lock:Add:Bot" .. msg.chat_id_) then
                         banm = "✓"
                     else
                         banm = "✘"
                     end
-                    if not database:get(bot_id .. "spider:Kick:Me" .. msg.chat_id_) then
+                    if not database:get(bot_id .. "LARViN:Kick:Me" .. msg.chat_id_) then
                         kickme = "✓"
                     else
                         kickme = "✘"
                     end
-                    Num_Flood = database:hget(bot_id .. "spider:flooding:settings:" .. msg.chat_id_, "floodmax") or 0
+                    Num_Flood = database:hget(bot_id .. "LARViN:flooding:settings:" .. msg.chat_id_, "floodmax") or 0
                     local text = "*\n܂𓍼 ⁝ ااعدادات المجموعه " ..
                                      "\n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ " ..
                                      "\n܂𓍼 ⁝ علامة ال {✓} تعني مفعل" ..
@@ -7599,7 +7599,7 @@ end
                         return false
                     end
                     send(msg.chat_id_, msg.id_, '܂𓍼 ⁝ تم تعطيل اوامر التحشيش')
-                    database:set(bot_id .. "spider:Fun_Bots" .. msg.chat_id_, "true")
+                    database:set(bot_id .. "LARViN:Fun_Bots" .. msg.chat_id_, "true")
                 end
                 if text == "تفعيل اوامر التحشيش" and Owner(msg) then
                     if AddChannel(msg.sender_user_id_) == false then
@@ -7614,7 +7614,7 @@ end
                         return false
                     end
                     send(msg.chat_id_, msg.id_, '܂𓍼 ⁝ تم تفعيل اوامر التحشيش')
-                    database:del(bot_id .. "spider:Fun_Bots" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Fun_Bots" .. msg.chat_id_)
                 end
 
                 if text == 'تفعيل الايدي' and Owner(msg) then
@@ -7629,7 +7629,7 @@ end
                         end
                         return false
                     end
-                    database:del(bot_id .. 'spider:Lock:ID:Bot' .. msg.chat_id_)
+                    database:del(bot_id .. 'LARViN:Lock:ID:Bot' .. msg.chat_id_)
                     send(msg.chat_id_, msg.id_, '܂𓍼 ⁝ تم تفعيل الايدي')
                 end
                 if text == 'تعطيل الايدي' and Owner(msg) then
@@ -7644,7 +7644,7 @@ end
                         end
                         return false
                     end
-                    database:set(bot_id .. 'spider:Lock:ID:Bot' .. msg.chat_id_, true)
+                    database:set(bot_id .. 'LARViN:Lock:ID:Bot' .. msg.chat_id_, true)
                     send(msg.chat_id_, msg.id_, '܂𓍼 ⁝ تم تعطيل الايدي')
                 end
                 if text == 'تفعيل الايدي بالصوره' and Owner(msg) then
@@ -7659,7 +7659,7 @@ end
                         end
                         return false
                     end
-                    database:del(bot_id .. 'spider:Lock:ID:Bot:Photo' .. msg.chat_id_)
+                    database:del(bot_id .. 'LARViN:Lock:ID:Bot:Photo' .. msg.chat_id_)
                     send(msg.chat_id_, msg.id_, '܂𓍼 ⁝ تم تفعيل الايدي بالصوره')
                 end
                 if text == 'تعطيل الايدي بالصوره' and Owner(msg) then
@@ -7674,7 +7674,7 @@ end
                         end
                         return false
                     end
-                    database:set(bot_id .. 'spider:Lock:ID:Bot:Photo' .. msg.chat_id_, true)
+                    database:set(bot_id .. 'LARViN:Lock:ID:Bot:Photo' .. msg.chat_id_, true)
                     send(msg.chat_id_, msg.id_, '܂𓍼 ⁝ تم تعطيل الايدي بالصوره')
                 end
                 if text == 'تعين الايدي' and Owner(msg) then
@@ -7689,7 +7689,7 @@ end
                         end
                         return false
                     end
-                    database:setex(bot_id .. "spider:Set:Id:Gp" .. msg.chat_id_ .. "" .. msg.sender_user_id_, 240, true)
+                    database:setex(bot_id .. "LARViN:Set:Id:Gp" .. msg.chat_id_ .. "" .. msg.sender_user_id_, 240, true)
                     local Text = [[
 ܂𓍼 ⁝  ارسل الان النص
 ܂𓍼 ⁝  يمكنك اضافه :
@@ -7709,25 +7709,25 @@ end
                 end
                 if text == 'حذف الايدي' or text == 'مسح الايدي' then
                     if Owner(msg) then
-                        database:del(bot_id .. "spider:Klesh:Id:Bot" .. msg.chat_id_)
+                        database:del(bot_id .. "LARViN:Klesh:Id:Bot" .. msg.chat_id_)
                         send(msg.chat_id_, msg.id_, '܂𓍼 ⁝ تم ازالة كليشة الايدي ')
                     end
                     return false
                 end
 
-                if database:get(bot_id .. "spider:Set:Id:Gp" .. msg.chat_id_ .. "" .. msg.sender_user_id_) then
+                if database:get(bot_id .. "LARViN:Set:Id:Gp" .. msg.chat_id_ .. "" .. msg.sender_user_id_) then
                     if text == 'الغاء' then
                         send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم الغاء تعين الايدي")
-                        database:del(bot_id .. "spider:Set:Id:Gp" .. msg.chat_id_ .. "" .. msg.sender_user_id_)
+                        database:del(bot_id .. "LARViN:Set:Id:Gp" .. msg.chat_id_ .. "" .. msg.sender_user_id_)
                         return false
                     end
-                    database:del(bot_id .. "spider:Set:Id:Gp" .. msg.chat_id_ .. "" .. msg.sender_user_id_)
-                    database:set(bot_id .. "spider:Klesh:Id:Bot" .. msg.chat_id_, text:match("(.*)"))
+                    database:del(bot_id .. "LARViN:Set:Id:Gp" .. msg.chat_id_ .. "" .. msg.sender_user_id_)
+                    database:set(bot_id .. "LARViN:Klesh:Id:Bot" .. msg.chat_id_, text:match("(.*)"))
                     send(msg.chat_id_, msg.id_, '܂𓍼 ⁝ تم تعين الايدي')
                 end
 
                 if text == 'ايدي' and tonumber(msg.reply_to_message_id_) == 0 and
-                    not database:get(bot_id .. 'spider:Lock:ID:Bot' .. msg.chat_id_) then
+                    not database:get(bot_id .. 'LARViN:Lock:ID:Bot' .. msg.chat_id_) then
                     if AddChannel(msg.sender_user_id_) == false then
                         local textchuser = database:get(bot_id .. 'text:ch:user')
                         if textchuser then
@@ -7739,8 +7739,8 @@ end
                         end
                         return false
                     end
-                    if not database:sismember(bot_id .. 'spider:Spam:Group' .. msg.sender_user_id_, text) then
-                        database:sadd(bot_id .. "spider:Spam:Group" .. msg.sender_user_id_, text)
+                    if not database:sismember(bot_id .. 'LARViN:Spam:Group' .. msg.sender_user_id_, text) then
+                        database:sadd(bot_id .. "LARViN:Spam:Group" .. msg.sender_user_id_, text)
                         tdcli_function({
                             ID = "GetUserProfilePhotos",
                             user_id_ = msg.sender_user_id_,
@@ -7757,26 +7757,26 @@ end
                                     UserName_User = 'لا يوجد'
                                 end
                                 local Id = msg.sender_user_id_
-                                local NumMsg = database:get(bot_id .. 'spider:messageUser' .. msg.chat_id_ .. ':' ..
+                                local NumMsg = database:get(bot_id .. 'LARViN:messageUser' .. msg.chat_id_ .. ':' ..
                                                                 msg.sender_user_id_) or 0
                                 local TotalMsg = Total_message(NumMsg)
                                 local Status_Gps = Get_Rank(Id, msg.chat_id_)
                                 local message_edit = database:get(
-                                                         bot_id .. 'spider:message_edit' .. msg.chat_id_ ..
+                                                         bot_id .. 'LARViN:message_edit' .. msg.chat_id_ ..
                                                              msg.sender_user_id_) or 0
                                 local Num_Games = database:get(
                                                       bot_id .. "Tshak:Add:Num" .. msg.chat_id_ .. msg.sender_user_id_) or
                                                       0
                                 local Add_Mem = database:get(
-                                                    bot_id .. "spider:Add:Memp" .. msg.chat_id_ .. ":" ..
+                                                    bot_id .. "LARViN:Add:Memp" .. msg.chat_id_ .. ":" ..
                                                         msg.sender_user_id_) or 0
                                 local Total_Photp = (taha.total_count_ or 0)
                                 local Texting = {'صورتك فدشي 😘😔❤️', "صارلك شكد مخليه ",
                                                  "وفالله 😔💘", "كشخه برب 😉💘",
                                                  "دغيره شبي هذ 😒", "عمري الحلوين 💘"}
                                 local Description = Texting[math.random(#Texting)]
-                                local get_id = database:get(bot_id .. "spider:Klesh:Id:Bot" .. msg.chat_id_)
-                                if not database:get(bot_id .. 'spider:Lock:ID:Bot:Photo' .. msg.chat_id_) then
+                                local get_id = database:get(bot_id .. "LARViN:Klesh:Id:Bot" .. msg.chat_id_)
+                                if not database:get(bot_id .. 'LARViN:Lock:ID:Bot:Photo' .. msg.chat_id_) then
                                     if taha.photos_[0] then
                                         if get_id then
                                             local get_id = get_id:gsub('#AddMem', Add_Mem)
@@ -7857,8 +7857,8 @@ end
                 end
 
                 if text == 'ايدي' and tonumber(msg.reply_to_message_id_) > 0 and
-                    not database:get(bot_id .. 'spider:Lock:ID:Bot' .. msg.chat_id_) then
-                    function Function_spider(extra, result, success)
+                    not database:get(bot_id .. 'LARViN:Lock:ID:Bot' .. msg.chat_id_) then
+                    function Function_LARViN(extra, result, success)
                         tdcli_function({
                             ID = "GetUser",
                             user_id_ = result.sender_user_id_
@@ -7874,16 +7874,16 @@ end
                                 UserName_User = 'لا يوجد'
                             end
                             local Id = data.id_
-                            local NumMsg = database:get(bot_id .. 'spider:messageUser' .. msg.chat_id_ .. ':' ..
+                            local NumMsg = database:get(bot_id .. 'LARViN:messageUser' .. msg.chat_id_ .. ':' ..
                                                             data.id_) or 0
                             local TotalMsg = Total_message(NumMsg)
                             local Status_Gps = Get_Rank(Id, msg.chat_id_)
                             local message_edit = database:get(
-                                                     bot_id .. 'spider:message_edit' .. msg.chat_id_ .. data.id_) or 0
+                                                     bot_id .. 'LARViN:message_edit' .. msg.chat_id_ .. data.id_) or 0
                             local Num_Games =
                                 database:get(bot_id .. "Tshak:Msg_User" .. msg.chat_id_ .. ":" .. data.id_) or 0
                             local Add_Mem =
-                                database:get(bot_id .. "spider:Add:Memp" .. msg.chat_id_ .. ":" .. data.id_) or 0
+                                database:get(bot_id .. "LARViN:Add:Memp" .. msg.chat_id_ .. ":" .. data.id_) or 0
                             send(msg.chat_id_, msg.id_,
                                 '*܂𓍼 ⁝ ايديه - ' .. Id .. '\n܂𓍼 ⁝ رسائله - ' .. NumMsg ..
                                     '\n܂𓍼 ⁝ معرفه - *[' .. UserName_User .. ']*\n܂𓍼 ⁝ تفاعله - ' ..
@@ -7896,14 +7896,14 @@ end
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
 
                 if text and text:match("^ايدي @(.*)$") and
-                    not database:get(bot_id .. 'spider:Lock:ID:Bot' .. msg.chat_id_) then
+                    not database:get(bot_id .. 'LARViN:Lock:ID:Bot' .. msg.chat_id_) then
                     local username = text:match("^ايدي @(.*)$")
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if result.id_ then
                             tdcli_function({
                                 ID = "GetUser",
@@ -7915,18 +7915,18 @@ end
                                     UserName_User = 'لا يوجد'
                                 end
                                 local Id = data.id_
-                                local NumMsg = database:get(bot_id .. 'spider:messageUser' .. msg.chat_id_ .. ':' ..
+                                local NumMsg = database:get(bot_id .. 'LARViN:messageUser' .. msg.chat_id_ .. ':' ..
                                                                 data.id_) or 0
                                 local TotalMsg = Total_message(NumMsg)
                                 local Status_Gps = Get_Rank(Id, msg.chat_id_)
                                 local message_edit = database:get(
-                                                         bot_id .. 'spider:message_edit' .. msg.chat_id_ .. data.id_) or
+                                                         bot_id .. 'LARViN:message_edit' .. msg.chat_id_ .. data.id_) or
                                                          0
                                 local Num_Games = database:get(
                                                       bot_id .. "Tshak:Msg_User" .. msg.chat_id_ .. ":" .. data.id_) or
                                                       0
                                 local Add_Mem = database:get(
-                                                    bot_id .. "spider:Add:Memp" .. msg.chat_id_ .. ":" .. data.id_) or 0
+                                                    bot_id .. "LARViN:Add:Memp" .. msg.chat_id_ .. ":" .. data.id_) or 0
                                 send(msg.chat_id_, msg.id_,
                                     '*܂𓍼 ⁝ ايديه - ' .. Id .. '\n܂𓍼 ⁝ رسائله - ' .. NumMsg ..
                                         '\n܂𓍼 ⁝ معرفه - *[' .. UserName_User ..
@@ -7941,12 +7941,12 @@ end
                     tdcli_function({
                         ID = "SearchPublicChat",
                         username_ = username
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
                 if text == 'كشف' and tonumber(msg.reply_to_message_id_) > 0 and
-                    not database:get(bot_id .. 'spider:Lock:ID:Bot' .. msg.chat_id_) then
-                    function Function_spider(extra, result, success)
+                    not database:get(bot_id .. 'LARViN:Lock:ID:Bot' .. msg.chat_id_) then
+                    function Function_LARViN(extra, result, success)
                         tdcli_function({
                             ID = "GetUser",
                             user_id_ = result.sender_user_id_
@@ -7970,14 +7970,14 @@ end
                         ID = "GetMessage",
                         chat_id_ = msg.chat_id_,
                         message_id_ = tonumber(msg.reply_to_message_id_)
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
 
                 if text and text:match("^كشف @(.*)$") and
-                    not database:get(bot_id .. 'spider:Lock:ID:Bot' .. msg.chat_id_) then
+                    not database:get(bot_id .. 'LARViN:Lock:ID:Bot' .. msg.chat_id_) then
                     local username = text:match("^كشف @(.*)$")
-                    function Function_spider(extra, result, success)
+                    function Function_LARViN(extra, result, success)
                         if result.id_ then
                             tdcli_function({
                                 ID = "GetUser",
@@ -8000,7 +8000,7 @@ send(msg.chat_id_, msg.id_, '\n*⌔︙الاسم - ('..DevZain..')\n⌔︙الا
                     tdcli_function({
                         ID = "SearchPublicChat",
                         username_ = username
-                    }, Function_spider, nil)
+                    }, Function_LARViN, nil)
                     return false
                 end
                 if text == "سمايلات" or text == "سمايل" then
@@ -8638,7 +8638,7 @@ send(msg.chat_id_, msg.id_, '\n*⌔︙الاسم - ('..DevZain..')\n⌔︙الا
                         end
                         return false
                     end
-                    local nummsg = database:get(bot_id .. 'spider:messageUser' .. msg.chat_id_ .. ':' ..
+                    local nummsg = database:get(bot_id .. 'LARViN:messageUser' .. msg.chat_id_ .. ':' ..
                                                     msg.sender_user_id_) or 1
                     local Text = '܂𓍼 ⁝ عدد رسائلك هنا *~ ' .. nummsg .. '*'
                     send(msg.chat_id_, msg.id_, Text)
@@ -8659,7 +8659,7 @@ send(msg.chat_id_, msg.id_, '\n*⌔︙الاسم - ('..DevZain..')\n⌔︙الا
                         end
                         return false
                     end
-                    local edit = database:get(bot_id .. 'spider:message_edit' .. msg.chat_id_ .. msg.sender_user_id_) or
+                    local edit = database:get(bot_id .. 'LARViN:message_edit' .. msg.chat_id_ .. msg.sender_user_id_) or
                                      0
                     local Text = '܂𓍼 ⁝ عدد التعديلات هنا *~ ' .. edit .. '*'
                     send(msg.chat_id_, msg.id_, Text)
@@ -8680,7 +8680,7 @@ send(msg.chat_id_, msg.id_, '\n*⌔︙الاسم - ('..DevZain..')\n⌔︙الا
                         end
                         return false
                     end
-                    local addmem = database:get(bot_id .. "spider:Add:Memp" .. msg.chat_id_ .. ":" ..
+                    local addmem = database:get(bot_id .. "LARViN:Add:Memp" .. msg.chat_id_ .. ":" ..
                                                     msg.sender_user_id_) or 0
                     local Text = '܂𓍼 ⁝ عدد جهاتك المضافه هنا *~ ' .. addmem .. '*'
                     send(msg.chat_id_, msg.id_, Text)
@@ -8741,7 +8741,7 @@ send(msg.chat_id_, msg.id_, '\n*⌔︙الاسم - ('..DevZain..')\n⌔︙الا
                         end
                         local NUMNKO = (NUMPY * 50)
                         database:decrby(bot_id .. "Tshak:Add:Num" .. msg.chat_id_ .. msg.sender_user_id_, NUMPY)
-                        database:incrby(bot_id .. "spider:messageUser" .. msg.chat_id_ .. ":" .. msg.sender_user_id_,
+                        database:incrby(bot_id .. "LARViN:messageUser" .. msg.chat_id_ .. ":" .. msg.sender_user_id_,
                             NUMNKO)
                         send(msg.chat_id_, msg.id_,
                             "܂𓍼 ⁝ تم خصم *~ { " .. NUMPY ..
@@ -8767,7 +8767,7 @@ send(msg.chat_id_, msg.id_, '\n*⌔︙الاسم - ('..DevZain..')\n⌔︙الا
                     local numadded = string.match(text, "(%d+)")
                     local iduserr = database:get(bot_id .. "Tshak:id:user" .. msg.chat_id_)
                     database:del(bot_id .. "Tshak:Msg_User" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
-                    database:incrby(bot_id .. "spider:messageUser" .. msg.chat_id_ .. ":" .. iduserr, numadded)
+                    database:incrby(bot_id .. "LARViN:messageUser" .. msg.chat_id_ .. ":" .. iduserr, numadded)
                     send(msg.chat_id_, msg.id_,
                         "܂𓍼 ⁝ تم اضافة له {" .. numadded .. "} من الرسائل")
                 end
@@ -8855,7 +8855,7 @@ send(msg.chat_id_, msg.id_, '\n*⌔︙الاسم - ('..DevZain..')\n⌔︙الا
                     local Num = text:match("^اضف رسائل (%d+)$")
                     function reply(extra, result, success)
                         database:del(bot_id .. "Tshak:Msg_User" .. msg.chat_id_ .. ":" .. result.sender_user_id_)
-                        database:incrby(bot_id .. "spider:messageUser" .. msg.chat_id_ .. ":" .. result.sender_user_id_,
+                        database:incrby(bot_id .. "LARViN:messageUser" .. msg.chat_id_ .. ":" .. result.sender_user_id_,
                             Num)
                         send(msg.chat_id_, msg.id_,
                             "\n܂𓍼 ⁝ تم اضافة له {" .. Num .. "} من الرسائل")
@@ -8868,8 +8868,8 @@ send(msg.chat_id_, msg.id_, '\n*⌔︙الاسم - ('..DevZain..')\n⌔︙الا
                     return false
                 end
 
-                if text == "تنظيف المشتركين" and Devspider(msg) then
-                    local pv = database:smembers(bot_id .. 'spider:UsersBot')
+                if text == "تنظيف المشتركين" and DevLARViN(msg) then
+                    local pv = database:smembers(bot_id .. 'LARViN:UsersBot')
                     local sendok = 0
                     for i = 1, #pv do
                         tdcli_function({
@@ -8888,7 +8888,7 @@ send(msg.chat_id_, msg.id_, '\n*⌔︙الاسم - ('..DevZain..')\n⌔︙الا
                                     print('\27[30;33m»» THE USER IS SAVE ME ↓\n»» ' .. pv[i] .. '\n\27[1;37m')
                                 else
                                     print('\27[30;31m»» THE USER IS BLOCK ME ↓\n»» ' .. pv[i] .. '\n\27[1;37m')
-                                    database:srem(bot_id .. 'spider:UsersBot', pv[i])
+                                    database:srem(bot_id .. 'LARViN:UsersBot', pv[i])
                                     sendok = sendok + 1
                                 end
                                 if #pv == i then
@@ -8909,8 +8909,8 @@ send(msg.chat_id_, msg.id_, '\n*⌔︙الاسم - ('..DevZain..')\n⌔︙الا
                     end
                     return false
                 end
-                if text == "تنظيف الكروبات" and Devspider(msg) then
-                    local group = database:smembers(bot_id .. 'spider:Chek:Groups')
+                if text == "تنظيف الكروبات" and DevLARViN(msg) then
+                    local group = database:smembers(bot_id .. 'LARViN:Chek:Groups')
                     local w = 0
                     local q = 0
                     for i = 1, #group do
@@ -8921,23 +8921,23 @@ send(msg.chat_id_, msg.id_, '\n*⌔︙الاسم - ('..DevZain..')\n⌔︙الا
                             if data and data.type_ and data.type_.channel_ and data.type_.channel_.status_ and
                                 data.type_.channel_.status_.ID == "ChatMemberStatusMember" then
                                 print('\27[30;34m»» THE BOT IS NOT ADMIN ↓\n»» ' .. group[i] .. '\n\27[1;37m')
-                                database:srem(bot_id .. 'spider:Chek:Groups', group[i])
+                                database:srem(bot_id .. 'LARViN:Chek:Groups', group[i])
                                 w = w + 1
                             end
                             if data and data.type_ and data.type_.channel_ and data.type_.channel_.status_ and
                                 data.type_.channel_.status_.ID == "ChatMemberStatusLeft" then
-                                database:srem(bot_id .. 'spider:Chek:Groups', group[i])
+                                database:srem(bot_id .. 'LARViN:Chek:Groups', group[i])
                                 q = q + 1
                                 print('\27[30;35m»» THE BOT IS LEFT GROUP ↓\n»» ' .. group[i] .. '\n\27[1;37m')
                             end
                             if data and data.type_ and data.type_.channel_ and data.type_.channel_.status_ and
                                 data.type_.channel_.status_.ID == "ChatMemberStatusKicked" then
-                                database:srem(bot_id .. 'spider:Chek:Groups', group[i])
+                                database:srem(bot_id .. 'LARViN:Chek:Groups', group[i])
                                 q = q + 1
                                 print('\27[30;36m»» THE BOT IS KICKED GROUP ↓\n»» ' .. group[i] .. '\n\27[1;37m')
                             end
                             if data and data.code_ and data.code_ == 400 then
-                                database:srem(bot_id .. 'spider:Chek:Groups', group[i])
+                                database:srem(bot_id .. 'LARViN:Chek:Groups', group[i])
                                 w = w + 1
                             end
                             if #group == i then
@@ -8968,50 +8968,50 @@ send(msg.chat_id_, msg.id_, '\n*⌔︙الاسم - ('..DevZain..')\n⌔︙الا
                     end
                     return false
                 end
-                if text == ("تحديث السورس") and Devspider(msg) then
+                if text == ("تحديث السورس") and DevLARViN(msg) then
                     send(msg.chat_id_, msg.id_, '܂𓍼 ⁝ تم التحديث')
-                    os.execute('rm -rf spider.lua')
+                    os.execute('rm -rf LARViN.lua')
                     os.execute('rm -rf start.lua')
-                    os.execute('wget https://raw.githubusercontent.com/spidersr/spider/master/spider.lua')
-                    os.execute('wget https://raw.githubusercontent.com/spidersr/spider/master/start.lua')
-                    dofile('spider.lua')
+                    os.execute('wget https://raw.githubusercontent.com/LARViNsr/LARViN/master/LARViN.lua')
+                    os.execute('wget https://raw.githubusercontent.com/LARViNsr/LARViN/master/start.lua')
+                    dofile('LARViN.lua')
                     return false
                 end
 
-                if text == 'تفعيل البوت الخدمي' and Devspider(msg) then
-                    database:del(bot_id .. 'spider:Free:Add:Bots')
+                if text == 'تفعيل البوت الخدمي' and DevLARViN(msg) then
+                    database:del(bot_id .. 'LARViN:Free:Add:Bots')
                     send(msg.chat_id_, msg.id_, '܂𓍼 ⁝ تم تفعيل البوت الخدمي ')
                 end
-                if text == 'تعطيل البوت الخدمي' and Devspider(msg) then
-                    database:set(bot_id .. 'spider:Free:Add:Bots', true)
+                if text == 'تعطيل البوت الخدمي' and DevLARViN(msg) then
+                    database:set(bot_id .. 'LARViN:Free:Add:Bots', true)
                     send(msg.chat_id_, msg.id_, '܂𓍼 ⁝ تم تعطيل البوت الخدمي')
                 end
-                if text and text:match("^تعين عدد الاعضاء (%d+)$") and Devspider(msg) then
+                if text and text:match("^تعين عدد الاعضاء (%d+)$") and DevLARViN(msg) then
                     local Num = text:match("تعين عدد الاعضاء (%d+)$")
-                    database:set(bot_id .. 'spider:Num:Add:Bot', Num)
+                    database:set(bot_id .. 'LARViN:Num:Add:Bot', Num)
                     send(msg.chat_id_, msg.id_, '܂𓍼 ⁝  تم وضع عدد الاعضاء *~' .. Num .. '* عضو')
                 end
                 if text == 'الاحصائيات' and DevBot(msg) then
-                    local Groups = database:scard(bot_id .. 'spider:Chek:Groups')
-                    local Users = database:scard(bot_id .. 'spider:UsersBot')
+                    local Groups = database:scard(bot_id .. 'LARViN:Chek:Groups')
+                    local Users = database:scard(bot_id .. 'LARViN:UsersBot')
                     send(msg.chat_id_, msg.id_,
                         '܂𓍼 ⁝ احصائيات البوت \n\n܂𓍼 ⁝ عدد المجموعات *~ ' .. Groups ..
                             '\n܂𓍼 ⁝ عدد المشتركين ~ ' .. Users .. '*')
                 end
-                if text == 'جلب نسخه احتياطيه' and Devspider(msg) then
-                    local list = database:smembers(bot_id .. 'spider:Chek:Groups')
+                if text == 'جلب نسخه احتياطيه' and DevLARViN(msg) then
+                    local list = database:smembers(bot_id .. 'LARViN:Chek:Groups')
                     local t = '{"BOT_ID": ' .. bot_id .. ',"GP_BOT":{'
                     for k, v in pairs(list) do
-                        NAME = 'spider Chat'
-                        ASAS = database:smembers(bot_id .. "spider:Basic:Constructor" .. v)
-                        MNSH = database:smembers(bot_id .. "spider:Constructor" .. v)
-                        MDER = database:smembers(bot_id .. "spider:Manager" .. v)
-                        MOD = database:smembers(bot_id .. "spider:Mod:User" .. v)
-                        link = database:get(bot_id .. "spider:Link_Group" .. v) or ''
+                        NAME = 'LARViN Chat'
+                        ASAS = database:smembers(bot_id .. "LARViN:Basic:Constructor" .. v)
+                        MNSH = database:smembers(bot_id .. "LARViN:Constructor" .. v)
+                        MDER = database:smembers(bot_id .. "LARViN:Manager" .. v)
+                        MOD = database:smembers(bot_id .. "LARViN:Mod:User" .. v)
+                        link = database:get(bot_id .. "LARViN:Link_Group" .. v) or ''
                         if k == 1 then
-                            t = t .. '"' .. v .. '":{"spider":"' .. NAME .. '",'
+                            t = t .. '"' .. v .. '":{"LARViN":"' .. NAME .. '",'
                         else
-                            t = t .. ',"' .. v .. '":{"spider":"' .. NAME .. '",'
+                            t = t .. ',"' .. v .. '":{"LARViN":"' .. NAME .. '",'
                         end
                         if #ASAS ~= 0 then
                             t = t .. '"ASAS":['
@@ -9067,7 +9067,7 @@ send(msg.chat_id_, msg.id_, '\n*⌔︙الاسم - ('..DevZain..')\n⌔︙الا
                         '܂𓍼 ⁝  عدد مجموعات التي في البوت { ' .. #list .. '}')
                 end
                 if text == 'المطور' or text == 'مطور' or text == 'المطورين' then
-                    local Text_Dev = database:get(bot_id .. 'spider:Text_Dev')
+                    local Text_Dev = database:get(bot_id .. 'LARViN:Text_Dev')
                     if Text_Dev then
                         send(msg.chat_id_, msg.id_, Text_Dev)
                     else
@@ -9080,10 +9080,10 @@ send(msg.chat_id_, msg.id_, '\n*⌔︙الاسم - ('..DevZain..')\n⌔︙الا
                         end, nil)
                     end
                 end
-                if text == 'الملفات' and Devspider(msg) then
+                if text == 'الملفات' and DevLARViN(msg) then
                     t = '܂𓍼 ⁝ جميع الملفات : \n ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ \n'
                     i = 0
-                    for v in io.popen('ls spider_Files'):lines() do
+                    for v in io.popen('ls LARViN_Files'):lines() do
                         if v:match(".lua$") then
                             i = i + 1
                             t = t .. i .. '*~ ' .. v .. '*\n'
@@ -9092,9 +9092,9 @@ send(msg.chat_id_, msg.id_, '\n*⌔︙الاسم - ('..DevZain..')\n⌔︙الا
                     send(msg.chat_id_, msg.id_, t)
                 end
                 if text == "متجر الملفات" or text == 'المتجر' then
-                    if Devspider(msg) then
+                    if DevLARViN(msg) then
                         local Get_Files, res = https.request(
-                                                   "https://raw.githubusercontent.com/spiderTeam/files_spider/master/getfile.json")
+                                                   "https://raw.githubusercontent.com/LARViNTeam/files_LARViN/master/getfile.json")
                         if res == 200 then
                             local Get_info, res = pcall(JSON.decode, Get_Files);
                             vardump(res.plugins_)
@@ -9106,7 +9106,7 @@ send(msg.chat_id_, msg.id_, '\n*⌔︙الاسم - ('..DevZain..')\n⌔︙الا
                                         "܂𓍼 ⁝ تدل علامة (܂𓍼 ) الملف معطل\n"
                                 local NumFile = 0
                                 for name, Info in pairs(res.plugins_) do
-                                    local Check_File_is_Found = io.open("spider_Files/" .. name, "r")
+                                    local Check_File_is_Found = io.open("LARViN_Files/" .. name, "r")
                                     if Check_File_is_Found then
                                         io.close(Check_File_is_Found)
                                         CeckFile = "(✔)"
@@ -9126,10 +9126,10 @@ send(msg.chat_id_, msg.id_, '\n*⌔︙الاسم - ('..DevZain..')\n⌔︙الا
                     end
                 end
 
-                if text and text:match("^(تعطيل ملف) (.*)(.lua)$") and Devspider(msg) then
+                if text and text:match("^(تعطيل ملف) (.*)(.lua)$") and DevLARViN(msg) then
                     local name_t = {string.match(text, "^(تعطيل ملف) (.*)(.lua)$")}
                     local file = name_t[2] .. '.lua'
-                    local file_bot = io.open("spider_Files/" .. file, "r")
+                    local file_bot = io.open("LARViN_Files/" .. file, "r")
                     if file_bot then
                         io.close(file_bot)
                         t = "*܂𓍼 ⁝ الملف » {" .. file ..
@@ -9138,22 +9138,22 @@ send(msg.chat_id_, msg.id_, '\n*⌔︙الاسم - ('..DevZain..')\n⌔︙الا
                         t = "*܂𓍼 ⁝  بالتاكيد تم تعطيل وحذف ملف » {" .. file .. "} \n✓*"
                     end
                     local json_file, res = https.request(
-                                               "https://raw.githubusercontent.com/spiderTeam/files_spider/master/files_spider/" ..
+                                               "https://raw.githubusercontent.com/LARViNTeam/files_LARViN/master/files_LARViN/" ..
                                                    file)
                     if res == 200 then
-                        os.execute("rm -fr spider_Files/" .. file)
+                        os.execute("rm -fr LARViN_Files/" .. file)
                         send(msg.chat_id_, msg.id_, t)
-                        dofile('spider.lua')
+                        dofile('LARViN.lua')
                     else
                         send(msg.chat_id_, msg.id_,
                             "*܂𓍼 ⁝  عذرا لا يوجد هاكذا ملف في المتجر *\n")
                     end
                     return false
                 end
-                if text and text:match("^(تفعيل ملف) (.*)(.lua)$") and Devspider(msg) then
+                if text and text:match("^(تفعيل ملف) (.*)(.lua)$") and DevLARViN(msg) then
                     local name_t = {string.match(text, "^(تفعيل ملف) (.*)(.lua)$")}
                     local file = name_t[2] .. '.lua'
-                    local file_bot = io.open("spider_Files/" .. file, "r")
+                    local file_bot = io.open("LARViN_Files/" .. file, "r")
                     if file_bot then
                         io.close(file_bot)
                         t = "*܂𓍼 ⁝  بالتاكيد تم تنزيل وتفعيل ملف » {" .. file ..
@@ -9163,58 +9163,58 @@ send(msg.chat_id_, msg.id_, '\n*⌔︙الاسم - ('..DevZain..')\n⌔︙الا
                                 "}\n܂𓍼 ⁝  تم تنزيله وتفعيله بنجاح \n܂𓍼 *"
                     end
                     local json_file, res = https.request(
-                                               "https://raw.githubusercontent.com/spiderTeam/files_spider/master/files_spider/" ..
+                                               "https://raw.githubusercontent.com/LARViNTeam/files_LARViN/master/files_LARViN/" ..
                                                    file)
                     if res == 200 then
-                        local chek = io.open("spider_Files/" .. file, 'w+')
+                        local chek = io.open("LARViN_Files/" .. file, 'w+')
                         chek:write(json_file)
                         chek:close()
                         send(msg.chat_id_, msg.id_, t)
-                        dofile('spider.lua')
+                        dofile('LARViN.lua')
                     else
                         send(msg.chat_id_, msg.id_,
                             "*܂𓍼 ⁝  عذرا لا يوجد هاكذا ملف في المتجر *\n")
                     end
                     return false
                 end
-                if text == "مسح جميع الملفات" and Devspider(msg) then
-                    os.execute("rm -fr spider_Files/*")
+                if text == "مسح جميع الملفات" and DevLARViN(msg) then
+                    os.execute("rm -fr LARViN_Files/*")
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم حذف جميع الملفات")
                     return false
                 end
        
-       if text == 'نقل الاحصائيات' and Devspider(msg) then
+       if text == 'نقل الاحصائيات' and DevLARViN(msg) then
 local Users = database:smembers(bot_id.."User_Bot")
 local Groups = database:smembers(bot_id..'Chek:Groups') 
 for i = 1, #Groups do
-database:sadd(bot_id..'spider:Chek:Groups',Groups[i])  
+database:sadd(bot_id..'LARViN:Chek:Groups',Groups[i])  
 end
 for i = 1, #Users do
-database:sadd(bot_id..'spider:UsersBot',Users[i])  
+database:sadd(bot_id..'LARViN:UsersBot',Users[i])  
 end
 send(msg.chat_id_, msg.id_,'👥┇تم نقل : '..#Groups..' كروب\n👤┇تم نقل : '..#Users..' مشترك \n🔘┇من التحديث القديم الى التحديث الجديد')
 end   
-                if text == 'حذف كليشه المطور' and Devspider(msg) then
-                    database:del(bot_id .. 'spider:Text_Dev')
+                if text == 'حذف كليشه المطور' and DevLARViN(msg) then
+                    database:del(bot_id .. 'LARViN:Text_Dev')
                     send(msg.chat_id_, msg.id_, '܂𓍼 ⁝  تم حذف كليشه المطور')
                 end
-                if text == 'وضع كليشه المطور' and Devspider(msg) then
-                    database:set(bot_id .. 'spider:Set:Text_Dev' .. msg.chat_id_, true)
+                if text == 'وضع كليشه المطور' and DevLARViN(msg) then
+                    database:set(bot_id .. 'LARViN:Set:Text_Dev' .. msg.chat_id_, true)
                     send(msg.chat_id_, msg.id_, '܂𓍼 ⁝  ارسل الكليشه الان')
                     return false
                 end
-                if text and database:get(bot_id .. 'spider:Set:Text_Dev' .. msg.chat_id_) then
+                if text and database:get(bot_id .. 'LARViN:Set:Text_Dev' .. msg.chat_id_) then
                     if text == 'الغاء' then
-                        database:del(bot_id .. 'spider:Set:Text_Dev' .. msg.chat_id_)
+                        database:del(bot_id .. 'LARViN:Set:Text_Dev' .. msg.chat_id_)
                         send(msg.chat_id_, msg.id_, '܂𓍼 ⁝ تم الغاء حفظ كليشة المطور')
                         return false
                     end
-                    database:set(bot_id .. 'spider:Text_Dev', text)
-                    database:del(bot_id .. 'spider:Set:Text_Dev' .. msg.chat_id_)
+                    database:set(bot_id .. 'LARViN:Text_Dev', text)
+                    database:del(bot_id .. 'LARViN:Set:Text_Dev' .. msg.chat_id_)
                     send(msg.chat_id_, msg.id_, '܂𓍼 ⁝ تم حفظ كليشة المطور')
                     return false
                 end
-                if text == 'رفع النسخه الاحتياطيه' and Devspider(msg) then
+                if text == 'رفع النسخه الاحتياطيه' and DevLARViN(msg) then
                     if tonumber(msg.reply_to_message_id_) > 0 then
                         function by_reply(extra, result, success)
                             if result.content_.document_ then
@@ -9230,8 +9230,8 @@ end
                         }, by_reply, nil)
                     end
                 end
-                if text == "تحديث" and Devspider(msg) then
-                    dofile("spider.lua")
+                if text == "تحديث" and DevLARViN(msg) then
+                    dofile("LARViN.lua")
                     send(msg.chat_id_, msg.id_, "܂𓍼 ⁝ تم التحديث")
                 end
                 if text == 'السورس' or text == 'سورس' or text == 'ياسورس' or text == 'يا سورس' then
@@ -9250,13 +9250,13 @@ end
                     Text = [[
 𓍼 ⁝ Welcome to Source 
 
-𓍼 ⁝ spider TEAM
+𓍼 ⁝ LARViN TEAM
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
 𓍼 ⁝ [Source Channel](https://t.me/Vc33h/610) 
 
 𓍼 ⁝ [Source  Files](https://t.me/Vc33h) 
 
-𓍼 ⁝ [TWS spider](http://t.me/RORO_8BOT) 
+𓍼 ⁝ [TWS LARViN](http://t.me/RORO_8BOT) 
  ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ 
 𓍼 ⁝ [Mtwr alswrus](http://t.me/H_4_L ) 
 ]]
@@ -9267,10 +9267,10 @@ end
                     send(msg.chat_id_, msg.id_,'܁𓍼 : منشئ اساسي فقط لتكمز 😹😭 ') 
                     return false
                     end
-                    database:del(bot_id..'spider:Constructor'..msg.chat_id_)
-                    database:del(bot_id..'spider:Mod:User'..msg.chat_id_)
-                    database:del(bot_id..'spider:Manager'..msg.chat_id_)
-                    database:del(bot_id..'spider:Special:User'..msg.chat_id_)
+                    database:del(bot_id..'LARViN:Constructor'..msg.chat_id_)
+                    database:del(bot_id..'LARViN:Mod:User'..msg.chat_id_)
+                    database:del(bot_id..'LARViN:Manager'..msg.chat_id_)
+                    database:del(bot_id..'LARViN:Special:User'..msg.chat_id_)
                     send(msg.chat_id_, msg.id_, '܁𓍼 : تم تنزيل جميع رتب الاعضاء من ▾\n܁𓍼 :◝ المنشئين ٬ المدراء ٬ الادمنيه ٬ المميزين◟\n')
                     end
                 if text and text:match("^(.*)$") then
@@ -9355,7 +9355,7 @@ end
                     end
                 end
 
-                if text == 'استعاده الاوامر' and Devspider(msg) then
+                if text == 'استعاده الاوامر' and DevLARViN(msg) then
                     database:del(bot_id .. 'help_text')
                     database:del(bot_id .. 'help1_text')
                     database:del(bot_id .. 'help2_text')
@@ -9368,54 +9368,54 @@ end
                     database:del(bot_id .. 'help9_text')
                     send(msg.chat_id_, msg.id_, '𓍼 : تم استعادة الاوامر القديمه')
                 end
-                if text == 'تغير امر الاوامر' and Devspider(msg) then
+                if text == 'تغير امر الاوامر' and DevLARViN(msg) then
                     send(msg.chat_id_, msg.id_, '܁𓍼 :ارسل كليشة الامر الان ◃')
                     database:set(bot_id .. 'help' .. msg.sender_user_id_, 'true')
                     return false
                 end
-                if text == 'تغير امر م1' and Devspider(msg) then
+                if text == 'تغير امر م1' and DevLARViN(msg) then
                     send(msg.chat_id_, msg.id_, '𓍼 : الان يمكنك ارسال الكليشه م1')
                     database:set(bot_id .. 'help1' .. msg.sender_user_id_, 'true')
                     return false
                 end
 
-                if text == 'تغير امر م2' and Devspider(msg) then
+                if text == 'تغير امر م2' and DevLARViN(msg) then
                     send(msg.chat_id_, msg.id_, '𓍼 : الان يمكنك ارسال الكليشه م2')
                     database:set(bot_id .. 'help2' .. msg.sender_user_id_, 'true')
                     return false
                 end
 
-                if text == 'تغير امر م3' and Devspider(msg) then
+                if text == 'تغير امر م3' and DevLARViN(msg) then
                     send(msg.chat_id_, msg.id_, '𓍼 : الان يمكنك ارسال الكليشه م3')
                     database:set(bot_id .. 'help3' .. msg.sender_user_id_, 'true')
                     return false
                 end
 
-                if text == 'تغير امر م4' and Devspider(msg) then
+                if text == 'تغير امر م4' and DevLARViN(msg) then
                     send(msg.chat_id_, msg.id_, '𓍼 : الان يمكنك ارسال الكليشه م4')
                     database:set(bot_id .. 'help4' .. msg.sender_user_id_, 'true')
                     return false
                 end
 
-                if text == 'تغير امر م5' and Devspider(msg) then
+                if text == 'تغير امر م5' and DevLARViN(msg) then
                     send(msg.chat_id_, msg.id_, '𓍼 : الان يمكنك ارسال الكليشه م5')
                     database:set(bot_id .. 'help5' .. msg.sender_user_id_, 'true')
                     return false
                 end
 
-                if text == 'تغير امر م6' and Devspider(msg) then
+                if text == 'تغير امر م6' and DevLARViN(msg) then
                     send(msg.chat_id_, msg.id_, '𓍼 : الان يمكنك ارسال الكليشه م6')
                     database:set(bot_id .. 'help6' .. msg.sender_user_id_, 'true')
                     return false
                 end
 
-                if text == 'تغير امر م7' and Devspider(msg) then
+                if text == 'تغير امر م7' and DevLARViN(msg) then
                     send(msg.chat_id_, msg.id_, '𓍼 : الان يمكنك ارسال الكليشه م7')
                     database:set(bot_id .. 'help7' .. msg.sender_user_id_, 'true')
                     return false
                 end
 
-                if text == 'تغير امر م8' and Devspider(msg) then
+                if text == 'تغير امر م8' and DevLARViN(msg) then
                     send(msg.chat_id_, msg.id_, '𓍼 : الان يمكنك ارسال الكليشه م8')
                     database:set(bot_id .. 'help8' .. msg.sender_user_id_, 'true')
                     return false
@@ -9733,11 +9733,11 @@ end
                 ID = "GetChannelFull",
                 channel_id_ = msg.chat_id_:gsub("-100", "")
             }, function(arg, data)
-                if tonumber(data.member_count_) < tonumber(database:get(bot_id .. 'spider:Num:Add:Bot') or 0) and
-                    not Devspider(msg) then
+                if tonumber(data.member_count_) < tonumber(database:get(bot_id .. 'LARViN:Num:Add:Bot') or 0) and
+                    not DevLARViN(msg) then
                     send(msg.chat_id_, msg.id_,
                         '܂𓍼 ⁝ عدد اعضاء المجموعه اقل من *~ {' ..
-                            (database:get(bot_id .. 'spider:Num:Add:Bot') or 0) .. '* عضو')
+                            (database:get(bot_id .. 'LARViN:Num:Add:Bot') or 0) .. '* عضو')
                     return false
                 end
                 tdcli_function({
@@ -9748,12 +9748,12 @@ end
                         ID = "GetChat",
                         chat_id_ = msg.chat_id_
                     }, function(arg, chat)
-                        if database:sismember(bot_id .. 'spider:Chek:Groups', msg.chat_id_) then
+                        if database:sismember(bot_id .. 'LARViN:Chek:Groups', msg.chat_id_) then
                             send(msg.chat_id_, msg.id_, '܂𓍼 ⁝ المجموعه مفعله سابقا ')
                         else
                             Reply_Status(msg, result.id_, 'reply_Add',
                                 '܂𓍼 ⁝ تم تفعيل المجموعه ~ ' .. chat.title_ .. '')
-                            database:sadd(bot_id .. 'spider:Chek:Groups', msg.chat_id_)
+                            database:sadd(bot_id .. 'LARViN:Chek:Groups', msg.chat_id_)
                             local Name = '[' .. result.first_name_ .. '](tg://user?id=' .. result.id_ .. ')'
                             local NameChat = chat.title_
                             NameChat = NameChat:gsub('"', "")
@@ -9778,7 +9778,7 @@ end
                                        '\n܂𓍼 ⁝ عدد اعضاء المجموعه *~ ' .. NumMember .. '*' ..
                                        '\n܂𓍼 ⁝ اسم المجموعه ~ [' .. NameChat .. ']' ..
                                        '\n܂𓍼 ⁝ الرابط ~ [' .. LinkGp .. ']'
-                            if not Devspider(msg) then
+                            if not DevLARViN(msg) then
                                 sendText(Id_Sudo, Text, 0, 'md')
                             end
                         end
@@ -9806,12 +9806,12 @@ end
                     ID = "GetChat",
                     chat_id_ = msg.chat_id_
                 }, function(arg, chat)
-                    if not database:sismember(bot_id .. 'spider:Chek:Groups', msg.chat_id_) then
+                    if not database:sismember(bot_id .. 'LARViN:Chek:Groups', msg.chat_id_) then
                         send(msg.chat_id_, msg.id_, '܂𓍼 ⁝ المجموعه معطله سابقا ')
                     else
                         Reply_Status(msg, result.id_, 'reply_Add',
                             '܂𓍼 ⁝ تم تعطيل المجموعه ~ ' .. chat.title_ .. '')
-                        database:srem(bot_id .. 'spider:Chek:Groups', msg.chat_id_)
+                        database:srem(bot_id .. 'LARViN:Chek:Groups', msg.chat_id_)
                         local Name = '[' .. result.first_name_ .. '](tg://user?id=' .. result.id_ .. ')'
                         local NameChat = chat.title_
                         NameChat = NameChat:gsub('"', "")
@@ -9835,14 +9835,14 @@ end
                                 Name .. '' .. '\n🔧⁝ ايدي المجموعه ~ `' .. IdChat .. '`' ..
                                 '\n܂𓍼 ⁝ اسم المجموعه ~ [' .. NameChat .. ']' ..
                                 '\n܂𓍼 ⁝ الرابط ~ [' .. LinkGp .. ']'
-                        if not Devspider(msg) then
+                        if not DevLARViN(msg) then
                             sendText(Id_Sudo, Text, 0, 'md')
                         end
                     end
                 end, nil)
             end, nil)
         end
-        if text == 'تفعيل' and not DevBot(msg) and not database:get(bot_id .. 'spider:Free:Add:Bots') then
+        if text == 'تفعيل' and not DevBot(msg) and not database:get(bot_id .. 'LARViN:Free:Add:Bots') then
             if AddChannel(msg.sender_user_id_) == false then
                 local textchuser = database:get(bot_id .. 'text:ch:user')
                 if textchuser then
@@ -9885,21 +9885,21 @@ end
                                     else
                                         var = 'عضو'
                                     end
-                                    if database:sismember(bot_id .. 'spider:Chek:Groups', msg.chat_id_) then
+                                    if database:sismember(bot_id .. 'LARViN:Chek:Groups', msg.chat_id_) then
                                         send(msg.chat_id_, msg.id_, '܂𓍼 ⁝ المجموعه مفعله سابقا ')
                                     else
                                         if tonumber(data.member_count_) <
-                                            tonumber(database:get(bot_id .. 'spider:Num:Add:Bot') or 0) and
-                                            not Devspider(msg) then
+                                            tonumber(database:get(bot_id .. 'LARViN:Num:Add:Bot') or 0) and
+                                            not DevLARViN(msg) then
                                             send(msg.chat_id_, msg.id_,
                                                 '܂𓍼 ⁝ عدد اعضاء المجموعه اقل من *~ {' ..
-                                                    (database:get(bot_id .. 'spider:Num:Add:Bot') or 0) .. '* عضو')
+                                                    (database:get(bot_id .. 'LARViN:Num:Add:Bot') or 0) .. '* عضو')
                                             return false
                                         end
                                         Reply_Status(msg, result.id_, 'reply_Add',
                                             '܂𓍼 ⁝ تم تفعيل المجموعه ~ ' .. chat.title_ .. '')
-                                        database:sadd(bot_id .. 'spider:Chek:Groups', msg.chat_id_)
-                                        database:sadd(bot_id .. 'spider:Basic:Constructor' .. msg.chat_id_,
+                                        database:sadd(bot_id .. 'LARViN:Chek:Groups', msg.chat_id_)
+                                        database:sadd(bot_id .. 'LARViN:Basic:Constructor' .. msg.chat_id_,
                                             msg.sender_user_id_)
                                         local Name = '[' .. result.first_name_ .. '](tg://user?id=' .. result.id_ .. ')'
                                         local NumMember = data.member_count_
@@ -9928,7 +9928,7 @@ end
                                                    '\n܂𓍼 ⁝ عدد اعضاء المجموعه *~ ' .. NumMember ..
                                                    '*' .. '\n܂𓍼 ⁝ اسم المجموعه ~ [' .. NameChat .. ']' ..
                                                    '\n܂𓍼 ⁝ الرابط ~ [' .. LinkGp .. ']'
-                                        if not Devspider(msg) then
+                                        if not DevLARViN(msg) then
                                             sendText(Id_Sudo, Text, 0, 'md')
                                         end
                                     end
@@ -9953,7 +9953,7 @@ end
                     end
                     return false
                 end
-                if Devspider(msg) then
+                if DevLARViN(msg) then
                     local Text = '📥┇مرحبا بك في اوامر المطور الجاهزه'
                     local keyboard = {{'الاحصائيات 📊'},
                                       {'تفعيل التواصل ⚡', 'تعطيل التواصل 🔰'},
@@ -9977,7 +9977,7 @@ end
                                       {'الغاء ✖'}}
                     send_inline_key(msg.chat_id_, Text, keyboard)
                 else
-                    if not database:get(bot_id .. 'spider:Start:Time' .. msg.sender_user_id_) then
+                    if not database:get(bot_id .. 'LARViN:Start:Time' .. msg.sender_user_id_) then
                         local start = database:get(bot_id .. "Start:Bot")
                         if start then
                             Test = start
@@ -9989,10 +9989,10 @@ end
                         send(msg.chat_id_, msg.id_, Test)
                     end
                 end
-                database:setex(bot_id .. 'spider:Start:Time' .. msg.sender_user_id_, 60, true)
+                database:setex(bot_id .. 'LARViN:Start:Time' .. msg.sender_user_id_, 60, true)
                 return false
             end
-            if not Devspider(msg) and not database:sismember(bot_id .. 'BaN:In:User', msg.sender_user_id_) and
+            if not DevLARViN(msg) and not database:sismember(bot_id .. 'BaN:In:User', msg.sender_user_id_) and
                 not database:get(bot_id .. 'Texting:In:Bv') then
                 send(msg.sender_user_id_, msg.id_, '܂𓍼 ⁝ تمت ارسال رسالتك الى ~ [' .. UserName .. ']')
                 tdcli_function({
@@ -10031,7 +10031,7 @@ end
                     end, nil);
                 end, nil);
             end
-            if Devspider(msg) and msg.reply_to_message_id_ ~= 0 then
+            if DevLARViN(msg) and msg.reply_to_message_id_ ~= 0 then
                 tdcli_function({
                     ID = "GetMessage",
                     chat_id_ = msg.chat_id_,
@@ -10102,7 +10102,7 @@ end
                     end, nil);
                 end, nil);
             end
-            if Devspider(msg) then
+            if DevLARViN(msg) then
                 if text == 'تفعيل التواصل ⚡' then
                     database:del(bot_id .. 'Texting:In:Bv')
                     send(msg.chat_id_, msg.id_, '🔘┇ تم تفعيل التواصل ')
@@ -10112,14 +10112,14 @@ end
                     send(msg.chat_id_, msg.id_, '🔘┇ تم تعطيل التواصل ')
                 end
                 if text == 'الاحصائيات 📊' then
-                    local Groups = database:scard(bot_id .. 'spider:Chek:Groups')
-                    local Users = database:scard(bot_id .. 'spider:UsersBot')
+                    local Groups = database:scard(bot_id .. 'LARViN:Chek:Groups')
+                    local Users = database:scard(bot_id .. 'LARViN:UsersBot')
                     send(msg.chat_id_, msg.id_,
                         '🔘┇احصائيات البوت \n\n👥┇عدد المجموعات *~ ' .. Groups ..
                             '\n👤┇عدد المشتركين ~ ' .. Users .. '*')
                 end
                 if text == "تنظيف المشتركين ♠" then
-                    local pv = database:smembers(bot_id .. 'spider:UsersBot')
+                    local pv = database:smembers(bot_id .. 'LARViN:UsersBot')
                     local sendok = 0
                     for i = 1, #pv do
                         tdcli_function({
@@ -10138,7 +10138,7 @@ end
                                     print('\27[30;33m»» THE USER IS SAVE ME ↓\n»» ' .. pv[i] .. '\n\27[1;37m')
                                 else
                                     print('\27[30;31m»» THE USER IS BLOCK ME ↓\n»» ' .. pv[i] .. '\n\27[1;37m')
-                                    database:srem(bot_id .. 'spider:UsersBot', pv[i])
+                                    database:srem(bot_id .. 'LARViN:UsersBot', pv[i])
                                     sendok = sendok + 1
                                 end
                                 if #pv == i then
@@ -10159,7 +10159,7 @@ end
                     return false
                 end
                 if text == "تنظيف الكروبات ℹ" then
-                    local group = database:smembers(bot_id .. 'spider:Chek:Groups')
+                    local group = database:smembers(bot_id .. 'LARViN:Chek:Groups')
                     local w = 0
                     local q = 0
                     for i = 1, #group do
@@ -10170,23 +10170,23 @@ end
                             if data and data.type_ and data.type_.channel_ and data.type_.channel_.status_ and
                                 data.type_.channel_.status_.ID == "ChatMemberStatusMember" then
                                 print('\27[30;34m»» THE BOT IS NOT ADMIN ↓\n»» ' .. group[i] .. '\n\27[1;37m')
-                                database:srem(bot_id .. 'spider:Chek:Groups', group[i])
+                                database:srem(bot_id .. 'LARViN:Chek:Groups', group[i])
                                 w = w + 1
                             end
                             if data and data.type_ and data.type_.channel_ and data.type_.channel_.status_ and
                                 data.type_.channel_.status_.ID == "ChatMemberStatusLeft" then
-                                database:srem(bot_id .. 'spider:Chek:Groups', group[i])
+                                database:srem(bot_id .. 'LARViN:Chek:Groups', group[i])
                                 q = q + 1
                                 print('\27[30;35m»» THE BOT IS LEFT GROUP ↓\n»» ' .. group[i] .. '\n\27[1;37m')
                             end
                             if data and data.type_ and data.type_.channel_ and data.type_.channel_.status_ and
                                 data.type_.channel_.status_.ID == "ChatMemberStatusKicked" then
-                                database:srem(bot_id .. 'spider:Chek:Groups', group[i])
+                                database:srem(bot_id .. 'LARViN:Chek:Groups', group[i])
                                 q = q + 1
                                 print('\27[30;36m»» THE BOT IS KICKED GROUP ↓\n»» ' .. group[i] .. '\n\27[1;37m')
                             end
                             if data and data.code_ and data.code_ == 400 then
-                                database:srem(bot_id .. 'spider:Chek:Groups', group[i])
+                                database:srem(bot_id .. 'LARViN:Chek:Groups', group[i])
                                 w = w + 1
                             end
                             if #group == i then
@@ -10218,84 +10218,84 @@ end
                     return false
                 end
                 if text == "- تغير اسم البوت 〽️ ." or text == "تغيير اسم البوت" then
-                    if Devspider(msg) then
-                        database:setex(bot_id .. "spider:Set:Name:Bot" .. msg.sender_user_id_, 300, true)
+                    if DevLARViN(msg) then
+                        database:setex(bot_id .. "LARViN:Set:Name:Bot" .. msg.sender_user_id_, 300, true)
                         send(msg.chat_id_, msg.id_, "📫┇ ارسل لي الاسم الان ")
                     end
                     return false
                 end
 
                 if text == 'تفعيل البوت الخدمي 💠' then
-                    database:del(bot_id .. 'spider:Free:Add:Bots')
+                    database:del(bot_id .. 'LARViN:Free:Add:Bots')
                     send(msg.chat_id_, msg.id_, '\n📫┇تم تفعيل البوت الخدمي ')
                 end
                 if text == 'تعطيل البوت الخدمي 📛' then
-                    database:set(bot_id .. 'spider:Free:Add:Bots', true)
+                    database:set(bot_id .. 'LARViN:Free:Add:Bots', true)
                     send(msg.chat_id_, msg.id_, '\n📫┇تم تعطيل البوت الخدمي')
                 end
                 if text == "اذاعه خاص 📡" and msg.reply_to_message_id_ == 0 then
-                    if database:get(bot_id .. "spider:Status:Bc") and not Devspider(msg) then
+                    if database:get(bot_id .. "LARViN:Status:Bc") and not DevLARViN(msg) then
                         send(msg.chat_id_, msg.id_,
                             "📫┇الاذاعه معطله من قبل المطور الاساسي")
                         return false
                     end
-                    database:setex(bot_id .. "spider:spider:Bc:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_, 600,
+                    database:setex(bot_id .. "LARViN:LARViN:Bc:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_, 600,
                         true)
                     send(msg.chat_id_, msg.id_,
                         "🔘┇ارسل لي سواء ~ { ملصق, متحركه, صوره, رساله }\n📫┇للخروج ارسل الغاء ")
                     return false
                 end
                 if text == "اذاعه 📡" and msg.reply_to_message_id_ == 0 then
-                    if database:get(bot_id .. "spider:Status:Bc") and not Devspider(msg) then
+                    if database:get(bot_id .. "LARViN:Status:Bc") and not DevLARViN(msg) then
                         send(msg.chat_id_, msg.id_,
                             "📫┇الاذاعه معطله من قبل المطور الاساسي")
                         return false
                     end
-                    database:setex(bot_id .. "spider:spider:Bc:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_,
+                    database:setex(bot_id .. "LARViN:LARViN:Bc:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_,
                         600, true)
                     send(msg.chat_id_, msg.id_,
                         "🔘┇ارسل لي سواء ~ { ملصق, متحركه, صوره, رساله }\n📫┇للخروج ارسل الغاء ")
                     return false
                 end
                 if text == "اذاعه بالتوجيه 👥" and msg.reply_to_message_id_ == 0 then
-                    if database:get(bot_id .. "spider:Status:Bc") and not Devspider(msg) then
+                    if database:get(bot_id .. "LARViN:Status:Bc") and not DevLARViN(msg) then
                         send(msg.chat_id_, msg.id_,
                             "📫┇الاذاعه معطله من قبل المطور الاساسي")
                         return false
                     end
-                    database:setex(bot_id .. "spider:spider:Fwd:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_,
+                    database:setex(bot_id .. "LARViN:LARViN:Fwd:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_,
                         600, true)
                     send(msg.chat_id_, msg.id_, "📥┇ارسل لي التوجيه الان")
                     return false
                 end
                 if text == "اذاعه بالتوجيه خاص 👤" and msg.reply_to_message_id_ == 0 then
-                    if database:get(bot_id .. "spider:Status:Bc") and not Devspider(msg) then
+                    if database:get(bot_id .. "LARViN:Status:Bc") and not DevLARViN(msg) then
                         send(msg.chat_id_, msg.id_,
                             "📫┇الاذاعه معطله من قبل المطور الاساسي")
                         return false
                     end
-                    database:setex(bot_id .. "spider:spider:Fwd:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_, 600,
+                    database:setex(bot_id .. "LARViN:LARViN:Fwd:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_, 600,
                         true)
                     send(msg.chat_id_, msg.id_, "📥┇ارسل لي التوجيه الان")
                     return false
                 end
                 if text == "تفعيل الاذاعه 🔔" then
-                    database:del(bot_id .. "spider:Status:Bc")
+                    database:del(bot_id .. "LARViN:Status:Bc")
                     send(msg.chat_id_, msg.id_, "\n📫┇تم تفعيل الاذاعه ")
                     return false
                 end
                 if text == "تعطيل الاذاعه 🔕" then
-                    database:set(bot_id .. "spider:Status:Bc", true)
+                    database:set(bot_id .. "LARViN:Status:Bc", true)
                     send(msg.chat_id_, msg.id_, "\n📫┇تم تعطيل الاذاعه")
                     return false
                 end
                 if text == "تفعيل المغادره 🔏" then
-                    database:del(bot_id .. "spider:Left:Bot" .. msg.chat_id_)
+                    database:del(bot_id .. "LARViN:Left:Bot" .. msg.chat_id_)
                     send(msg.chat_id_, msg.id_, "📫┇تم تفعيل مغادرة البوت")
                     return false
                 end
                 if text == "تعطيل المغادره 🔓" then
-                    database:set(bot_id .. "spider:Left:Bot" .. msg.chat_id_, true)
+                    database:set(bot_id .. "LARViN:Left:Bot" .. msg.chat_id_, true)
                     send(msg.chat_id_, msg.id_, "🔘┇تم تعطيل مغادرة البوت")
                     return false
                 end
@@ -10319,27 +10319,27 @@ end
                     database:del(bot_id .. 'Start:Bot')
                     send(msg.chat_id_, msg.id_, '🔘┇تم حذف كليشه ستارت')
                 end
-                if text and text:match("^- تغير الاشتراك 🧾 .$") and Devspider(msg) then
+                if text and text:match("^- تغير الاشتراك 🧾 .$") and DevLARViN(msg) then
                     database:setex(bot_id .. "add:ch:jm" .. msg.chat_id_ .. "" .. msg.sender_user_id_, 360, true)
                     send(msg.chat_id_, msg.id_, '🔘┇حسنآ ارسل لي معرف القناة')
                     return false
                 end
-                if text and text:match("^- تغير رساله الاشتراك 🧾 .$") and Devspider(msg) then
+                if text and text:match("^- تغير رساله الاشتراك 🧾 .$") and DevLARViN(msg) then
                     database:setex(bot_id .. "textch:user" .. msg.chat_id_ .. "" .. msg.sender_user_id_, 360, true)
                     send(msg.chat_id_, msg.id_, '🔘┇حسنآ ارسل لي النص الذي تريده')
                     return false
                 end
-                if text == "حذف رساله الاشتراك ℹ ." and Devspider(msg) then
+                if text == "حذف رساله الاشتراك ℹ ." and DevLARViN(msg) then
                     database:del(bot_id .. 'text:ch:user')
                     send(msg.chat_id_, msg.id_, "🔘┇تم مسح رساله الاشتراك ")
                     return false
                 end
-                if text and text:match("^- تعين قناة الاشتراك 📁 .$") and Devspider(msg) then
+                if text and text:match("^- تعين قناة الاشتراك 📁 .$") and DevLARViN(msg) then
                     database:setex(bot_id .. "add:ch:jm" .. msg.chat_id_ .. "" .. msg.sender_user_id_, 360, true)
                     send(msg.chat_id_, msg.id_, '🔘┇حسنآ ارسل لي معرف القناة')
                     return false
                 end
-                if text == "- تفعيل الاشتراك الاجباري 📄 ." and Devspider(msg) then
+                if text == "- تفعيل الاشتراك الاجباري 📄 ." and DevLARViN(msg) then
                     if database:get(bot_id .. 'add:ch:id') then
                         local addchusername = database:get(bot_id .. 'add:ch:username')
                         send(msg.chat_id_, msg.id_,
@@ -10352,13 +10352,13 @@ end
                     end
                     return false
                 end
-                if text == "- تعطيل الاشتراك الاجباري 📄 ." and Devspider(msg) then
+                if text == "- تعطيل الاشتراك الاجباري 📄 ." and DevLARViN(msg) then
                     database:del(bot_id .. 'add:ch:id')
                     database:del(bot_id .. 'add:ch:username')
                     send(msg.chat_id_, msg.id_, "🔘┇تم تعطيل الاشتراك الاجباري ")
                     return false
                 end
-                if text == "- الاشتراك الاجباري 📮 ." and Devspider(msg) then
+                if text == "- الاشتراك الاجباري 📮 ." and DevLARViN(msg) then
                     if database:get(bot_id .. 'add:ch:username') then
                         local addchusername = database:get(bot_id .. 'add:ch:username')
                         send(msg.chat_id_, msg.id_,
@@ -10423,20 +10423,20 @@ end
                     database:set(bot_id .. 'text:ch:user', texxt)
                     send(msg.chat_id_, msg.id_, '🔘┇تم تغيير رسالة الاشتراك ')
                 end
-                if text == ("مسح قائمه العام 📮") and Devspider(msg) then
-                    database:del(bot_id .. "spider:GBan:User")
+                if text == ("مسح قائمه العام 📮") and DevLARViN(msg) then
+                    database:del(bot_id .. "LARViN:GBan:User")
                     send(msg.chat_id_, msg.id_, "\n📮┇تم مسح قائمه العام")
                     return false
                 end
-                if text == ("مسح المطورين 🚸") and Devspider(msg) then
-                    database:del(bot_id .. "spider:Sudo:User")
+                if text == ("مسح المطورين 🚸") and DevLARViN(msg) then
+                    database:del(bot_id .. "LARViN:Sudo:User")
                     send(msg.chat_id_, msg.id_, "\n📮┇ تم مسح قائمة المطورين  ")
                 end
-                if text == ("قائمه العام 🚷") and Devspider(msg) then
-                    local list = database:smembers(bot_id .. "spider:GBan:User")
+                if text == ("قائمه العام 🚷") and DevLARViN(msg) then
+                    local list = database:smembers(bot_id .. "LARViN:GBan:User")
                     t = "\n⛔┇قائمة المحظورين عام \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ \n"
                     for k, v in pairs(list) do
-                        local username = database:get(bot_id .. "spider:User:Name" .. v)
+                        local username = database:get(bot_id .. "LARViN:User:Name" .. v)
                         if username then
                             t = t .. "" .. k .. "- ([@" .. username .. "])\n"
                         else
@@ -10449,11 +10449,11 @@ end
                     send(msg.chat_id_, msg.id_, t)
                     return false
                 end
-                if text == ("المطورين 🔱") and Devspider(msg) then
-                    local list = database:smembers(bot_id .. "spider:Sudo:User")
+                if text == ("المطورين 🔱") and DevLARViN(msg) then
+                    local list = database:smembers(bot_id .. "LARViN:Sudo:User")
                     t = "\n⛔┇قائمة مطورين البوت \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ \n"
                     for k, v in pairs(list) do
-                        local username = database:get(bot_id .. "spider:User:Name" .. v)
+                        local username = database:get(bot_id .. "LARViN:User:Name" .. v)
                         if username then
                             t = t .. "" .. k .. "- ([@" .. username .. "])\n"
                         else
@@ -10466,19 +10466,19 @@ end
                     send(msg.chat_id_, msg.id_, t)
                 end
                 if text == 'جلب نسخه احتياطيه 📁' then
-                    local list = database:smembers(bot_id .. 'spider:Chek:Groups')
+                    local list = database:smembers(bot_id .. 'LARViN:Chek:Groups')
                     local t = '{"BOT_ID": ' .. bot_id .. ',"GP_BOT":{'
                     for k, v in pairs(list) do
-                        NAME = 'spider Chat'
-                        ASAS = database:smembers(bot_id .. "spider:Basic:Constructor" .. v)
-                        MNSH = database:smembers(bot_id .. "spider:Constructor" .. v)
-                        MDER = database:smembers(bot_id .. "spider:Manager" .. v)
-                        MOD = database:smembers(bot_id .. "spider:Mod:User" .. v)
-                        link = database:get(bot_id .. "spider:Link_Group" .. v) or ''
+                        NAME = 'LARViN Chat'
+                        ASAS = database:smembers(bot_id .. "LARViN:Basic:Constructor" .. v)
+                        MNSH = database:smembers(bot_id .. "LARViN:Constructor" .. v)
+                        MDER = database:smembers(bot_id .. "LARViN:Manager" .. v)
+                        MOD = database:smembers(bot_id .. "LARViN:Mod:User" .. v)
+                        link = database:get(bot_id .. "LARViN:Link_Group" .. v) or ''
                         if k == 1 then
-                            t = t .. '"' .. v .. '":{"spider":"' .. NAME .. '",'
+                            t = t .. '"' .. v .. '":{"LARViN":"' .. NAME .. '",'
                         else
-                            t = t .. ',"' .. v .. '":{"spider":"' .. NAME .. '",'
+                            t = t .. ',"' .. v .. '":{"LARViN":"' .. NAME .. '",'
                         end
                         if #ASAS ~= 0 then
                             t = t .. '"ASAS":['
@@ -10535,15 +10535,15 @@ end
                 end
                 if text == "تحديث السورس 📥" then
                     send(msg.chat_id_, msg.id_, '☑┇تم التحديث')
-                    os.execute('rm -rf spider.lua')
+                    os.execute('rm -rf LARViN.lua')
                     os.execute('rm -rf start.lua')
-                    os.execute('wget https://raw.githubusercontent.com/spidersr/spider/master/spider.lua')
-                    os.execute('wget https://raw.githubusercontent.com/spidersr/spider/master/start.lua')
-                    dofile('spider.lua')
+                    os.execute('wget https://raw.githubusercontent.com/LARViNsr/LARViN/master/LARViN.lua')
+                    os.execute('wget https://raw.githubusercontent.com/LARViNsr/LARViN/master/start.lua')
+                    dofile('LARViN.lua')
                     return false
                 end
                 if text == "تحديث ♻" then
-                    dofile("spider.lua")
+                    dofile("LARViN.lua")
                     send(msg.chat_id_, msg.id_, "☑┇تم التحديث")
                 end
             end
@@ -10553,7 +10553,7 @@ end
 function tdcli_update_callback(data)
     if data.ID == "UpdateChannel" then
         if data.channel_.status_.ID == "ChatMemberStatusKicked" then
-            database:srem(bot_id .. 'spider:Chek:Groups', '-100' .. data.channel_.id_)
+            database:srem(bot_id .. 'LARViN:Chek:Groups', '-100' .. data.channel_.id_)
         end
     end
     if (data.ID == "UpdateNewMessage") then
@@ -10609,15 +10609,15 @@ function tdcli_update_callback(data)
             "MessagePinMessage" or msg.content_.ID == "MessageChatJoinByLink" or msg.content_.ID ==
             "MessageChatAddMembers" or msg.content_.ID == "MessageChatChangeTitle" or msg.content_.ID ==
             "MessageChatDeleteMember" then
-            if database:get(bot_id .. "spider:Lock:tagservr" .. msg.chat_id_) then
+            if database:get(bot_id .. "LARViN:Lock:tagservr" .. msg.chat_id_) then
                 DeleteMessage(msg.chat_id_, {
                     [0] = msg.id_
                 })
                 return false
             end
         end
-        if text and not database:sismember(bot_id .. 'spider:Spam:Group' .. msg.sender_user_id_, text) then
-            database:del(bot_id .. 'spider:Spam:Group' .. msg.sender_user_id_)
+        if text and not database:sismember(bot_id .. 'LARViN:Spam:Group' .. msg.sender_user_id_, text) then
+            database:del(bot_id .. 'LARViN:Spam:Group' .. msg.sender_user_id_)
         end
         ------------------------------------------------------------------------
         tdcli_function({
@@ -10625,15 +10625,15 @@ function tdcli_update_callback(data)
             user_id_ = msg.sender_user_id_
         }, function(arg, data)
             if data.username_ ~= false then
-                database:set(bot_id .. 'spider:User:Name' .. msg.sender_user_id_, data.username_)
+                database:set(bot_id .. 'LARViN:User:Name' .. msg.sender_user_id_, data.username_)
             end
         end, nil)
         ------------------------------------------------------------------------
         if msg.content_.ID == "MessageChatAddMembers" then
-            database:set(bot_id .. "spider:Who:Added:Me" .. msg.chat_id_ .. ":" .. msg.content_.members_[0].id_,
+            database:set(bot_id .. "LARViN:Who:Added:Me" .. msg.chat_id_ .. ":" .. msg.content_.members_[0].id_,
                 msg.sender_user_id_)
             local mem_id = msg.content_.members_
-            local Bots = database:get(bot_id .. "spider:Lock:Bot:kick" .. msg.chat_id_)
+            local Bots = database:get(bot_id .. "LARViN:Lock:Bot:kick" .. msg.chat_id_)
             for i = 0, #mem_id do
                 if msg.content_.members_[i].type_.ID == "UserTypeBot" and not Addictive(msg) and Bots == "kick" then
                     https.request(
@@ -10711,7 +10711,7 @@ function tdcli_update_callback(data)
         --------------------------------------------------------------------------------------------------------------
         if msg.content_.ID == "MessageChatAddMembers" then
             local mem_id = msg.content_.members_
-            local Bots = database:get(bot_id .. "spider:Lock:Bot:kick" .. msg.chat_id_)
+            local Bots = database:get(bot_id .. "LARViN:Lock:Bot:kick" .. msg.chat_id_)
             for i = 0, #mem_id do
                 if msg.content_.members_[i].type_.ID == "UserTypeBot" and not Addictive(msg) and Bots == "del" then
                     Get_Info = https.request("https://api.telegram.org/bot" .. token .. "/kickChatMember?chat_id=" ..
@@ -10784,31 +10784,31 @@ function tdcli_update_callback(data)
             end
         end
         ------------------------------------------------------------------------
-        if text and database:get(bot_id .. "spider:Del:Cmd:Group" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) ==
+        if text and database:get(bot_id .. "LARViN:Del:Cmd:Group" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) ==
             "true" then
-            local NewCmmd = database:get(bot_id .. "spider:Set:Cmd:Group:New1" .. msg.chat_id_ .. ":" .. text)
+            local NewCmmd = database:get(bot_id .. "LARViN:Set:Cmd:Group:New1" .. msg.chat_id_ .. ":" .. text)
             if NewCmmd then
-                database:del(bot_id .. "spider:Set:Cmd:Group:New1" .. msg.chat_id_ .. ":" .. text)
-                database:del(bot_id .. "spider:Set:Cmd:Group:New" .. msg.chat_id_)
-                database:srem(bot_id .. "spider:List:Cmd:Group:New" .. msg.chat_id_, text)
+                database:del(bot_id .. "LARViN:Set:Cmd:Group:New1" .. msg.chat_id_ .. ":" .. text)
+                database:del(bot_id .. "LARViN:Set:Cmd:Group:New" .. msg.chat_id_)
+                database:srem(bot_id .. "LARViN:List:Cmd:Group:New" .. msg.chat_id_, text)
                 send(msg.chat_id_, msg.id_, "🔰┇تم ازالة الامر من المجموعه")
             else
                 send(msg.chat_id_, msg.id_,
                     "🔰┇لا يوجد امر بهاذا الاسم تاكد من الامر واعد المحاوله")
             end
-            database:del(bot_id .. "spider:Del:Cmd:Group" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
+            database:del(bot_id .. "LARViN:Del:Cmd:Group" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
             return false
         end
         ------------------------------------------------------------------------
         if data.message_.content_.text_ then
-            local NewCmmd = database:get(bot_id .. "spider:Set:Cmd:Group:New1" .. msg.chat_id_ .. ":" ..
+            local NewCmmd = database:get(bot_id .. "LARViN:Set:Cmd:Group:New1" .. msg.chat_id_ .. ":" ..
                                              data.message_.content_.text_)
             if NewCmmd then
                 data.message_.content_.text_ = (NewCmmd or data.message_.content_.text_)
             end
         end
-        local Name_Bot = (database:get(bot_id .. "spider:Name:Bot") or "لارفين")
-        if not database:get(bot_id .. "spider:Fun_Bots" .. msg.chat_id_) then
+        local Name_Bot = (database:get(bot_id .. "LARViN:Name:Bot") or "لارفين")
+        if not database:get(bot_id .. "LARViN:Fun_Bots" .. msg.chat_id_) then
             if text == "" .. Name_Bot .. ' شنو رئيك بهاذا' and tonumber(msg.reply_to_message_id_) > 0 then
                 function FunBot(extra, result, success)
                     local Fun = {'لوكي وزاحف من ساع زحفلي وحضرته 😒',
@@ -10857,8 +10857,8 @@ function tdcli_update_callback(data)
             data.message_.content_.text_ = data.message_.content_.text_:gsub('^' .. Name_Bot .. ' ', '')
         end
         ------------------------------------------------------------------------
-        spider_Started_Bot(msg, data)
-        spider_Files(msg)
+        LARViN_Started_Bot(msg, data)
+        LARViN_Files(msg)
     elseif (data.ID == "UpdateMessageEdited") then
         local msg = data
         tdcli_function({
@@ -10866,9 +10866,9 @@ function tdcli_update_callback(data)
             chat_id_ = msg.chat_id_,
             message_id_ = tonumber(msg.message_id_)
         }, function(extra, result, success)
-            database:incr(bot_id .. 'spider:message_edit' .. result.chat_id_ .. result.sender_user_id_)
+            database:incr(bot_id .. 'LARViN:message_edit' .. result.chat_id_ .. result.sender_user_id_)
             local Text = result.content_.text_
-            if database:get(bot_id .. "spider:Lock:edit" .. msg.chat_id_) and not Text and not BasicConstructor(result) then
+            if database:get(bot_id .. "LARViN:Lock:edit" .. msg.chat_id_) and not Text and not BasicConstructor(result) then
                 Reply_Status(result, result.sender_user_id_, "reply",
                     "📬┇قام بالتعديل على الميديا")
                 DeleteMessage(result.chat_id_, {
@@ -10882,7 +10882,7 @@ function tdcli_update_callback(data)
                     text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or text and text:match("[Tt].[Mm][Ee]") or
                     text and text:match("[Tt][Ll][Gg][Rr][Mm].[Mm][Ee]") or text and
                     text:match("[Tt][Ee][Ll][Ee][Ss][Cc][Oo].[Pp][Ee]") then
-                    if database:get(bot_id .. "spider:Lock:Link" .. msg.chat_id_) then
+                    if database:get(bot_id .. "LARViN:Lock:Link" .. msg.chat_id_) then
                         DeleteMessage(result.chat_id_, {
                             [0] = data.message_id_
                         })
@@ -10893,7 +10893,7 @@ function tdcli_update_callback(data)
                 if text and text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or text and
                     text:match("[Tt].[Mm][Ee]") or text and text:match("[Tt][Ll][Gg][Rr][Mm].[Mm][Ee]") or text and
                     text:match("[Tt][Ee][Ll][Ee][Ss][Cc][Oo].[Pp][Ee]") then
-                    if database:get(bot_id .. "spider:Lock:Link" .. msg.chat_id_) then
+                    if database:get(bot_id .. "LARViN:Lock:Link" .. msg.chat_id_) then
                         DeleteMessage(result.chat_id_, {
                             [0] = data.message_id_
                         })
@@ -10904,7 +10904,7 @@ function tdcli_update_callback(data)
                 if text and text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or text and
                     text:match("[Tt].[Mm][Ee]") or text and text:match("[Tt][Ll][Gg][Rr][Mm].[Mm][Ee]") or text and
                     text:match("[Tt][Ee][Ll][Ee][Ss][Cc][Oo].[Pp][Ee]") then
-                    if database:get(bot_id .. "spider:Lock:Link" .. msg.chat_id_) then
+                    if database:get(bot_id .. "LARViN:Lock:Link" .. msg.chat_id_) then
                         DeleteMessage(result.chat_id_, {
                             [0] = data.message_id_
                         })
@@ -10915,7 +10915,7 @@ function tdcli_update_callback(data)
                 if text and text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or text and
                     text:match("[Tt].[Mm][Ee]") or text and text:match("[Tt][Ll][Gg][Rr][Mm].[Mm][Ee]") or text and
                     text:match("[Tt][Ee][Ll][Ee][Ss][Cc][Oo].[Pp][Ee]") then
-                    if database:get(bot_id .. "spider:Lock:Link" .. msg.chat_id_) then
+                    if database:get(bot_id .. "LARViN:Lock:Link" .. msg.chat_id_) then
                         DeleteMessage(result.chat_id_, {
                             [0] = data.message_id_
                         })
@@ -10926,7 +10926,7 @@ function tdcli_update_callback(data)
                 if text and text:match("[hH][tT][tT][pP][sT]") or text and
                     text:match("[tT][eE][lL][eE][gG][rR][aA].[Pp][Hh]") or text and
                     text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa].[Pp][Hh]") then
-                    if database:get(bot_id .. "spider:Lock:Link" .. msg.chat_id_) then
+                    if database:get(bot_id .. "LARViN:Lock:Link" .. msg.chat_id_) then
                         DeleteMessage(result.chat_id_, {
                             [0] = data.message_id_
                         })
@@ -10935,7 +10935,7 @@ function tdcli_update_callback(data)
                 end
                 ------------------------------------------------------------------------
                 if text and text:match("(.*)(@)(.*)") then
-                    if database:get(bot_id .. "spider:Lock:User:Name" .. msg.chat_id_) then
+                    if database:get(bot_id .. "LARViN:Lock:User:Name" .. msg.chat_id_) then
                         DeleteMessage(result.chat_id_, {
                             [0] = data.message_id_
                         })
@@ -10944,7 +10944,7 @@ function tdcli_update_callback(data)
                 end
                 ------------------------------------------------------------------------
                 if text and text:match("@") then
-                    if database:get(bot_id .. "spider:Lock:User:Name" .. msg.chat_id_) then
+                    if database:get(bot_id .. "LARViN:Lock:User:Name" .. msg.chat_id_) then
                         DeleteMessage(result.chat_id_, {
                             [0] = data.message_id_
                         })
@@ -10953,7 +10953,7 @@ function tdcli_update_callback(data)
                 end
                 ------------------------------------------------------------------------
                 if text and text:match("(.*)(#)(.*)") then
-                    if database:get(bot_id .. "spider:Lock:hashtak" .. msg.chat_id_) then
+                    if database:get(bot_id .. "LARViN:Lock:hashtak" .. msg.chat_id_) then
                         DeleteMessage(result.chat_id_, {
                             [0] = data.message_id_
                         })
@@ -10962,7 +10962,7 @@ function tdcli_update_callback(data)
                 end
                 ------------------------------------------------------------------------
                 if text and text:match("#") then
-                    if database:get(bot_id .. "spider:Lock:hashtak" .. msg.chat_id_) then
+                    if database:get(bot_id .. "LARViN:Lock:hashtak" .. msg.chat_id_) then
                         DeleteMessage(result.chat_id_, {
                             [0] = data.message_id_
                         })
@@ -10971,7 +10971,7 @@ function tdcli_update_callback(data)
                 end
                 ------------------------------------------------------------------------
                 if text and text:match("/") then
-                    if database:get(bot_id .. "spider:Lock:Cmd" .. msg.chat_id_) then
+                    if database:get(bot_id .. "LARViN:Lock:Cmd" .. msg.chat_id_) then
                         DeleteMessage(result.chat_id_, {
                             [0] = data.message_id_
                         })
@@ -10979,7 +10979,7 @@ function tdcli_update_callback(data)
                     end
                 end
                 if text and text:match("(.*)(/)(.*)") then
-                    if database:get(bot_id .. "spider:Lock:Cmd" .. msg.chat_id_) then
+                    if database:get(bot_id .. "LARViN:Lock:Cmd" .. msg.chat_id_) then
                         DeleteMessage(result.chat_id_, {
                             [0] = data.message_id_
                         })
@@ -10988,9 +10988,9 @@ function tdcli_update_callback(data)
                 end
                 ------------------------------------------------------------------------
                 if text then
-                    local spider_Msg = database:get(bot_id .. "spider:Add:Filter:Rp2" .. text .. result.chat_id_)
-                    if spider_Msg then
-                        Reply_Status(result, result.sender_user_id_, "reply", "📬┇" .. spider_Msg)
+                    local LARViN_Msg = database:get(bot_id .. "LARViN:Add:Filter:Rp2" .. text .. result.chat_id_)
+                    if LARViN_Msg then
+                        Reply_Status(result, result.sender_user_id_, "reply", "📬┇" .. LARViN_Msg)
                         DeleteMessage(result.chat_id_, {
                             [0] = data.message_id_
                         })
@@ -11003,7 +11003,7 @@ function tdcli_update_callback(data)
     elseif (data.ID == "UpdateMessageSendSucceeded") then
         local msg = data.message_
         local text = msg.content_.text_
-        local Get_Msg_Pin = database:get(bot_id .. 'spider:Msg:Pin:Chat' .. msg.chat_id_)
+        local Get_Msg_Pin = database:get(bot_id .. 'LARViN:Msg:Pin:Chat' .. msg.chat_id_)
         if Get_Msg_Pin ~= nil then
             if text == Get_Msg_Pin then
                 tdcli_function({
@@ -11014,7 +11014,7 @@ function tdcli_update_callback(data)
                 }, function(arg, d)
                     if d.ID == 'Ok' then
 
-                        database:del(bot_id .. 'spider:Msg:Pin:Chat' .. msg.chat_id_);
+                        database:del(bot_id .. 'LARViN:Msg:Pin:Chat' .. msg.chat_id_);
                     end
                 end, nil)
             elseif (msg.content_.sticker_) then
@@ -11025,7 +11025,7 @@ function tdcli_update_callback(data)
                         message_id_ = msg.id_,
                         disable_notification_ = 0
                     }, function(arg, d)
-                        database:del(bot_id .. 'spider:Msg:Pin:Chat' .. msg.chat_id_)
+                        database:del(bot_id .. 'LARViN:Msg:Pin:Chat' .. msg.chat_id_)
                     end, nil)
                 end
             end
@@ -11037,7 +11037,7 @@ function tdcli_update_callback(data)
                         message_id_ = msg.id_,
                         disable_notification_ = 0
                     }, function(arg, d)
-                        database:del(bot_id .. 'spider:Msg:Pin:Chat' .. msg.chat_id_)
+                        database:del(bot_id .. 'LARViN:Msg:Pin:Chat' .. msg.chat_id_)
                     end, nil)
                 end
             end
@@ -11061,7 +11061,7 @@ function tdcli_update_callback(data)
                         message_id_ = msg.id_,
                         disable_notification_ = 0
                     }, function(arg, d)
-                        database:del(bot_id .. 'spider:Msg:Pin:Chat' .. msg.chat_id_)
+                        database:del(bot_id .. 'LARViN:Msg:Pin:Chat' .. msg.chat_id_)
                     end, nil)
                 end
             end
@@ -11070,7 +11070,7 @@ function tdcli_update_callback(data)
     if (data.ID == "UpdateOption" and data.value_.value_ == "Ready") then
         print(
             '\27[30;32m»» يرجى الاننتضار لحين تنظيف المجموعات الوهميه ««\n\27[1;37m')
-        local list = database:smembers(bot_id .. 'spider:UsersBot')
+        local list = database:smembers(bot_id .. 'LARViN:UsersBot')
         for k, v in pairs(list) do
             tdcli_function({
                 ID = 'GetChat',
@@ -11078,7 +11078,7 @@ function tdcli_update_callback(data)
             }, function(arg, data)
             end, nil)
         end
-        local list = database:smembers(bot_id .. 'spider:Chek:Groups')
+        local list = database:smembers(bot_id .. 'LARViN:Chek:Groups')
         for k, v in pairs(list) do
             tdcli_function({
                 ID = 'GetChat',
@@ -11095,22 +11095,22 @@ function tdcli_update_callback(data)
                         }
                     }, function(e, g)
                     end, nil)
-                    database:srem(bot_id .. 'spider:Chek:Groups', v)
+                    database:srem(bot_id .. 'LARViN:Chek:Groups', v)
                 end
                 if data and data.type_ and data.type_.channel_ and data.type_.channel_.status_ and
                     data.type_.channel_.status_.ID == "ChatMemberStatusLeft" then
-                    database:srem(bot_id .. 'spider:Chek:Groups', v)
+                    database:srem(bot_id .. 'LARViN:Chek:Groups', v)
                 end
                 if data and data.type_ and data.type_.channel_ and data.type_.channel_.status_ and
                     data.type_.channel_.status_.ID == "ChatMemberStatusKicked" then
-                    database:srem(bot_id .. 'spider:Chek:Groups', v)
+                    database:srem(bot_id .. 'LARViN:Chek:Groups', v)
                 end
                 if data and data.code_ and data.code_ == 400 then
-                    database:srem(bot_id .. 'spider:Chek:Groups', v)
+                    database:srem(bot_id .. 'LARViN:Chek:Groups', v)
                 end
                 if data and data.type_ and data.type_.channel_ and data.type_.channel_.status_ and
                     data.type_.channel_.status_.ID == "ChatMemberStatusEditor" then
-                    database:sadd(bot_id .. 'spider:Chek:Groups', v)
+                    database:sadd(bot_id .. 'LARViN:Chek:Groups', v)
                 end
             end, nil)
         end
