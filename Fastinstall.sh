@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
-cd $HOME/spider
+cd $HOME/LARViN
 install() {
 rm -rf $HOME/.telegram-cli
 sudo chmod +x tg
-chmod +x spider
+chmod +x LARViN
 chmod +x install.sh
 chmod +x Run
 ./Run
 }
 get() {
-rm -fr spider.lua
+rm -fr LARViN.lua
 rm -fr sudo.lua
-wget "https://raw.githubusercontent.com/spiderTeam/spider/master/spider.lua"
+wget "https://raw.githubusercontent.com/LARViNTeam/LARViN/master/LARViN.lua"
 lua start.lua
 }
 installall(){
@@ -48,8 +48,6 @@ fi
 installall
 cd ..
 rm -rf luarocks*
-cd spider
+cd LARViN
 rm -rf luarocks*
 lua start.lua
-
-
