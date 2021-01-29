@@ -6881,7 +6881,7 @@ local Status_Gps = Get_Rank(Id,msg.chat_id_)
 local message_edit = database:get(bot_id..'spider:message_edit'..msg.chat_id_..data.id_) or 0
 local Num_Games = database:get(bot_id.."Tshak:Msg_User"..msg.chat_id_..":"..data.id_) or 0
 local Add_Mem = database:get(bot_id.."spider:Add:Memp"..msg.chat_id_..":"..data.id_) or 0
-send(msg.chat_id_, msg.id_,'*⌔∮ايديه - '..Id..'\n⌔∮رسائله - '..NumMsg..'\n⌔∮معرفه - *['..UserName_User..']*\n⌔∮تفاعله - '..TotalMsg..'\n⌔∮رتبته - '..Status_Gps..'\n⌔∮تعديلاته - '..message_edit..'\n⌔∮جهاته - '..Add_Mem..'') 
+send(msg.chat_id_, msg.id_,'*⌔∮ايديه - '..Id..'\n⌔∮رسائله - '..NumMsg..'\n⌔∮معرفه - *['..UserName_User..']*\n⌔∮تفاعله - '..TotalMsg..'\n⌔∮رتبته - '..Status_Gps..'\n⌔∮تعديلاته - '..message_edit..'\n⌔∮جهاته - '..Add_Mem..'\n*') 
 end,nil)   
 end
 tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_spider, nil)
@@ -6905,7 +6905,7 @@ local Status_Gps = Get_Rank(Id,msg.chat_id_)
 local message_edit = database:get(bot_id..'spider:message_edit'..msg.chat_id_..data.id_) or 0
 local Num_Games = database:get(bot_id.."Tshak:Msg_User"..msg.chat_id_..":"..data.id_) or 0
 local Add_Mem = database:get(bot_id.."spider:Add:Memp"..msg.chat_id_..":"..data.id_) or 0
-send(msg.chat_id_, msg.id_,'*⌔∮ايديه - '..Id..'\n⌔∮رسائله - '..NumMsg..'\n⌔∮معرفه - *['..UserName_User..']*\n⌔∮تفاعله - '..TotalMsg..'\n⌔∮رتبته - '..Status_Gps..'\n⌔∮تعديلاته - '..message_edit..'\n⌔∮جهاته - '..Add_Mem..'') 
+send(msg.chat_id_, msg.id_,'*⌔∮ايديه - '..Id..'\n⌔∮رسائله - '..NumMsg..'\n⌔∮معرفه - *['..UserName_User..']*\n⌔∮تفاعله - '..TotalMsg..'\n⌔∮رتبته - '..Status_Gps..'\n⌔∮تعديلاته - '..message_edit..'\n⌔∮جهاته - '..Add_Mem..'\n*') 
 end,nil)   
 else
 send(msg.chat_id_, msg.id_,'⌔∮لا يوجد حساب بهاذا المعرف')
