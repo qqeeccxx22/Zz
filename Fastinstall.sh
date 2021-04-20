@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 cd $HOME/spider
-vn =`lsb_release -rs | cut -f1 -d"."`
+vn =`lsb_release -rs | cut -f1 -d.`
 rm -rf $HOME/.telegram-cli
 install() {
 rm -rf $HOME/.telegram-cli
