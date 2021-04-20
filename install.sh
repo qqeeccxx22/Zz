@@ -16,6 +16,8 @@ lua start.lua
 
 installall(){
 Version=`lsb_release -rs | cut -f1 -d"."`
+apt update
+apt upgrade
 if [ "$Version" == "18" ];then
 echo -e "${WHITB}\n¦ Installing depedencies for ubuntu 18  ... \n${CNIL}"
 cd /lib/x86_64-linux-gnu/ && sudo ln -s libreadline.so.7.0 libreadline.so.6
