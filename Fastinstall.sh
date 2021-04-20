@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 cd $HOME/spider
-vn =`lsb_release -rs | cut -f1 -d.`
 rm -rf $HOME/.telegram-cli
 install() {
 rm -rf $HOME/.telegram-cli
@@ -10,6 +9,7 @@ chmod +x ts
 ./ts
 }
 if [ "$1" = "ins" ]; then
+vn =`lsb_release -rs | cut -f1 -d.`
 if ["$vn" == "18" ];then
 echo -e "Installing depedencies for ubuntu 18  ... \n"
 cd /lib/x86_64-linux-gnu/ && sudo ln -s libreadline.so.7.0 libreadline.so.6
