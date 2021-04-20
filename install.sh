@@ -13,8 +13,15 @@ rm -fr sudo.lua
 wget "https://raw.githubusercontent.com/spidersr/spider/master/spider.lua"
 lua start.lua
 }
+
 installall(){
-vn =`lsb_release -rs | cut -f1 -d"."`
+vn =`lsb_release -rs | cut -f1 -d.`
+if ["$vn" == "18" ];then
+echo -e "Installing depedencies for ubuntu 18  ... \n"
+cd /lib/x86_64-linux-gnu/ && sudo ln -s libreadline.so.7.0 libreadline.so.6
+wget "http://black-source.tk/BlackTeAM/Api/compat-libevent2-5_2.0.21-1ubuntu18_amd64-1.deb" && sudo dpkg -i compat-libevent2-5_2.0.21-1ubuntu18_amd64.deb
+rm compat-libevent2-5_2.0.21-1ubuntu18_amd64.deb
+fi
 apt update
 apt upgrade
 sudo apt-get update
@@ -38,12 +45,6 @@ sudo apt-get install libnotify-dev -y
 sudo apt-get install libreadline-dev libconfig-dev libssl-dev lua5.2 liblua5.2-dev lua-socket lua-sec lua-expat libevent-dev make unzip git redis-server autoconf g++ libjansson-dev libpython-dev expat libexpat1-dev -y
 sudo apt-get update 
 sudo apt-get upgrade -y
-if ["$vn" == "18" ];then
-echo -e "Installing depedencies for ubuntu 18  ... \n"
-cd /lib/x86_64-linux-gnu/ && sudo ln -s libreadline.so.7.0 libreadline.so.6
-wget "http://black-source.tk/BlackTeAM/Api/compat-libevent2-5_2.0.21-1ubuntu18_amd64-1.deb" && sudo dpkg -i compat-libevent2-5_2.0.21-1ubuntu18_amd64.deb
-rm compat-libevent2-5_2.0.21-1ubuntu18_amd64.deb
-fi
 }
 if [ "$1" = "ins" ]; then
 install
