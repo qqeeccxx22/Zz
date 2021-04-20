@@ -28,7 +28,7 @@ io.write('\n\27[1;31mThe Tokem was not Saved\n\27[0;39;49m')
 end 
 os.execute('lua start.lua')
 end
-if not redis:get(Create_4.."Id_spider") then
+if not Create_3:get(Create_4.."Id_spider") then
 print("\27[1;34m\n»» Send Your id Sudo : \27[m")
 local Id = io.read():gsub(' ','') 
 if tostring(Id):match('%d+') then
