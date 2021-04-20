@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-cd $HOME/spider
+cd $(cd $(dirname $0); pwd)
 install() {
 rm -rf $HOME/.telegram-cli
 sudo chmod +x tg
