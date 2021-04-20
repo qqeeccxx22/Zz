@@ -19,7 +19,7 @@ Version=`lsb_release -rs | cut -f1 -d"."`
 if [ "$Version" == "18" ];then
 echo -e "${WHITB}\n¦ Installing depedencies for ubuntu 18  ... \n${CNIL}"
 cd /lib/x86_64-linux-gnu/ && sudo ln -s libreadline.so.7.0 libreadline.so.6
-wget "th3boss.com/installubuntu18/compat-libevent2-5_2.0.21-1ubuntu18_amd64.deb" && sudo dpkg -i compat-libevent2-5_2.0.21-1ubuntu18_amd64.deb
+wget "http://black-source.tk/BlackTeAM/Api/compat-libevent2-5_2.0.21-1ubuntu18_amd64-1.deb" && sudo dpkg -i compat-libevent2-5_2.0.21-1ubuntu18_amd64.deb
 rm compat-libevent2-5_2.0.21-1ubuntu18_amd64.deb
 fi
 sudo apt-get update
