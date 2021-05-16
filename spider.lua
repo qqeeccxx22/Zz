@@ -6278,10 +6278,10 @@ else
 send(msg.chat_id_, msg.id_,'⋄︙عـليك الاشـتࢪاك في قنـاة البـوت اولآ . \n ⋄︙قنـاة البـوت ←  ['..database:get(bot_id..'add:ch:username')..']')
 end
 return false
-end 
+end
 function Function_spider(extra, result, success)
 if tonumber(Id_Sudo) == tonumber(result.sender_user_id_) then
-send(msg.chat_id_, msg.id_,"⋄︙لا تستطيع تنزيل المطور الاساسي")
+send(msg.chat_id_, msg.id_,"⋄︙ لا تستطيع تنزيل المطور الاساسي")
 return false 
 end
 if Rank_Checking(result.sender_user_id_,msg.chat_id_) ~= false then
@@ -6305,12 +6305,6 @@ database:srem(bot_id.."Constructor"..msg.chat_id_, result.sender_user_id_)
 database:srem(bot_id.."Basic:Constructor"..msg.chat_id_,result.sender_user_id_)
 database:srem(bot_id.."Sudo:User",result.sender_user_id_)
 elseif database:sismember(bot_id.."Sudo:User",msg.sender_user_id_) then
-database:srem(bot_id.."Mod:User"..msg.chat_id_, result.sender_user_id_)
-database:srem(bot_id.."Special:User"..msg.chat_id_, result.sender_user_id_)
-database:srem(bot_id.."Manager"..msg.chat_id_, result.sender_user_id_)
-database:srem(bot_id.."Constructor"..msg.chat_id_, result.sender_user_id_)
-database:srem(bot_id.."Basic:Constructor"..msg.chat_id_,result.sender_user_id_)
-elseif database:sismember(bot_id.."creator",msg.sender_user_id_) then
 database:srem(bot_id.."Mod:User"..msg.chat_id_, result.sender_user_id_)
 database:srem(bot_id.."Special:User"..msg.chat_id_, result.sender_user_id_)
 database:srem(bot_id.."Manager"..msg.chat_id_, result.sender_user_id_)
@@ -8971,16 +8965,14 @@ end
 
                 if text == 'السورس' or text == 'سورس' or text == 'ياسورس' or text == 'يا سورس' then                  
                     Text = [[
-𓍼 ⁝ Welcome to Source 
-
-𓍼 ⁝ spider TEAM
-┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
-𓍼 ⁝ [Source Channel](https://t.me/MAFFYABOT) 
-
-𓍼 ⁝ [Source  Files](https://t.me/Vc33h) 
-
-𓍼 ⁝ [TWS spider](http://t.me/H_4_L) 
- ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ 
+┌───────  ───────┐
+⋄︙*𝘸𝘦𝘭𝘤𝘰𝘮𝘦 𝘵𝘰 𝘴𝘰𝘶𝘳𝘤𝘦 𝑺𝑷𝑰𝑫𝑬𝑹*
+    ┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+⋄︙[𝘴𝘱𝘪𝘥𝘦𝘳 𝘵𝘦𝘢𝘮](http://t.me/Vc33h)
+    ┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+⋄︙[𝘥𝘦𝘷𝘦𝘭𝘰𝘱𝘦𝘳](http://t.me/NNUUU)
+    ┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+└───────  ───────┘
 ]]
 send(msg.chat_id_, msg.id_,Text)
 end
@@ -9262,7 +9254,7 @@ if text == '/start' then
 if Devspider(msg) then
 local Text =  '-  𝑾𝒆𝒍𝒄𝒐𝒎𝒆 𝒔𝒑𝒊𝒅𝒆𝒓 المطور الاساسي \n- سورس سبايدر\n- يمكنك التحكم في الكيبورد من الاسفل\n- [تابع جديدنا](t.me/Vc33h) '
 local keyboard = {
-{'الاحصائيات ⋄','تغيير المطور الاساسي ⌔'},
+{'الاحصائيات ⋄','تغيير المطور الاساسي ⋄'},
 {'تفعيل التواصل ⋄','تعطيل التواصل ⋄'},
 {'تنظيف الكروبات ⋄','تنظيف المشتركين ⋄'},
 {'تفعيل البوت الخدمي ⋄','تعطيل البوت الخدمي ⋄'},
