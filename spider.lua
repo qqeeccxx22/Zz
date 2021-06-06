@@ -3658,6 +3658,217 @@ Reply_Status(msg,userid,"reply","⋄︙تم تنزيله من المطورين")
 return false 
 end
 
+if text == 'تفعيل الاوامر الثانويه' and Constructor(msg) then 
+send(msg.chat_id_, msg.id_,'\n❏︙ تم تفعيل الاوامر الثانوي\n———× 𝑩𝒆𝒔𝒔𝒐 𝒔𝒐𝒓𝒖𝒄𝒆 ×——— \n❏︙منشئ اساسي (اس) \n❏︙منشئ (من) \nمدير (مد) \n❏︙ادمن (اد) \n❏︙مميز (م) \n———× 𝑩𝒆𝒔𝒔𝒐 𝒔𝒐𝒓𝒖𝒄𝒆 ×——— \n❏︙ تم تحويل اله الاوامر رفع')
+redis:del(bot_id..'Basic:Constructor'..msg.chat_id_)
+end
+if text == 'تعطيل الاوامر الثانويه' and Constructor(msg) then
+Reply_Status(msg,msg.sender_user_id_,"lock",'\n❏︙ تم تعطيل الاوامر الثانويه \n———× 𝑩𝒆𝒔𝒔𝒐 𝒔𝒐𝒓𝒖𝒄𝒆 ×——— \n❏︙منشئ اساسي (اس) \n❏︙منشئ (من) \nمدير (مد) \n❏︙ادمن (اد) \n❏︙مميز (م) \n———× 𝑩𝒆𝒔𝒔𝒐 𝒔𝒐𝒓𝒖𝒄𝒆 ×——— \n❏︙ تم سترجاع الاوامر سابقه') 
+redis:set(bot_id..'Basic:Constructor'..msg.chat_id_, true)
+end
+if text == ("اس") and tonumber(msg.reply_to_message_id_) ~= 0 and creatorA(msg) then 
+function Function_Miro(extra, result, success)
+redis:sadd(bot_id.."Basic:Constructor"..msg.chat_id_, result.sender_user_id_)
+Reply_Status(msg,result.sender_user_id_,"reply","• تم ترقيته منشئ اساسي")  
+end
+tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_Miro, nil)
+return false
+end
+if text and text:match("^اس @(.*)$") and creatorA(msg) then 
+local username = text:match("^اس @(.*)$")
+function Function_Miro(extra, result, success)
+if result.id_ then
+if (result and result.type_ and result.type_.ID == "ChannelChatInfo") then
+send(msg.chat_id_,msg.id_,"• عذرا عزيزي المستخدم هاذا معرف قناة يرجى استخدام الامر بصوره صحيحه !")   
+return false 
+end      
+redis:sadd(bot_id.."Basic:Constructor"..msg.chat_id_, result.id_)
+Reply_Status(msg,result.id_,"reply","?? : تم ترقيته منشئ اساسي")  
+else
+send(msg.chat_id_, msg.id_,"• لا يوجد حساب بهاذا المعرف")
+end
+end
+tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_Miro, nil)
+return false
+end
+if text and text:match("^اس (%d+)$") and creatorA(msg) then 
+local userid = text:match("^اس (%d+)$") 
+redis:sadd(bot_id.."Basic:Constructor"..msg.chat_id_, userid)
+Reply_Status(msg,userid,"reply","• تم ترقيته منشئ اساسي")  
+return false
+end
+if text == "من" and tonumber(msg.reply_to_message_id_) ~= 0 and BasicConstructor(msg) then 
+function Function_Miro(extra, result, success)
+redis:sadd(bot_id.."Constructor"..msg.chat_id_, result.sender_user_id_)
+Reply_Status(msg,result.sender_user_id_,"reply","• تم ترقيته منشئ في المجموعه")  
+end
+tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_Miro, nil)
+end
+if text and text:match("^من @(.*)$") and BasicConstructor(msg) then 
+local username = text:match("^من @(.*)$")
+function Function_Miro(extra, result, success)
+if result.id_ then
+if (result and result.type_ and result.type_.ID == "ChannelChatInfo") then
+send(msg.chat_id_,msg.id_,"• عذرا عزيزي المستخدم هاذا معرف قناة يرجى استخدام الامر بصوره صحيحه !")   
+return false 
+end      
+redis:sadd(bot_id.."Constructor"..msg.chat_id_, result.id_)
+Reply_Status(msg,result.id_,"reply","• تم ترقيته منشئ في المجموعه")  
+else
+send(msg.chat_id_, msg.id_,"• لا يوجد حساب بهاذا المعرف")
+end
+end
+tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_Miro, nil)
+end
+if text and text:match("^من (%d+)$") and BasicConstructor(msg) then 
+local userid = text:match("^من (%d+)$")
+redis:sadd(bot_id.."Constructor"..msg.chat_id_, userid)
+Reply_Status(msg,userid,"reply","• تم ترقيته منشئ في المجموعه")  
+end
+if text == ("مد") and tonumber(msg.reply_to_message_id_) ~= 0 and Constructor(msg) then 
+function Function_Miro(extra, result, success)
+redis:sadd(bot_id.."Manager"..msg.chat_id_, result.sender_user_id_)
+Reply_Status(msg,result.sender_user_id_,"reply","• تم ترقيته مدير المجموعه")  
+end
+tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_Miro, nil)
+return false
+end  
+if text and text:match("^مد @(.*)$") and Constructor(msg) then 
+local username = text:match("^مد @(.*)$") 
+function Function_Miro(extra, result, success)
+if result.id_ then
+if (result and result.type_ and result.type_.ID == "ChannelChatInfo") then
+send(msg.chat_id_,msg.id_,"• عذرا عزيزي المستخدم هاذا معرف قناة يرجى استخدام الامر بصوره صحيحه !")   
+return false 
+end      
+redis:sadd(bot_id.."Manager"..msg.chat_id_, result.id_)
+Reply_Status(msg,result.id_,"reply","• تم ترقيته مدير المجموعه")  
+else
+send(msg.chat_id_, msg.id_,"• لا يوجد حساب بهاذا المعرف")
+end
+end
+tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_Miro, nil)
+return false
+end 
+if text and text:match("^مد (%d+)$") and Constructor(msg) then 
+local userid = text:match("^مد (%d+)$") 
+redis:sadd(bot_id.."Manager"..msg.chat_id_, userid)
+Reply_Status(msg,userid,"reply","• تم ترقيته مدير المجموعه")  
+return false
+end 
+if text == ("اد") and tonumber(msg.reply_to_message_id_) ~= 0 and Owner(msg) then 
+if not Constructor(msg) and redis:get(bot_id.."Add:Group:Cheking"..msg.chat_id_) then 
+send(msg.chat_id_, msg.id_,'• لا تستطيع رفع احد وذالك لان تم تعطيل الرفع من قبل المنشئين')
+return false
+end
+function Function_Miro(extra, result, success)
+redis:sadd(bot_id.."Mod:User"..msg.chat_id_, result.sender_user_id_)
+Reply_Status(msg,result.sender_user_id_,"reply","• تم ترقيته ادمن للمجموعه")  
+end
+tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_Miro, nil)
+return false
+end
+if text and text:match("^اد @(.*)$") and Owner(msg) then 
+local username = text:match("^اد @(.*)$")
+if not Constructor(msg) and redis:get(bot_id.."Add:Group:Cheking"..msg.chat_id_) then 
+send(msg.chat_id_, msg.id_,'• لا تستطيع رفع احد وذالك لان تم تعطيل الرفع من قبل المنشئين')
+return false
+end
+function Function_Miro(extra, result, success)
+if result.id_ then
+if (result and result.type_ and result.type_.ID == "ChannelChatInfo") then
+send(msg.chat_id_,msg.id_,"• عذرا عزيزي المستخدم هاذا معرف قناة يرجى استخدام الامر بصوره صحيحه !")   
+return false 
+end      
+redis:sadd(bot_id.."Mod:User"..msg.chat_id_, result.id_)
+Reply_Status(msg,result.id_,"reply","• تم ترقيته ادمن للمجموعه")  
+else
+send(msg.chat_id_, msg.id_,"• لا يوجد حساب بهاذا المعرف")
+end
+end
+tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_Miro, nil)
+return false
+end
+if text and text:match("^اد (%d+)$") and Owner(msg) then 
+local userid = text:match("^اد (%d+)$")
+if not Constructor(msg) and redis:get(bot_id.."Add:Group:Cheking"..msg.chat_id_) then 
+send(msg.chat_id_, msg.id_,'• لا تستطيع رفع احد وذالك لان تم تعطيل الرفع من قبل المنشئين')
+return false
+end
+redis:sadd(bot_id.."Mod:User"..msg.chat_id_, userid)
+Reply_Status(msg,userid,"reply","• تم ترقيته ادمن للمجموعه")  
+return false
+end
+if text == ("م") and tonumber(msg.reply_to_message_id_) ~= 0 and Addictive(msg) then     
+if not Constructor(msg) and redis:get(bot_id.."Add:Group:Cheking"..msg.chat_id_) then    
+send(msg.chat_id_, msg.id_,'• لا تستطيع رفع احد وذالك لان تم تعطيل الرفع من قبل المنشئين')
+return false
+end
+function Function_Miro(extra, result, success)
+redis:sadd(bot_id.."Special:User"..msg.chat_id_, result.sender_user_id_)
+Reply_Status(msg,result.sender_user_id_,"reply","• تم ترقيته مميز للمجموعه")  
+end
+tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_Miro, nil)
+return false
+end
+if text and text:match("^م @(.*)$") and Addictive(msg) then     
+local username = text:match("^م @(.*)$") 
+if not Constructor(msg) and redis:get(bot_id.."Add:Group:Cheking"..msg.chat_id_) then 
+send(msg.chat_id_, msg.id_,'• لا تستطيع رفع احد وذالك لان تم تعطيل الرفع من قبل المنشئين')
+return false
+end
+function Function_Miro(extra, result, success)
+if result.id_ then
+if (result and result.type_ and result.type_.ID == "ChannelChatInfo") then
+send(msg.chat_id_,msg.id_,"• عذرا عزيزي المستخدم هاذا معرف قناة يرجى استخدام الامر بصوره صحيحه !")   
+return false 
+end      
+redis:sadd(bot_id.."Special:User"..msg.chat_id_, result.id_)
+Reply_Status(msg,result.id_,"reply","• تم ترقيته مميز للمجموعه")  
+else
+send(msg.chat_id_, msg.id_,"• لا يوجد حساب بهاذا المعرف")
+end
+end
+tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_Miro, nil)
+return false
+end
+if text and text:match("^م (%d+)$") and Addictive(msg) then     
+local userid = text:match("^م (%d+)$")
+if not Constructor(msg) and redis:get(bot_id.."Add:Group:Cheking"..msg.chat_id_) then 
+send(msg.chat_id_, msg.id_,'• لا تستطيع رفع احد وذالك لان تم تعطيل الرفع من قبل المنشئين')
+return false
+end
+redis:sadd(bot_id.."Special:User"..msg.chat_id_, userid)
+Reply_Status(msg,userid,"reply","• تم ترقيته مميز للمجموعه")  
+return false
+end
+if text and text:match("^تك @(.*)$") and DevMiro(msg) then
+local username = text:match("^تك @(.*)$") 
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = redis:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'❏︙عذراً عليك الاشتراك في القناة \n ❏︙اشترك هنا ['..redis:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
+function Function_Miro(extra, result, success)
+if result.id_ then
+redis:srem(bot_id.."Basic:Constructor"..msg.chat_id_, result.id_)
+redis:srem(bot_id.."Constructor"..msg.chat_id_, result.id_)
+redis:srem(bot_id.."Manager"..msg.chat_id_, result.id_)
+redis:srem(bot_id.."Mod:User"..msg.chat_id_, result.id_)
+redis:srem(bot_id.."Special:User"..msg.chat_id_, result.id_)
+Reply_Status(msg,result.id_,"reply","\n༄¦ تم تنزيل مميز \n༄¦ تم تنزيل ادمن \n༄¦ تم تنزيل مدير \n༄¦ تم تنزيل منشئ \n༄¦ تم تنزيل منشئ اساسي \n❏❏❏❏❏❏❏❏❏❏❏❏❏❏❏\n✯︙تم تنزيل العضو جميع الرتب\n✯︙ بواسطه ➥ [《BESSO》](t.me/BESSO500K)")  
+else
+send(msg.chat_id_, msg.id_,"• لا يوجد حساب بهاذا المعرف")
+end
+end
+tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_Miro, nil)
+return false
+end
+
 if text == ("رفع منشئ اساسي") and tonumber(msg.reply_to_message_id_) ~= 0 and creatorA(msg) then
 if AddChannel(msg.sender_user_id_) == false then
 local textchuser = database:get(bot_id..'text:ch:user')
@@ -8943,18 +9154,25 @@ dofile("spider.lua")
 send(msg.chat_id_, msg.id_, "⋄︙تم التحديث")
 end
 
-                if text == 'السورس' or text == 'سورس' or text == 'ياسورس' or text == 'يا سورس' then                  
-                    Text = [[
-┌───────  ───────┐
-⋄︙*𝘸𝘦𝘭𝘤𝘰𝘮𝘦 𝘵𝘰 𝘴𝘰𝘶𝘳𝘤𝘦 𝑺𝑷𝑰𝑫𝑬𝑹*
-    ┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-⋄︙[𝘴𝘱𝘪𝘥𝘦𝘳 𝘵𝘦𝘢𝘮](http://t.me/Vc33h)
-    ┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-⋄︙[𝘥𝘦𝘷𝘦𝘭𝘰𝘱𝘦𝘳](http://t.me/NNUUU)
-    ┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-└───────  ───────┘
-]]
-send(msg.chat_id_, msg.id_,Text)
+                if text == 'السورس' or text == 'سورس' or text == 'ياسورس' or text == 'يا سورس' then       
+Text = "[𝘞𝘦𝘭𝘤𝘰𝘮𝘦 𝘵𝘰 ـ BeSsO Source ـ ](t.me/BESSO500K)"
+keyboard = {} 
+keyboard.inline_keyboard = {
+{{text = 'ـ BeSsO Source ـ  .',url="https://t.me/MUSIC_REMAS_3"}},
+}
+local msg_id = msg.id_/2097152/0.5
+https.request("https://api.telegram.org/bot"..token..'/sendMessage?chat_id=' .. msg.chat_id_ .. '&text=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+return false
+end
+if text == 'شنو الوقت' or text == 'الوقت' or text == 'بيش الساعه' then 
+local htot = {'mathbf','mathit','mathfrak','mathrm'}
+local alwan = {'blue','green','yellow','magenta','Orange','DarkOrange','red'}
+local url1 = 'http://latex.codecogs.com/png.download?'..'\\dpi{600}%20\\huge%20\\'..htot[math.random(#htot)]..'{{\\color{'..alwan[math.random(#alwan)]..'}'..os.date("%H:%M")..'}}' 
+file = download_to_file(url1,'Miro.webp')
+print('TIMESSSS')
+ local Miro = 'https://api.telegram.org/bot' .. token .. '/sendDocument'
+local curl = 'curl "' .. Miro .. '" -F "chat_id=' .. msg.chat_id_ .. '" -F "document=@' .. 'Miro.webp' .. '"'
+io.popen(curl)
 end
 if text == 'تنزيل جميع الرتب' then
                     if not BasicConstructor(msg) then
@@ -8992,6 +9210,32 @@ local texting = {"ما ما ما اخجل شني 😭??💞","ماا وخر ما
 send(msg.chat_id_, msg.id_, ''..texting[math.random(#texting)]..'')
 return false
 end
+if text == 'اريد بوت' or text == 'اريد مطور' or text == 'خوش سورس' or text == 'سورس بيسو' or text == 'اريد بوت تمبلر' or text == 'سورس بيسو' then
+Text = [[
+•- DEV @FSFFF مبرمج بوتات•
+]]
+send(msg.chat_id_, msg.id_,Text)
+return false
+end
+if text == 'اريد انصب بوت' or text == 'عجبني البوت' or text == 'منو منصبلك' or text == 'منو مطور السورس' or text == 'مطور السورس' or text == 'انصبلك'  or text == 'انصبلك بوت' then
+Text = [[
+اهلا عزيزي
+متوفر تنصيب بوتات ع سورس بيسو
+احدث واسرع البوتات وضمان الثقه
+للاستفسار راسل المطور @FSFFF
+]]
+send(msg.chat_id_, msg.id_,Text)
+return false
+end
+if text == 'م1' or text == 'م2' or text == 'م3' or text == 'م4' or text == 'م5' then     
+Text = [[
+اهلا عزيزي
+لايوجد هاكذا اوامر في البوت
+اكتب `الاوامر` وتحكم في الكيبورد بالاسفل
+]]
+send(msg.chat_id_, msg.id_,Text)
+return false
+end
 
 if text == 'رابط الحذف' or text == 'رابط حذف' or text == 'رابط حذف انستا' then
 Text =[[
@@ -8999,6 +9243,7 @@ Text =[[
 ]]
 keyboard = {} 
 keyboard.inline_keyboard = {
+	{{text = ' ● رابط بوت الحذف تليكرام ●.',url="https://t.me/Y5BBOT"}},
 {{text = ' ● رابط حذف تلي كرام ●.',url="https://my.telegram.org/auth?to=delete"}},
 {{text = ' ● رابط حذف الانستا ●.',url="https://www.instagram.com/accounts/login/?next=/accounts/remove/request/permanent/"}},
 {{text = '● رابط حذف فيسبوك ● .',url="https://www.facebook.com/help/deleteaccount"}},
@@ -9014,7 +9259,7 @@ send(msg.chat_id_, msg.id_,'• عذرا الاوامر هذا لا تخصك ')
 return false
 end
 local Text =[[
-ـ spider Source ـ 
+ـ BeSsO Source ـ 
  —ـ—ـ—ـ—ـ—ـ—ـ—ـ—ـ— 
 ⌔︙لعرض اوامر الحمايه ⌯ 𝟏 ⌯ .
 ⌔︙لعرض الاوامر الخدميه ⌯ 𝟐 ⌯ .
@@ -9931,9 +10176,7 @@ local Teext =[[
 ]]
 keyboard = {} 
 keyboard.inline_keyboard = {
-{{text = '①', callback_data="/help1"},{text = '②', callback_data="/help2"},{text = '③', callback_data="/help3"}},
-{{text = '④', callback_data="/help4"},{text = '⑤', callback_data="/help5"},{text = 'التسليه', callback_data="/help10"}},
-{{text = 'الاوامر الرئيسيه', callback_data="/help"}},
+{{text = '⌯ 𝟐 ⌯', callback_data="/help2"},{text = 'الاوامر الرئيسيه', callback_data="/help"}},
 }
 return https.request("https://api.telegram.org/bot"..token..'/editMessageText?chat_id='..Chat_id..'&text='..URL.escape(Teext)..'&message_id='..msg_idd..'&parse_mode=markdown&disable_web_page_preview=true&reply_markup='..JSON.encode(keyboard)) 
 end
@@ -10004,9 +10247,7 @@ local Teext =[[
 ]]
 keyboard = {} 
 keyboard.inline_keyboard = {
-{{text = '①', callback_data="/help1"},{text = '②', callback_data="/help2"},{text = '③', callback_data="/help3"}},
-{{text = '④', callback_data="/help4"},{text = '⑤', callback_data="/help5"},{text = 'التسليه', callback_data="/help10"}},
-{{text = 'الاوامر الرئيسيه', callback_data="/help"}},
+{{text = '⌯ 𝟑 ⌯', callback_data="/help3"},{text = 'الاوامر الرئيسيه', callback_data="/help"}},
 }
 return https.request("https://api.telegram.org/bot"..token..'/editMessageText?chat_id='..Chat_id..'&text='..URL.escape(Teext)..'&message_id='..msg_idd..'&parse_mode=markdown&disable_web_page_preview=true&reply_markup='..JSON.encode(keyboard)) 
 end
@@ -10052,9 +10293,7 @@ local Teext =[[
 ]]
 keyboard = {} 
 keyboard.inline_keyboard = {
-{{text = '①', callback_data="/help1"},{text = '②', callback_data="/help2"},{text = '③', callback_data="/help3"}},
-{{text = '④', callback_data="/help4"},{text = '⑤', callback_data="/help5"},{text = 'التسليه', callback_data="/help10"}},
-{{text = 'الاوامر الرئيسيه', callback_data="/help"}},
+{{text = '⌯ 𝟒 ⌯', callback_data="/help4"},{text = 'الاوامر الرئيسيه', callback_data="/help"}},
 }
 return https.request("https://api.telegram.org/bot"..token..'/editMessageText?chat_id='..Chat_id..'&text='..URL.escape(Teext)..'&message_id='..msg_idd..'&parse_mode=markdown&disable_web_page_preview=true&reply_markup='..JSON.encode(keyboard)) 
 end
@@ -10089,8 +10328,7 @@ local Teext =[[
 ]]
 keyboard = {} 
 keyboard.inline_keyboard = {
-{{text = '①', callback_data="/help1"},{text = '②', callback_data="/help2"},{text = '③', callback_data="/help3"}},
-{{text = '④', callback_data="/help4"},{text = '⑤', callback_data="/help5"},{text = 'التسليه', callback_data="/help10"}},
+{{text = '⌯ 𝟓 ⌯', callback_data="/help5"},{text = 'التسليه', callback_data="/help10"}},
 {{text = 'الاوامر الرئيسيه', callback_data="/help"}},
 }
 return https.request("https://api.telegram.org/bot"..token..'/editMessageText?chat_id='..Chat_id..'&text='..URL.escape(Teext)..'&message_id='..msg_idd..'&parse_mode=markdown&disable_web_page_preview=true&reply_markup='..JSON.encode(keyboard)) 
@@ -10149,9 +10387,7 @@ local Teext =[[
 ]]
 keyboard = {} 
 keyboard.inline_keyboard = {
-{{text = '①', callback_data="/help1"},{text = '②', callback_data="/help2"},{text = '③', callback_data="/help3"}},
-{{text = '④', callback_data="/help4"},{text = '⑤', callback_data="/help5"},{text = 'التسليه', callback_data="/help10"}},
-{{text = 'الاوامر الرئيسيه', callback_data="/help"}},
+{{text = 'التسليه', callback_data="/help10"},{text = 'الاوامر الرئيسيه', callback_data="/help"}},
 }
 return https.request("https://api.telegram.org/bot"..token..'/editMessageText?chat_id='..Chat_id..'&text='..URL.escape(Teext)..'&message_id='..msg_idd..'&parse_mode=markdown&disable_web_page_preview=true&reply_markup='..JSON.encode(keyboard)) 
 end
@@ -10193,8 +10429,6 @@ local Teext =[[
 ]]
 keyboard = {} 
 keyboard.inline_keyboard = {
-{{text = '①', callback_data="/help1"},{text = '②', callback_data="/help2"},{text = '③', callback_data="/help3"}},
-{{text = '④', callback_data="/help4"},{text = '⑤', callback_data="/help5"},{text = 'التسليه', callback_data="/help10"}},
 {{text = 'الاوامر الرئيسيه', callback_data="/help"}},
 }
 return https.request("https://api.telegram.org/bot"..token..'/editMessageText?chat_id='..Chat_id..'&text='..URL.escape(Teext)..'&message_id='..msg_idd..'&parse_mode=markdown&disable_web_page_preview=true&reply_markup='..JSON.encode(keyboard)) 
@@ -10206,7 +10440,7 @@ https.request("https://api.telegram.org/bot"..token.."/answerCallbackQuery?callb
 return false
 end
 local Teext =[[
-ـ spider Source ـ 
+ـ BeSsO Source ـ 
  —ـ—ـ—ـ—ـ—ـ—ـ—ـ—ـ— 
 ⌔︙لعرض اوامر الحمايه ⌯ 𝟏 ⌯ .
 ⌔︙لعرض الاوامر الخدميه ⌯ 𝟐 ⌯ .
@@ -10220,8 +10454,8 @@ local Teext =[[
 keyboard = {} 
 keyboard.inline_keyboard = {
 {{text = '⌯ 𝟏 ⌯', callback_data="/help1"},{text = '⌯ 𝟐 ⌯', callback_data="/help2"},{text = '⌯ 𝟑 ⌯', callback_data="/help3"}},
-{{text = '⌯ 𝟒 ⌯', callback_data="/help4"},{text = '⌯ 𝟓 ⌯', callback_data="/help6"}},
-{{text = 'اوامر التسليه', callback_data="/help5"}},
+{{text = '⌯ 𝟒 ⌯', callback_data="/help4"},{text = '⌯ 𝟓 ⌯', callback_data="/help5"}},
+{{text = 'اوامر التسليه', callback_data="/help10"}},
 }
 return https.request("https://api.telegram.org/bot"..token..'/editMessageText?chat_id='..Chat_id..'&text='..URL.escape(Teext)..'&message_id='..msg_idd..'&parse_mode=markdown&disable_web_page_preview=true&reply_markup='..JSON.encode(keyboard)) 
 end
