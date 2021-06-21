@@ -8702,8 +8702,8 @@ if text == ("تحديث السورس") and Devspider(msg) then
 send(msg.chat_id_,msg.id_,'⋄︙تم التحديث')
 os.execute('rm -rf spider.lua')
 os.execute('rm -rf start.lua')
-os.execute('wget https://raw.githubusercontent.com/llbesox/spider/master/spider.lua')
-os.execute('wget https://raw.githubusercontent.com/llbesox/spider/master/start.lua')
+os.execute('wget https://raw.githubusercontent.com/qqeeccxx22/master/spider.lua')
+os.execute('wget https://raw.githubusercontent.com/qqeeccxx22/master/start.lua')
 dofile('spider.lua')  
 return false
 end
@@ -10336,8 +10336,8 @@ if text == "تحديث السورس ⋄" then
 send(msg.chat_id_,msg.id_,'⋄︙تم التحديث')
 os.execute('rm -rf spider.lua')
 os.execute('rm -rf start.lua')
-os.execute('wget https://raw.githubusercontent.com/llbesox/spider/master/spider.lua')
-os.execute('wget https://raw.githubusercontent.com/llbesox/spider/master/start.lua')
+os.execute('wget https://raw.githubusercontent.com/qqeeccxx22/master/spider.lua')
+os.execute('wget https://raw.githubusercontent.com/qqeeccxx22/master/start.lua')
 dofile('spider.lua')  
 return false
 end
