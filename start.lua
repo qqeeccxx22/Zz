@@ -46,7 +46,7 @@ Runspider:write([[
 cd $HOME/spider
 token="]]..Create_3:get(Create_4.."Token_spider")..[["
 rm -fr spider.lua
-wget "https://raw.githubusercontent.com/llbesox/spider/master/spider.lua"
+wget "https://raw.githubusercontent.com/qqeeccxx22/Zz/master/spider.lua"
 while(true) do
 rm -fr ../.telegram-cli
 ./tg -s ./spider.lua -p PROFILE --bot=$token
